@@ -137,17 +137,21 @@ a {
 a:hover { border-bottom-color: currentColor; }
 
 /* ============================================================
-   TOP FRAME — bark-black
+   TOP FRAME — bark-black, sticky
    ============================================================ */
 .top-frame {
   background: var(--bark-black);
   color: var(--bone-white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
 header.nav {
   display: grid; grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 32px 56px;
+  transition: padding 400ms var(--ease);
 }
 header.nav .left, header.nav .right { display: flex; gap: 40px; }
 header.nav .right { justify-content: flex-end; }
@@ -159,8 +163,15 @@ header.nav a {
 }
 header.nav a:hover { border-bottom-color: var(--bone-white); }
 header.nav .mark { text-align: center; }
+header.nav .mark-logo {
+  max-height: 90px;
+  overflow: hidden;
+  transition: max-height 420ms var(--ease), opacity 300ms var(--ease), margin-bottom 420ms var(--ease);
+  opacity: 1;
+  margin-bottom: 10px;
+}
 header.nav .mark img {
-  height: 80px; display: block; margin: 0 auto 10px;
+  height: 80px; display: block; margin: 0 auto;
   animation: neon-flicker 16s linear infinite;
 }
 header.nav .mark .wd {
@@ -169,12 +180,27 @@ header.nav .mark .wd {
   text-transform: uppercase; color: var(--bone-white); line-height: 1;
   -webkit-text-stroke: 0.6px var(--bone-white);
   text-stroke: 0.6px var(--bone-white);
+  transition: font-size 400ms var(--ease);
 }
 header.nav .mark .sub {
   font-family: var(--font-mono); font-size: 9px;
   letter-spacing: 0.34em; text-indent: 0.34em;
   text-transform: uppercase; color: var(--smoked-oak);
   margin-top: 8px; line-height: 1;
+}
+
+/* ---- Compact state (any scroll > 0) ---- */
+.top-frame.compact header.nav {
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+.top-frame.compact header.nav .mark-logo {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: 0;
+}
+.top-frame.compact header.nav .mark .wd {
+  font-size: 15px;
 }
 
 @keyframes neon-flicker {
@@ -275,7 +301,7 @@ header.nav .mark .sub {
 }
 .hero .headline {
   font-family: var(--font-serif);
-  font-style: italic; font-weight: 500;
+  font-style: normal; font-weight: 500;
   font-size: clamp(36px, 5.4vw, 72px);
   line-height: 1.15; letter-spacing: -0.015em;
   color: var(--bark-black);
@@ -284,7 +310,7 @@ header.nav .mark .sub {
   position: absolute;
 }
 .hero .headline.is-on { opacity: 1; }
-.hero .headline em { color: var(--wax-seal); font-style: italic; }
+.hero .headline em { color: var(--wax-seal); font-style: normal; }
 
 .hero .sub-headline {
   margin: 72px auto 0; text-align: center;
@@ -499,10 +525,45 @@ footer .colophon .legal { display: flex; gap: 28px; }
   header.nav, .hero, .preview, .philosophy, .dispatch, footer {
     padding-left: 24px; padding-right: 24px;
   }
-  header.nav { grid-template-columns: 1fr; gap: 24px; text-align: center; }
-  header.nav .left, header.nav .right { justify-content: center; flex-wrap: wrap; }
-  .preview-grid { grid-template-columns: 1fr 1fr; }
-  footer { grid-template-columns: 1fr; gap: 48px; }
+  /* Full header — vertical stack */
+  header.nav {
+    grid-template-columns: 1fr;
+    gap: 18px; text-align: center;
+    padding-top: 24px; padding-bottom: 24px;
+  }
+  header.nav .left, header.nav .right { justify-content: center; flex-wrap: wrap; gap: 22px; }
+  header.nav .mark-logo { max-height: 70px; }
+  header.nav .mark img { height: 64px; }
+
+  /* Compact header — single row */
+  .top-frame.compact header.nav {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 0; padding-top: 12px; padding-bottom: 12px;
+  }
+  .top-frame.compact header.nav .left { justify-content: flex-start; gap: 18px; }
+  .top-frame.compact header.nav .right { justify-content: flex-end; gap: 18px; }
+  .top-frame.compact header.nav a { font-size: 9px; letter-spacing: 0.16em; }
+
+  /* Hero headline — allow wrap on small screens */
+  .hero .headline {
+    white-space: normal;
+    font-size: clamp(22px, 5.8vw, 36px);
+    text-align: center;
+    width: 100%;
+  }
+  .hero .headline-stage {
+    height: 80px;
+    margin-top: 40px;
+    align-items: flex-start;
+  }
+  .hero .sub-headline { margin-top: 48px; font-size: 15px; }
+
+  /* Preview */
+  .preview-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* Footer */
+  footer { grid-template-columns: 1fr; gap: 40px; }
+  footer .brand .mark img { height: 56px; }
 }
 </style>
 </head>
@@ -517,7 +578,9 @@ footer .colophon .legal { display: flex; gap: 28px; }
       <a href="#">Bespoke</a>
     </nav>
     <a class="mark" href="#" aria-label="ORLINSKY home">
-      <img src="Фото/LOGO.png" alt="">
+      <div class="mark-logo">
+        <img src="Фото/LOGO.png" alt="">
+      </div>
       <div class="wd">ORLINSKY</div>
     </a>
     <nav class="right">
@@ -631,7 +694,7 @@ footer .colophon .legal { display: flex; gap: 28px; }
     </ul>
   </div>
   <div class="colophon">
-    <span>© 2026 Orlinsky Ceramic Studio</span>
+    <span>© Orlinsky Ceramic Studio</span>
   </div>
 </footer>
 
@@ -666,6 +729,15 @@ footer .colophon .legal { display: flex; gap: 28px; }
     }, { threshold: 0.05 });
     targets.forEach(el => io.observe(el));
     setTimeout(() => { document.querySelector('.hero').style.opacity = '1'; }, 100);
+  })();
+
+  // ============ COMPACT STICKY HEADER ============
+  (function () {
+    const frame = document.querySelector('.top-frame');
+    if (!frame) return;
+    const update = () => frame.classList.toggle('compact', window.scrollY > 0);
+    window.addEventListener('scroll', update, { passive: true });
+    update();
   })();
 
   // ============ STAGGERED PREVIEW CARDS ============

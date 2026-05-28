@@ -113,6 +113,7 @@
   --radius: 0;
   --shadow: none;
   --ease:       cubic-bezier(0.4, 0.0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
   --dur-slow:   800ms;
   --dur-med:    600ms;
   --dur-quick:  300ms;
@@ -150,7 +151,7 @@ a:hover { border-bottom-color: currentColor; }
 header.nav {
   display: grid; grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 32px 56px;
+  padding: 28px 56px;
   transition: padding 400ms var(--ease);
 }
 header.nav .left, header.nav .right { display: flex; gap: 40px; }
@@ -166,12 +167,14 @@ header.nav .mark { text-align: center; }
 header.nav .mark-logo {
   max-height: 90px;
   overflow: hidden;
-  transition: max-height 420ms var(--ease), opacity 300ms var(--ease), margin-bottom 420ms var(--ease);
+  transition: max-height 420ms var(--ease), opacity 300ms var(--ease),
+              margin-bottom 420ms var(--ease), transform 420ms var(--ease);
   opacity: 1;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
+  transform-origin: top center;
 }
 header.nav .mark img {
-  height: 72px; display: block; margin: 0 auto;
+  height: 68px; display: block; margin: 0 auto;
   animation: neon-flicker 16s linear infinite;
 }
 header.nav .mark .wd {
@@ -186,20 +189,21 @@ header.nav .mark .sub {
   font-family: var(--font-mono); font-size: 9px;
   letter-spacing: 0.34em; text-indent: 0.34em;
   text-transform: lowercase; color: var(--aged-clay);
-  margin-top: 7px; line-height: 1;
-  transition: opacity 300ms var(--ease), max-height 300ms var(--ease);
+  margin-top: 6px; line-height: 1;
+  transition: opacity 300ms var(--ease), max-height 300ms var(--ease), margin-top 300ms var(--ease);
   overflow: hidden; max-height: 20px;
 }
 
 /* ---- Compact state (any scroll > 0) ---- */
 .top-frame.compact header.nav {
-  padding-top: 13px;
-  padding-bottom: 13px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 .top-frame.compact header.nav .mark-logo {
   max-height: 0;
   opacity: 0;
   margin-bottom: 0;
+  transform: scaleY(0.3);
 }
 .top-frame.compact header.nav .mark .wd {
   font-size: 15px;
@@ -225,41 +229,53 @@ header.nav .mark .sub {
   background: var(--bone-white);
   transition: transform 300ms var(--ease), opacity 200ms var(--ease);
 }
-.hamburger.active span:nth-child(1) {
-  transform: translateY(9.25px) rotate(45deg);
-}
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-9.25px) rotate(-45deg);
-}
+.hamburger.active span:nth-child(1) { transform: translateY(9.25px) rotate(45deg); }
+.hamburger.active span:nth-child(2) { opacity: 0; }
+.hamburger.active span:nth-child(3) { transform: translateY(-9.25px) rotate(-45deg); }
 
-/* ---- Mobile overlay menu ---- */
-.mobile-menu {
+/* ---- Mobile slide-in drawer menu ---- */
+.menu-backdrop {
   display: none;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 98;
+  opacity: 0;
+  transition: opacity 350ms var(--ease);
+}
+.menu-backdrop.open { display: block; opacity: 1; }
+
+.mobile-menu {
   position: fixed;
-  inset: 0;
+  top: 0; right: 0; bottom: 0;
+  width: 70%;
+  max-width: 300px;
   background: var(--bark-black);
   z-index: 99;
+  display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  gap: 44px;
+  gap: 40px;
   padding: 60px 40px;
+  transform: translateX(100%);
+  transition: transform 380ms var(--ease);
+  border-left: 0.5px solid rgba(201,184,154,0.12);
 }
-.mobile-menu.open { display: flex; }
+.mobile-menu.open { transform: translateX(0); }
 .mobile-menu a {
-  font-family: var(--font-mono); font-size: 13px;
+  font-family: var(--font-mono); font-size: 12px;
   letter-spacing: 0.28em; text-transform: uppercase;
   color: var(--bone-white); border-bottom: 0;
 }
 .mobile-menu a:hover { color: var(--aged-clay); border-bottom: 0; }
 .mobile-menu .divider {
-  width: 30px; height: 0.5px;
-  background: rgba(201,184,154,0.3);
+  width: 24px; height: 0.5px;
+  background: rgba(201,184,154,0.25);
 }
 
+/* ============================================================
+   NEON FLICKER
+   ============================================================ */
 @keyframes neon-flicker {
   0%, 100% { filter: none; }
   4%       { filter: none; }
@@ -324,7 +340,7 @@ header.nav .mark .sub {
    ============================================================ */
 .hero {
   background: var(--bone-white);
-  padding: 64px 56px 80px;
+  padding: 48px 56px 64px;
 }
 .hero .video-frame {
   aspect-ratio: 16 / 9;
@@ -350,7 +366,11 @@ header.nav .mark .sub {
   pointer-events: none;
 }
 
-/* ---- Mute button ---- */
+/* ---- Mute button with pulse ---- */
+@keyframes mute-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(245,241,232,0); }
+  50%       { box-shadow: 0 0 0 5px rgba(245,241,232,0.08); }
+}
 .mute-btn {
   position: absolute;
   bottom: 14px; right: 14px;
@@ -366,14 +386,18 @@ header.nav .mark .sub {
   backdrop-filter: blur(8px);
   transition: background 200ms var(--ease), transform 150ms var(--ease);
   padding: 0;
+  animation: mute-pulse 3s ease-in-out infinite;
 }
-.mute-btn:hover { background: rgba(42,37,32,0.92); transform: scale(1.08); }
+.mute-btn:hover { background: rgba(42,37,32,0.92); transform: scale(1.08); animation: none; }
 .mute-btn svg { width: 15px; height: 15px; display: block; }
 
+/* ---- Headlines: vertical slide + blur transition ---- */
 .hero .headline-stage {
-  margin: 56px -24px 0; text-align: center;
-  height: 1.4em;
+  margin: 40px auto 0;
+  max-width: clamp(340px, 50vw, 720px);
+  height: calc(2 * 1.15em + 0.4em);
   display: flex; align-items: center; justify-content: center;
+  text-align: center;
   position: relative;
 }
 .hero .headline {
@@ -382,25 +406,38 @@ header.nav .mark .sub {
   font-size: clamp(36px, 5.4vw, 72px);
   line-height: 1.15; letter-spacing: -0.015em;
   color: var(--bark-black);
-  margin: 0 auto; white-space: nowrap;
-  opacity: 0; transition: opacity 1.2s var(--ease);
-  position: absolute;
+  margin: 0; width: 100%;
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(6px);
+  transition: opacity 700ms var(--ease), transform 700ms var(--ease), filter 700ms var(--ease);
+  position: absolute; text-align: center;
 }
-.hero .headline.is-on { opacity: 1; }
+.hero .headline.is-on {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0px);
+}
+.hero .headline.is-off {
+  opacity: 0;
+  transform: translateY(-28px);
+  filter: blur(6px);
+  transition: opacity 600ms var(--ease), transform 600ms var(--ease), filter 500ms var(--ease);
+}
 .hero .headline em { color: var(--wax-seal); font-style: normal; }
 
 .hero .sub-headline {
-  margin: 72px auto 0; text-align: center;
+  margin: 44px auto 0; text-align: center;
   font-family: var(--font-sans); font-size: 17px;
   line-height: 1.65; color: var(--smoked-oak);
-  max-width: 72ch; text-wrap: pretty;
+  max-width: 54ch; text-wrap: balance;
 }
 
 /* ============================================================
    CURATED PREVIEW
    ============================================================ */
 .preview {
-  padding: 40px 56px 120px;
+  padding: 36px 56px 80px;
 }
 .preview-grid {
   display: grid; grid-template-columns: repeat(3, 1fr);
@@ -436,7 +473,7 @@ header.nav .mark .sub {
 .work:hover .photo img { opacity: 0.88; }
 
 .work .label {
-  margin-top: 22px; text-align: center;
+  margin-top: 18px; text-align: center;
   position: relative; height: 28px; overflow: hidden;
 }
 .work .name {
@@ -460,10 +497,7 @@ header.nav .mark .sub {
 .work .name::after  { left:  calc(100% + 12px); }
 .work:hover .name {
   color: var(--wax-seal); letter-spacing: 0.06em;
-  transition:
-    color 500ms var(--ease) 0ms,
-    letter-spacing 700ms var(--ease) 0ms,
-    transform 700ms var(--ease) 0ms;
+  transition: color 500ms var(--ease) 0ms, letter-spacing 700ms var(--ease) 0ms, transform 700ms var(--ease) 0ms;
 }
 .work:hover .name::before,
 .work:hover .name::after {
@@ -471,7 +505,7 @@ header.nav .mark .sub {
   transition: width 700ms var(--ease) 0ms;
 }
 
-.preview-cta { margin-top: 80px; display: flex; justify-content: center; }
+.preview-cta { margin-top: 56px; display: flex; justify-content: center; }
 .preview-cta a {
   font-family: var(--font-mono); font-size: 11px;
   letter-spacing: 0.32em; text-transform: uppercase;
@@ -486,7 +520,7 @@ header.nav .mark .sub {
    ============================================================ */
 .philosophy {
   background: var(--raw-linen);
-  padding: 96px 56px;
+  padding: 72px 56px;
   border-top: 0.5px solid var(--aged-clay);
   border-bottom: 0.5px solid var(--aged-clay);
   text-align: center;
@@ -500,7 +534,7 @@ header.nav .mark .sub {
 }
 .philosophy .ornament {
   display: block; width: 24px; height: 0.5px;
-  background: var(--bark-black); margin: 48px auto 0;
+  background: var(--bark-black); margin: 40px auto 0;
 }
 
 /* ============================================================
@@ -508,7 +542,7 @@ header.nav .mark .sub {
    ============================================================ */
 .dispatch {
   background: var(--bone-white);
-  padding: 80px 56px 88px;
+  padding: 64px 56px 72px;
   text-align: center;
   border-top: 0.5px solid var(--aged-clay);
 }
@@ -517,7 +551,7 @@ header.nav .mark .sub {
   font-style: italic; font-weight: 300;
   font-size: clamp(22px, 2.4vw, 30px);
   line-height: 1.3; color: var(--bark-black);
-  margin: 0 0 36px; letter-spacing: -0.005em;
+  margin: 0 0 32px; letter-spacing: -0.005em;
 }
 .dispatch .sub {
   display: inline-flex; align-items: end; gap: 0;
@@ -547,7 +581,7 @@ header.nav .mark .sub {
    ============================================================ */
 footer {
   background: var(--bark-black); color: var(--bone-white);
-  padding: 56px 56px 28px;
+  padding: 52px 56px 24px;
   display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
   gap: 56px; align-items: start;
 }
@@ -555,8 +589,10 @@ footer .brand .mark { text-align: center; display: inline-block; margin-bottom: 
 footer .brand .mark img { height: 64px; display: block; margin: 0 auto 8px; }
 footer .brand .mark .wd {
   font-family: var(--font-serif); font-weight: 500;
-  font-size: 17px; letter-spacing: 0.38em; text-indent: 0.38em;
+  font-size: 18px; letter-spacing: 0.38em; text-indent: 0.38em;
   text-transform: uppercase; color: var(--bone-white); line-height: 1;
+  -webkit-text-stroke: 0.6px var(--bone-white);
+  text-stroke: 0.6px var(--bone-white);
 }
 footer .brand .mark .sub {
   font-family: var(--font-mono); font-size: 9px;
@@ -565,7 +601,7 @@ footer .brand .mark .sub {
   margin-top: 7px; line-height: 1;
 }
 footer .brand .tag {
-  margin-top: 22px;
+  margin-top: 20px;
   font-family: var(--font-mono); font-size: 10px;
   letter-spacing: 0.22em; text-transform: uppercase;
   color: rgba(245,241,232,0.55);
@@ -573,7 +609,7 @@ footer .brand .tag {
 footer h4 {
   font-family: var(--font-mono); font-size: 10px;
   letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--bone-white); margin: 4px 0 22px; font-weight: 400;
+  color: var(--bone-white); margin: 4px 0 18px; font-weight: 400;
 }
 footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 footer ul a {
@@ -584,7 +620,7 @@ footer ul a {
 footer ul a:hover { color: var(--bone-white); border-bottom-color: var(--bone-white); }
 footer .colophon {
   grid-column: 1 / -1;
-  margin-top: 16px; padding-top: 18px;
+  margin-top: 14px; padding-top: 16px;
   border-top: 0.5px solid rgba(201,184,154,0.18);
   display: flex; justify-content: space-between;
   font-family: var(--font-mono); font-size: 9.5px;
@@ -599,111 +635,124 @@ footer .colophon .legal { display: flex; gap: 28px; }
    RESPONSIVE ≤ 900px
    ============================================================ */
 @media (max-width: 900px) {
-  /* ---- Header: flex column, hamburger replaces nav ---- */
+  /* ---- Header: column centered, hamburger fixed top-right ---- */
   header.nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px 24px;
+    padding: 18px 24px;
     position: relative;
     gap: 0;
-    transition: padding 400ms var(--ease);
+    transition: padding 420ms var(--ease);
   }
   header.nav .left,
   header.nav .right { display: none; }
+
+  /* Hamburger: always absolute top-right, never moves */
   .hamburger {
     display: flex;
     position: absolute;
     right: 24px;
     top: 50%;
     transform: translateY(-50%);
+    transition: none;
   }
 
-  /* ---- Compact mobile: ORLINSKY + hamburger ---- */
-  .top-frame.compact header.nav {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 24px;
+  /* Mark: smooth slide to left on compact */
+  header.nav .mark {
+    transition: transform 420ms var(--ease);
+    transform-origin: center center;
   }
-  .top-frame.compact header.nav .hamburger {
-    position: static;
-    transform: none;
+
+  /* Compact mobile: mark slides to left edge */
+  .top-frame.compact header.nav {
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   .top-frame.compact header.nav .mark {
+    transform: translateX(calc(24px + 50% - 50vw));
     text-align: left;
+  }
+  .top-frame.compact header.nav .mark .wd { font-size: 15px; }
+  .top-frame.compact header.nav .mark .sub {
+    opacity: 0; max-height: 0; margin-top: 0;
+  }
+  /* Eagle collapses in-place: scaleY shrinks from top, max-height removes space */
+  .top-frame.compact header.nav .mark-logo {
+    max-height: 0;
+    opacity: 0;
+    margin-bottom: 0;
+    transform: scaleY(0.2);
   }
 
   /* Mark sizing on mobile */
   header.nav .mark-logo { max-height: 70px; }
-  header.nav .mark img { height: 60px; }
+  header.nav .mark img { height: 56px; }
 
-  /* ---- Hero: video full bleed on mobile ---- */
+  /* ---- Hero: video full bleed ---- */
   .hero {
     padding-top: 0;
     padding-left: 0; padding-right: 0;
-    padding-bottom: 64px;
+    padding-bottom: 48px;
   }
   .hero .video-frame {
-    max-width: none;
-    margin: 0;
+    max-width: none; margin: 0;
     aspect-ratio: 4 / 3;
   }
   .hero .headline-stage {
-    margin-top: 32px;
+    margin-top: 28px;
     margin-left: 24px; margin-right: 24px;
+    max-width: none;
     height: 140px;
     align-items: flex-start;
     text-align: center;
   }
   .hero .headline {
-    white-space: normal;
-    font-size: clamp(38px, 9.5vw, 52px);
+    font-size: clamp(36px, 9vw, 50px);
     font-weight: 700;
     text-align: center;
     width: 100%;
     line-height: 1.12;
   }
   .hero .sub-headline {
-    margin-top: 36px;
-    margin-left: 24px; margin-right: 24px;
+    margin-top: 28px;
+    margin-left: auto; margin-right: auto;
     font-size: 15px;
     max-width: 34ch;
+    text-align: center;
     text-wrap: balance;
   }
 
   /* ---- Preview ---- */
-  .preview { padding-left: 24px; padding-right: 24px; }
-  .preview-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .preview { padding-left: 24px; padding-right: 24px; padding-bottom: 56px; }
+  .preview-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .preview-cta { margin-top: 40px; }
 
   /* ---- Philosophy / Dispatch ---- */
-  .philosophy, .dispatch { padding-left: 24px; padding-right: 24px; }
+  .philosophy { padding: 52px 24px; }
+  .dispatch { padding: 52px 24px 60px; }
 
   /* ---- Footer ---- */
   footer {
     grid-template-columns: 1fr;
-    gap: 36px;
-    padding: 48px 24px 28px;
+    gap: 32px;
+    padding: 44px 24px 24px;
   }
   footer .brand { text-align: center; }
   footer .brand .mark { text-align: center; }
-  footer .brand .mark img { height: 56px; margin-bottom: 10px; }
-  footer .brand .mark .wd { font-size: 16px; }
-  footer .brand .mark .sub { font-size: 10px; }
-  footer .brand .tag { font-size: 11px; margin-top: 18px; }
-  footer h4 { margin-top: 0; }
+  footer .brand .mark img { height: 54px; margin-bottom: 10px; }
+  footer .brand .mark .wd { font-size: 18px; }
+  footer .brand .mark .sub { font-size: 9px; }
+  footer .brand .tag { font-size: 11px; margin-top: 16px; }
+  footer h4 { margin-top: 0; margin-bottom: 14px; }
   footer ul { gap: 12px; }
   footer ul a { font-size: 15px; }
   footer .colophon {
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    text-align: center;
+    flex-direction: column; align-items: center;
+    gap: 8px; text-align: center;
   }
   footer .colophon .legal {
-    flex-direction: row;
-    gap: 20px;
-    justify-content: center;
+    flex-direction: row; gap: 20px; justify-content: center;
   }
 }
 </style>
@@ -736,8 +785,9 @@ footer .colophon .legal { display: flex; gap: 28px; }
   </header>
 </div>
 
-<!-- ============ MOBILE MENU OVERLAY ============ -->
-<div class="mobile-menu" role="dialog" aria-label="Navigation">
+<!-- ============ MOBILE MENU ============ -->
+<div class="menu-backdrop"></div>
+<nav class="mobile-menu" role="dialog" aria-label="Navigation">
   <a href="#">Gallery</a>
   <div class="divider"></div>
   <a href="#">The Craft</a>
@@ -749,7 +799,7 @@ footer .colophon .legal { display: flex; gap: 28px; }
   <a href="#">Kind Words</a>
   <div class="divider"></div>
   <a href="#">Client Care</a>
-</div>
+</nav>
 
 <!-- ============ HERO ============ -->
 <section class="hero">
@@ -759,13 +809,11 @@ footer .colophon .legal { display: flex; gap: 28px; }
       <source src="%D0%92%D0%B8%D0%B4%D0%B5%D0%BE/%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%B4%D0%BB%D1%8F%20HERO.mp4" type="video/mp4">
     </video>
     <button class="mute-btn" aria-label="Toggle sound">
-      <!-- muted icon (default) -->
       <svg id="icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
         <line x1="23" y1="9" x2="17" y2="15"/>
         <line x1="17" y1="9" x2="23" y2="15"/>
       </svg>
-      <!-- sound on icon (hidden initially) -->
       <svg id="icon-sound" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
         <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
@@ -775,8 +823,8 @@ footer .colophon .legal { display: flex; gap: 28px; }
   </div>
 
   <div class="headline-stage" aria-live="polite">
-    <h1 class="headline" data-i="0">Memories matter more than <em>achievements</em></h1>
-    <h1 class="headline" data-i="1">People want to return to where it was <em>warm</em></h1>
+    <h1 class="headline" data-i="0">Memories matter more<br>than <em>achievements</em></h1>
+    <h1 class="headline" data-i="1">People want to return<br>to where it was <em>warm</em></h1>
   </div>
 
   <p class="sub-headline">
@@ -812,7 +860,6 @@ footer .colophon .legal { display: flex; gap: 28px; }
       <div class="label"><span class="name">The firing</span></div>
     </a>
   </div>
-
   <div class="preview-cta">
     <a href="#">Explore the Collection</a>
   </div>
@@ -875,14 +922,17 @@ footer .colophon .legal { display: flex; gap: 28px; }
 </footer>
 
 <script>
-  // ============ ROTATING HEADLINES ============
+  // ============ ROTATING HEADLINES — vertical slide + blur ============
   (function () {
     const headlines = document.querySelectorAll('.hero .headline');
     if (!headlines.length) return;
     let idx = 0;
     headlines[idx].classList.add('is-on');
     setInterval(() => {
-      headlines[idx].classList.remove('is-on');
+      const current = headlines[idx];
+      current.classList.remove('is-on');
+      current.classList.add('is-off');
+      setTimeout(() => current.classList.remove('is-off'), 700);
       idx = (idx + 1) % headlines.length;
       headlines[idx].classList.add('is-on');
     }, 5400);
@@ -923,8 +973,8 @@ footer .colophon .legal { display: flex; gap: 28px; }
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
-          const idx = Array.from(works).indexOf(e.target);
-          setTimeout(() => e.target.classList.add('is-in'), idx * 380);
+          const i = Array.from(works).indexOf(e.target);
+          setTimeout(() => e.target.classList.add('is-in'), i * 380);
           io.unobserve(e.target);
         }
       });
@@ -953,10 +1003,7 @@ footer .colophon .legal { display: flex; gap: 28px; }
     const tryPlay = () => {
       const p = video.play();
       if (p !== undefined) {
-        p.catch(() => {
-          video.muted = true;
-          video.play().catch(() => {});
-        });
+        p.catch(() => { video.muted = true; video.play().catch(() => {}); });
       }
     };
     if (document.readyState === 'complete') { tryPlay(); }
@@ -967,21 +1014,25 @@ footer .colophon .legal { display: flex; gap: 28px; }
   (function () {
     const hamburger = document.querySelector('.hamburger');
     const menu = document.querySelector('.mobile-menu');
+    const backdrop = document.querySelector('.menu-backdrop');
     if (!hamburger || !menu) return;
-    hamburger.addEventListener('click', () => {
-      const isOpen = menu.classList.toggle('open');
-      hamburger.classList.toggle('active', isOpen);
-      hamburger.setAttribute('aria-expanded', isOpen);
-      document.body.style.overflow = isOpen ? 'hidden' : '';
-    });
-    menu.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        menu.classList.remove('open');
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
-    });
+    const open = () => {
+      menu.classList.add('open');
+      backdrop && backdrop.classList.add('open');
+      hamburger.classList.add('active');
+      hamburger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    const close = () => {
+      menu.classList.remove('open');
+      backdrop && backdrop.classList.remove('open');
+      hamburger.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+    hamburger.addEventListener('click', () => menu.classList.contains('open') ? close() : open());
+    backdrop && backdrop.addEventListener('click', close);
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
   })();
 </script>
 

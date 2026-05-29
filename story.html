@@ -103,14 +103,14 @@ header.nav .mark .sub { font-family:var(--font-mono); font-size:9px; letter-spac
   padding:80px 56px 96px;
 }
 .story-inner {
-  max-width:800px;
+  /* 40% wider: 800px × 1.4 = 1120px */
+  max-width:1120px;
   margin:0 auto;
   display:flex;
   flex-direction:column;
   align-items:center;
 }
 
-/* Section label */
 .story-inner .label {
   font-family:var(--font-mono); font-size:10px;
   letter-spacing:0.44em; text-transform:uppercase;
@@ -122,60 +122,61 @@ header.nav .mark .sub { font-family:var(--font-mono); font-size:9px; letter-spac
   width:320px; height:320px;
   border-radius:50%;
   overflow:hidden;
-  margin:0 auto 56px;
-  position:relative;
+  margin:0 auto 72px;
   box-shadow:
     0 0 0 1px rgba(200,112,31,0.18),
     0 0 32px rgba(200,112,31,0.06);
 }
 .story-portrait img {
   width:100%; height:100%;
-  object-fit:cover;
-  object-position:center top;
+  object-fit:cover; object-position:center top;
   display:block;
-  /* No filter — original colours preserved */
 }
 
-/* Narrative text */
-.story-text {
-  text-align:center;
+/* ---- Narrative blocks ---- */
+.story-text { width:100%; text-align:center; }
+
+/* One semantic block — each is a distinct emotional movement */
+.story-block {
+  width:100%;
+  margin-bottom:80px;
 }
-.story-text p {
+.story-block:last-of-type { margin-bottom:0; }
+
+.story-block p {
   font-family:var(--font-serif); font-weight:300;
-  font-size:clamp(19px,2.1vw,24px);
-  line-height:1.8; letter-spacing:0.005em;
+  font-size:clamp(20px,1.9vw,25px);
+  line-height:1.85; letter-spacing:0.008em;
   color:var(--color-text-secondary);
-  margin:0 0 28px;
+  margin:0 0 24px;
   text-wrap:balance;
 }
-.story-text p:last-of-type { margin-bottom:0; }
+.story-block p:last-child { margin-bottom:0; }
 
-/* Pull quote — the emotional core */
-.story-text .pull {
+/* Pull-quote: emotional peak within a block */
+.story-block .pull {
   font-style:italic;
   color:var(--color-text-primary);
-  font-size:clamp(22px,2.5vw,30px);
-  border-left:none;
-  padding:12px 0;
-  margin:40px 0;
+  font-size:clamp(22px,2.2vw,30px);
+  line-height:1.7;
+  margin:0 0 24px;
 }
 
-/* Divider ornament between paragraphs */
-.story-divider {
-  width:1px; height:40px;
-  background:linear-gradient(to bottom, transparent, var(--color-accent), transparent);
-  margin:8px auto 36px;
-  opacity:0.5;
+/* Thin orange horizontal breath between blocks */
+.story-breath {
+  width:1px; height:56px;
+  background:linear-gradient(to bottom,
+    transparent 0%, rgba(200,112,31,0.55) 50%, transparent 100%);
+  margin:0 auto 80px;
 }
 
 /* Signature */
 .story-signature {
-  margin-top:56px;
+  margin-top:72px;
   font-family:var(--font-serif); font-style:italic; font-weight:300;
-  font-size:28px; letter-spacing:0.04em;
+  font-size:30px; letter-spacing:0.04em;
   color:var(--color-accent);
-  text-align:center;
-  opacity:0.85;
+  text-align:center; opacity:0.85;
 }
 
 /* ============================================================
@@ -211,6 +212,10 @@ footer .colophon { grid-column:1/-1; margin-top:40px; padding-top:16px; border-t
   .top-frame.compact header.nav .mark-logo { max-height:0; opacity:0; margin-bottom:0; transform:scaleY(0.2); }
   .story-wrap { padding:56px 24px 72px; }
   .story-portrait { width:240px; height:240px; }
+  .story-block { margin-bottom:56px; }
+  .story-breath { height:44px; margin-bottom:56px; }
+  .story-block p { font-size:clamp(18px,4.5vw,22px); }
+  .story-block .pull { font-size:clamp(20px,5vw,26px); }
   .sep { width:70%; }
   footer { grid-template-columns:1fr; gap:32px; padding:48px 24px 24px; }
   footer .brand { align-items:flex-start; }
@@ -269,37 +274,49 @@ footer .colophon { grid-column:1/-1; margin-top:40px; padding-top:16px; border-t
 
     <div class="story-text">
 
-      <p>I often find myself thinking that a person is not just a story, but an entire world — filled with quiet and precious memories, especially from childhood.</p>
+      <!-- I. Recognition — the reader feels seen before anything is sold -->
+      <div class="story-block">
+        <p>I often find myself thinking that a person is not just a story, but an entire world — filled with quiet and precious memories, especially from childhood.</p>
+      </div>
 
-      <div class="story-divider"></div>
+      <div class="story-breath"></div>
 
-      <p class="pull">Summers that felt endless. The scent of rain — it felt different back then. A home where everything was calm. Familiar voices that still echo in memory.</p>
+      <!-- II. Memory — sensory, specific, evokes the reader's own inner images -->
+      <div class="story-block">
+        <p class="pull">Summers that felt endless. The scent of rain — it felt different back then. A home where everything was calm. Familiar voices that still echo in memory.</p>
+        <p>In those simple details lived that true kind of happiness.</p>
+      </div>
 
-      <p>In those simple details lived that true kind of happiness.</p>
+      <div class="story-breath"></div>
 
-      <div class="story-divider"></div>
+      <!-- III. Awakening — the maker's turning point, brief and decisive -->
+      <div class="story-block">
+        <p>At some point, I realized I wanted to create works that help us return to that state — to that inner feeling when happiness was quiet and simple, like childhood memories.</p>
+        <p>That is how our ceramic paintings came to life.</p>
+      </div>
 
-      <p>At some point, I realized I wanted to create works that help us return to that state — to that inner feeling when happiness was quiet and simple, like childhood memories.</p>
+      <div class="story-breath"></div>
 
-      <p>That is how our ceramic paintings came to life.</p>
+      <!-- IV. The Craft — grounding in physical reality, hands and time -->
+      <div class="story-block">
+        <p>Their compositions are intentionally simple. And within that simplicity lives that very feeling — distant, warm, almost forgotten. A feeling we sometimes wish to return to quietly.</p>
+        <p>While creating each piece, traces of hands, movement, and time remain on its surface. Every firing adds depth — just as the years add depth to our memories. Sometimes I notice a small uneven mark and choose to leave it — as a reminder that memory, too, is never perfectly smooth.</p>
+      </div>
 
-      <div class="story-divider"></div>
+      <div class="story-breath"></div>
 
-      <p>Their compositions are intentionally simple. And within that simplicity lives that very feeling — distant, warm, almost forgotten. A feeling we sometimes wish to return to quietly.</p>
+      <!-- V. Purpose — what the object holds, why it matters in a home -->
+      <div class="story-block">
+        <p class="pull">I believe the objects in our homes can hold a state of being.</p>
+        <p>At times, they become a quiet reminder of when happiness had no conditions — when a warm evening and the embrace of loved ones were enough.</p>
+      </div>
 
-      <div class="story-divider"></div>
+      <div class="story-breath"></div>
 
-      <p>While creating each piece, traces of hands, movement, and time remain on its surface. Every firing adds depth — just as the years add depth to our memories. Sometimes I notice a small uneven mark and choose to leave it — as a reminder that memory, too, is never perfectly smooth.</p>
-
-      <div class="story-divider"></div>
-
-      <p class="pull">I believe the objects in our homes can hold a state of being.</p>
-
-      <p>At times, they become a quiet reminder of when happiness had no conditions — when a warm evening and the embrace of loved ones were enough.</p>
-
-      <div class="story-divider"></div>
-
-      <p>If one of these works becomes a point of return for you — to yourself, to simplicity, to that familiar feeling of happiness — then it has found its home.</p>
+      <!-- VI. Invitation — personal, direct, completes the emotional loop -->
+      <div class="story-block">
+        <p>If one of these works becomes a point of return for you — to yourself, to simplicity, to that familiar feeling of happiness — then it has found its home.</p>
+      </div>
 
     </div>
 

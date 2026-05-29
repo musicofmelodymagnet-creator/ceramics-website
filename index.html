@@ -170,8 +170,7 @@ header.nav .mark img {
 header.nav .mark .wd {
   font-family:var(--font-serif); font-weight:500;
   font-size:18px; letter-spacing:0.38em;
-  /* 0.19em = half letter-spacing: shifts glyphs right to optically center under eagle */
-  padding-left:0.19em;
+  padding-left:0;
   text-transform:uppercase; color:var(--color-text-primary); line-height:1;
   -webkit-text-stroke:0.6px var(--color-text-primary);
   text-stroke:0.6px var(--color-text-primary);
@@ -596,7 +595,7 @@ footer .brand .mark img { height:51px; display:block; margin:0 auto 8px; }
 footer .brand .mark .wd {
   font-family:var(--font-serif); font-weight:500;
   font-size:18px; letter-spacing:0.38em;
-  padding-left:0.19em; /* optical centering — half letter-spacing */
+  padding-left:0;
   text-transform:uppercase; color:var(--color-text-primary); line-height:1;
   -webkit-text-stroke:0.6px var(--color-text-primary);
   text-stroke:0.6px var(--color-text-primary);
@@ -604,7 +603,7 @@ footer .brand .mark .wd {
 }
 footer .brand .mark .sub {
   font-family:var(--font-mono); font-size:9px;
-  letter-spacing:0.34em; padding-left:0.17em;
+  letter-spacing:0.34em; padding-left:0;
   text-transform:lowercase; color:var(--color-text-secondary);
   margin-top:6px; line-height:1;
   display:block; text-align:center; margin-left:auto; margin-right:auto;
@@ -939,22 +938,23 @@ function calibrateLogo(imgEl) {
   if (!imgEl || !imgEl.complete || imgEl.naturalWidth === 0) return;
   var dispW = imgEl.offsetWidth;
   if (!dispW) return;
-  /* 90% of wing width; CSS padding-left:0.19em handles optical centering */
-  var textW = Math.round(dispW * WING_FRAC * 0.90);
   var mark = imgEl.closest('.mark');
   if (!mark) return;
   var wd = mark.querySelector('.wd');
   if (wd) {
-    wd.style.width = textW + 'px';
-    /* Both header and footer: centered via margin:auto (flex + margin both work) */
+    wd.style.width = 'auto';
     wd.style.marginLeft = 'auto';
     wd.style.marginRight = 'auto';
+    wd.style.paddingLeft = '0';
+    wd.style.textAlign = 'center';
   }
   var sub = mark.querySelector('.sub');
   if (sub) {
     sub.style.width = 'auto';
     sub.style.marginLeft = 'auto';
     sub.style.marginRight = 'auto';
+    sub.style.paddingLeft = '0';
+    sub.style.textAlign = 'center';
   }
 }
 

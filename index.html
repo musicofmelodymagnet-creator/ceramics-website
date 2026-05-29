@@ -126,9 +126,10 @@ a:hover { border-bottom-color:currentColor; }
   position:sticky; top:0; z-index:100;
   border-bottom:1px solid #4A4238;
 }
-.top-frame.snap-top { animation: header-snap-top 2250ms ease-out both; }
+/* Animate ONLY the logo mark — background panel stays fixed */
+.top-frame.snap-top .mark { animation: header-snap-top 2250ms ease-out both; }
 .top-frame.snap-top .mark-logo { animation: logo-snap-top 2250ms ease-out both; }
-/* When collapsing: suppress spring bounce — use plain ease */
+/* When collapsing: suppress spring bounce */
 .top-frame.collapsing header.nav { transition-timing-function: var(--ease) !important; }
 .top-frame.collapsing header.nav .mark-logo { transition-timing-function: var(--ease) !important; }
 .top-frame.collapsing header.nav .mark { transition-timing-function: var(--ease) !important; }
@@ -169,22 +170,22 @@ header.nav .mark img {
 header.nav .mark .wd {
   font-family:var(--font-serif); font-weight:500;
   font-size:18px; letter-spacing:0.38em;
+  /* 0.19em = half letter-spacing: shifts glyphs right to optically center under eagle */
+  padding-left:0.19em;
   text-transform:uppercase; color:var(--color-text-primary); line-height:1;
   -webkit-text-stroke:0.6px var(--color-text-primary);
   text-stroke:0.6px var(--color-text-primary);
-  /* Slow glow fade-OUT on mouse-leave (3 s) */
   text-shadow: none;
   transition:font-size 400ms var(--ease), opacity 300ms var(--ease),
              width 300ms var(--ease), margin 300ms var(--ease),
              text-shadow 3000ms ease-out;
   display:block; margin:0 auto; text-align:center;
-  box-sizing:border-box;
 }
-/* Fast glow IN on hover */
+/* Fast glow IN on hover — 2× smaller radii, 2× stronger intensity */
 header.nav .mark:hover .wd {
-  text-shadow: 0 0 16px rgba(245,241,232,0.75),
-               0 0 32px rgba(245,241,232,0.3),
-               0 0 56px rgba(245,241,232,0.12);
+  text-shadow: 0 0 8px rgba(245,241,232,0.95),
+               0 0 16px rgba(245,241,232,0.55),
+               0 0 28px rgba(245,241,232,0.2);
   transition:text-shadow 500ms ease-in;
 }
 header.nav .mark .sub {
@@ -222,19 +223,13 @@ header.nav .mark .sub {
 .hamburger.active span:nth-child(2) { opacity:0; }
 .hamburger.active span:nth-child(3) { transform:translateY(-9.25px) rotate(-45deg); }
 
-/* ---- Mobile slide-in drawer — damped multi-oscillation ---- */
+/* ---- Mobile menu — simple ease-out deceleration, no bouncing ---- */
 @keyframes menu-enter {
   0%   { transform: translateX(100%); }
-  50%  { transform: translateX(-5%); }
-  66%  { transform: translateX(2.5%); }
-  78%  { transform: translateX(-1.2%); }
-  88%  { transform: translateX(0.5%); }
-  94%  { transform: translateX(-0.15%); }
   100% { transform: translateX(0); }
 }
 @keyframes menu-exit {
   0%   { transform: translateX(0); }
-  18%  { transform: translateX(3%); }
   100% { transform: translateX(100%); }
 }
 
@@ -255,9 +250,9 @@ header.nav .mark .sub {
   border-left:1px solid #4A4238;
   /* No CSS transition — animation handles open/close */
 }
-/* 2× slower opening (650×2=1300ms) */
-.mobile-menu.is-opening { animation: menu-enter 1300ms ease-out forwards; }
-.mobile-menu.is-closing { animation: menu-exit 400ms cubic-bezier(0.55,0,1,1) forwards; }
+/* Smooth decel: strong ease-out curve (fast start → velocity → 0 at end) */
+.mobile-menu.is-opening { animation: menu-enter 1300ms cubic-bezier(0.16,1,0.3,1) forwards; }
+.mobile-menu.is-closing { animation: menu-exit 380ms cubic-bezier(0.55,0,1,1) forwards; }
 .mobile-menu a {
   font-family:var(--font-mono); font-size:14px;
   letter-spacing:0.26em; text-transform:uppercase;
@@ -330,22 +325,22 @@ header.nav .mark .sub {
   0%,100% { box-shadow:0 0 0 0 rgba(200,112,31,0), 0 0 0 0 rgba(245,241,232,0); }
   50%      { box-shadow:0 0 0 5.6px rgba(200,112,31,0.14), 0 0 0 11px rgba(245,241,232,0.05); }
 }
-/* Mute button: centered, protrudes 20% below video */
+/* Mute button: centered, 40% protrusion, 50% transparent */
 .mute-btn {
   position:absolute;
   bottom:0; left:50%;
-  transform:translateX(-50%) translateY(20%);
+  transform:translateX(-50%) translateY(40%);
   z-index:5;
   width:36px; height:36px;
-  background:rgba(26,22,18,0.82);
-  border:1px solid rgba(200,112,31,0.35);
+  background:rgba(26,22,18,0.41);
+  border:1px solid rgba(200,112,31,0.25);
   border-radius:50%; color:var(--color-text-primary);
   cursor:pointer; display:flex; align-items:center; justify-content:center;
   -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
   transition:background 200ms var(--ease);
   padding:0; animation:mute-pulse 2.8s ease-in-out infinite;
 }
-.mute-btn:hover { background:rgba(26,22,18,0.98); transform:translateX(-50%) translateY(20%) scale(1.1); animation:none; }
+.mute-btn:hover { background:rgba(26,22,18,0.85); transform:translateX(-50%) translateY(40%) scale(1.1); animation:none; }
 .mute-btn svg { width:15px; height:15px; display:block; }
 
 /* ---- Headlines: cinematic materialization ---- */
@@ -377,10 +372,11 @@ header.nav .mark .sub {
   transform:translateX(-50%) translateY(0) scale(1);
   filter:blur(0) brightness(1);
 }
+/* Exit: evaporate IN PLACE — no vertical drift, only scale + blur + opacity */
 .hero .headline.is-off {
   opacity:0;
-  transform:translateX(-50%) translateY(-20px) scale(1.04);
-  filter:blur(6px) brightness(1.2);
+  transform:translateX(-50%) translateY(0) scale(1.06);
+  filter:blur(7px) brightness(1.4);
   transition:opacity 1000ms cubic-bezier(0.4,0,1,1),
              transform 1000ms cubic-bezier(0.4,0,1,1),
              filter 800ms cubic-bezier(0.4,0,1,1);
@@ -483,14 +479,17 @@ header.nav .mark .sub {
    ============================================================ */
 @keyframes name-bounce-out {
   0%   { letter-spacing:0.06em; color:var(--color-accent); }
-  11%  { letter-spacing:-0.006em; }
-  22%  { letter-spacing:0.044em; }
-  33%  { letter-spacing:0.003em; }
-  44%  { letter-spacing:0.030em; }
-  55%  { letter-spacing:0.006em; }
-  66%  { letter-spacing:0.020em; }
-  77%  { letter-spacing:0.008em; }
-  88%  { letter-spacing:0.014em; }
+  10%  { letter-spacing:-0.006em; }
+  20%  { letter-spacing:0.044em; }
+  30%  { letter-spacing:0.003em; }
+  40%  { letter-spacing:0.030em; }
+  50%  { letter-spacing:0.006em; }
+  60%  { letter-spacing:0.020em; }
+  70%  { letter-spacing:0.008em; }
+  80%  { letter-spacing:0.013em; }
+  88%  { letter-spacing:0.004em; }  /* +2 micro oscillations */
+  94%  { letter-spacing:0.008em; }
+  97%  { letter-spacing:0.002em; }
   100% { letter-spacing:0; color:var(--color-text-secondary); }
 }
 .work .name.name-out {
@@ -557,30 +556,32 @@ header.nav .mark .sub {
 /* ============================================================
    FOOTER
    ============================================================ */
+/* Footer: Studio | Legal | Brand (rightmost, centered within column) */
 footer {
   background:var(--color-bg-surface);
   padding:52px 56px 24px;
-  display:grid; grid-template-columns:1.6fr 1fr 0.5fr 0.8fr;
-  gap:44px; align-items:start;
+  display:grid; grid-template-columns:1fr 1fr 1.4fr;
+  gap:48px; align-items:start;
 }
-/* Footer brand — left-aligned */
-footer .brand { display:flex; flex-direction:column; align-items:flex-start; }
-footer .brand .mark { display:flex; flex-direction:column; align-items:flex-start; }
-footer .brand .mark img { height:51px; display:block; margin:0 0 8px; }
+/* Footer brand — right column, all items centered on same axis */
+footer .brand { display:flex; flex-direction:column; align-items:center; }
+footer .brand .mark { display:flex; flex-direction:column; align-items:center; }
+footer .brand .mark img { height:51px; display:block; margin:0 auto 8px; }
 footer .brand .mark .wd {
   font-family:var(--font-serif); font-weight:500;
   font-size:18px; letter-spacing:0.38em;
+  padding-left:0.19em; /* optical centering — half letter-spacing */
   text-transform:uppercase; color:var(--color-text-primary); line-height:1;
   -webkit-text-stroke:0.6px var(--color-text-primary);
   text-stroke:0.6px var(--color-text-primary);
-  display:block; box-sizing:border-box;
+  display:block; text-align:center; margin:0 auto;
 }
 footer .brand .mark .sub {
   font-family:var(--font-mono); font-size:9px;
-  letter-spacing:0.34em;
+  letter-spacing:0.34em; padding-left:0.17em;
   text-transform:lowercase; color:var(--color-text-secondary);
   margin-top:6px; line-height:1;
-  display:block;
+  display:block; text-align:center; margin-left:auto; margin-right:auto;
 }
 /* Social icons row */
 footer .brand .social-links {
@@ -713,9 +714,9 @@ footer .colophon .legal { display:flex; gap:28px; }
   }
   footer .brand { align-items:flex-start; }
   footer .brand .mark { align-items:flex-start; }
-  footer .brand .mark img { height:42px; margin:0 0 8px; }
+  footer .brand .mark img { height:42px; margin:0 auto 8px; }
   footer .brand .mark .wd { font-size:16px; }
-  footer .brand .social-links { margin-top:16px; }
+  footer .brand .social-links { margin-top:16px; margin-bottom:56px; } /* 2× gap before Studio */
   footer h4 { margin-top:0; margin-bottom:14px; }
   footer ul { gap:12px; }
   footer ul a { font-size:15px; }
@@ -848,8 +849,24 @@ footer .colophon .legal { display:flex; gap:28px; }
 
 <div class="sep" role="separator"></div>
 
-<!-- ============ FOOTER ============ -->
+<!-- ============ FOOTER — Studio | Legal | Brand (right, centered) ============ -->
 <footer>
+  <div>
+    <h4>Studio</h4>
+    <ul>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Client Care</a></li>
+      <li><a href="#">Shipping &amp; Returns</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Legal</h4>
+    <ul>
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms of Service</a></li>
+    </ul>
+  </div>
   <div class="brand">
     <div class="mark">
       <img src="Фото/LOGO-eagle.png" alt="ORLINSKY" id="footer-eagle">
@@ -857,53 +874,19 @@ footer .colophon .legal { display:flex; gap:28px; }
       <div class="sub">ceramic studio</div>
     </div>
     <div class="social-links">
-      <!-- Instagram -->
       <a href="#" class="soc" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
       </a>
-      <!-- YouTube -->
       <a href="#" class="soc" aria-label="YouTube">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
-          <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
       </a>
-      <!-- Facebook -->
       <a href="#" class="soc" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
       </a>
-      <!-- TikTok -->
       <a href="#" class="soc" aria-label="TikTok">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
-        </svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
       </a>
     </div>
-  </div>
-  <div>
-    <h4>Studio</h4>
-    <ul>
-      <li><a href="#">Contact</a></li>
-      <li><a href="#">Client Care</a></li>
-      <li><a href="#">Shipping &amp; Returns</a></li>
-      <li><a href="#">Bespoke inquiries</a></li>
-    </ul>
-  </div>
-  <div>
-    <h4><a href="#" style="color:var(--color-text-muted);letter-spacing:0.22em;font-family:var(--font-mono);font-size:10px;text-transform:uppercase;transition:color 300ms;">FAQ</a></h4>
-  </div>
-  <div>
-    <h4>Legal</h4>
-    <ul>
-      <li><a href="#">Privacy Policy</a></li>
-      <li><a href="#">Terms of Service</a></li>
-    </ul>
   </div>
   <div class="colophon">
     <span>© Orlinsky Ceramic Studio</span>
@@ -923,32 +906,22 @@ function calibrateLogo(imgEl) {
   if (!imgEl || !imgEl.complete || imgEl.naturalWidth === 0) return;
   var dispW = imgEl.offsetWidth;
   if (!dispW) return;
-  /* 90% of wing displayed width */
+  /* 90% of wing width; CSS padding-left:0.19em handles optical centering */
   var textW = Math.round(dispW * WING_FRAC * 0.90);
   var mark = imgEl.closest('.mark');
   if (!mark) return;
-  var isFooter = imgEl.id === 'footer-eagle';
   var wd = mark.querySelector('.wd');
   if (wd) {
     wd.style.width = textW + 'px';
-    wd.style.boxSizing = 'border-box';
-    if (isFooter) {
-      /* Footer: left-aligned — no auto margins */
-      wd.style.marginLeft = '0';
-      wd.style.marginRight = '0';
-    } else {
-      /* Header: centered */
-      wd.style.marginLeft = 'auto';
-      wd.style.marginRight = 'auto';
-    }
+    /* Both header and footer: centered via margin:auto (flex + margin both work) */
+    wd.style.marginLeft = 'auto';
+    wd.style.marginRight = 'auto';
   }
   var sub = mark.querySelector('.sub');
   if (sub) {
     sub.style.width = 'auto';
-    if (!isFooter) {
-      sub.style.marginLeft = 'auto';
-      sub.style.marginRight = 'auto';
-    }
+    sub.style.marginLeft = 'auto';
+    sub.style.marginRight = 'auto';
   }
 }
 
@@ -1032,7 +1005,7 @@ var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=se
   var works = document.querySelectorAll('.work');
   if(!works.length) return;
 
-  /* Intersection: staggered reveal */
+  /* Intersection: reveal as soon as ANY pixel enters viewport (threshold:0) */
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if(e.isIntersecting){
@@ -1041,7 +1014,7 @@ var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=se
         io.unobserve(e.target);
       }
     });
-  },{threshold:0.1});
+  },{threshold:0, rootMargin:'0px'});
   works.forEach(function(w){ io.observe(w); });
 
   /* Name bounce-out: 8 damped oscillations over 2.5 s when mouse leaves */
@@ -1143,6 +1116,12 @@ var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=se
   hb.addEventListener('click', function(){ isOpen ? close() : open(); });
   if(bd) bd.addEventListener('click', close);
   menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+
+  /* Prevent page scroll when touching the menu panel */
+  menu.addEventListener('touchmove', function(e){
+    /* Allow swipe-to-close tracking (touchStartX set) — prevent all other scrolls */
+    if(isOpen && touchStartX === null) e.preventDefault();
+  }, {passive:false});
 
   /* Swipe-left to close */
   var touchStartX = null, touchStartY = null;

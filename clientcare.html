@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>The Craft — ORLINSKY Ceramic Studio</title>
+<title>Client Care — ORLINSKY Ceramic Studio</title>
 <script>
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (window.location.hash) history.replaceState(null,'',window.location.pathname+window.location.search);
@@ -31,7 +31,6 @@
   --font-mono:'JetBrains Mono','IBM Plex Mono',monospace;
   --ease:cubic-bezier(0.4,0.0,0.2,1);
 }
-
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--color-bg-base);}
 ::-webkit-scrollbar-thumb{background:var(--color-bg-elevated);}
@@ -79,187 +78,148 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .sep{height:1px;border:none;margin:0 auto;width:50%;background:linear-gradient(to right,rgba(200,112,31,0) 0%,rgba(200,112,31,0.15) 20%,rgba(200,112,31,0.55) 45%,rgba(200,112,31,0.85) 50%,rgba(200,112,31,0.55) 55%,rgba(200,112,31,0.15) 80%,rgba(200,112,31,0) 100%);box-shadow:0 0 8px 1px rgba(200,112,31,0.35);}
 
 /* ============================================================
-   SHARED
+   HERO — bg-elevated
+   Open with warmth. Not a service page — a personal invitation.
    ============================================================ */
-.eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:0.44em;text-transform:uppercase;color:var(--color-accent);margin:0 0 32px;display:block;}
-.step-num{font-family:var(--font-mono);font-size:10px;letter-spacing:0.28em;color:var(--color-accent);opacity:0.6;margin:0 0 16px;display:block;}
-
-/* Photo — shared treatment */
-.craft-img{width:100%;display:block;object-fit:cover;}
-.craft-img-wrap{overflow:hidden;position:relative;}
-.craft-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 800ms var(--ease);}
-.craft-img-wrap:hover img{transform:scale(1.03);}
-
-/* ============================================================
-   BLOCK 1 — BEGINNING  bg-elevated
-   ============================================================ */
-.block-1{background:var(--color-bg-elevated);padding:80px 56px 0;}
-.block-1-header{text-align:center;padding-bottom:64px;}
-.block-1-header h1{
-  font-family:var(--font-serif);font-weight:300;font-style:italic;
-  font-size:clamp(28px,3.8vw,52px);
-  line-height:1.2;letter-spacing:0.01em;
-  color:var(--color-text-primary);margin:0;
-}
-/* Full-width image */
-.block-1-hero{
-  max-width:1200px;margin:0 auto;
-  aspect-ratio:16/9;
-}
-.block-1-hero img{width:100%;height:100%;object-fit:cover;display:block;}
-
-/* Quote below image */
-.block-1-quote{
+.cc-hero{
   background:var(--color-bg-elevated);
-  padding:64px 56px 72px;
+  padding:88px 56px 80px;
   text-align:center;
-  max-width:none;
 }
-.block-1-quote .main-quote{
+.cc-hero .eyebrow{
+  font-family:var(--font-mono);font-size:10px;
+  letter-spacing:0.44em;text-transform:uppercase;
+  color:var(--color-accent);margin:0 0 36px;display:block;
+}
+.cc-hero h1{
   font-family:var(--font-serif);font-weight:300;
-  font-size:clamp(26px,3.2vw,44px);
-  line-height:1.25;letter-spacing:0.02em;
+  font-size:clamp(30px,4vw,54px);
+  line-height:1.15;letter-spacing:0.01em;
   color:var(--color-text-primary);
-  margin:0 0 28px;max-width:900px;margin-left:auto;margin-right:auto;
+  margin:0 0 32px;
 }
-.block-1-quote .sub-text{
-  font-family:var(--font-sans);font-weight:300;
-  font-size:clamp(14px,1.4vw,16px);
-  line-height:1.8;letter-spacing:0.02em;
+.cc-hero .lead{
+  font-family:var(--font-serif);font-weight:300;font-style:italic;
+  font-size:clamp(17px,1.8vw,22px);
+  line-height:1.75;color:var(--color-text-secondary);
+  max-width:52ch;margin:0 auto 52px;text-wrap:balance;
+}
+
+/* Contact button — direct, warm, prominent */
+.cc-contact-block{
+  display:inline-flex;flex-direction:column;align-items:center;gap:16px;
+}
+.cc-email{
+  font-family:var(--font-serif);font-weight:400;
+  font-size:clamp(18px,2vw,26px);
+  letter-spacing:0.06em;
+  color:var(--color-accent);
+  border-bottom:1px solid rgba(200,112,31,0.35);
+  padding-bottom:6px;
+  transition:color 300ms var(--ease),border-color 300ms var(--ease);
+}
+.cc-email:hover{color:var(--color-accent-hover);border-bottom-color:var(--color-accent-hover);}
+.cc-response{
+  font-family:var(--font-mono);font-size:10px;
+  letter-spacing:0.28em;text-transform:uppercase;
   color:var(--color-text-muted);
-  max-width:60ch;margin:0 auto;
 }
+
+/* Social links row */
+.cc-socials{
+  display:flex;align-items:center;gap:24px;
+  margin-top:40px;justify-content:center;
+}
+.cc-socials a{
+  font-family:var(--font-mono);font-size:10px;
+  letter-spacing:0.3em;text-transform:uppercase;
+  color:var(--color-text-muted);border-bottom:0;
+  display:flex;align-items:center;gap:8px;
+  transition:color 300ms var(--ease);
+}
+.cc-socials a:hover{color:var(--color-text-secondary);border-bottom:0;}
+.cc-socials .dot{width:3px;height:3px;border-radius:50%;background:var(--color-divider);}
 
 /* ============================================================
-   BLOCK 2 — PROCESS  bg-base
+   CARE CARDS — bg-base
+   Four topics. Each a complete reassurance.
    ============================================================ */
-.block-2{background:var(--color-bg-base);padding:80px 56px;}
-.block-2-title{
-  font-family:var(--font-serif);font-weight:300;
-  font-size:clamp(22px,2.4vw,32px);
-  letter-spacing:0.04em;
-  color:var(--color-text-muted);
-  text-align:center;margin:0 0 72px;
+.cc-cards{
+  background:var(--color-bg-base);
+  padding:80px 56px;
 }
-
-/* Alternating photo + text rows */
-.process-row{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:0;max-width:1200px;margin:0 auto 2px;
-  align-items:stretch;
+.cc-cards-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:2px;
+  max-width:1200px;
+  margin:0 auto;
 }
-.process-row.reverse{direction:rtl;}
-.process-row.reverse > *{direction:ltr;}
-
-.process-photo{aspect-ratio:4/3;}
-.process-text{
-  display:flex;flex-direction:column;justify-content:center;
-  padding:52px 56px;
+.cc-card{
   background:var(--color-bg-elevated);
+  padding:52px 48px;
+  position:relative;
+  transition:background 300ms var(--ease);
 }
-.process-text h3{
-  font-family:var(--font-serif);font-weight:300;font-style:italic;
-  font-size:clamp(20px,2.2vw,30px);
-  line-height:1.3;color:var(--color-text-primary);
+.cc-card:hover{background:#28221D;}
+
+/* Accent top border on hover */
+.cc-card::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(to right,transparent,var(--color-accent),transparent);
+  opacity:0;transform:scaleX(0.4);
+  transition:opacity 400ms var(--ease),transform 400ms var(--ease);
+}
+.cc-card:hover::before{opacity:0.6;transform:scaleX(1);}
+
+.cc-card-icon{
+  width:40px;height:40px;margin-bottom:28px;
+  opacity:0.5;
+}
+.cc-card-icon svg{width:100%;height:100%;}
+
+.cc-card h3{
+  font-family:var(--font-serif);font-weight:400;
+  font-size:clamp(20px,2vw,26px);
+  letter-spacing:0.02em;line-height:1.2;
+  color:var(--color-text-primary);
   margin:0 0 20px;
 }
-.process-text p{
+.cc-card p{
   font-family:var(--font-sans);font-weight:300;
   font-size:clamp(13px,1.2vw,15px);
   line-height:1.85;letter-spacing:0.015em;
-  color:var(--color-text-secondary);margin:0;
-}
-
-/* ============================================================
-   BLOCK 3 — PHILOSOPHY OF IMPERFECTION  bg-elevated
-   ============================================================ */
-.block-3{background:var(--color-bg-elevated);padding:80px 56px;}
-.block-3-inner{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:64px;max-width:1200px;margin:0 auto;
-  align-items:center;
-}
-.block-3-img{aspect-ratio:3/4;}
-.block-3-text{}
-.block-3-text blockquote{
-  font-family:var(--font-serif);font-weight:300;
-  font-size:clamp(22px,2.6vw,38px);
-  line-height:1.35;letter-spacing:0.01em;
-  color:var(--color-text-primary);
-  margin:0 0 32px;padding:0;border:none;
-}
-.block-3-text p{
-  font-family:var(--font-sans);font-weight:300;
-  font-size:clamp(14px,1.3vw,16px);
-  line-height:1.85;letter-spacing:0.015em;
-  color:var(--color-text-secondary);margin:0;
-}
-
-/* ============================================================
-   BLOCK 4 — MATERIALS & QUALITY  bg-base
-   ============================================================ */
-.block-4{background:var(--color-bg-base);padding:80px 56px;}
-.block-4-inner{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;max-width:1200px;margin:0 auto;
-  align-items:center;
-}
-.block-4-img{aspect-ratio:4/3;}
-.block-4-list{}
-.block-4-list h3{
-  font-family:var(--font-serif);font-weight:300;
-  font-size:clamp(20px,2.2vw,30px);
-  letter-spacing:0.02em;
-  color:var(--color-text-primary);margin:0 0 40px;
-}
-.quality-item{
-  display:flex;align-items:flex-start;gap:20px;
-  padding:20px 0;
-  border-bottom:1px solid var(--color-border);
-}
-.quality-item:first-of-type{border-top:1px solid var(--color-border);}
-.quality-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--color-accent);
-  flex-shrink:0;margin-top:8px;opacity:0.75;
-}
-.quality-item span{
-  font-family:var(--font-sans);font-weight:300;
-  font-size:clamp(14px,1.3vw,16px);
-  line-height:1.7;letter-spacing:0.015em;
   color:var(--color-text-secondary);
+  margin:0 0 16px;
+}
+.cc-card p:last-child{margin-bottom:0;}
+.cc-card .note{
+  font-family:var(--font-mono);font-size:10px;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--color-text-muted);
+  margin-top:24px;padding-top:20px;
+  border-top:1px solid var(--color-border);
 }
 
 /* ============================================================
-   BLOCK 5 — EMOTIONAL ANCHOR  bg-elevated
+   PROMISE — bg-elevated
+   The closing emotional guarantee. Not legal — human.
    ============================================================ */
-.block-5{
+.cc-promise{
   background:var(--color-bg-elevated);
-  padding:0;
-  position:relative;overflow:hidden;
+  padding:88px 56px;
+  text-align:center;
 }
-.block-5-img{
-  width:100%;aspect-ratio:21/9;
-  position:relative;
-}
-.block-5-img img{
-  width:100%;height:100%;object-fit:cover;display:block;
-  filter:brightness(0.55);
-}
-.block-5-overlay{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  padding:56px;
-  background:linear-gradient(to top,rgba(12,11,8,0.6),transparent 60%);
-}
-.block-5-overlay blockquote{
+.cc-promise blockquote{
   font-family:var(--font-serif);font-weight:300;font-style:italic;
-  font-size:clamp(22px,3vw,44px);
-  line-height:1.3;letter-spacing:0.01em;
+  font-size:clamp(22px,2.8vw,38px);
+  line-height:1.45;letter-spacing:0.01em;
   color:var(--color-text-primary);
-  text-align:center;margin:0;
-  max-width:900px;
-  text-shadow:0 2px 24px rgba(0,0,0,0.5);
+  max-width:700px;margin:0 auto 32px;text-wrap:balance;
+}
+.cc-promise .author{
+  font-family:var(--font-serif);font-style:italic;font-weight:300;
+  font-size:22px;color:var(--color-accent);opacity:0.8;
 }
 
 /* ============================================================
@@ -279,9 +239,7 @@ footer ul a{font-family:var(--font-sans);font-size:14px;color:var(--color-text-s
 footer ul a:hover{color:var(--color-accent);}
 footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.5px solid var(--color-border);display:flex;justify-content:center;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-muted);}
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* ============================================================ RESPONSIVE ============================================================ */
 @media(max-width:900px){
   header.nav{display:flex;flex-direction:column;align-items:center;padding:18px 24px;position:relative;gap:0;}
   header.nav .left,header.nav .right{display:none;}
@@ -293,24 +251,11 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .top-frame.compact header.nav .mark .wd{font-size:15px;}
   .top-frame.compact header.nav .mark .sub{opacity:0;max-height:0;margin-top:0;}
   .top-frame.compact header.nav .mark-logo{max-height:0;opacity:0;margin-bottom:0;transform:scaleY(0.2);}
-
-  .block-1{padding:56px 24px 0;}
-  .block-1-header{padding-bottom:40px;}
-  .block-1-quote{padding:48px 24px 56px;}
-  .block-2{padding:56px 24px;}
-  .block-2-title{margin-bottom:48px;}
-  .process-row{grid-template-columns:1fr;direction:ltr!important;}
-  .process-row.reverse{direction:ltr!important;}
-  .process-photo{aspect-ratio:4/3;}
-  .process-text{padding:32px 24px;}
-  .block-3{padding:56px 24px;}
-  .block-3-inner{grid-template-columns:1fr;gap:32px;}
-  .block-3-img{aspect-ratio:4/3;}
-  .block-4{padding:56px 24px;}
-  .block-4-inner{grid-template-columns:1fr;gap:40px;}
-  .block-4-img{aspect-ratio:4/3;}
-  .block-5-img{aspect-ratio:3/2;}
-  .block-5-overlay blockquote{font-size:clamp(18px,5vw,28px);}
+  .cc-hero{padding:60px 24px 56px;}
+  .cc-cards{padding:56px 24px;}
+  .cc-cards-grid{grid-template-columns:1fr;gap:2px;}
+  .cc-card{padding:40px 28px;}
+  .cc-promise{padding:64px 24px;}
   .sep{width:70%;}
   footer{grid-template-columns:1fr;gap:32px;padding:48px 24px 24px;}
   footer .brand{align-items:flex-start;}
@@ -326,7 +271,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <header class="nav">
     <nav class="left">
       <a href="index.html">Gallery</a>
-      <a href="craft.html" class="active">The Craft</a>
+      <a href="craft.html">The Craft</a>
       <a href="#">Bespoke</a>
     </nav>
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
@@ -337,7 +282,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <nav class="right">
       <a href="story.html">Our Story</a>
       <a href="kindwords.html">Kind Words</a>
-      <a href="clientcare.html">Client Care</a>
+      <a href="clientcare.html" class="active">Client Care</a>
     </nav>
     <button class="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -348,150 +293,117 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 <div class="menu-backdrop"></div>
 <nav class="mobile-menu" role="dialog" aria-label="Navigation">
   <a href="index.html">Gallery</a><div class="divider"></div>
-  <a href="craft.html" class="active">The Craft</a><div class="divider"></div>
+  <a href="craft.html">The Craft</a><div class="divider"></div>
   <a href="#">Bespoke</a><div class="divider"></div>
   <a href="story.html">Our Story</a><div class="divider"></div>
   <a href="kindwords.html">Kind Words</a><div class="divider"></div>
-  <a href="clientcare.html">Client Care</a>
+  <a href="clientcare.html" class="active">Client Care</a>
 </nav>
 
 <div class="sep" role="separator"></div>
 
 <!-- ============================================================
-     BLOCK 1 — BEGINNING   bg-elevated
+     HERO — warm invitation, not a service desk
+     bg-elevated
      ============================================================ -->
-<section class="block-1">
-  <div class="block-1-header">
-    <span class="eyebrow">The Craft</span>
-    <h1>Each piece begins long before it takes shape</h1>
-  </div>
-  <div class="block-1-hero">
-    <img src="Фото/2.jpg" alt="Studio, morning work">
-  </div>
-</section>
+<section class="cc-hero">
+  <span class="eyebrow">Client Care</span>
+  <h1>We are here<br>whenever you need us</h1>
+  <p class="lead">Every piece that leaves this studio carries our full responsibility. If you have a question, a concern, or simply want to talk about your order — we respond personally, not through a system.</p>
 
-<div class="block-1-quote">
-  <p class="main-quote">True depth is often hidden in the quietest forms</p>
-  <p class="sub-text">Layer by layer, each piece is shaped, fired and refined over 10 days</p>
-</div>
-
-<div class="sep" role="separator"></div>
-
-<!-- ============================================================
-     BLOCK 2 — THE PROCESS   bg-base
-     ============================================================ -->
-<section class="block-2">
-  <p class="block-2-title">The Process</p>
-
-  <div class="process-row">
-    <div class="craft-img-wrap process-photo">
-      <img src="Фото/1.jpg" alt="Built by hand">
-    </div>
-    <div class="process-text">
-      <span class="step-num">01</span>
-      <h3>Built by hand, each form develops its own natural character</h3>
-      <p>Every shape begins with direct contact between hands and clay. No mould determines the outcome. The material responds to touch, pressure, and intention — forming something that could not have been designed.</p>
-    </div>
+  <div class="cc-contact-block">
+    <a href="mailto:hello@orlinsky.ca" class="cc-email">hello@orlinsky.ca</a>
+    <span class="cc-response">We respond within 24 hours</span>
   </div>
 
-  <div class="process-row reverse">
-    <div class="craft-img-wrap process-photo">
-      <img src="Фото/7.jpg" alt="Surface texture">
-    </div>
-    <div class="process-text">
-      <span class="step-num">02</span>
-      <h3>Nothing is over-refined — the surface is allowed to remain authentic</h3>
-      <p>The texture carries the memory of its making. Grain, depth, and irregularity are not corrected — they are preserved as part of the work's honest character.</p>
-    </div>
-  </div>
-
-  <div class="process-row">
-    <div class="craft-img-wrap process-photo">
-      <img src="Фото/4.jpg" alt="Kiln firing">
-    </div>
-    <div class="process-text">
-      <span class="step-num">03</span>
-      <h3>Inside the kiln, heat and time give each piece lasting durability</h3>
-      <p>Fire completes what the hand begins. At high temperature, clay transforms — hardening into something that will outlast almost anything placed beside it.</p>
-    </div>
-  </div>
-
-  <div class="process-row reverse">
-    <div class="craft-img-wrap process-photo">
-      <img src="Фото/8.jpg" alt="Glaze and paint">
-    </div>
-    <div class="process-text">
-      <span class="step-num">04</span>
-      <h3>The final surface balances softness, depth and quiet luminosity</h3>
-      <p>Glazes are chosen and applied by hand, layer by layer. The result is never flat — it shifts with light, breathing differently at different hours of the day.</p>
-    </div>
-  </div>
-
-  <div class="process-row">
-    <div class="craft-img-wrap process-photo">
-      <img src="Фото/5.jpg" alt="Final check">
-    </div>
-    <div class="process-text">
-      <span class="step-num">05</span>
-      <h3>Each work is personally checked before it becomes yours</h3>
-      <p>Before a piece leaves the studio it is held, turned, and considered. Only those that meet the full standard of the work are prepared for shipping.</p>
-    </div>
-  </div>
-
-</section>
-
-<div class="sep" role="separator"></div>
-
-<!-- ============================================================
-     BLOCK 3 — PHILOSOPHY OF IMPERFECTION   bg-elevated
-     ============================================================ -->
-<section class="block-3">
-  <div class="block-3-inner">
-    <div class="craft-img-wrap block-3-img">
-      <img src="Фото/3.jpg" alt="Imperfect surface">
-    </div>
-    <div class="block-3-text">
-      <span class="eyebrow">Imperfection</span>
-      <blockquote>No piece is identical — each one develops its own quiet identity</blockquote>
-      <p>These subtle differences give every piece its own unmistakable character. What appears as variation is in fact the visible record of a specific moment — a particular pressure, a unique path through the fire.</p>
-    </div>
+  <div class="cc-socials">
+    <a href="#" aria-label="Instagram">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      Instagram
+    </a>
+    <span class="dot"></span>
+    <a href="#" aria-label="Facebook">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      Facebook
+    </a>
+    <span class="dot"></span>
+    <a href="#" aria-label="YouTube">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+      YouTube
+    </a>
+    <span class="dot"></span>
+    <a href="#" aria-label="TikTok">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+      TikTok
+    </a>
   </div>
 </section>
 
 <div class="sep" role="separator"></div>
 
 <!-- ============================================================
-     BLOCK 4 — MATERIALS & QUALITY   bg-base
+     CARE CARDS — bg-base
+     Four areas: shipping, packaging, returns, support
      ============================================================ -->
-<section class="block-4">
-  <div class="block-4-inner">
-    <div class="craft-img-wrap block-4-img">
-      <img src="Фото/6.jpg" alt="Ceramic quality">
+<section class="cc-cards">
+  <div class="cc-cards-grid">
+
+    <!-- SHIPPING -->
+    <div class="cc-card">
+      <div class="cc-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>
+      </div>
+      <h3>Shipping</h3>
+      <p>We ship worldwide from our studio in Canada, partnering with trusted carriers. Every order includes tracking information sent directly to you once dispatched.</p>
+      <p>Processing takes up to 2 business days. Exact delivery times are shown at checkout after entering your shipping address — so you always know what to expect before confirming.</p>
+      <p class="note">Processing: up to 2 business days · Worldwide delivery</p>
     </div>
-    <div class="block-4-list">
-      <span class="eyebrow">Materials &amp; Quality</span>
-      <h3>Every detail considered,<br>every step controlled</h3>
-      <div class="quality-item"><div class="quality-dot"></div><span>Durable ceramic composition</span></div>
-      <div class="quality-item"><div class="quality-dot"></div><span>Multiple controlled kiln firings</span></div>
-      <div class="quality-item"><div class="quality-dot"></div><span>Hand-layered glaze and paint</span></div>
-      <div class="quality-item"><div class="quality-dot"></div><span>Stable wall mounting system</span></div>
-      <div class="quality-item"><div class="quality-dot"></div><span>Carefully quality-checked</span></div>
+
+    <!-- PACKAGING -->
+    <div class="cc-card">
+      <div class="cc-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      </div>
+      <h3>Packaging</h3>
+      <p>Each artwork is packed the way it deserves — as a fragile and valuable object. Multiple protective layers, reinforced corners, and sturdy outer packaging ensure that what arrives in your hands is exactly what left ours.</p>
+      <p>Opening the parcel is part of the experience. We design the unboxing to feel like receiving something truly special — because that is what it is.</p>
+      <p class="note">Protective layers · Reinforced corners · Luxury unboxing</p>
     </div>
+
+    <!-- RETURNS -->
+    <div class="cc-card">
+      <div class="cc-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3"/></svg>
+      </div>
+      <h3>Returns &amp; Exchanges</h3>
+      <p>If something does not feel right, please reach out to us first — we would rather find a solution together than have you feel uncertain about your purchase.</p>
+      <p>Returns are accepted within 14 days of delivery. As each piece is handmade and unique, conditions may vary by situation. Detailed terms are always handled in conversation, not through an automated process.</p>
+      <p class="note">14-day window · Personal case-by-case care · Contact us first</p>
+    </div>
+
+    <!-- SUPPORT -->
+    <div class="cc-card">
+      <div class="cc-card-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <h3>Personal Support</h3>
+      <p>This studio is run by a person, not a department. When you write to us, a real person reads your message, considers it, and responds with care. Not a template — a reply.</p>
+      <p>If your piece arrived damaged, if you have any question at all, or simply want to share your experience — we are genuinely here. Every message matters to us.</p>
+      <p class="note">Real person · 24-hour response · Every message answered</p>
+    </div>
+
   </div>
 </section>
 
 <div class="sep" role="separator"></div>
 
 <!-- ============================================================
-     BLOCK 5 — EMOTIONAL ANCHOR   bg-elevated
+     PROMISE — bg-elevated
+     Not legal language. A human promise.
      ============================================================ -->
-<section class="block-5">
-  <div class="block-5-img">
-    <img src="Фото/9.jpg" alt="Created with warmth">
-    <div class="block-5-overlay">
-      <blockquote>Created as a quiet return to the warmth we carry from childhood</blockquote>
-    </div>
-  </div>
+<section class="cc-promise">
+  <blockquote>"Your trust in us is not taken for granted. Every order, every message, every concern — handled with the same attention we give to the clay itself."</blockquote>
+  <div class="cc-promise .author">— Ruslan Orlinsky</div>
 </section>
 
 <div class="sep" role="separator"></div>
@@ -541,11 +453,11 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
 ['header-eagle','footer-eagle'].forEach(function(id){var img=document.getElementById(id);if(img&&!img.complete)img.addEventListener('load',function(){calibrateLogo(img);});});
 (function(){var frame=document.querySelector('.top-frame');if(!frame)return;window.addEventListener('scroll',function(){frame.classList.toggle('compact',window.scrollY>0);},{passive:true});frame.classList.toggle('compact',window.scrollY>0);})();
 (function(){
-  var targets=document.querySelectorAll('section,.block-1-quote,footer');
+  var targets=document.querySelectorAll('section,footer');
   targets.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1),transform 900ms cubic-bezier(0.16,1,0.3,1)';});
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);}});},{threshold:0.04});
   targets.forEach(function(el){io.observe(el);});
-  setTimeout(function(){var h=document.querySelector('.block-1');if(h){h.style.opacity='1';h.style.transform='translateY(0)';}},100);
+  setTimeout(function(){var h=document.querySelector('.cc-hero');if(h){h.style.opacity='1';h.style.transform='translateY(0)';}},100);
 })();
 (function(){
   var hb=document.querySelector('.hamburger'),menu=document.querySelector('.mobile-menu'),bd=document.querySelector('.menu-backdrop');

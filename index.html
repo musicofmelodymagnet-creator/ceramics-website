@@ -195,6 +195,7 @@ header.nav .mark .sub {
   transition:opacity 300ms var(--ease), max-height 300ms var(--ease), margin-top 300ms var(--ease);
   overflow:hidden; max-height:20px;
   display:block; text-align:center; margin-left:auto; margin-right:auto;
+  white-space:nowrap;
 }
 
 /* ---- Compact state ---- */
@@ -800,6 +801,8 @@ footer .colophon .legal { display:flex; gap:28px; }
   <a href="#">Client Care</a>
 </nav>
 
+<div class="sep" role="separator"></div>
+
 <!-- ============ HERO ============ -->
 <section class="hero">
   <div class="video-wrap">
@@ -923,40 +926,36 @@ footer .colophon .legal { display:flex; gap:28px; }
 /* ---- Scroll to top on load ---- */
 window.addEventListener('DOMContentLoaded', function(){ window.scrollTo(0, 0); });
 
-/* ---- Logo calibration: ORLINSKY = 80% of actual wing span ---- */
+/* ---- Logo calibration: auto-width, centered ---- */
 function calibrateLogo(imgEl) {
   if (!imgEl || !imgEl.complete || imgEl.naturalWidth === 0) return;
   var dispW = imgEl.offsetWidth;
   if (!dispW) return;
-
-  var EAGLE_IMG_W = 2605;
-  var WING_L = 234, WING_R = 2337;
-  var wingFrac = (WING_R - WING_L) / EAGLE_IMG_W;
-  var wingPx = dispW * wingFrac;
-  var textW = Math.round(wingPx * 0.80);
 
   var mark = imgEl.closest('.mark');
   if (!mark) return;
 
   var wd = mark.querySelector('.wd');
   if (wd) {
-    wd.style.width       = textW + 'px';
-    wd.style.marginLeft  = 'auto';
-    wd.style.marginRight = 'auto';
+    wd.style.width       = 'auto';
+    wd.style.maxWidth    = 'none';
     wd.style.paddingLeft = '0';
     wd.style.textAlign   = 'center';
     wd.style.display     = 'block';
+    wd.style.marginLeft  = 'auto';
+    wd.style.marginRight = 'auto';
   }
 
   var sub = mark.querySelector('.sub');
   if (sub) {
     sub.style.width       = 'auto';
-    sub.style.maxWidth    = textW + 'px';
-    sub.style.marginLeft  = 'auto';
-    sub.style.marginRight = 'auto';
+    sub.style.maxWidth    = 'none';
     sub.style.paddingLeft = '0';
     sub.style.textAlign   = 'center';
     sub.style.display     = 'block';
+    sub.style.marginLeft  = 'auto';
+    sub.style.marginRight = 'auto';
+    sub.style.whiteSpace  = 'nowrap';
   }
 }
 

@@ -549,7 +549,7 @@ header.nav .mark .sub {
 }
 .dispatch .sub {
   display:inline-flex; align-items:flex-end; gap:0;
-  border-bottom:0.5px solid var(--color-border);
+  border-bottom:1.5px solid var(--color-border);
   width:clamp(280px,32vw,420px);
   transition:border-color 400ms var(--ease);
 }
@@ -962,10 +962,33 @@ function calibrateLogo(imgEl) {
     sub.style.whiteSpace  = 'nowrap';
   }
 
-  /* Footer eagle: ensure no fixed width overrides */
+  /* Footer eagle: force flex centering on .mark + reset all widths */
   if (imgEl.id === 'footer-eagle') {
-    if (wd)  { wd.style.width  = 'auto'; wd.style.maxWidth  = 'none'; }
-    if (sub) { sub.style.width = 'auto'; sub.style.maxWidth = 'none'; }
+    var footerMark = imgEl.closest('.mark');
+    if (footerMark) {
+      footerMark.style.display       = 'flex';
+      footerMark.style.flexDirection = 'column';
+      footerMark.style.alignItems    = 'center';
+      footerMark.style.width         = 'fit-content';
+      footerMark.style.margin        = '0 auto';
+    }
+    if (wd) {
+      wd.style.width       = 'auto';
+      wd.style.maxWidth    = 'none';
+      wd.style.paddingLeft = '0';
+      wd.style.marginLeft  = '0';
+      wd.style.marginRight = '0';
+      wd.style.textAlign   = 'center';
+    }
+    if (sub) {
+      sub.style.width       = 'auto';
+      sub.style.maxWidth    = 'none';
+      sub.style.paddingLeft = '0';
+      sub.style.marginLeft  = '0';
+      sub.style.marginRight = '0';
+      sub.style.textAlign   = 'center';
+      sub.style.whiteSpace  = 'nowrap';
+    }
   }
 }
 

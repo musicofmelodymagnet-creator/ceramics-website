@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>FAQ — ORLINSKY Ceramic Studio</title>
+<title>Kind Words — ORLINSKY Ceramic Studio</title>
 <script>
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (window.location.hash) history.replaceState(null,'',window.location.pathname+window.location.search);
@@ -24,7 +24,6 @@
   --color-text-secondary:#C9B89A;
   --color-text-muted:#7A6E63;
   --color-accent:#C8701F;
-  --color-accent-hover:#E8833A;
   --color-border:#2E2820;
   --color-divider:#5A5048;
   --font-serif:'Cormorant Garamond','EB Garamond',Georgia,serif;
@@ -38,7 +37,6 @@
 ::-webkit-scrollbar-track{background:var(--color-bg-base);}
 ::-webkit-scrollbar-thumb{background:var(--color-bg-elevated);}
 ::-webkit-scrollbar-thumb:hover{background:var(--color-accent);}
-
 html{overflow-x:clip;}
 html,body{margin:0;padding:0;background:var(--color-bg-base);color:var(--color-text-primary);font-family:var(--font-sans);font-size:17px;font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;max-width:100%;}
 a{color:inherit;text-decoration:none;border-bottom:0.5px solid transparent;transition:border-color 300ms var(--ease),color 300ms var(--ease);}
@@ -91,159 +89,162 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .sep{height:1px;border:none;margin:0 auto;width:50%;background:linear-gradient(to right,rgba(200,112,31,0) 0%,rgba(200,112,31,0.15) 20%,rgba(200,112,31,0.55) 45%,rgba(200,112,31,0.85) 50%,rgba(200,112,31,0.55) 55%,rgba(200,112,31,0.15) 80%,rgba(200,112,31,0) 100%);box-shadow:0 0 8px 1px rgba(200,112,31,0.35);}
 
 /* ============================================================
-   FAQ HERO
+   INTRO — bg-elevated (warm accent, like philosophy on main)
    ============================================================ */
-.faq-hero{
-  background:var(--color-bg-elevated); /* accent/intro — like philosophy on main */
+.kw-intro{
+  background:var(--color-bg-elevated);
   padding:80px 56px 72px;
   text-align:center;
 }
-.faq-hero .eyebrow{
+.kw-intro .eyebrow{
   font-family:var(--font-mono);font-size:10px;
   letter-spacing:0.44em;text-transform:uppercase;
-  color:var(--color-accent);margin:0 0 32px;
+  color:var(--color-accent);margin:0 0 36px;
 }
-.faq-hero h1{
+.kw-intro h1{
   font-family:var(--font-serif);font-weight:300;
-  font-size:clamp(32px,4.5vw,58px);
-  line-height:1.1;letter-spacing:0.02em;
+  font-size:clamp(30px,4vw,52px);
+  line-height:1.2;letter-spacing:0.01em;
   color:var(--color-text-primary);
-  margin:0 0 20px;
+  margin:0 0 48px;
 }
-.faq-hero .subtitle{
+.kw-intro-text{
+  max-width:700px;margin:0 auto;
+  display:flex;flex-direction:column;gap:16px;
+}
+.kw-intro-text p{
   font-family:var(--font-serif);font-weight:300;font-style:italic;
-  font-size:clamp(17px,1.8vw,22px);
+  font-size:clamp(18px,2vw,24px);
+  line-height:1.75;letter-spacing:0.01em;
   color:var(--color-text-secondary);
-  letter-spacing:0.01em;margin:0;
+  margin:0;
+}
+.kw-intro-text p:last-child{
+  font-family:var(--font-sans);font-weight:300;font-style:normal;
+  font-size:clamp(14px,1.4vw,16px);
+  color:var(--color-text-muted);
+  letter-spacing:0.02em;line-height:1.7;
+  margin-top:8px;
 }
 
 /* ============================================================
-   FAQ ACCORDION
+   VIDEOS SECTION
+   bg-base body, sides naturally dark via section bg,
+   cards use 2 lighter tones: bg-elevated (outer) + bg-base variant (center)
    ============================================================ */
-.faq-section{
-  background:var(--color-bg-base); /* content/reading — like dispatch on main */
-  padding:0 56px 96px;
+.kw-videos{
+  /* dark bg-surface on the outer section — pads create "dark sides" */
+  background:var(--color-bg-surface);
+  padding:72px 56px 80px;
 }
-.faq-list{
-  max-width:900px;
+.kw-videos-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  max-width:1100px;
   margin:0 auto;
 }
 
-/* Single FAQ item */
-.faq-item{
-  border-top:1px solid var(--color-border);
+/* Video placeholder card — 9:16 vertical */
+.kw-card{
   position:relative;
-  transition:border-color 300ms var(--ease);
-}
-.faq-item:last-child{ border-bottom:1px solid var(--color-border); }
-
-/* Accent line — slides in on open */
-.faq-item::before{
-  content:"";
-  position:absolute; left:0; top:0; bottom:0;
-  width:2px;
-  background:var(--color-accent);
-  transform:scaleY(0);
-  transform-origin:top;
-  transition:transform 400ms var(--ease);
-  opacity:0.7;
-}
-.faq-item.open::before{
-  transform:scaleY(1);
-}
-
-/* Question button */
-.faq-trigger{
-  width:100%; background:transparent; border:0;
-  padding:28px 48px 28px 24px;
-  display:flex; align-items:center; gap:20px;
-  cursor:pointer; text-align:left;
-  position:relative;
-  transition:background 250ms var(--ease);
-}
-.faq-trigger:hover{
-  background:rgba(200,112,31,0.03);
-}
-
-.faq-number{
-  font-family:var(--font-mono);font-size:15px;
-  letter-spacing:0.22em;color:var(--color-accent);
-  opacity:0.85;flex-shrink:0;width:28px;
-  transition:opacity 300ms var(--ease);
-}
-.faq-item.open .faq-number{ opacity:1; }
-
-.faq-question{
-  font-family:var(--font-serif);font-weight:400;
-  font-size:clamp(23px,2.5vw,30px);
-  line-height:1.3;letter-spacing:0.01em;
-  color:var(--color-text-secondary);
-  flex:1;
-  transition:color 300ms var(--ease);
-}
-.faq-item.open .faq-question,
-.faq-trigger:hover .faq-question{
-  color:var(--color-text-primary);
-}
-
-/* +/× icon */
-.faq-icon{
-  flex-shrink:0;
-  width:22px; height:22px;
-  border:1px solid rgba(200,180,155,0.2);
-  border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  position:absolute; right:20px; top:50%; transform:translateY(-50%);
-  transition:border-color 350ms var(--ease), background 350ms var(--ease), transform 350ms var(--ease);
-}
-.faq-icon::before,
-.faq-icon::after{
-  content:"";position:absolute;
-  background:var(--color-text-secondary);
-  border-radius:1px;
-  transition:transform 350ms var(--ease), opacity 350ms var(--ease), background 350ms var(--ease);
-}
-.faq-icon::before{ width:10px; height:1px; }
-.faq-icon::after { width:1px; height:10px; }
-
-/* Open state: + rotates into × */
-.faq-item.open .faq-icon{
-  border-color:var(--color-accent);
-  background:rgba(200,112,31,0.08);
-}
-.faq-item.open .faq-icon::before,
-.faq-item.open .faq-icon::after{
-  background:var(--color-accent);
-}
-.faq-item.open .faq-icon::before{ transform:rotate(45deg); }
-.faq-item.open .faq-icon::after { transform:rotate(45deg); }
-
-/* Answer — smooth height via grid-template-rows */
-.faq-body{
-  display:grid;
-  grid-template-rows:0fr;
-  transition:grid-template-rows 450ms cubic-bezier(0.16,1,0.3,1);
-}
-.faq-item.open .faq-body{
-  grid-template-rows:1fr;
-}
-.faq-body-inner{
+  aspect-ratio:9/16;
   overflow:hidden;
+  cursor:pointer;
 }
-.faq-answer{
-  padding:0 24px 32px 72px;
-  font-family:var(--font-sans);font-weight:300;
-  font-size:clamp(17px,1.75vw,20px);
-  line-height:1.85;letter-spacing:0.015em;
-  color:var(--color-text-secondary);
-  opacity:0;
-  transform:translateY(6px);
-  transition:opacity 350ms var(--ease) 80ms,
-             transform 350ms var(--ease) 80ms;
+
+/* Outer cards: bg-elevated (lighter warm tone) */
+.kw-card:nth-child(1),
+.kw-card:nth-child(3){
+  background:var(--color-bg-elevated);
 }
-.faq-item.open .faq-answer{
-  opacity:1;
-  transform:translateY(0);
+/* Center card: bg-base (slightly different lighter tone) */
+.kw-card:nth-child(2){
+  background:var(--color-bg-base);
+}
+
+/* Subtle inner border */
+.kw-card::before{
+  content:"";
+  position:absolute;inset:0;
+  border:1px solid rgba(200,180,155,0.08);
+  pointer-events:none;
+  z-index:2;
+  transition:border-color 400ms var(--ease);
+}
+.kw-card:hover::before{
+  border-color:rgba(200,112,31,0.25);
+}
+
+/* Subtle gradient overlay — bottom fade */
+.kw-card::after{
+  content:"";
+  position:absolute;
+  left:0;right:0;bottom:0;
+  height:40%;
+  background:linear-gradient(to top,rgba(12,11,8,0.6),transparent);
+  pointer-events:none;
+  z-index:1;
+}
+
+/* Play button */
+.kw-play{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:3;
+  display:flex;align-items:center;justify-content:center;
+  width:60px;height:60px;
+  border-radius:50%;
+  background:rgba(200,112,31,0.15);
+  border:1px solid rgba(200,112,31,0.4);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  transition:background 350ms var(--ease),
+             border-color 350ms var(--ease),
+             transform 350ms var(--ease);
+}
+.kw-card:hover .kw-play{
+  background:rgba(200,112,31,0.28);
+  border-color:rgba(200,112,31,0.7);
+  transform:translate(-50%,-50%) scale(1.08);
+}
+/* Triangle */
+.kw-play::after{
+  content:"";
+  display:block;
+  width:0;height:0;
+  margin-left:4px;
+  border-top:10px solid transparent;
+  border-bottom:10px solid transparent;
+  border-left:17px solid var(--color-accent);
+  opacity:0.85;
+}
+
+/* Label at bottom of card */
+.kw-label{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  z-index:4;
+  padding:20px 18px;
+  text-align:center;
+}
+.kw-label span{
+  font-family:var(--font-mono);font-size:9px;
+  letter-spacing:0.32em;text-transform:uppercase;
+  color:rgba(245,241,232,0.35);
+}
+
+/* Coming-soon text inside card */
+.kw-soon{
+  position:absolute;
+  bottom:60px;left:0;right:0;
+  z-index:3;
+  text-align:center;
+}
+.kw-soon span{
+  font-family:var(--font-serif);font-style:italic;font-weight:300;
+  font-size:13px;letter-spacing:0.06em;
+  color:rgba(201,184,154,0.28);
 }
 
 /* ============================================================
@@ -277,12 +278,23 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .top-frame.compact header.nav .mark .wd{font-size:15px;}
   .top-frame.compact header.nav .mark .sub{opacity:0;max-height:0;margin-top:0;}
   .top-frame.compact header.nav .mark-logo{max-height:0;opacity:0;margin-bottom:0;transform:scaleY(0.2);}
-  .faq-hero{padding:56px 24px 48px;}
-  .faq-section{padding:0 24px 72px;}
-  .faq-trigger{padding:22px 44px 22px 16px;}
-  .faq-number{display:none;}
-  .faq-answer{padding:0 16px 28px 16px;}
-  .faq-icon{right:14px;}
+
+  .kw-intro{padding:56px 24px 52px;}
+  .kw-videos{padding:48px 24px 64px;}
+
+  /* Mobile: single column, cards stacked */
+  .kw-videos-grid{
+    grid-template-columns:1fr;
+    gap:16px;
+    max-width:320px;
+  }
+  /* All cards same tone on mobile */
+  .kw-card:nth-child(1),
+  .kw-card:nth-child(2),
+  .kw-card:nth-child(3){
+    background:var(--color-bg-elevated);
+  }
+
   .sep{width:70%;}
   footer{grid-template-columns:1fr;gap:32px;padding:48px 24px 24px;}
   footer .brand{align-items:flex-start;}
@@ -308,7 +320,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     </a>
     <nav class="right">
       <a href="story.html">Our Story</a>
-      <a href="kindwords.html">Kind Words</a>
+      <a href="kindwords.html" class="active">Kind Words</a>
       <a href="#">Client Care</a>
     </nav>
     <button class="hamburger" aria-label="Open menu" aria-expanded="false">
@@ -323,192 +335,45 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <a href="#">The Craft</a><div class="divider"></div>
   <a href="#">Bespoke</a><div class="divider"></div>
   <a href="story.html">Our Story</a><div class="divider"></div>
-  <a href="kindwords.html">Kind Words</a><div class="divider"></div>
+  <a href="kindwords.html" class="active">Kind Words</a><div class="divider"></div>
   <a href="#">Client Care</a>
 </nav>
 
 <div class="sep" role="separator"></div>
 
-<!-- FAQ HERO -->
-<section class="faq-hero">
-  <p class="eyebrow">FAQ</p>
-  <h1>Frequently Asked Questions</h1>
-  <p class="subtitle">Everything you might wish to know — carefully gathered.</p>
+<!-- INTRO -->
+<section class="kw-intro">
+  <p class="eyebrow">Kind Words</p>
+  <h1>Behind every artwork are hours of handmade work,<br>inspiration, and love for details.</h1>
+  <div class="kw-intro-text">
+    <p>That is why your kind reviews touch us so deeply.</p>
+    <p>Thank you for sharing your emotions and allowing our art to become part of your stories.</p>
+    <p>For us, this means far more than simple words of appreciation.</p>
+  </div>
 </section>
 
 <div class="sep" role="separator"></div>
 
-<!-- FAQ LIST -->
-<section class="faq-section">
-  <div class="faq-list">
+<!-- VIDEO PLACEHOLDERS -->
+<section class="kw-videos">
+  <div class="kw-videos-grid">
 
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">01</span>
-        <span class="faq-question">What is the idea behind your paintings?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">I'm inspired by the idea that every person carries an entire world within them — a world of quiet, meaningful memories. The simple moments of childhood, when happiness felt natural and unconditional. Through my ceramic paintings, I try to reflect that very state — a sense of calm, simplicity, and the gentle feeling of returning to yourself.</p>
-        </div>
-      </div>
+    <div class="kw-card">
+      <div class="kw-play"></div>
+      <div class="kw-soon"><span>Video review</span></div>
+      <div class="kw-label"><span>Client Review</span></div>
     </div>
 
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">02</span>
-        <span class="faq-question">How are the ceramic paintings made?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Each piece is handcrafted from durable ceramic, kiln-fired, and finished with artistic glazes. Thanks to the handmade process and firing, every artwork is truly one of a kind and beautifully unique.</p>
-        </div>
-      </div>
+    <div class="kw-card">
+      <div class="kw-play"></div>
+      <div class="kw-soon"><span>Video review</span></div>
+      <div class="kw-label"><span>Client Review</span></div>
     </div>
 
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">03</span>
-        <span class="faq-question">Which countries do you ship to?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Our studio is based in Canada, and we ship worldwide in partnership with trusted carriers.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">04</span>
-        <span class="faq-question">What are the processing and delivery times?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Orders require up to 2 business days for preparation, followed by shipping time. Exact delivery estimates will be shown at checkout after you enter your shipping address.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">05</span>
-        <span class="faq-question">How do you package the artwork for safe delivery?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Each artwork is packaged like a fragile art object, with protective layers, sturdy materials, and reinforced corners. Our goal is for your piece to arrive in perfect condition.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">06</span>
-        <span class="faq-question">What should I do if my artwork arrives damaged?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">If this ever happens, please contact us right away. We will resolve the matter as quickly as possible.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">07</span>
-        <span class="faq-question">Can I request a return or exchange?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Yes, returns are possible. However, as each piece is fragile and unique, return conditions may vary. Full details can be found in the Client Care / Shipping &amp; Returns section.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">08</span>
-        <span class="faq-question">Is the artwork ready to hang?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Yes, mounting hardware is installed on the back, so you can hang the piece as soon as it arrives.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">09</span>
-        <span class="faq-question">Can I add a personal inscription?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Yes, this option is available. We can add a personal inscription in the form of a wax seal with your heartfelt message — a beautiful and truly unique touch. Details can be found in the Bespoke section.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">10</span>
-        <span class="faq-question">Will the artwork look exactly like the photos?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">You will receive the exact piece shown on the product page. As each artwork is handmade, slight natural variations may occur — these are part of its individuality and charm.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">11</span>
-        <span class="faq-question">How should I care for a ceramic artwork?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Care is simple: gently wipe with a soft, dry cloth. Do not use abrasives or wash under water.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">12</span>
-        <span class="faq-question">Can it be displayed in a bathroom or kitchen?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Yes, ceramic and glaze handle humidity well. However, please avoid direct contact with water and strong impact, as with any fragile art object.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">13</span>
-        <span class="faq-question">How can I contact you if I have a question?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">You can contact us via the email listed in the Client Care section. We'll be happy to assist you.</p>
-        </div>
-      </div>
+    <div class="kw-card">
+      <div class="kw-play"></div>
+      <div class="kw-soon"><span>Video review</span></div>
+      <div class="kw-label"><span>Client Review</span></div>
     </div>
 
   </div>
@@ -545,9 +410,8 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 </footer>
 
 <script>
-window.addEventListener('DOMContentLoaded', function(){ window.scrollTo(0,0); });
+window.addEventListener('DOMContentLoaded',function(){window.scrollTo(0,0);});
 
-/* Logo calibration */
 function calibrateLogo(imgEl){
   if(!imgEl||!imgEl.complete||imgEl.naturalWidth===0)return;
   var mark=imgEl.closest('.mark');if(!mark)return;
@@ -567,44 +431,20 @@ window.addEventListener('load',calibrateAll);
 var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTimeout(calibrateAll,120);});
 ['header-eagle','footer-eagle'].forEach(function(id){var img=document.getElementById(id);if(img&&!img.complete)img.addEventListener('load',function(){calibrateLogo(img);});});
 
-/* Compact header */
 (function(){
   var frame=document.querySelector('.top-frame');if(!frame)return;
   window.addEventListener('scroll',function(){frame.classList.toggle('compact',window.scrollY>0);},{passive:true});
   frame.classList.toggle('compact',window.scrollY>0);
 })();
 
-/* Scroll reveal */
 (function(){
   var targets=document.querySelectorAll('section,footer');
   targets.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1),transform 900ms cubic-bezier(0.16,1,0.3,1)';});
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);}});},{threshold:0.04});
   targets.forEach(function(el){io.observe(el);});
-  setTimeout(function(){var h=document.querySelector('.faq-hero');if(h){h.style.opacity='1';h.style.transform='translateY(0)';}},100);
+  setTimeout(function(){var h=document.querySelector('.kw-intro');if(h){h.style.opacity='1';h.style.transform='translateY(0)';}},100);
 })();
 
-/* FAQ Accordion */
-(function(){
-  var items = document.querySelectorAll('.faq-item');
-  items.forEach(function(item){
-    var trigger = item.querySelector('.faq-trigger');
-    trigger.addEventListener('click', function(){
-      var isOpen = item.classList.contains('open');
-      /* Close all others */
-      items.forEach(function(other){
-        if(other !== item && other.classList.contains('open')){
-          other.classList.remove('open');
-          other.querySelector('.faq-trigger').setAttribute('aria-expanded','false');
-        }
-      });
-      /* Toggle this one */
-      item.classList.toggle('open', !isOpen);
-      trigger.setAttribute('aria-expanded', String(!isOpen));
-    });
-  });
-})();
-
-/* Mobile menu */
 (function(){
   var hb=document.querySelector('.hamburger'),menu=document.querySelector('.mobile-menu'),bd=document.querySelector('.menu-backdrop');
   if(!hb||!menu)return;

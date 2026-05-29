@@ -128,14 +128,17 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 }
 
 /* ============================================================
-   VIDEOS SECTION
-   bg-base body, sides naturally dark via section bg,
-   cards use 2 lighter tones: bg-elevated (outer) + bg-base variant (center)
+   VIDEOS SECTION — bg-base matches hero on main page
    ============================================================ */
 .kw-videos{
-  /* dark bg-surface on the outer section — pads create "dark sides" */
-  background:var(--color-bg-surface);
-  padding:72px 56px 80px;
+  background:var(--color-bg-base);
+  padding:64px 56px 80px;
+}
+.kw-videos .section-eyebrow{
+  font-family:var(--font-mono);font-size:10px;
+  letter-spacing:0.44em;text-transform:uppercase;
+  color:var(--color-accent);
+  text-align:center;margin:0 0 48px;
 }
 .kw-videos-grid{
   display:grid;
@@ -153,14 +156,14 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   cursor:pointer;
 }
 
-/* Outer cards: bg-elevated (lighter warm tone) */
+/* Outer cards: warm lighter tone */
 .kw-card:nth-child(1),
 .kw-card:nth-child(3){
-  background:var(--color-bg-elevated);
+  background:#2A2520;
 }
-/* Center card: bg-base (slightly different lighter tone) */
+/* Center card: slightly lighter/warmer */
 .kw-card:nth-child(2){
-  background:var(--color-bg-base);
+  background:#332C26;
 }
 
 /* Subtle inner border */
@@ -288,11 +291,10 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     gap:16px;
     max-width:320px;
   }
-  /* All cards same tone on mobile */
   .kw-card:nth-child(1),
   .kw-card:nth-child(2),
   .kw-card:nth-child(3){
-    background:var(--color-bg-elevated);
+    background:#2A2520;
   }
 
   .sep{width:70%;}
@@ -343,6 +345,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 
 <!-- VIDEO PLACEHOLDERS -->
 <section class="kw-videos">
+  <p class="section-eyebrow">Kind Words</p>
   <div class="kw-videos-grid">
 
     <div class="kw-card">
@@ -368,9 +371,8 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 
 <div class="sep" role="separator"></div>
 
-<!-- INTRO -->
+<!-- INTRO TEXT -->
 <section class="kw-intro">
-  <p class="eyebrow">Kind Words</p>
   <h1>Behind every artwork are hours of handmade work,<br>inspiration, and love for details.</h1>
   <div class="kw-intro-text">
     <p>That is why your kind reviews touch us so deeply.</p>

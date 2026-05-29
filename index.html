@@ -26,10 +26,10 @@
    DARK BRAND PALETTE — Orlinsky Color System v2
    ==================================================================== */
 :root {
-  /* Backgrounds — three depth layers */
-  --color-bg-base:        #1A1612;
-  --color-bg-surface:     #2A2520;
-  --color-bg-elevated:    #332D28;
+  /* Backgrounds — three depth layers (surface darker than base = correct hierarchy) */
+  --color-bg-base:        #16130F;
+  --color-bg-surface:     #0D0B08;
+  --color-bg-elevated:    #221E1A;
 
   /* Text hierarchy */
   --color-text-primary:   #F5F1E8;
@@ -42,7 +42,7 @@
   --color-accent-pressed: #8C4B12;
 
   /* Borders */
-  --color-border:         #332D28;
+  --color-border:         #1E1A16;
   --color-border-accent:  rgba(200,112,31,0.3);
 
   /* Typography */
@@ -124,7 +124,7 @@ a:hover { border-bottom-color:currentColor; }
   background:var(--color-bg-surface);
   color:var(--color-text-primary);
   position:sticky; top:0; z-index:100;
-  border-bottom:1px solid #4A4238;
+  border-bottom:1px solid rgba(200,180,155,0.12);
 }
 /* Animate ONLY the logo mark — background panel stays fixed */
 .top-frame.snap-top .mark { animation: header-snap-top 2250ms ease-out both; }
@@ -559,7 +559,7 @@ header.nav .mark .sub {
 /* Footer: Studio | Legal | Brand (rightmost, centered within column) */
 footer {
   background:var(--color-bg-surface);
-  padding:52px 56px 24px;
+  padding:80px 56px 32px;
   display:grid; grid-template-columns:1fr 1fr 1.4fr;
   gap:48px; align-items:start;
 }

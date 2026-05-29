@@ -178,18 +178,18 @@ header.nav .mark .wd {
   transition:font-size 400ms var(--ease), opacity 300ms var(--ease),
              width 300ms var(--ease), margin 300ms var(--ease),
              text-shadow 3000ms ease-out,
-             transform 2000ms cubic-bezier(0.25,1,0.5,1);
+             transform 2000ms ease-in-out;
   display:block; margin:0 auto; text-align:center;
 }
-/* Hover: scale up + intense glow in; scale returns slowly on mouse-out */
+/* Hover: subtle scale + intense glow; both return slowly on mouse-out */
 header.nav .mark:hover .wd {
-  transform:scale(1.2);
+  transform:scale(1.08);
   text-shadow: 0 0 8px rgba(245,241,232,1),
                0 0 20px rgba(245,241,232,0.9),
                0 0 40px rgba(245,241,232,0.5),
                0 0 60px rgba(245,241,232,0.2);
-  transition:transform 300ms var(--ease),
-             text-shadow 500ms ease-in;
+  transition:transform 400ms ease-in-out,
+             text-shadow 500ms ease-in-out;
 }
 header.nav .mark .sub {
   font-family:var(--font-mono); font-size:9px;
@@ -900,26 +900,13 @@ footer .colophon .legal { display:flex; gap:28px; }
     </ul>
   </div>
   <div class="brand">
-    <div class="mark">
-      <img src="Фото/LOGO-eagle.png" alt="ORLINSKY" id="footer-eagle">
+    <a class="mark" href="#" aria-label="ORLINSKY home">
+      <div class="mark-logo">
+        <img src="Фото/LOGO-eagle.png" alt="" id="footer-eagle">
+      </div>
       <div class="wd">ORLINSKY</div>
       <div class="sub">ceramic studio</div>
-    </div>
-    <div class="social-links">
-      <a href="#" class="soc" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
-      </a>
-      <a href="#" class="soc" aria-label="YouTube">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
-      </a>
-      <a href="#" class="soc" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      </a>
-      <a href="#" class="soc" aria-label="TikTok">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-      </a>
-    </div>
-    <div class="divider-line"></div>
+    </a>
   </div>
   <div class="colophon">
     <span>© Orlinsky Ceramic Studio</span>

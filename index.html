@@ -247,7 +247,7 @@ header.nav .mark .sub {
   align-items:flex-start; justify-content:center;
   gap:38px; padding:60px 28px;
   transform:translateX(100%);
-  border-left:1px solid #4A4238;
+  border-left:1px solid rgba(200,180,155,0.10);
   /* No CSS transition — animation handles open/close */
 }
 /* Smooth decel: strong ease-out curve (fast start → velocity → 0 at end) */
@@ -386,12 +386,12 @@ header.nav .mark .sub {
 }
 .hero .headline em { color:var(--color-text-secondary); font-style:normal; }
 
-/* +20% gap: clamp(60×1.2=72, 7vw×1.2=8.4, 88×1.2=106) */
 .hero .sub-headline {
   margin:clamp(72px,8.4vw,106px) auto 0; text-align:center;
-  font-family:var(--font-sans); font-size:17px;
-  line-height:1.65; color:var(--color-text-secondary);
-  max-width:54ch; text-wrap:balance;
+  font-family:var(--font-sans); font-size:15px; font-weight:300;
+  line-height:1.75; letter-spacing:0.02em;
+  color:var(--color-text-secondary);
+  max-width:50ch; text-wrap:balance;
 }
 
 /* ============================================================
@@ -533,10 +533,10 @@ header.nav .mark .sub {
 }
 .philosophy .line {
   font-family:var(--font-serif); font-weight:300;
-  font-size:clamp(22px,2.4vw,30px);
-  line-height:1.55; letter-spacing:-0.005em;
+  font-size:clamp(24px,2.6vw,34px);
+  line-height:1.65; letter-spacing:0.01em;
   color:var(--color-text-secondary);
-  max-width:64ch; margin:0 auto; text-wrap:balance;
+  max-width:58ch; margin:0 auto; text-wrap:balance;
 }
 .philosophy .ornament {
   display:block; width:24px; height:0.5px;
@@ -630,6 +630,12 @@ footer .brand .social-links .soc:hover {
   transition:background 220ms ease-in, border-color 220ms ease-in, color 220ms ease-in;
 }
 footer .brand .social-links .soc svg { width:15px; height:15px; display:block; }
+footer .brand .divider-line {
+  width:40px; height:1px;
+  background:linear-gradient(to right, transparent, var(--color-accent), transparent);
+  margin:24px auto 0;
+  opacity:0.6;
+}
 footer h4 {
   font-family:var(--font-mono); font-size:10px;
   letter-spacing:0.22em; text-transform:uppercase;
@@ -913,6 +919,7 @@ footer .colophon .legal { display:flex; gap:28px; }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
       </a>
     </div>
+    <div class="divider-line"></div>
   </div>
   <div class="colophon">
     <span>© Orlinsky Ceramic Studio</span>
@@ -980,19 +987,29 @@ var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=se
   }, 7400); /* was 5400, +2000 ms */
 })();
 
-/* ---- FADE-IN ON SCROLL ---- */
+/* ---- FADE-IN ON SCROLL — opacity + translateY ---- */
 (function(){
   var targets = document.querySelectorAll('section, footer');
   targets.forEach(function(el){
-    el.style.opacity='0'; el.style.transition='opacity 800ms cubic-bezier(0.4,0,0.2,1)';
+    el.style.opacity='0';
+    el.style.transform='translateY(28px)';
+    el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1), transform 900ms cubic-bezier(0.16,1,0.3,1)';
   });
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
-      if(e.isIntersecting){ e.target.style.opacity='1'; io.unobserve(e.target); }
+      if(e.isIntersecting){
+        e.target.style.opacity='1';
+        e.target.style.transform='translateY(0)';
+        io.unobserve(e.target);
+      }
     });
   },{threshold:0.05});
   targets.forEach(function(el){ io.observe(el); });
-  setTimeout(function(){ document.querySelector('.hero').style.opacity='1'; },100);
+  setTimeout(function(){
+    var hero = document.querySelector('.hero');
+    hero.style.opacity='1';
+    hero.style.transform='translateY(0)';
+  },100);
 })();
 
 /* ---- COMPACT STICKY HEADER — snap-top ONLY on expand, no spring on collapse ---- */

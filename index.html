@@ -2,8 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ORLINSKY — Handcrafted Ceramic Paintings</title>
+<script>
+  /* Fix mobile: load at top, no scroll restoration to anchor */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (window.location.hash) history.replaceState(null, '', window.location.pathname + window.location.search);
+</script>
 <style>
 /* ---- @font-face --------------------------------------------------- */
 @font-face { font-family:'Cormorant Garamond'; src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Light.ttf') format('truetype'); font-weight:300; font-style:normal; font-display:swap; }
@@ -57,6 +62,9 @@
 ::-webkit-scrollbar-thumb:hover { background:var(--color-accent); }
 
 /* ---- Base ---- */
+html {
+  overflow-x: clip; /* prevent horizontal overflow causing right strip */
+}
 html, body {
   margin:0; padding:0;
   background:var(--color-bg-base);
@@ -66,6 +74,7 @@ html, body {
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
   text-rendering:optimizeLegibility;
+  max-width:100%;
 }
 a {
   color:inherit; text-decoration:none;
@@ -77,12 +86,24 @@ a:hover { border-bottom-color:currentColor; }
 /* ============================================================
    TOP FRAME
    ============================================================ */
+
+/* Damped oscillation when scrolling back to top */
+@keyframes header-snap-top {
+  0%   { transform: translateY(-6px); }
+  20%  { transform: translateY(3px); }
+  40%  { transform: translateY(-1.8px); }
+  60%  { transform: translateY(0.9px); }
+  80%  { transform: translateY(-0.3px); }
+  100% { transform: translateY(0); }
+}
+
 .top-frame {
   background:var(--color-bg-surface);
   color:var(--color-text-primary);
   position:sticky; top:0; z-index:100;
-  border-bottom:0.5px solid var(--color-border);
+  border-bottom:1px solid var(--color-border);
 }
+.top-frame.snap-top { animation: header-snap-top 550ms cubic-bezier(0.22,0.61,0.36,1) both; }
 header.nav {
   display:grid; grid-template-columns:1fr auto 1fr;
   align-items:center;
@@ -180,13 +201,13 @@ header.nav .mark .sub {
 }
 .mobile-menu.open { transform:translateX(0); }
 .mobile-menu a {
-  font-family:var(--font-mono); font-size:12px;
-  letter-spacing:0.28em; text-transform:uppercase;
+  font-family:var(--font-mono); font-size:14px;
+  letter-spacing:0.26em; text-transform:uppercase;
   color:var(--color-text-secondary); border-bottom:0;
 }
 .mobile-menu a:hover { color:var(--color-accent); border-bottom:0; }
 .mobile-menu .divider {
-  width:24px; height:0.5px; background:var(--color-border);
+  width:32px; height:1px; background:#4A4238;
 }
 
 /* ============================================================
@@ -220,10 +241,14 @@ header.nav .mark .sub {
   background:var(--color-bg-base);
   padding:48px 56px 64px;
 }
+/* Video wrapper allows mute button to protrude below */
+.hero .video-wrap {
+  position:relative;
+  max-width:1200px; margin:0 auto;
+}
 .hero .video-frame {
   aspect-ratio:16/9; background:var(--color-bg-surface);
   position:relative; overflow:hidden;
-  max-width:1200px; margin:0 auto;
 }
 .hero .video-frame video,
 .hero .video-frame img {
@@ -247,23 +272,27 @@ header.nav .mark .sub {
   0%,100% { box-shadow:0 0 0 0 rgba(200,112,31,0), 0 0 0 0 rgba(245,241,232,0); }
   50%      { box-shadow:0 0 0 8px rgba(200,112,31,0.12), 0 0 0 16px rgba(245,241,232,0.04); }
 }
+/* Mute button: centered, protrudes 20% below video */
 .mute-btn {
-  position:absolute; bottom:14px; right:14px; z-index:2;
+  position:absolute;
+  bottom:0; left:50%;
+  transform:translateX(-50%) translateY(20%);
+  z-index:5;
   width:36px; height:36px;
-  background:rgba(26,22,18,0.78);
-  border:0.5px solid rgba(200,112,31,0.3);
+  background:rgba(26,22,18,0.82);
+  border:1px solid rgba(200,112,31,0.35);
   border-radius:50%; color:var(--color-text-primary);
   cursor:pointer; display:flex; align-items:center; justify-content:center;
-  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
-  transition:background 200ms var(--ease), transform 150ms var(--ease);
+  -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  transition:background 200ms var(--ease);
   padding:0; animation:mute-pulse 2.8s ease-in-out infinite;
 }
-.mute-btn:hover { background:rgba(26,22,18,0.95); transform:scale(1.1); animation:none; }
+.mute-btn:hover { background:rgba(26,22,18,0.98); transform:translateX(-50%) translateY(20%) scale(1.1); animation:none; }
 .mute-btn svg { width:15px; height:15px; display:block; }
 
 /* ---- Headlines: vertical slide + blur ---- */
 .hero .headline-stage {
-  margin:40px auto 0; width:100%;
+  margin:clamp(32px,4vw,56px) auto 0; width:100%;
   height:1.35em;
   position:relative; text-align:center; overflow:visible;
 }
@@ -288,8 +317,9 @@ header.nav .mark .sub {
 }
 .hero .headline em { color:var(--color-text-secondary); font-style:normal; }
 
+/* Professional breathing room: ~0.7× headline size = ~50px + stage height */
 .hero .sub-headline {
-  margin:44px auto 0; text-align:center;
+  margin:clamp(40px,5vw,64px) auto 0; text-align:center;
   font-family:var(--font-sans); font-size:17px;
   line-height:1.65; color:var(--color-text-secondary);
   max-width:54ch; text-wrap:balance;
@@ -421,7 +451,8 @@ footer {
   display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr;
   gap:56px; align-items:start;
 }
-footer .brand .mark { text-align:center; display:inline-block; }
+footer .brand { display:flex; flex-direction:column; align-items:center; }
+footer .brand .mark { text-align:center; display:flex; flex-direction:column; align-items:center; }
 footer .brand .mark img { height:51px; display:block; margin:0 auto 8px; }
 footer .brand .mark .wd {
   font-family:var(--font-serif); font-weight:500;
@@ -505,26 +536,31 @@ footer .colophon .legal { display:flex; gap:28px; }
   .top-frame.compact header.nav .mark-logo { max-height:0; opacity:0; margin-bottom:0; transform:scaleY(0.2); }
 
   /* Hero */
-  .hero { padding-top:0; padding-left:0; padding-right:0; padding-bottom:48px; }
+  .hero { padding-top:0; padding-left:0; padding-right:0; padding-bottom:56px; }
+  .hero .video-wrap { max-width:none; margin:0; }
   .hero .video-frame { max-width:none; margin:0; aspect-ratio:4/3; }
+
+  /* Strict viewport centering for headline stage */
   .hero .headline-stage {
-    margin-top:28px; margin-left:24px; margin-right:24px;
-    max-width:none; height:148px;
-    align-items:flex-start; text-align:center;
+    margin-top:36px; margin-left:0; margin-right:0;
+    width:100%; max-width:none; height:148px;
+    text-align:center;
   }
   .hero .headline {
     white-space:normal; font-size:clamp(36px,9vw,50px);
     font-weight:900; line-height:1.1;
     -webkit-text-stroke:0.5px var(--color-text-primary);
-    left:50%; width:calc(100% - 0px);
+    /* Center strictly on viewport: left edge = 0 of full-width stage */
+    left:50%; width:calc(100vw - 48px);
     transform:translateX(-50%) translateY(28px);
+    text-align:center;
   }
   .hero .headline.is-on { transform:translateX(-50%) translateY(0); }
   .hero .headline.is-off { transform:translateX(-50%) translateY(-28px); }
   /* Mobile: show <br> — two lines */
   .hero .headline br { display:inline; }
   .hero .sub-headline {
-    margin-top:28px; margin-left:auto; margin-right:auto;
+    margin-top:32px; margin-left:auto; margin-right:auto;
     font-size:15px; max-width:34ch; text-align:center; text-wrap:balance;
   }
 
@@ -541,8 +577,8 @@ footer .colophon .legal { display:flex; gap:28px; }
   footer {
     grid-template-columns:1fr; gap:32px; padding:44px 24px 24px;
   }
-  footer .brand { text-align:center; }
-  footer .brand .mark { text-align:center; }
+  footer .brand { text-align:center; align-items:center; }
+  footer .brand .mark { align-items:center; }
   footer .brand .mark img { height:42px; margin-bottom:8px; }
   footer .brand .mark .wd { font-size:16px; }
   footer h4 { margin-top:0; margin-bottom:14px; }
@@ -552,6 +588,15 @@ footer .colophon .legal { display:flex; gap:28px; }
     flex-direction:column; align-items:center; gap:8px; text-align:center;
   }
   footer .colophon .legal { flex-direction:row; gap:20px; justify-content:center; }
+
+  /* More visible borders on mobile */
+  .top-frame { border-bottom-width:1px; border-bottom-color:#4A4238; }
+  .philosophy { border-top-width:1px; border-top-color:#4A4238; border-bottom-width:1px; border-bottom-color:#4A4238; }
+  .dispatch { border-top-width:1px; border-top-color:#4A4238; }
+  footer { border-top-width:1px; border-top-color:#4A4238; }
+  footer .colophon { border-top-width:1px; border-top-color:#4A4238; }
+  .dispatch .sub { border-bottom-width:1px; border-bottom-color:#4A4238; }
+  .mobile-menu { border-left-width:1px; border-left-color:#4A4238; }
 }
 </style>
 </head>
@@ -601,11 +646,13 @@ footer .colophon .legal { display:flex; gap:28px; }
 
 <!-- ============ HERO ============ -->
 <section class="hero">
-  <div class="video-frame">
-    <video autoplay muted loop playsinline webkit-playsinline preload="auto"
-      poster="Design%20from%20Claude%20Design/project/assets/hero-video-placeholder.jpg">
-      <source src="%D0%92%D0%B8%D0%B4%D0%B5%D0%BE/%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%B4%D0%BB%D1%8F%20HERO.mp4" type="video/mp4">
-    </video>
+  <div class="video-wrap">
+    <div class="video-frame">
+      <video autoplay muted loop playsinline webkit-playsinline preload="auto"
+        poster="Design%20from%20Claude%20Design/project/assets/hero-video-placeholder.jpg">
+        <source src="%D0%92%D0%B8%D0%B4%D0%B5%D0%BE/%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%B4%D0%BB%D1%8F%20HERO.mp4" type="video/mp4">
+      </video>
+    </div>
     <button class="mute-btn" aria-label="Toggle sound">
       <svg id="icon-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
@@ -627,6 +674,8 @@ footer .colophon .legal { display:flex; gap:28px; }
     Handcrafted ceramic paintings that return you to when happiness was simple — bringing that quiet feeling home
   </p>
 </section>
+
+
 
 <!-- ============ CURATED PREVIEW ============ -->
 <section class="preview">
@@ -696,21 +745,22 @@ footer .colophon .legal { display:flex; gap:28px; }
 </footer>
 
 <script>
-/* ---- Image dimensions (LOGO-eagle.png: 2605×1015, wings x=234–2337) ---- */
-var EAGLE_IMG_W = 2605, EAGLE_IMG_H = 1015;
+/* ---- Scroll to top on load ---- */
+window.addEventListener('DOMContentLoaded', function(){ window.scrollTo(0, 0); });
+
+/* ---- Logo calibration: ORLINSKY = 90% of wing displayed width ---- */
+var EAGLE_IMG_W = 2605;
 var WING_L = 234, WING_R = 2337;
 var WING_FRAC = (WING_R - WING_L) / EAGLE_IMG_W; // 0.8073
-var WING_OFFSET_FRAC = WING_L / EAGLE_IMG_W;      // 0.08988
 
 function calibrateLogo(imgEl) {
   if (!imgEl || !imgEl.complete || imgEl.naturalWidth === 0) return;
   var dispW = imgEl.offsetWidth;
   if (!dispW) return;
-  /* Wing displayed width × 95% for text */
-  var textW = Math.round(dispW * WING_FRAC * 0.95);
+  /* 90% of wing displayed width */
+  var textW = Math.round(dispW * WING_FRAC * 0.90);
   var mark = imgEl.closest('.mark');
   if (!mark) return;
-  /* Only constrain ORLINSKY width; sub stays natural, both centered */
   var wd = mark.querySelector('.wd');
   if (wd) { wd.style.width = textW + 'px'; wd.style.marginLeft = 'auto'; wd.style.marginRight = 'auto'; }
   var sub = mark.querySelector('.sub');
@@ -725,13 +775,13 @@ function calibrateAll() {
 }
 
 window.addEventListener('load', calibrateAll);
-var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=setTimeout(calibrateAll,120); });
+var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=setTimeout(calibrateAll, 120); });
 ['header-eagle','footer-eagle'].forEach(function(id){
   var img = document.getElementById(id);
   if (img && !img.complete) img.addEventListener('load', function(){ calibrateLogo(img); });
 });
 
-/* ---- ROTATING HEADLINES — vertical slide + blur ---- */
+/* ---- ROTATING HEADLINES ---- */
 (function(){
   var headlines = document.querySelectorAll('.hero .headline');
   if (!headlines.length) return;
@@ -761,13 +811,26 @@ var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=se
   setTimeout(function(){ document.querySelector('.hero').style.opacity='1'; },100);
 })();
 
-/* ---- COMPACT STICKY HEADER ---- */
+/* ---- COMPACT STICKY HEADER + snap-top oscillation ---- */
 (function(){
   var frame = document.querySelector('.top-frame');
   if(!frame) return;
-  var update = function(){ frame.classList.toggle('compact', window.scrollY > 0); };
-  window.addEventListener('scroll', update, {passive:true});
-  update();
+  var wasCompact = false;
+  window.addEventListener('scroll', function(){
+    var compact = window.scrollY > 0;
+    if (wasCompact && !compact) {
+      /* Just scrolled back to top — trigger damped oscillation */
+      frame.classList.remove('snap-top');
+      void frame.offsetWidth; /* force reflow to restart animation */
+      frame.classList.add('snap-top');
+      setTimeout(function(){ frame.classList.remove('snap-top'); }, 600);
+    }
+    wasCompact = compact;
+    frame.classList.toggle('compact', compact);
+  }, {passive:true});
+  /* Set initial state */
+  wasCompact = window.scrollY > 0;
+  frame.classList.toggle('compact', wasCompact);
 })();
 
 /* ---- STAGGERED PREVIEW CARDS ---- */
@@ -807,15 +870,72 @@ var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=se
   document.readyState==='complete'?go():window.addEventListener('load',go);
 })();
 
-/* ---- HAMBURGER + MOBILE MENU ---- */
+/* ---- HAMBURGER + MOBILE MENU (spring open/close + swipe-left to close) ---- */
 (function(){
-  var hb=document.querySelector('.hamburger'), menu=document.querySelector('.mobile-menu'), bd=document.querySelector('.menu-backdrop');
-  if(!hb||!menu) return;
-  var open=function(){ menu.classList.add('open'); bd&&bd.classList.add('open'); hb.classList.add('active'); hb.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; };
-  var close=function(){ menu.classList.remove('open'); bd&&bd.classList.remove('open'); hb.classList.remove('active'); hb.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
-  hb.addEventListener('click',function(){ menu.classList.contains('open')?close():open(); });
-  bd&&bd.addEventListener('click',close);
-  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',close); });
+  var hb = document.querySelector('.hamburger');
+  var menu = document.querySelector('.mobile-menu');
+  var bd = document.querySelector('.menu-backdrop');
+  if(!hb || !menu) return;
+
+  function open() {
+    menu.style.transform = '';
+    menu.classList.add('open');
+    if(bd) bd.classList.add('open');
+    hb.classList.add('active');
+    hb.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    /* Clear any inline transform from swipe drag, let CSS handle slide-out */
+    menu.style.transition = '';
+    menu.style.transform = '';
+    menu.classList.remove('open');
+    if(bd) bd.classList.remove('open');
+    hb.classList.remove('active');
+    hb.setAttribute('aria-expanded','false');
+    document.body.style.overflow = '';
+  }
+
+  hb.addEventListener('click', function(){ menu.classList.contains('open') ? close() : open(); });
+  if(bd) bd.addEventListener('click', close);
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+
+  /* Swipe-left to close: track touch on menu panel */
+  var touchStartX = null, touchStartY = null;
+
+  menu.addEventListener('touchstart', function(e){
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+    menu.style.transition = 'none'; /* disable for real-time drag */
+  }, {passive:true});
+
+  menu.addEventListener('touchmove', function(e){
+    if(touchStartX === null) return;
+    var dx = e.touches[0].clientX - touchStartX;
+    var dy = e.touches[0].clientY - touchStartY;
+    /* Only track horizontal-dominant left swipes */
+    if(dx < 0 && Math.abs(dx) > Math.abs(dy)) {
+      /* Rubber resistance: sqrt damping makes it feel magnetic */
+      var drag = -Math.sqrt(Math.abs(dx)) * Math.sqrt(Math.abs(dx));
+      menu.style.transform = 'translateX(' + drag + 'px)';
+    }
+  }, {passive:true});
+
+  menu.addEventListener('touchend', function(e){
+    if(touchStartX === null) return;
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    /* Restore spring transition */
+    menu.style.transition = '';
+    if(dx < -72) {
+      /* Swiped left past threshold — close with spring */
+      close();
+    } else {
+      /* Snap back with spring */
+      menu.style.transform = '';
+    }
+    touchStartX = null; touchStartY = null;
+  }, {passive:true});
 })();
 </script>
 </body>

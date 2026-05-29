@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>FAQ — ORLINSKY Ceramic Studio</title>
+<title>The Craft — ORLINSKY Ceramic Studio</title>
 <script>
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (window.location.hash) history.replaceState(null,'',window.location.pathname+window.location.search);
 </script>
 <style>
 @font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Light.ttf')format('truetype');font-weight:300;font-style:normal;font-display:swap;}
-@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Italic.ttf')format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-LightItalic.ttf')format('truetype');font-weight:300;font-style:italic;font-display:swap;}
 @font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
 @font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Medium.ttf')format('truetype');font-weight:500;font-style:normal;font-display:swap;}
 @font-face{font-family:'Inter';src:url('Design%20from%20Claude%20Design/project/fonts/Inter_18pt-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
@@ -24,35 +24,25 @@
   --color-text-secondary:#C9B89A;
   --color-text-muted:#7A6E63;
   --color-accent:#C8701F;
-  --color-accent-hover:#E8833A;
   --color-border:#2E2820;
   --color-divider:#5A5048;
   --font-serif:'Cormorant Garamond','EB Garamond',Georgia,serif;
   --font-sans:'Inter',-apple-system,sans-serif;
   --font-mono:'JetBrains Mono','IBM Plex Mono',monospace;
   --ease:cubic-bezier(0.4,0.0,0.2,1);
-  --ease-spring:cubic-bezier(0.34,1.52,0.64,1);
 }
 
 ::-webkit-scrollbar{width:4px;}
 ::-webkit-scrollbar-track{background:var(--color-bg-base);}
 ::-webkit-scrollbar-thumb{background:var(--color-bg-elevated);}
 ::-webkit-scrollbar-thumb:hover{background:var(--color-accent);}
-
 html{overflow-x:clip;}
 html,body{margin:0;padding:0;background:var(--color-bg-base);color:var(--color-text-primary);font-family:var(--font-sans);font-size:17px;font-weight:400;line-height:1.7;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;max-width:100%;}
 a{color:inherit;text-decoration:none;border-bottom:0.5px solid transparent;transition:border-color 300ms var(--ease),color 300ms var(--ease);}
 a:hover{border-bottom-color:currentColor;}
 
-/* ============================================================
-   HEADER
-   ============================================================ */
-@keyframes neon-flicker{
-  0%,100%{filter:none;}
-  7%{filter:drop-shadow(0 0 4px rgba(200,112,31,0.65)) drop-shadow(0 0 9px rgba(200,112,31,0.3));}
-  39.5%{filter:drop-shadow(0 0 5px rgba(200,112,31,0.8)) drop-shadow(0 0 12px rgba(200,112,31,0.45));}
-  82%{filter:drop-shadow(0 0 5px rgba(200,112,31,0.65)) drop-shadow(0 0 12px rgba(200,112,31,0.35));}
-}
+/* ============================================================ HEADER ============================================================ */
+@keyframes neon-flicker{0%,100%{filter:none;}7%{filter:drop-shadow(0 0 4px rgba(200,112,31,0.65)) drop-shadow(0 0 9px rgba(200,112,31,0.3));}39.5%{filter:drop-shadow(0 0 5px rgba(200,112,31,0.8)) drop-shadow(0 0 12px rgba(200,112,31,0.45));}82%{filter:drop-shadow(0 0 5px rgba(200,112,31,0.65)) drop-shadow(0 0 12px rgba(200,112,31,0.35));}}
 .top-frame{background:var(--color-bg-surface);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(200,180,155,0.20);}
 header.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:28px 56px;transition:padding 400ms var(--ease);}
 header.nav .left,header.nav .right{display:flex;gap:40px;}
@@ -86,164 +76,190 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .mobile-menu a{font-family:var(--font-mono);font-size:14px;letter-spacing:0.26em;text-transform:uppercase;color:var(--color-text-secondary);border-bottom:0;}
 .mobile-menu a:hover{color:var(--color-accent);border-bottom:0;}
 .mobile-menu .divider{width:32px;height:1px;background:var(--color-divider);}
-
-/* Separator */
 .sep{height:1px;border:none;margin:0 auto;width:50%;background:linear-gradient(to right,rgba(200,112,31,0) 0%,rgba(200,112,31,0.15) 20%,rgba(200,112,31,0.55) 45%,rgba(200,112,31,0.85) 50%,rgba(200,112,31,0.55) 55%,rgba(200,112,31,0.15) 80%,rgba(200,112,31,0) 100%);box-shadow:0 0 8px 1px rgba(200,112,31,0.35);}
 
 /* ============================================================
-   FAQ HERO
+   SHARED
    ============================================================ */
-.faq-hero{
-  background:var(--color-bg-elevated); /* accent/intro — like philosophy on main */
-  padding:80px 56px 72px;
-  text-align:center;
-}
-.faq-hero .eyebrow{
-  font-family:var(--font-mono);font-size:10px;
-  letter-spacing:0.44em;text-transform:uppercase;
-  color:var(--color-accent);margin:0 0 32px;
-}
-.faq-hero h1{
-  font-family:var(--font-serif);font-weight:300;
-  font-size:clamp(32px,4.5vw,58px);
-  line-height:1.1;letter-spacing:0.02em;
-  color:var(--color-text-primary);
-  margin:0 0 20px;
-}
-.faq-hero .subtitle{
+.eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:0.44em;text-transform:uppercase;color:var(--color-accent);margin:0 0 32px;display:block;}
+.step-num{font-family:var(--font-mono);font-size:10px;letter-spacing:0.28em;color:var(--color-accent);opacity:0.6;margin:0 0 16px;display:block;}
+
+/* Photo — shared treatment */
+.craft-img{width:100%;display:block;object-fit:cover;}
+.craft-img-wrap{overflow:hidden;position:relative;}
+.craft-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 800ms var(--ease);}
+.craft-img-wrap:hover img{transform:scale(1.03);}
+
+/* ============================================================
+   BLOCK 1 — BEGINNING  bg-elevated
+   ============================================================ */
+.block-1{background:var(--color-bg-elevated);padding:80px 56px 0;}
+.block-1-header{text-align:center;padding-bottom:64px;}
+.block-1-header h1{
   font-family:var(--font-serif);font-weight:300;font-style:italic;
-  font-size:clamp(17px,1.8vw,22px);
-  color:var(--color-text-secondary);
-  letter-spacing:0.01em;margin:0;
+  font-size:clamp(28px,3.8vw,52px);
+  line-height:1.2;letter-spacing:0.01em;
+  color:var(--color-text-primary);margin:0;
+}
+/* Full-width image */
+.block-1-hero{
+  max-width:1200px;margin:0 auto;
+  aspect-ratio:16/9;
+}
+.block-1-hero img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* Quote below image */
+.block-1-quote{
+  background:var(--color-bg-elevated);
+  padding:64px 56px 72px;
+  text-align:center;
+  max-width:none;
+}
+.block-1-quote .main-quote{
+  font-family:var(--font-serif);font-weight:300;
+  font-size:clamp(26px,3.2vw,44px);
+  line-height:1.25;letter-spacing:0.02em;
+  color:var(--color-text-primary);
+  margin:0 0 28px;max-width:900px;margin-left:auto;margin-right:auto;
+}
+.block-1-quote .sub-text{
+  font-family:var(--font-sans);font-weight:300;
+  font-size:clamp(14px,1.4vw,16px);
+  line-height:1.8;letter-spacing:0.02em;
+  color:var(--color-text-muted);
+  max-width:60ch;margin:0 auto;
 }
 
 /* ============================================================
-   FAQ ACCORDION
+   BLOCK 2 — PROCESS  bg-base
    ============================================================ */
-.faq-section{
-  background:var(--color-bg-base); /* content/reading — like dispatch on main */
-  padding:0 56px 96px;
-}
-.faq-list{
-  max-width:900px;
-  margin:0 auto;
-}
-
-/* Single FAQ item */
-.faq-item{
-  border-top:1px solid var(--color-border);
-  position:relative;
-  transition:border-color 300ms var(--ease);
-}
-.faq-item:last-child{ border-bottom:1px solid var(--color-border); }
-
-/* Accent line — slides in on open */
-.faq-item::before{
-  content:"";
-  position:absolute; left:0; top:0; bottom:0;
-  width:2px;
-  background:var(--color-accent);
-  transform:scaleY(0);
-  transform-origin:top;
-  transition:transform 400ms var(--ease);
-  opacity:0.7;
-}
-.faq-item.open::before{
-  transform:scaleY(1);
+.block-2{background:var(--color-bg-base);padding:80px 56px;}
+.block-2-title{
+  font-family:var(--font-serif);font-weight:300;
+  font-size:clamp(22px,2.4vw,32px);
+  letter-spacing:0.04em;
+  color:var(--color-text-muted);
+  text-align:center;margin:0 0 72px;
 }
 
-/* Question button */
-.faq-trigger{
-  width:100%; background:transparent; border:0;
-  padding:28px 48px 28px 24px;
-  display:flex; align-items:center; gap:20px;
-  cursor:pointer; text-align:left;
-  position:relative;
-  transition:background 250ms var(--ease);
+/* Alternating photo + text rows */
+.process-row{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;max-width:1200px;margin:0 auto 2px;
+  align-items:stretch;
 }
-.faq-trigger:hover{
-  background:rgba(200,112,31,0.03);
-}
+.process-row.reverse{direction:rtl;}
+.process-row.reverse > *{direction:ltr;}
 
-.faq-number{
-  font-family:var(--font-mono);font-size:15px;
-  letter-spacing:0.22em;color:var(--color-accent);
-  opacity:0.85;flex-shrink:0;width:28px;
-  transition:opacity 300ms var(--ease);
+.process-photo{aspect-ratio:4/3;}
+.process-text{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:52px 56px;
+  background:var(--color-bg-elevated);
 }
-.faq-item.open .faq-number{ opacity:1; }
-
-.faq-question{
-  font-family:var(--font-serif);font-weight:400;
-  font-size:clamp(23px,2.5vw,30px);
-  line-height:1.3;letter-spacing:0.01em;
-  color:var(--color-text-secondary);
-  flex:1;
-  transition:color 300ms var(--ease);
+.process-text h3{
+  font-family:var(--font-serif);font-weight:300;font-style:italic;
+  font-size:clamp(20px,2.2vw,30px);
+  line-height:1.3;color:var(--color-text-primary);
+  margin:0 0 20px;
 }
-.faq-item.open .faq-question,
-.faq-trigger:hover .faq-question{
-  color:var(--color-text-primary);
-}
-
-/* +/× icon */
-.faq-icon{
-  flex-shrink:0;
-  width:22px; height:22px;
-  border:1px solid rgba(200,180,155,0.2);
-  border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  position:absolute; right:20px; top:50%; transform:translateY(-50%);
-  transition:border-color 350ms var(--ease), background 350ms var(--ease), transform 350ms var(--ease);
-}
-.faq-icon::before,
-.faq-icon::after{
-  content:"";position:absolute;
-  background:var(--color-text-secondary);
-  border-radius:1px;
-  transition:transform 350ms var(--ease), opacity 350ms var(--ease), background 350ms var(--ease);
-}
-.faq-icon::before{ width:10px; height:1px; }
-.faq-icon::after { width:1px; height:10px; }
-
-/* Open state: + rotates into × */
-.faq-item.open .faq-icon{
-  border-color:var(--color-accent);
-  background:rgba(200,112,31,0.08);
-}
-.faq-item.open .faq-icon::before,
-.faq-item.open .faq-icon::after{
-  background:var(--color-accent);
-}
-.faq-item.open .faq-icon::before{ transform:rotate(45deg); }
-.faq-item.open .faq-icon::after { transform:rotate(45deg); }
-
-/* Answer — smooth height via grid-template-rows */
-.faq-body{
-  display:grid;
-  grid-template-rows:0fr;
-  transition:grid-template-rows 450ms cubic-bezier(0.16,1,0.3,1);
-}
-.faq-item.open .faq-body{
-  grid-template-rows:1fr;
-}
-.faq-body-inner{
-  overflow:hidden;
-}
-.faq-answer{
-  padding:0 24px 32px 72px;
+.process-text p{
   font-family:var(--font-sans);font-weight:300;
-  font-size:clamp(17px,1.75vw,20px);
+  font-size:clamp(13px,1.2vw,15px);
   line-height:1.85;letter-spacing:0.015em;
-  color:var(--color-text-secondary);
-  opacity:0;
-  transform:translateY(6px);
-  transition:opacity 350ms var(--ease) 80ms,
-             transform 350ms var(--ease) 80ms;
+  color:var(--color-text-secondary);margin:0;
 }
-.faq-item.open .faq-answer{
-  opacity:1;
-  transform:translateY(0);
+
+/* ============================================================
+   BLOCK 3 — PHILOSOPHY OF IMPERFECTION  bg-elevated
+   ============================================================ */
+.block-3{background:var(--color-bg-elevated);padding:80px 56px;}
+.block-3-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:64px;max-width:1200px;margin:0 auto;
+  align-items:center;
+}
+.block-3-img{aspect-ratio:3/4;}
+.block-3-text{}
+.block-3-text blockquote{
+  font-family:var(--font-serif);font-weight:300;
+  font-size:clamp(22px,2.6vw,38px);
+  line-height:1.35;letter-spacing:0.01em;
+  color:var(--color-text-primary);
+  margin:0 0 32px;padding:0;border:none;
+}
+.block-3-text p{
+  font-family:var(--font-sans);font-weight:300;
+  font-size:clamp(14px,1.3vw,16px);
+  line-height:1.85;letter-spacing:0.015em;
+  color:var(--color-text-secondary);margin:0;
+}
+
+/* ============================================================
+   BLOCK 4 — MATERIALS & QUALITY  bg-base
+   ============================================================ */
+.block-4{background:var(--color-bg-base);padding:80px 56px;}
+.block-4-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;max-width:1200px;margin:0 auto;
+  align-items:center;
+}
+.block-4-img{aspect-ratio:4/3;}
+.block-4-list{}
+.block-4-list h3{
+  font-family:var(--font-serif);font-weight:300;
+  font-size:clamp(20px,2.2vw,30px);
+  letter-spacing:0.02em;
+  color:var(--color-text-primary);margin:0 0 40px;
+}
+.quality-item{
+  display:flex;align-items:flex-start;gap:20px;
+  padding:20px 0;
+  border-bottom:1px solid var(--color-border);
+}
+.quality-item:first-of-type{border-top:1px solid var(--color-border);}
+.quality-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--color-accent);
+  flex-shrink:0;margin-top:8px;opacity:0.75;
+}
+.quality-item span{
+  font-family:var(--font-sans);font-weight:300;
+  font-size:clamp(14px,1.3vw,16px);
+  line-height:1.7;letter-spacing:0.015em;
+  color:var(--color-text-secondary);
+}
+
+/* ============================================================
+   BLOCK 5 — EMOTIONAL ANCHOR  bg-elevated
+   ============================================================ */
+.block-5{
+  background:var(--color-bg-elevated);
+  padding:0;
+  position:relative;overflow:hidden;
+}
+.block-5-img{
+  width:100%;aspect-ratio:21/9;
+  position:relative;
+}
+.block-5-img img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  filter:brightness(0.55);
+}
+.block-5-overlay{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  padding:56px;
+  background:linear-gradient(to top,rgba(12,11,8,0.6),transparent 60%);
+}
+.block-5-overlay blockquote{
+  font-family:var(--font-serif);font-weight:300;font-style:italic;
+  font-size:clamp(22px,3vw,44px);
+  line-height:1.3;letter-spacing:0.01em;
+  color:var(--color-text-primary);
+  text-align:center;margin:0;
+  max-width:900px;
+  text-shadow:0 2px 24px rgba(0,0,0,0.5);
 }
 
 /* ============================================================
@@ -277,12 +293,24 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .top-frame.compact header.nav .mark .wd{font-size:15px;}
   .top-frame.compact header.nav .mark .sub{opacity:0;max-height:0;margin-top:0;}
   .top-frame.compact header.nav .mark-logo{max-height:0;opacity:0;margin-bottom:0;transform:scaleY(0.2);}
-  .faq-hero{padding:56px 24px 48px;}
-  .faq-section{padding:0 24px 72px;}
-  .faq-trigger{padding:22px 44px 22px 16px;}
-  .faq-number{display:none;}
-  .faq-answer{padding:0 16px 28px 16px;}
-  .faq-icon{right:14px;}
+
+  .block-1{padding:56px 24px 0;}
+  .block-1-header{padding-bottom:40px;}
+  .block-1-quote{padding:48px 24px 56px;}
+  .block-2{padding:56px 24px;}
+  .block-2-title{margin-bottom:48px;}
+  .process-row{grid-template-columns:1fr;direction:ltr!important;}
+  .process-row.reverse{direction:ltr!important;}
+  .process-photo{aspect-ratio:4/3;}
+  .process-text{padding:32px 24px;}
+  .block-3{padding:56px 24px;}
+  .block-3-inner{grid-template-columns:1fr;gap:32px;}
+  .block-3-img{aspect-ratio:4/3;}
+  .block-4{padding:56px 24px;}
+  .block-4-inner{grid-template-columns:1fr;gap:40px;}
+  .block-4-img{aspect-ratio:4/3;}
+  .block-5-img{aspect-ratio:3/2;}
+  .block-5-overlay blockquote{font-size:clamp(18px,5vw,28px);}
   .sep{width:70%;}
   footer{grid-template-columns:1fr;gap:32px;padding:48px 24px 24px;}
   footer .brand{align-items:flex-start;}
@@ -298,7 +326,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <header class="nav">
     <nav class="left">
       <a href="index.html">Gallery</a>
-      <a href="craft.html">The Craft</a>
+      <a href="craft.html" class="active">The Craft</a>
       <a href="#">Bespoke</a>
     </nav>
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
@@ -320,7 +348,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 <div class="menu-backdrop"></div>
 <nav class="mobile-menu" role="dialog" aria-label="Navigation">
   <a href="index.html">Gallery</a><div class="divider"></div>
-  <a href="craft.html">The Craft</a><div class="divider"></div>
+  <a href="craft.html" class="active">The Craft</a><div class="divider"></div>
   <a href="#">Bespoke</a><div class="divider"></div>
   <a href="story.html">Our Story</a><div class="divider"></div>
   <a href="kindwords.html">Kind Words</a><div class="divider"></div>
@@ -329,188 +357,140 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 
 <div class="sep" role="separator"></div>
 
-<!-- FAQ HERO -->
-<section class="faq-hero">
-  <p class="eyebrow">FAQ</p>
-  <h1>Frequently Asked Questions</h1>
-  <p class="subtitle">Everything you might wish to know — carefully gathered.</p>
+<!-- ============================================================
+     BLOCK 1 — BEGINNING   bg-elevated
+     ============================================================ -->
+<section class="block-1">
+  <div class="block-1-header">
+    <span class="eyebrow">The Craft</span>
+    <h1>Each piece begins long before it takes shape</h1>
+  </div>
+  <div class="block-1-hero">
+    <img src="Фото/2.jpg" alt="Studio, morning work">
+  </div>
+</section>
+
+<div class="block-1-quote">
+  <p class="main-quote">True depth is often hidden in the quietest forms</p>
+  <p class="sub-text">Layer by layer, each piece is shaped, fired and refined over 10 days</p>
+</div>
+
+<div class="sep" role="separator"></div>
+
+<!-- ============================================================
+     BLOCK 2 — THE PROCESS   bg-base
+     ============================================================ -->
+<section class="block-2">
+  <p class="block-2-title">The Process</p>
+
+  <div class="process-row">
+    <div class="craft-img-wrap process-photo">
+      <img src="Фото/1.jpg" alt="Built by hand">
+    </div>
+    <div class="process-text">
+      <span class="step-num">01</span>
+      <h3>Built by hand, each form develops its own natural character</h3>
+      <p>Every shape begins with direct contact between hands and clay. No mould determines the outcome. The material responds to touch, pressure, and intention — forming something that could not have been designed.</p>
+    </div>
+  </div>
+
+  <div class="process-row reverse">
+    <div class="craft-img-wrap process-photo">
+      <img src="Фото/7.jpg" alt="Surface texture">
+    </div>
+    <div class="process-text">
+      <span class="step-num">02</span>
+      <h3>Nothing is over-refined — the surface is allowed to remain authentic</h3>
+      <p>The texture carries the memory of its making. Grain, depth, and irregularity are not corrected — they are preserved as part of the work's honest character.</p>
+    </div>
+  </div>
+
+  <div class="process-row">
+    <div class="craft-img-wrap process-photo">
+      <img src="Фото/4.jpg" alt="Kiln firing">
+    </div>
+    <div class="process-text">
+      <span class="step-num">03</span>
+      <h3>Inside the kiln, heat and time give each piece lasting durability</h3>
+      <p>Fire completes what the hand begins. At high temperature, clay transforms — hardening into something that will outlast almost anything placed beside it.</p>
+    </div>
+  </div>
+
+  <div class="process-row reverse">
+    <div class="craft-img-wrap process-photo">
+      <img src="Фото/8.jpg" alt="Glaze and paint">
+    </div>
+    <div class="process-text">
+      <span class="step-num">04</span>
+      <h3>The final surface balances softness, depth and quiet luminosity</h3>
+      <p>Glazes are chosen and applied by hand, layer by layer. The result is never flat — it shifts with light, breathing differently at different hours of the day.</p>
+    </div>
+  </div>
+
+  <div class="process-row">
+    <div class="craft-img-wrap process-photo">
+      <img src="Фото/5.jpg" alt="Final check">
+    </div>
+    <div class="process-text">
+      <span class="step-num">05</span>
+      <h3>Each work is personally checked before it becomes yours</h3>
+      <p>Before a piece leaves the studio it is held, turned, and considered. Only those that meet the full standard of the work are prepared for shipping.</p>
+    </div>
+  </div>
+
 </section>
 
 <div class="sep" role="separator"></div>
 
-<!-- FAQ LIST -->
-<section class="faq-section">
-  <div class="faq-list">
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">01</span>
-        <span class="faq-question">What is the idea behind your paintings?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">I'm inspired by the idea that every person carries an entire world within them — a world of quiet, meaningful memories. The simple moments of childhood, when happiness felt natural and unconditional. Through my ceramic paintings, I try to reflect that very state — a sense of calm, simplicity, and the gentle feeling of returning to yourself.</p>
-        </div>
-      </div>
+<!-- ============================================================
+     BLOCK 3 — PHILOSOPHY OF IMPERFECTION   bg-elevated
+     ============================================================ -->
+<section class="block-3">
+  <div class="block-3-inner">
+    <div class="craft-img-wrap block-3-img">
+      <img src="Фото/3.jpg" alt="Imperfect surface">
     </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">02</span>
-        <span class="faq-question">How are the ceramic paintings made?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Each piece is handcrafted from durable ceramic, kiln-fired, and finished with artistic glazes. Thanks to the handmade process and firing, every artwork is truly one of a kind and beautifully unique.</p>
-        </div>
-      </div>
+    <div class="block-3-text">
+      <span class="eyebrow">Imperfection</span>
+      <blockquote>No piece is identical — each one develops its own quiet identity</blockquote>
+      <p>These subtle differences give every piece its own unmistakable character. What appears as variation is in fact the visible record of a specific moment — a particular pressure, a unique path through the fire.</p>
     </div>
+  </div>
+</section>
 
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">03</span>
-        <span class="faq-question">Which countries do you ship to?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Our studio is based in Canada, and we ship worldwide in partnership with trusted carriers.</p>
-        </div>
-      </div>
+<div class="sep" role="separator"></div>
+
+<!-- ============================================================
+     BLOCK 4 — MATERIALS & QUALITY   bg-base
+     ============================================================ -->
+<section class="block-4">
+  <div class="block-4-inner">
+    <div class="craft-img-wrap block-4-img">
+      <img src="Фото/6.jpg" alt="Ceramic quality">
     </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">04</span>
-        <span class="faq-question">What are the processing and delivery times?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Orders require up to 2 business days for preparation, followed by shipping time. Exact delivery estimates will be shown at checkout after you enter your shipping address.</p>
-        </div>
-      </div>
+    <div class="block-4-list">
+      <span class="eyebrow">Materials &amp; Quality</span>
+      <h3>Every detail considered,<br>every step controlled</h3>
+      <div class="quality-item"><div class="quality-dot"></div><span>Durable ceramic composition</span></div>
+      <div class="quality-item"><div class="quality-dot"></div><span>Multiple controlled kiln firings</span></div>
+      <div class="quality-item"><div class="quality-dot"></div><span>Hand-layered glaze and paint</span></div>
+      <div class="quality-item"><div class="quality-dot"></div><span>Stable wall mounting system</span></div>
+      <div class="quality-item"><div class="quality-dot"></div><span>Carefully quality-checked</span></div>
     </div>
+  </div>
+</section>
 
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">05</span>
-        <span class="faq-question">How do you package the artwork for safe delivery?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Each artwork is packaged like a fragile art object, with protective layers, sturdy materials, and reinforced corners. Our goal is for your piece to arrive in perfect condition.</p>
-        </div>
-      </div>
+<div class="sep" role="separator"></div>
+
+<!-- ============================================================
+     BLOCK 5 — EMOTIONAL ANCHOR   bg-elevated
+     ============================================================ -->
+<section class="block-5">
+  <div class="block-5-img">
+    <img src="Фото/9.jpg" alt="Created with warmth">
+    <div class="block-5-overlay">
+      <blockquote>Created as a quiet return to the warmth we carry from childhood</blockquote>
     </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">06</span>
-        <span class="faq-question">What should I do if my artwork arrives damaged?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">If this ever happens, please contact us right away. We will resolve the matter as quickly as possible.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">07</span>
-        <span class="faq-question">Can I request a return or exchange?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Yes, returns are possible. However, as each piece is fragile and unique, return conditions may vary. Full details can be found in the Client Care / Shipping &amp; Returns section.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">08</span>
-        <span class="faq-question">Is the artwork ready to hang?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Yes, mounting hardware is installed on the back, so you can hang the piece as soon as it arrives.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">09</span>
-        <span class="faq-question">Can I add a personal inscription?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Yes, this option is available. We can add a personal inscription in the form of a wax seal with your heartfelt message — a beautiful and truly unique touch. Details can be found in the Bespoke section.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">10</span>
-        <span class="faq-question">Will the artwork look exactly like the photos?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">You will receive the exact piece shown on the product page. As each artwork is handmade, slight natural variations may occur — these are part of its individuality and charm.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">11</span>
-        <span class="faq-question">How should I care for a ceramic artwork?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Care is simple: gently wipe with a soft, dry cloth. Do not use abrasives or wash under water.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">12</span>
-        <span class="faq-question">Can it be displayed in a bathroom or kitchen?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">Yes, ceramic and glaze handle humidity well. However, please avoid direct contact with water and strong impact, as with any fragile art object.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="faq-item">
-      <button class="faq-trigger" aria-expanded="false">
-        <span class="faq-number">13</span>
-        <span class="faq-question">How can I contact you if I have a question?</span>
-        <span class="faq-icon" aria-hidden="true"></span>
-      </button>
-      <div class="faq-body" role="region">
-        <div class="faq-body-inner">
-          <p class="faq-answer">You can contact us via the email listed in the Client Care section. We'll be happy to assist you.</p>
-        </div>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -545,9 +525,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 </footer>
 
 <script>
-window.addEventListener('DOMContentLoaded', function(){ window.scrollTo(0,0); });
-
-/* Logo calibration */
+window.addEventListener('DOMContentLoaded',function(){window.scrollTo(0,0);});
 function calibrateLogo(imgEl){
   if(!imgEl||!imgEl.complete||imgEl.naturalWidth===0)return;
   var mark=imgEl.closest('.mark');if(!mark)return;
@@ -555,56 +533,20 @@ function calibrateLogo(imgEl){
   if(wd){wd.style.width='auto';wd.style.maxWidth='none';wd.style.paddingLeft='0';wd.style.textAlign='center';wd.style.display='block';wd.style.marginLeft='auto';wd.style.marginRight='auto';}
   var sub=mark.querySelector('.sub');
   if(sub){sub.style.width='auto';sub.style.maxWidth='none';sub.style.paddingLeft='0';sub.style.textAlign='center';sub.style.display='block';sub.style.marginLeft='auto';sub.style.marginRight='auto';sub.style.whiteSpace='nowrap';}
-  if(imgEl.id==='footer-eagle'){
-    var fm=imgEl.closest('.mark');
-    if(fm){fm.style.display='flex';fm.style.flexDirection='column';fm.style.alignItems='center';fm.style.width='fit-content';fm.style.margin='0 auto';}
-    if(wd){wd.style.width='auto';wd.style.maxWidth='none';}
-    if(sub){sub.style.width='auto';sub.style.maxWidth='none';}
-  }
+  if(imgEl.id==='footer-eagle'){var fm=imgEl.closest('.mark');if(fm){fm.style.display='flex';fm.style.flexDirection='column';fm.style.alignItems='center';fm.style.width='fit-content';fm.style.margin='0 auto';}if(wd){wd.style.width='auto';wd.style.maxWidth='none';}if(sub){sub.style.width='auto';sub.style.maxWidth='none';}}
 }
 function calibrateAll(){['header-eagle','footer-eagle'].forEach(function(id){var img=document.getElementById(id);if(img)calibrateLogo(img);});}
 window.addEventListener('load',calibrateAll);
 var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTimeout(calibrateAll,120);});
 ['header-eagle','footer-eagle'].forEach(function(id){var img=document.getElementById(id);if(img&&!img.complete)img.addEventListener('load',function(){calibrateLogo(img);});});
-
-/* Compact header */
+(function(){var frame=document.querySelector('.top-frame');if(!frame)return;window.addEventListener('scroll',function(){frame.classList.toggle('compact',window.scrollY>0);},{passive:true});frame.classList.toggle('compact',window.scrollY>0);})();
 (function(){
-  var frame=document.querySelector('.top-frame');if(!frame)return;
-  window.addEventListener('scroll',function(){frame.classList.toggle('compact',window.scrollY>0);},{passive:true});
-  frame.classList.toggle('compact',window.scrollY>0);
-})();
-
-/* Scroll reveal */
-(function(){
-  var targets=document.querySelectorAll('section,footer');
+  var targets=document.querySelectorAll('section,.block-1-quote,footer');
   targets.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1),transform 900ms cubic-bezier(0.16,1,0.3,1)';});
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);}});},{threshold:0.04});
   targets.forEach(function(el){io.observe(el);});
-  setTimeout(function(){var h=document.querySelector('.faq-hero');if(h){h.style.opacity='1';h.style.transform='translateY(0)';}},100);
+  setTimeout(function(){var h=document.querySelector('.block-1');if(h){h.style.opacity='1';h.style.transform='translateY(0)';}},100);
 })();
-
-/* FAQ Accordion */
-(function(){
-  var items = document.querySelectorAll('.faq-item');
-  items.forEach(function(item){
-    var trigger = item.querySelector('.faq-trigger');
-    trigger.addEventListener('click', function(){
-      var isOpen = item.classList.contains('open');
-      /* Close all others */
-      items.forEach(function(other){
-        if(other !== item && other.classList.contains('open')){
-          other.classList.remove('open');
-          other.querySelector('.faq-trigger').setAttribute('aria-expanded','false');
-        }
-      });
-      /* Toggle this one */
-      item.classList.toggle('open', !isOpen);
-      trigger.setAttribute('aria-expanded', String(!isOpen));
-    });
-  });
-})();
-
-/* Mobile menu */
 (function(){
   var hb=document.querySelector('.hamburger'),menu=document.querySelector('.mobile-menu'),bd=document.querySelector('.menu-backdrop');
   if(!hb||!menu)return;

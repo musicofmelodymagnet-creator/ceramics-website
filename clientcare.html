@@ -127,18 +127,21 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 
 /* Social links row */
 .cc-socials{
-  display:flex;align-items:center;gap:24px;
+  display:flex;align-items:center;gap:20px;
+  flex-wrap:wrap;
   margin-top:40px;justify-content:center;
+  max-width:320px;
 }
 .cc-socials a{
   font-family:var(--font-mono);font-size:10px;
-  letter-spacing:0.3em;text-transform:uppercase;
+  letter-spacing:0.22em;text-transform:uppercase;
   color:var(--color-text-muted);border-bottom:0;
-  display:flex;align-items:center;gap:8px;
+  display:flex;align-items:center;gap:7px;
   transition:color 300ms var(--ease);
+  white-space:nowrap;
 }
 .cc-socials a:hover{color:var(--color-text-secondary);border-bottom:0;}
-.cc-socials .dot{width:3px;height:3px;border-radius:50%;background:var(--color-divider);}
+.cc-socials .dot{width:3px;height:3px;border-radius:50%;background:var(--color-divider);flex-shrink:0;}
 
 /* ============================================================
    CARE CARDS — bg-base
@@ -252,6 +255,9 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .top-frame.compact header.nav .mark .sub{opacity:0;max-height:0;margin-top:0;}
   .top-frame.compact header.nav .mark-logo{max-height:0;opacity:0;margin-bottom:0;transform:scaleY(0.2);}
   .cc-hero{padding:60px 24px 56px;}
+  .cc-email{font-size:clamp(16px,4.5vw,20px);word-break:break-all;}
+  .cc-socials{max-width:100%;gap:14px;}
+  .cc-socials .dot{display:none;}
   .cc-cards{padding:56px 24px;}
   .cc-cards-grid{grid-template-columns:1fr;gap:2px;}
   .cc-card{padding:40px 28px;}

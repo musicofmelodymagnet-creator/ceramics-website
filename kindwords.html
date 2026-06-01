@@ -285,17 +285,25 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .kw-intro{padding:56px 24px 52px;}
   .kw-videos{padding:48px 24px 64px;}
 
-  /* Mobile: single column, cards stacked */
+  /* Mobile: horizontal scroll, 10% peek of next card */
+  .kw-videos{ padding-left:0; padding-right:0; }
+  .kw-videos .section-eyebrow{ padding:0 24px; }
   .kw-videos-grid{
-    grid-template-columns:1fr;
-    gap:16px;
-    max-width:320px;
+    display:flex; flex-direction:row;
+    overflow-x:scroll; overflow-y:visible;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:12px; padding:0 24px;
+    max-width:none;
   }
-  .kw-card:nth-child(1),
-  .kw-card:nth-child(2),
-  .kw-card:nth-child(3){
-    background:#2A2520;
+  .kw-videos-grid::-webkit-scrollbar{ display:none; }
+  .kw-card{
+    flex:0 0 80vw;
+    scroll-snap-align:start;
+    aspect-ratio:9/16;
   }
+
 
   .sep{width:70%;}
   footer{grid-template-columns:1fr;gap:32px;padding:48px 24px 24px;}
@@ -343,6 +351,18 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 
 <div class="sep" role="separator"></div>
 
+<!-- INTRO TEXT -->
+<section class="kw-intro">
+  <h1>Behind every artwork are hours of handmade work,<br>inspiration, and love for details.</h1>
+  <div class="kw-intro-text">
+    <p>That is why your kind reviews touch us so deeply.</p>
+    <p>Thank you for sharing your emotions and allowing our art to become part of your stories.</p>
+    <p>For us, this means far more than simple words of appreciation.</p>
+  </div>
+</section>
+
+<div class="sep" role="separator"></div>
+
 <!-- VIDEO PLACEHOLDERS -->
 <section class="kw-videos">
   <p class="section-eyebrow">Kind Words</p>
@@ -366,18 +386,6 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       <div class="kw-label"><span>Client Review</span></div>
     </div>
 
-  </div>
-</section>
-
-<div class="sep" role="separator"></div>
-
-<!-- INTRO TEXT -->
-<section class="kw-intro">
-  <h1>Behind every artwork are hours of handmade work,<br>inspiration, and love for details.</h1>
-  <div class="kw-intro-text">
-    <p>That is why your kind reviews touch us so deeply.</p>
-    <p>Thank you for sharing your emotions and allowing our art to become part of your stories.</p>
-    <p>For us, this means far more than simple words of appreciation.</p>
   </div>
 </section>
 

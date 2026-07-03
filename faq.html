@@ -261,6 +261,10 @@ footer .brand .mark .mark-logo{margin-bottom:0;line-height:0;}
 footer .brand .mark .mark-logo img{height:72px;display:block;margin:0 auto;animation:neon-flicker 16s linear infinite;}
 footer .brand .mark .wd{font-family:var(--font-serif);font-weight:500;font-size:18px;letter-spacing:0.38em;padding-left:0;text-transform:uppercase;color:var(--color-text-primary);line-height:1;-webkit-text-stroke:0.6px var(--color-text-primary);display:block;text-align:center;margin:0 auto;width:auto;white-space:nowrap;}
 footer .brand .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:0.34em;text-transform:lowercase;color:var(--color-text-secondary);margin-top:6px;line-height:1;display:block;text-align:center;white-space:nowrap;}
+footer .brand .social-links{display:flex;gap:14px;margin-top:20px;}
+footer .brand .social-links .soc{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;border:0.5px solid var(--color-divider);color:var(--color-text-muted);transition:color 300ms var(--ease),border-color 300ms var(--ease);border-bottom:none!important;}
+footer .brand .social-links .soc:hover{color:var(--color-accent);border-color:var(--color-accent);}
+footer .brand .social-links .soc svg{width:15px;height:15px;display:block;}
 footer h4{font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-muted);margin:0 0 18px;font-weight:400;}
 footer ul{list-style:none;padding:0;margin:0;display:grid;gap:12px;}
 footer ul a{font-family:var(--font-sans);font-size:14px;color:var(--color-text-secondary);transition:color 300ms var(--ease);}
@@ -544,6 +548,20 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       <div class="wd">ORLINSKY</div>
       <div class="sub">ceramic studio</div>
     </a>
+    <div class="social-links">
+      <a href="#" class="soc" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@ORLINSKYCeramic/featured" class="soc" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="#" class="soc" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="#" class="soc" aria-label="TikTok">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+      </a>
+    </div>
   </div>
   <div class="colophon"><span>© Orlinsky Ceramic Studio</span></div>
 </footer>

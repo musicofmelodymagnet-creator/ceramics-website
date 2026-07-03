@@ -146,28 +146,33 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 }
 .kw-videos-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+  grid-template-columns:repeat(4,1fr);
   gap:20px;
-  max-width:1100px;
+  max-width:1320px;
   margin:0 auto;
 }
 
-/* Video placeholder card — 9:16 vertical */
+/* Video card — 9:16 vertical */
 .kw-card{
   position:relative;
   aspect-ratio:9/16;
   overflow:hidden;
   cursor:pointer;
+  background:#1E1B17;
 }
 
-/* Outer cards: warm lighter tone */
-.kw-card:nth-child(1),
-.kw-card:nth-child(3){
-  background:#2A2520;
+/* Photo fill */
+.kw-photo{
+  position:absolute;
+  inset:0;
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  z-index:0;
+  transition:transform 700ms var(--ease);
 }
-/* Center card: slightly lighter/warmer */
-.kw-card:nth-child(2){
-  background:#332C26;
+.kw-card:hover .kw-photo{
+  transform:scale(1.04);
 }
 
 /* Subtle inner border */
@@ -239,19 +244,6 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   font-family:var(--font-mono);font-size:9px;
   letter-spacing:0.32em;text-transform:uppercase;
   color:rgba(245,241,232,0.35);
-}
-
-/* Coming-soon text inside card */
-.kw-soon{
-  position:absolute;
-  bottom:60px;left:0;right:0;
-  z-index:3;
-  text-align:center;
-}
-.kw-soon span{
-  font-family:var(--font-serif);font-style:italic;font-weight:300;
-  font-size:13px;letter-spacing:0.06em;
-  color:rgba(201,184,154,0.28);
 }
 
 /* ============================================================
@@ -380,20 +372,26 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <div class="kw-videos-grid">
 
     <div class="kw-card">
+      <img class="kw-photo" src="Фото/Заглушки%20для%20отзывов/1%20review.jpg" alt="Client review">
       <div class="kw-play"></div>
-      <div class="kw-soon"><span>Video review</span></div>
       <div class="kw-label"><span>Client Review</span></div>
     </div>
 
     <div class="kw-card">
+      <img class="kw-photo" src="Фото/Заглушки%20для%20отзывов/2%20review.jpg" alt="Client review">
       <div class="kw-play"></div>
-      <div class="kw-soon"><span>Video review</span></div>
       <div class="kw-label"><span>Client Review</span></div>
     </div>
 
     <div class="kw-card">
+      <img class="kw-photo" src="Фото/Заглушки%20для%20отзывов/3%20review.jpg" alt="Client review">
       <div class="kw-play"></div>
-      <div class="kw-soon"><span>Video review</span></div>
+      <div class="kw-label"><span>Client Review</span></div>
+    </div>
+
+    <div class="kw-card">
+      <img class="kw-photo" src="Фото/Заглушки%20для%20отзывов/4%20review.jpg" alt="Client review">
+      <div class="kw-play"></div>
       <div class="kw-label"><span>Client Review</span></div>
     </div>
 

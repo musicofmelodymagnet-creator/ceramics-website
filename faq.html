@@ -190,12 +190,13 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   color:var(--color-text-primary);
 }
 
-/* +/× icon */
+/* +/× icon — orange by default (unread), neutral after read */
 .faq-icon{
   flex-shrink:0;
   width:22px; height:22px;
-  border:1px solid rgba(200,180,155,0.2);
+  border:1px solid var(--color-accent);
   border-radius:50%;
+  background:rgba(200,112,31,0.08);
   display:flex; align-items:center; justify-content:center;
   position:absolute; right:20px; top:50%; transform:translateY(-50%);
   transition:border-color 350ms var(--ease), background 350ms var(--ease), transform 350ms var(--ease);
@@ -203,17 +204,27 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .faq-icon::before,
 .faq-icon::after{
   content:"";position:absolute;
-  background:var(--color-text-secondary);
+  background:var(--color-accent);
   border-radius:1px;
   transition:transform 350ms var(--ease), opacity 350ms var(--ease), background 350ms var(--ease);
 }
 .faq-icon::before{ width:10px; height:1px; }
 .faq-icon::after { width:1px; height:10px; }
 
-/* Open state: + rotates into × */
+/* Read state: neutral/colorless (has been opened before) */
+.faq-item.read .faq-icon{
+  border-color:rgba(200,180,155,0.2);
+  background:transparent;
+}
+.faq-item.read .faq-icon::before,
+.faq-item.read .faq-icon::after{
+  background:var(--color-text-secondary);
+}
+
+/* Open state: + rotates into × with accent */
 .faq-item.open .faq-icon{
   border-color:var(--color-accent);
-  background:rgba(200,112,31,0.08);
+  background:rgba(200,112,31,0.12);
 }
 .faq-item.open .faq-icon::before,
 .faq-item.open .faq-icon::after{
@@ -318,6 +329,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       <a href="story.html">Our Story</a>
       <a href="kindwords.html">Kind Words</a>
       <a href="clientcare.html">Client Care</a>
+      <a href="faq.html" class="active">FAQ</a>
     </nav>
     <button class="hamburger" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -333,6 +345,8 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <a href="story.html">Our Story</a><div class="divider"></div>
   <a href="kindwords.html">Kind Words</a><div class="divider"></div>
   <a href="clientcare.html">Client Care</a>
+  <div class="divider"></div>
+  <a href="faq.html" class="active">FAQ</a>
 </nav>
 
 <div class="sep" role="separator"></div>
@@ -340,7 +354,6 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 <!-- FAQ HERO -->
 <section class="faq-hero">
   <p class="eyebrow">FAQ</p>
-  <h1>Frequently Asked Questions</h1>
   <p class="subtitle">Everything you might wish to know — carefully gathered.</p>
 </section>
 
@@ -612,15 +625,17 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
     var trigger = item.querySelector('.faq-trigger');
     trigger.addEventListener('click', function(){
       var isOpen = item.classList.contains('open');
-      /* Close all others */
+      /* Close all others — mark as read */
       items.forEach(function(other){
         if(other !== item && other.classList.contains('open')){
           other.classList.remove('open');
+          other.classList.add('read');
           other.querySelector('.faq-trigger').setAttribute('aria-expanded','false');
         }
       });
       /* Toggle this one */
       item.classList.toggle('open', !isOpen);
+      if(isOpen) item.classList.add('read');
       trigger.setAttribute('aria-expanded', String(!isOpen));
     });
   });

@@ -30,9 +30,9 @@
    ==================================================================== */
 :root {
   /* Backgrounds — three depth layers (surface darker than base = correct hierarchy) */
-  --color-bg-base:        #1C1814;
+  --color-bg-base:        #221E1A;
   --color-bg-header:#16130F;
-  --color-bg-elevated:    #221E1A;
+  --color-bg-elevated:    #2C2724;
 
   /* Text hierarchy */
   --color-text-primary:   #F5F1E8;
@@ -140,7 +140,7 @@ a:hover { border-bottom-color:currentColor; }
 header.nav {
   display:grid; grid-template-columns:1fr auto 1fr;
   align-items:center;
-  padding:28px 56px;
+  padding:24px 56px;
   transition:padding 500ms var(--ease-spring);
 }
 header.nav .left, header.nav .right { display:flex; gap:40px; }
@@ -213,7 +213,7 @@ header.nav .mark .sub {
 
 /* ---- Compact state ---- */
 .top-frame.compact header.nav {
-  padding-top:12px; padding-bottom:12px;
+  padding-top:10px; padding-bottom:10px;
 }
 .top-frame.compact header.nav .mark-logo {
   max-height:0; opacity:0; margin-bottom:0; transform:scaleY(0.2);
@@ -404,7 +404,7 @@ header.nav .mark .sub {
 
 .hero .sub-headline {
   margin:clamp(72px,8.4vw,106px) auto 0; text-align:center;
-  font-family:var(--font-sans); font-size:15px; font-weight:300;
+  font-family:var(--font-sans); font-size:18px; font-weight:300;
   line-height:1.75; letter-spacing:0.02em;
   color:var(--color-text-secondary);
   max-width:50ch; text-wrap:balance;
@@ -700,7 +700,7 @@ footer .colophon {
   /* Header */
   header.nav {
     display:flex; flex-direction:column; align-items:center;
-    padding:18px 24px; position:relative; gap:0;
+    padding:15px 24px; position:relative; gap:0;
     transition:padding 500ms var(--ease-spring);
   }
   header.nav .left, header.nav .right { display:none; }
@@ -720,7 +720,7 @@ footer .colophon {
     transition:transform 500ms var(--ease-spring);
   }
   .top-frame.compact header.nav {
-    padding-top:10px; padding-bottom:10px;
+    padding-top:9px; padding-bottom:9px;
   }
   .top-frame.compact header.nav .mark {
     transform:translateX(calc(24px + 50% - 50vw));
@@ -761,7 +761,7 @@ footer .colophon {
   .hero .headline br { display:inline; }
   .hero .sub-headline {
     margin-top:32px; margin-left:auto; margin-right:auto;
-    font-size:15px; max-width:34ch; text-align:center; text-wrap:balance;
+    font-size:18px; max-width:34ch; text-align:center; text-wrap:balance;
   }
 
   /* Preview */

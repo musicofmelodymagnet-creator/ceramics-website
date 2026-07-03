@@ -25,9 +25,9 @@
 @font-face { font-family:'JetBrains Mono'; src:url('Design%20from%20Claude%20Design/project/fonts/JetBrainsMono-Medium.ttf') format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
 
 :root {
-  --color-bg-base:        #1C1814;
+  --color-bg-base:        #221E1A;
   --color-bg-header:#16130F;
-  --color-bg-elevated:    #221E1A;
+  --color-bg-elevated:    #2C2724;
   --color-text-primary:   #F5F1E8;
   --color-text-secondary: #C9B89A;
   --color-text-muted:     #7A6E63;
@@ -62,7 +62,7 @@ a:hover { border-bottom-color:currentColor; }
   82%   { filter:drop-shadow(0 0 5px rgba(200,112,31,0.65)) drop-shadow(0 0 12px rgba(200,112,31,0.35)); }
 }
 .top-frame { background:var(--color-bg-header); position:sticky; top:0; z-index:100; border-bottom:1px solid rgba(200,180,155,0.20); }
-header.nav { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:28px 56px; transition:padding 400ms var(--ease); }
+header.nav { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:24px 56px; transition:padding 400ms var(--ease); }
 header.nav .left, header.nav .right { display:flex; gap:40px; }
 header.nav .right { justify-content:flex-end; }
 header.nav a { font-family:var(--font-mono); font-size:11px; letter-spacing:0.22em; text-transform:uppercase; color:var(--color-text-secondary); transition:color 300ms var(--ease); border-bottom:0; }
@@ -75,7 +75,7 @@ header.nav .mark img { height:68px; display:block; margin:0 auto; animation:neon
 header.nav .mark .wd { font-family:var(--font-serif); font-weight:500; font-size:18px; letter-spacing:0.38em; padding-left:0; text-transform:uppercase; color:var(--color-text-primary); line-height:1; -webkit-text-stroke:0.6px var(--color-text-primary); text-shadow:none; will-change:transform; backface-visibility:hidden; transition:font-size 400ms var(--ease), text-shadow 3000ms ease-out, transform 1400ms cubic-bezier(0.0,0.0,0.2,1); display:block; margin:0 auto; text-align:center; }
 header.nav .mark:hover .wd { transform:scale(1.08); text-shadow:0 0 8px rgba(245,241,232,1), 0 0 20px rgba(245,241,232,0.9), 0 0 40px rgba(245,241,232,0.5), 0 0 60px rgba(245,241,232,0.2); transition:transform 350ms cubic-bezier(0.4,0,0.2,1), text-shadow 400ms ease-in; }
 header.nav .mark .sub { font-family:var(--font-mono); font-size:9px; letter-spacing:0.34em; text-transform:lowercase; color:var(--color-text-secondary); margin-top:6px; line-height:1; overflow:hidden; max-height:20px; display:block; text-align:center; margin-left:auto; margin-right:auto; white-space:nowrap; }
-.top-frame.compact header.nav { padding-top:12px; padding-bottom:12px; }
+.top-frame.compact header.nav { padding-top:10px; padding-bottom:10px; }
 .top-frame.compact header.nav .mark-logo { max-height:0; opacity:0; margin-bottom:0; transform:scaleY(0.2); }
 .top-frame.compact header.nav .mark .wd { font-size:15px; }
 .top-frame.compact header.nav .mark .sub { opacity:0; max-height:0; margin-top:0; }
@@ -203,12 +203,12 @@ footer .colophon { grid-column:1/-1; margin-top:40px; padding-top:16px; border-t
    RESPONSIVE
    ============================================================ */
 @media (max-width:900px) {
-  header.nav { display:flex; flex-direction:column; align-items:center; padding:18px 24px; position:relative; gap:0; }
+  header.nav { display:flex; flex-direction:column; align-items:center; padding:15px 24px; position:relative; gap:0; }
   header.nav .left, header.nav .right { display:none; }
   .hamburger { display:flex; position:absolute; right:24px; top:50%; transform:translateY(-50%); }
   header.nav .mark-logo { max-height:70px; }
   header.nav .mark img { height:56px; }
-  .top-frame.compact header.nav { padding-top:10px; padding-bottom:10px; }
+  .top-frame.compact header.nav { padding-top:9px; padding-bottom:9px; }
   .top-frame.compact header.nav .mark { transform:translateX(calc(24px + 50% - 50vw)); text-align:left; }
   .top-frame.compact header.nav .mark .wd { font-size:15px; }
   .top-frame.compact header.nav .mark .sub { opacity:0; max-height:0; margin-top:0; }

@@ -27,8 +27,8 @@
    ==================================================================== */
 :root {
   /* Backgrounds — three depth layers (surface darker than base = correct hierarchy) */
-  --color-bg-base:        #16130F;
-  --color-bg-surface:     #0C0B08;
+  --color-bg-base:        #1C1814;
+  --color-bg-header:#16130F;
   --color-bg-elevated:    #221E1A;
 
   /* Text hierarchy */
@@ -122,7 +122,7 @@ a:hover { border-bottom-color:currentColor; }
 }
 
 .top-frame {
-  background:var(--color-bg-surface);
+  background:var(--color-bg-header);
   color:var(--color-text-primary);
   position:sticky; top:0; z-index:100;
   border-bottom:1px solid rgba(200,180,155,0.20);
@@ -252,7 +252,7 @@ header.nav .mark .sub {
 .mobile-menu {
   position:fixed; top:0; right:0; bottom:0;
   width:50%; max-width:220px;
-  background:var(--color-bg-surface); z-index:99;
+  background:var(--color-bg-header); z-index:99;
   display:flex; flex-direction:column;
   align-items:flex-start; justify-content:center;
   gap:32px; padding:150px 28px 60px;
@@ -312,7 +312,7 @@ header.nav .mark .sub {
   max-width:1200px; margin:0 auto;
 }
 .hero .video-frame {
-  aspect-ratio:16/9; background:var(--color-bg-surface);
+  aspect-ratio:16/9; background:var(--color-bg-header);
   position:relative; overflow:hidden;
 }
 .hero .video-frame video,
@@ -598,7 +598,7 @@ header.nav .mark .sub {
    ============================================================ */
 /* Footer: Studio | Legal | Brand (rightmost, centered within column) */
 footer {
-  background:var(--color-bg-surface);
+  background:var(--color-bg-header);
   padding:64px 80px 32px;
   display:grid;
   grid-template-columns:1fr 1fr 1fr;

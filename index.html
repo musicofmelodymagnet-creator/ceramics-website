@@ -541,8 +541,39 @@ header.nav .mark .sub {
   font-family:var(--font-mono); font-size:10px;
   letter-spacing:0.44em; text-transform:uppercase;
   color:var(--color-accent);
-  text-align:center; margin:0 0 40px;
+  text-align:center; margin:0 0 32px;
 }
+.kw-home-intro {
+  max-width:680px; margin:0 auto 48px;
+  text-align:center;
+}
+.kw-home-intro h2 {
+  font-family:var(--font-serif); font-weight:300;
+  font-size:clamp(20px,2.4vw,30px);
+  line-height:1.3; letter-spacing:0.01em;
+  color:var(--color-text-primary);
+  margin:0 0 16px;
+}
+.kw-home-intro p {
+  font-family:var(--font-serif); font-weight:300; font-style:italic;
+  font-size:clamp(16px,1.6vw,20px);
+  line-height:1.75; color:var(--color-text-secondary);
+  margin:0;
+}
+.kw-cta { margin-top:48px; display:flex; justify-content:center; }
+.kw-cta a {
+  font-family:var(--font-mono); font-size:11px;
+  letter-spacing:0.28em; text-transform:uppercase;
+  color:var(--color-text-secondary);
+  border:1px solid rgba(200,180,155,0.25);
+  border-bottom:1px solid rgba(200,180,155,0.25) !important;
+  padding:14px 32px;
+  display:inline-flex; align-items:center; gap:12px;
+  transition:color 400ms var(--ease), border-color 400ms var(--ease), background 400ms var(--ease);
+}
+.kw-cta a::after { content:"→"; font-family:var(--font-sans); font-size:14px; transition:transform 400ms var(--ease); }
+.kw-cta a:hover { color:var(--color-text-primary); border-color:rgba(200,180,155,0.5); background:rgba(200,180,155,0.04); }
+.kw-cta a:hover::after { transform:translateX(4px); }
 .kw-videos-grid {
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -996,6 +1027,10 @@ footer .colophon {
 <!-- ============ KIND WORDS — video reviews ============ -->
 <section class="kw-videos">
   <p class="section-eyebrow">Kind Words</p>
+  <div class="kw-home-intro">
+    <h2>Behind every artwork are hours of handmade work,<br>inspiration, and love for details.</h2>
+    <p>That is why your kind reviews touch us so deeply.<br>Thank you for sharing your emotions and allowing our art to become part of your stories.</p>
+  </div>
   <div class="kw-videos-grid">
     <div class="kw-card">
       <img class="kw-photo" src="Фото/Заглушки%20для%20отзывов/1%20review.jpg" alt="Client review">
@@ -1013,6 +1048,9 @@ footer .colophon {
       <img class="kw-photo" src="Фото/Заглушки%20для%20отзывов/4%20review.jpg" alt="Client review">
       <div class="kw-play"></div>
     </div>
+  </div>
+  <div class="kw-cta">
+    <a href="kindwords.html">See all reviews</a>
   </div>
 </section>
 

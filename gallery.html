@@ -131,6 +131,7 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   padding:24px 0;
   position:relative;
   color:inherit;
+  border-bottom:0!important;
 }
 .g-item::after{
   content:'';
@@ -179,6 +180,10 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   transition:color 300ms var(--ease);
 }
 .g-item:hover .g-name{color:var(--color-accent);}
+.g-photo-wrap{display:flex;flex-direction:column;gap:5px;}
+.g-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:5px;height:90px;}
+.g-thumbs img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.36;transition:opacity 800ms ease-in-out;}
+.g-item:hover .g-thumbs img{opacity:0.8;transition:opacity 350ms ease-out;}
 
 /* ============================================================
    FOOTER
@@ -218,6 +223,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .gallery-hero{padding:56px 24px 52px;}
   .g-list{padding:0 24px 72px;}
   .g-item{grid-template-columns:150px 1fr;gap:20px;padding:20px 0;}
+  .g-thumbs{height:60px;}
   .g-name{font-size:clamp(18px,5vw,26px);}
   .sep{width:70%;}
   footer{grid-template-columns:1fr;gap:28px;padding:44px 24px 24px;}
@@ -286,48 +292,84 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 <!-- GALLERY LIST -->
 <section class="g-list">
 
-  <a class="g-item" href="#">
-    <div class="g-photo"><img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Tulips in a striped vase"></div>
+  <a class="g-item" href="product.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Tulips in a striped vase"></div>
+      <div class="g-thumbs">
+        <img src="Фото/Фото%20наших%20картин/1-2.jpg" alt="">
+        <img src="Фото/Фото%20наших%20картин/1-3.jpg" alt="">
+      </div>
+    </div>
     <div class="g-info">
       <span class="g-num">01</span>
       <h2 class="g-name">Tulips in a striped vase</h2>
     </div>
   </a>
 
-  <a class="g-item" href="#">
-    <div class="g-photo"><img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Eucalyptus and winter berries"></div>
+  <a class="g-item" href="product.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Eucalyptus and winter berries"></div>
+      <div class="g-thumbs">
+        <img src="Фото/Фото%20наших%20картин/2-2.jpg" alt="">
+        <img src="Фото/Фото%20наших%20картин/2-3.jpg" alt="">
+      </div>
+    </div>
     <div class="g-info">
       <span class="g-num">02</span>
       <h2 class="g-name">Eucalyptus and winter berries</h2>
     </div>
   </a>
 
-  <a class="g-item" href="#">
-    <div class="g-photo"><img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Garden boot in bloom"></div>
+  <a class="g-item" href="product.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Garden boot in bloom"></div>
+      <div class="g-thumbs">
+        <img src="Фото/Фото%20наших%20картин/3-2.jpg" alt="">
+        <img src="Фото/Фото%20наших%20картин/3-3.jpg" alt="">
+      </div>
+    </div>
     <div class="g-info">
       <span class="g-num">03</span>
       <h2 class="g-name">Garden boot in bloom</h2>
     </div>
   </a>
 
-  <a class="g-item" href="#">
-    <div class="g-photo"><img src="Фото/Фото%20наших%20картин/4-1.jpg" alt="Three vessels, still life"></div>
+  <a class="g-item" href="product.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/4-1.jpg" alt="Three vessels, still life"></div>
+      <div class="g-thumbs">
+        <img src="Фото/Фото%20наших%20картин/4-2.jpg" alt="">
+        <img src="Фото/Фото%20наших%20картин/4-3.jpg" alt="">
+      </div>
+    </div>
     <div class="g-info">
       <span class="g-num">04</span>
       <h2 class="g-name">Three vessels, still life</h2>
     </div>
   </a>
 
-  <a class="g-item" href="#">
-    <div class="g-photo"><img src="Фото/Фото%20наших%20картин/5-1.jpg" alt="The whale and the sail"></div>
+  <a class="g-item" href="product.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/5-1.jpg" alt="The whale and the sail"></div>
+      <div class="g-thumbs">
+        <img src="Фото/Фото%20наших%20картин/5-2.jpg" alt="">
+        <img src="Фото/Фото%20наших%20картин/5-3.jpg" alt="">
+      </div>
+    </div>
     <div class="g-info">
       <span class="g-num">05</span>
       <h2 class="g-name">The whale and the sail</h2>
     </div>
   </a>
 
-  <a class="g-item" href="#">
-    <div class="g-photo"><img src="Фото/Фото%20наших%20картин/6-1.jpg" alt="Wheelbarrow in flower"></div>
+  <a class="g-item" href="product.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/6-1.jpg" alt="Wheelbarrow in flower"></div>
+      <div class="g-thumbs">
+        <img src="Фото/Фото%20наших%20картин/6-2.jpg" alt="">
+        <img src="Фото/Фото%20наших%20картин/6-3.jpg" alt="">
+      </div>
+    </div>
     <div class="g-info">
       <span class="g-num">06</span>
       <h2 class="g-name">Wheelbarrow in flower</h2>

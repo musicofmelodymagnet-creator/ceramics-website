@@ -140,11 +140,13 @@ a:hover { border-bottom-color:currentColor; }
 header.nav {
   display:grid; grid-template-columns:1fr auto 1fr;
   align-items:center;
-  padding:24px 56px;
+  column-gap:48px;
+  padding:20px 56px;
   transition:padding 500ms var(--ease-spring);
 }
 header.nav .left, header.nav .right { display:flex; gap:40px; }
-header.nav .right { justify-content:flex-end; }
+header.nav .left { justify-content:flex-end; }
+header.nav .right { justify-content:flex-start; }
 header.nav a {
   font-family:var(--font-mono); font-size:11px;
   letter-spacing:0.22em; text-transform:uppercase;
@@ -383,6 +385,7 @@ header.nav .mark .sub {
              transform 1400ms cubic-bezier(0.16,1,0.3,1),
              filter 1200ms cubic-bezier(0.16,1,0.3,1);
   position:absolute; left:50%;
+  pointer-events:none;
 }
 /* Desktop: hide <br> — one line */
 .hero .headline br { display:none; }
@@ -390,6 +393,7 @@ header.nav .mark .sub {
   opacity:1;
   transform:translateX(-50%) translateY(0) scale(1);
   filter:blur(0) brightness(1);
+  pointer-events:auto;
 }
 /* Exit: evaporate IN PLACE — no vertical drift, only scale + blur + opacity */
 .hero .headline.is-off {
@@ -700,7 +704,7 @@ footer .colophon {
   /* Header */
   header.nav {
     display:flex; flex-direction:column; align-items:center;
-    padding:15px 24px; position:relative; gap:0;
+    padding:13px 24px; position:relative; gap:0;
     transition:padding 500ms var(--ease-spring);
   }
   header.nav .left, header.nav .right { display:none; }
@@ -865,7 +869,7 @@ footer .colophon {
 
   <div class="headline-stage" aria-live="polite">
     <h1 class="headline" data-i="0">Memories matter more<br>than <em>achievements</em></h1>
-    <h1 class="headline" data-i="1">People want to return<br>to where it was <em>warm</em></h1>
+    <h1 class="headline" data-i="1">People want to return <br>to where it was <em>warm</em></h1>
   </div>
 
   <p class="sub-headline">

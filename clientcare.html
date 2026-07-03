@@ -236,8 +236,8 @@ footer{background:var(--color-bg-header);padding:64px 80px 32px;display:grid;gri
 footer .brand{display:flex;flex-direction:column;align-items:center;text-align:center;}
 footer .brand .mark{display:flex;flex-direction:column;align-items:center;text-align:center;border-bottom:0!important;}
 footer .brand .mark:hover{border-bottom:0!important;}
-footer .brand .mark .mark-logo{margin-bottom:0;line-height:0;}
-footer .brand .mark .mark-logo img{height:72px;display:block;margin:0 auto;animation:neon-flicker 16s linear infinite;}
+footer .brand .mark .mark-logo{margin-bottom:-5px;line-height:0;}
+footer .brand .mark .mark-logo img{height:72px;display:block;margin:0 auto;}
 footer .brand .mark .wd{font-family:var(--font-serif);font-weight:500;font-size:18px;letter-spacing:0.38em;padding-left:0;text-transform:uppercase;color:var(--color-text-primary);line-height:1;-webkit-text-stroke:0.6px var(--color-text-primary);display:block;text-align:center;margin:0 auto;width:auto;white-space:nowrap;}
 footer .brand .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:0.34em;text-transform:lowercase;color:var(--color-text-secondary);margin-top:6px;line-height:1;display:block;text-align:center;white-space:nowrap;}
 footer .brand .social-links{display:flex;gap:10px;margin-top:20px;justify-content:center;}
@@ -246,8 +246,8 @@ footer .brand .social-links .soc:hover{background:var(--color-accent);border-col
 footer .brand .social-links .soc svg{width:15px;height:15px;display:block;}
 footer h4{font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-muted);margin:0 0 18px;font-weight:400;}
 footer ul{list-style:none;padding:0;margin:0;display:grid;gap:12px;}
-footer ul a{font-family:var(--font-sans);font-size:14px;color:var(--color-text-secondary);transition:color 300ms var(--ease);}
-footer ul a:hover{color:var(--color-accent);}
+footer ul a{font-family:var(--font-sans);font-size:14px;color:var(--color-text-secondary);transition:color 300ms var(--ease),border-color 300ms var(--ease);}
+footer ul a:hover{color:var(--color-accent);border-bottom-color:var(--color-accent);}
 footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.5px solid var(--color-border);display:flex;justify-content:center;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-muted);}
 
 /* ============================================================ RESPONSIVE ============================================================ */
@@ -271,10 +271,17 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .cc-card{padding:40px 28px;}
   .cc-promise{padding:64px 24px;}
   .sep{width:70%;}
-  footer{grid-template-columns:1fr;gap:32px;padding:48px 24px 24px;}
+  footer{grid-template-columns:1fr;gap:28px;padding:44px 24px 24px;}
   footer .brand{align-items:flex-start;}
   footer .brand .mark{align-items:flex-start;}
-  footer .colophon{justify-content:flex-start;}
+  footer .brand .mark img{height:42px;margin:0 auto 8px;}
+  footer .brand .mark .wd{font-size:16px;}
+  footer .brand .social-links{margin-top:16px;margin-bottom:56px;}
+  footer h4{margin-top:0;margin-bottom:14px;}
+  footer ul{gap:12px;}
+  footer ul a{font-size:15px;}
+  footer .colophon{flex-direction:column;align-items:flex-start;gap:8px;border-top-width:1px;border-top-color:var(--color-divider);}
+  footer .colophon .legal{flex-direction:row;gap:20px;}
 }
 </style>
 </head>

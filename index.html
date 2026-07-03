@@ -531,6 +531,100 @@ header.nav .mark .sub {
 }
 
 /* ============================================================
+   KIND WORDS — video reviews block (shared styles with kindwords.html)
+   ============================================================ */
+.kw-videos {
+  background:var(--color-bg-base);
+  padding:56px 56px 72px;
+}
+.kw-videos .section-eyebrow {
+  font-family:var(--font-mono); font-size:10px;
+  letter-spacing:0.44em; text-transform:uppercase;
+  color:var(--color-accent);
+  text-align:center; margin:0 0 40px;
+}
+.kw-videos-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+  max-width:1320px;
+  margin:0 auto;
+}
+.kw-card {
+  position:relative;
+  aspect-ratio:9/16;
+  overflow:hidden;
+  cursor:pointer;
+  background:#1E1B17;
+}
+.kw-photo {
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover; display:block;
+  z-index:0;
+  transition:transform 2000ms ease-in-out;
+}
+.kw-card:hover .kw-photo {
+  transform:scale(1.04);
+  transition:transform 600ms ease-out;
+}
+.kw-card::before {
+  content:""; position:absolute; inset:0;
+  border:1px solid rgba(200,180,155,0.08);
+  pointer-events:none; z-index:2;
+  transition:border-color 400ms var(--ease);
+}
+.kw-card:hover::before { border-color:rgba(200,112,31,0.25); }
+.kw-card::after {
+  content:""; position:absolute;
+  left:0; right:0; bottom:0; height:40%;
+  background:linear-gradient(to top,rgba(12,11,8,0.6),transparent);
+  pointer-events:none; z-index:1;
+}
+.kw-play {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  z-index:3;
+  display:flex; align-items:center; justify-content:center;
+  width:60px; height:60px;
+  border-radius:50%;
+  background:rgba(200,112,31,0.15);
+  border:1px solid rgba(200,112,31,0.4);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  transition:background 350ms var(--ease),
+             border-color 350ms var(--ease),
+             transform 350ms var(--ease);
+}
+.kw-card:hover .kw-play {
+  background:rgba(200,112,31,0.28);
+  border-color:rgba(200,112,31,0.7);
+  transform:translate(-50%,-50%) scale(1.08);
+}
+.kw-play::after {
+  content:""; display:block;
+  width:0; height:0; margin-left:4px;
+  border-top:10px solid transparent;
+  border-bottom:10px solid transparent;
+  border-left:17px solid var(--color-accent);
+  opacity:0.85;
+}
+@media (max-width:900px) {
+  .kw-videos { padding-left:0; padding-right:0; }
+  .kw-videos .section-eyebrow { padding:0 24px; }
+  .kw-videos-grid {
+    display:flex; flex-direction:row;
+    overflow-x:scroll; overflow-y:visible;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:12px; padding:0 24px;
+    max-width:none;
+  }
+  .kw-videos-grid::-webkit-scrollbar { display:none; }
+  .kw-card { flex:0 0 80vw; scroll-snap-align:start; aspect-ratio:9/16; }
+}
+
+/* ============================================================
    PHILOSOPHY
    ============================================================ */
 .philosophy {
@@ -895,6 +989,31 @@ footer .colophon {
     <a class="work" href="#"><div class="photo"><img src="Фото/4.jpg" alt=""></div><div class="label"><span class="name">The firing</span></div></a>
   </div>
   <div class="preview-cta"><a href="#">Explore the Collection</a></div>
+</section>
+
+<div class="sep" role="separator"></div>
+
+<!-- ============ KIND WORDS — video reviews ============ -->
+<section class="kw-videos">
+  <p class="section-eyebrow">Kind Words</p>
+  <div class="kw-videos-grid">
+    <div class="kw-card">
+      <img class="kw-photo" src="Фото/Заглушки%20для%20отзывов/1%20review.jpg" alt="Client review">
+      <div class="kw-play"></div>
+    </div>
+    <div class="kw-card">
+      <img class="kw-photo" src="Фото/Заглушки%20для%20отзывов/2%20review.jpg" alt="Client review">
+      <div class="kw-play"></div>
+    </div>
+    <div class="kw-card">
+      <img class="kw-photo" src="Фото/Заглушки%20для%20отзывов/3%20review.jpg" alt="Client review">
+      <div class="kw-play"></div>
+    </div>
+    <div class="kw-card">
+      <img class="kw-photo" src="Фото/Заглушки%20для%20отзывов/4%20review.jpg" alt="Client review">
+      <div class="kw-play"></div>
+    </div>
+  </div>
 </section>
 
 <div class="sep" role="separator"></div>

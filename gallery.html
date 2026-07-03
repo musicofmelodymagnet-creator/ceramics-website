@@ -132,6 +132,8 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   position:relative;
   color:inherit;
   border-bottom:0!important;
+  cursor:pointer;
+  text-decoration:none;
 }
 .g-item::after{
   content:'';
@@ -165,6 +167,7 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   transform:scale(1.04);
   transition:transform 600ms ease-out;
 }
+.g-photo-wrap,.g-info{position:relative;z-index:1;}
 .g-info{display:flex;flex-direction:column;gap:0;}
 .g-num{
   font-family:var(--font-mono);font-size:10px;
@@ -180,6 +183,18 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   transition:color 300ms var(--ease);
 }
 .g-item:hover .g-name{color:var(--color-accent);}
+.g-arrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-mono);font-size:9px;
+  letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--color-text-muted);
+  margin-top:20px;
+  opacity:0;
+  transform:translateX(-8px);
+  transition:opacity 350ms var(--ease),transform 350ms var(--ease),color 300ms var(--ease);
+}
+.g-arrow svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.g-item:hover .g-arrow{opacity:1;transform:translateX(0);color:var(--color-accent);}
 .g-photo-wrap{display:flex;flex-direction:column;gap:5px;}
 .g-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:5px;height:90px;}
 .g-thumbs img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.36;transition:opacity 800ms ease-in-out;}
@@ -303,6 +318,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="g-info">
       <span class="g-num">01</span>
       <h2 class="g-name">Tulips in a striped vase</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
@@ -317,6 +333,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="g-info">
       <span class="g-num">02</span>
       <h2 class="g-name">Eucalyptus and winter berries</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
@@ -331,6 +348,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="g-info">
       <span class="g-num">03</span>
       <h2 class="g-name">Garden boot in bloom</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
@@ -345,6 +363,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="g-info">
       <span class="g-num">04</span>
       <h2 class="g-name">Three vessels, still life</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
@@ -359,6 +378,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="g-info">
       <span class="g-num">05</span>
       <h2 class="g-name">The whale and the sail</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
@@ -373,6 +393,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="g-info">
       <span class="g-num">06</span>
       <h2 class="g-name">Wheelbarrow in flower</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 

@@ -167,6 +167,85 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .gcat-item:hover .gcat-title{color:var(--color-accent);}
 
 /* ============================================================
+   CHRISTIAN GIFTS SECTION
+   ============================================================ */
+.cg-section{
+  max-width:860px;
+  margin:0 auto;
+  padding:72px 56px 80px;
+  box-sizing:border-box;
+}
+.cg-section h2{
+  font-family:var(--font-serif);
+  font-weight:300;
+  font-size:clamp(26px,3vw,42px);
+  line-height:1.15;
+  letter-spacing:0.01em;
+  color:var(--color-text-primary);
+  margin:0 0 32px;
+}
+.cg-section .cg-intro{
+  font-family:var(--font-sans);
+  font-size:16px;
+  line-height:1.75;
+  color:var(--color-text-secondary);
+  margin:0 0 48px;
+}
+.cg-how{
+  margin:0 0 48px;
+}
+.cg-how-label{
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:0.38em;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  display:block;
+  margin-bottom:28px;
+}
+.cg-steps{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.cg-step{
+  display:grid;
+  grid-template-columns:36px 1fr;
+  gap:16px;
+  align-items:start;
+}
+.cg-step-num{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.18em;
+  color:var(--color-accent);
+  font-weight:400;
+  padding-top:3px;
+}
+.cg-step-text{
+  font-family:var(--font-sans);
+  font-size:15.5px;
+  line-height:1.65;
+  color:var(--color-text-secondary);
+}
+.cg-body{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+.cg-body p{
+  font-family:var(--font-sans);
+  font-size:16px;
+  line-height:1.75;
+  color:var(--color-text-secondary);
+  margin:0;
+}
+.cg-body p.cg-close{
+  color:var(--color-text-primary);
+  font-size:16.5px;
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 footer{background:var(--color-bg-header);padding:64px 80px 32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;align-items:start;}
@@ -204,6 +283,8 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .gallery-hero{padding:48px 24px 40px;}
   .gallery-cats{flex-direction:column;padding:32px 24px 40px;gap:24px;}
   .gcat-photo{aspect-ratio:4/3;}
+  .cg-section{padding:48px 24px 56px;}
+  .cg-section h2{font-size:clamp(22px,6vw,32px);}
   .sep{width:70%;}
   footer{grid-template-columns:1fr;gap:28px;padding:44px 24px 24px;}
   footer .brand{align-items:flex-start;}
@@ -287,16 +368,54 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     </div>
   </a>
 
-  <a class="gcat-item" href="#">
+  <a class="gcat-item" href="#christian-gifts">
     <div class="gcat-photo">
-      <img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Ceramic Paintings with God's Message">
+      <img src="Фото/Картины%20с%20печатью/wax-1.jpg" alt="Christian Gifts">
     </div>
     <div class="gcat-info">
-      <span class="gcat-title">Ceramic Paintings with God's Message</span>
+      <span class="gcat-title">Christian Gifts</span>
     </div>
   </a>
 
 </section>
+
+<div class="sep" role="separator"></div>
+
+<!-- CHRISTIAN GIFTS SECTION -->
+<div id="christian-gifts">
+  <div class="cg-section">
+    <h2>Christian Gift for Someone Special</h2>
+    <p class="cg-intro">It is more than a handcrafted ceramic artwork — it is a meaningful Christian gift that continues to bless its owner every single day, long after it is received.</p>
+
+    <div class="cg-how">
+      <span class="cg-how-label">How It Works</span>
+      <div class="cg-steps">
+        <div class="cg-step">
+          <span class="cg-step-num">01</span>
+          <span class="cg-step-text">Simply touch the wax seal with the top edge of your smartphone.</span>
+        </div>
+        <div class="cg-step">
+          <span class="cg-step-num">02</span>
+          <span class="cg-step-text">Instantly receive today's comforting Bible verse with a peaceful audio reading.</span>
+        </div>
+        <div class="cg-step">
+          <span class="cg-step-num">03</span>
+          <span class="cg-step-text">Return each day to discover a fresh message from God's Word.</span>
+        </div>
+        <div class="cg-step">
+          <span class="cg-step-num">04</span>
+          <span class="cg-step-text">No batteries. No charging. Always ready whenever you need encouragement from Scripture.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cg-body">
+      <p>Each day, the artwork reveals a new message from God's Word through an inspiring audio reading, creating a quiet moment to pause, find peace, and draw closer to God. Whether in the morning before the day begins or in the evening before rest, every message brings fresh hope, comfort, wisdom, and God's promises.</p>
+      <p>Unlike traditional Christian gifts, this artwork offers a new experience every day, making it a meaningful companion people naturally return to again and again.</p>
+      <p class="cg-close">It is a truly meaningful gift for someone who holds a special place in your heart — a lasting reminder of God's love, your love, and the blessing you wanted to share with them long after the special occasion has passed.</p>
+    </div>
+  </div>
+</div>
 
 <div class="sep" role="separator"></div>
 
@@ -376,9 +495,19 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
   frame.classList.toggle('compact',window.scrollY>0);
 })();
 
+/* Smooth scroll for tile anchors */
+(function(){
+  document.querySelectorAll('.gcat-item[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var target=document.querySelector(a.getAttribute('href'));
+      if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
+})();
+
 /* Scroll reveal */
 (function(){
-  var targets=document.querySelectorAll('footer');
+  var targets=document.querySelectorAll('.cg-section,footer');
   targets.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1),transform 900ms cubic-bezier(0.16,1,0.3,1)';});
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);}});},{threshold:0.04});
   targets.forEach(function(el){io.observe(el);});

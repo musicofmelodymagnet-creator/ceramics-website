@@ -6,15 +6,16 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Gallery — ORLINSKY Ceramic Studio</title>
+<title>Christian Gifts — ORLINSKY Ceramic Studio</title>
 <script>
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (window.location.hash) history.replaceState(null,'',window.location.pathname+window.location.search);
 </script>
 <style>
 @font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Light.ttf')format('truetype');font-weight:300;font-style:normal;font-display:swap;}
-@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Italic.ttf')format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-LightItalic.ttf')format('truetype');font-weight:300;font-style:italic;font-display:swap;}
 @font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Italic.ttf')format('truetype');font-weight:400;font-style:italic;font-display:swap;}
 @font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Medium.ttf')format('truetype');font-weight:500;font-style:normal;font-display:swap;}
 @font-face{font-family:'Inter';src:url('Design%20from%20Claude%20Design/project/fonts/Inter_18pt-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
 @font-face{font-family:'JetBrains Mono';src:url('Design%20from%20Claude%20Design/project/fonts/JetBrainsMono-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
@@ -34,7 +35,6 @@
   --font-sans:'Inter',-apple-system,sans-serif;
   --font-mono:'JetBrains Mono','IBM Plex Mono',monospace;
   --ease:cubic-bezier(0.4,0.0,0.2,1);
-  --ease-spring:cubic-bezier(0.34,1.52,0.64,1);
 }
 
 ::-webkit-scrollbar{width:4px;}
@@ -58,7 +58,8 @@ a:hover{border-bottom-color:currentColor;}
 }
 .top-frame{background:var(--color-bg-header);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(200,180,155,0.20);}
 header.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:48px;padding:20px 56px;transition:padding 400ms var(--ease);}
-header.nav .left,header.nav .right{display:flex;gap:40px;}header.nav .left{justify-content:flex-end;}
+header.nav .left,header.nav .right{display:flex;gap:40px;}
+header.nav .left{justify-content:flex-end;}
 header.nav .right{justify-content:flex-start;}
 header.nav a{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-secondary);transition:color 300ms var(--ease);border-bottom:0;}
 @media(hover:hover){header.nav a:hover{color:var(--color-accent);border-bottom:0;}}
@@ -94,77 +95,149 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .sep{height:1px;border:none;margin:0 auto;width:50%;background:linear-gradient(to right,rgba(200,112,31,0) 0%,rgba(200,112,31,0.15) 20%,rgba(200,112,31,0.55) 45%,rgba(200,112,31,0.85) 50%,rgba(200,112,31,0.55) 55%,rgba(200,112,31,0.15) 80%,rgba(200,112,31,0) 100%);box-shadow:0 0 8px 1px rgba(200,112,31,0.35);}
 
 /* ============================================================
-   GALLERY HERO
+   HERO — full-width photo with title overlay
    ============================================================ */
-.gallery-hero{
+.cg-hero{
+  position:relative;
+  width:100%;
+  max-height:600px;
+  overflow:hidden;
   background:var(--color-bg-elevated);
-  padding:36px 56px 32px;
-  text-align:center;
 }
-.gallery-hero .eyebrow{
-  font-family:var(--font-mono);font-size:10px;
-  letter-spacing:0.44em;text-transform:uppercase;
-  color:var(--color-accent);margin:0 0 20px;
+.cg-hero-img{
+  width:100%;
+  height:600px;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  opacity:0.72;
 }
-.gallery-hero h1{
-  font-family:var(--font-serif);font-weight:300;
-  font-size:clamp(23px,3vw,39px);
-  line-height:1.2;letter-spacing:0.01em;
-  color:var(--color-text-primary);margin:0;
+.cg-hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to bottom,rgba(34,30,26,0) 30%,rgba(34,30,26,0.85) 100%);
+}
+.cg-hero-text{
+  position:absolute;
+  bottom:52px;
+  left:56px;
+  right:56px;
+}
+.cg-hero-eyebrow{
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:0.44em;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  display:block;
+  margin-bottom:16px;
+}
+.cg-hero-title{
+  font-family:var(--font-serif);
+  font-weight:300;
+  font-size:clamp(28px,4vw,56px);
+  line-height:1.1;
+  letter-spacing:0.01em;
+  color:var(--color-text-primary);
+  margin:0;
+  max-width:700px;
 }
 
 /* ============================================================
-   GALLERY CATEGORIES (3 TILES)
+   INTRO
    ============================================================ */
-.gallery-cats{
-  display:flex;
-  gap:16px;
-  max-width:1124px;
-  margin:0 auto;
-  padding:56px 56px 64px;
-  box-sizing:border-box;
-}
-.gcat-item{
-  flex:1;
-  display:block;
-  text-decoration:none;
-  border-bottom:0!important;
-  color:var(--color-text-primary);
-  cursor:pointer;
-}
-.gcat-photo{
-  aspect-ratio:1;
-  overflow:hidden;
+.cg-intro-wrap{
   background:var(--color-bg-elevated);
-  display:block;
+  padding:64px 56px 72px;
 }
-.gcat-photo img{
-  width:100%;height:100%;
-  object-fit:cover;
-  display:block;
-  opacity:0.75;
-  transition:transform 700ms ease, opacity 500ms ease;
+.cg-intro-inner{
+  max-width:780px;
+  margin:0 auto;
 }
-.gcat-item:hover .gcat-photo img{
-  transform:scale(1.04);
-  opacity:0.92;
-  transition:transform 450ms ease-out, opacity 300ms ease-out;
-}
-.gcat-info{
-  padding:12px 0 0;
-}
-.gcat-title{
+.cg-intro-text{
   font-family:var(--font-serif);
   font-weight:300;
-  font-size:clamp(16px,1.4vw,22px);
-  line-height:1.2;
-  color:var(--color-text-primary);
-  display:block;
-  margin:0 0 7px;
-  letter-spacing:0.01em;
-  transition:color 300ms ease;
+  font-size:clamp(20px,1.8vw,26px);
+  line-height:1.8;
+  letter-spacing:0.008em;
+  color:var(--color-text-secondary);
+  margin:0;
+  text-wrap:balance;
 }
-.gcat-item:hover .gcat-title{color:var(--color-accent);}
+
+/* ============================================================
+   HOW IT WORKS
+   ============================================================ */
+.cg-how-wrap{
+  padding:72px 56px 80px;
+  max-width:1000px;
+  margin:0 auto;
+  box-sizing:border-box;
+}
+.cg-how-label{
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:0.44em;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  display:block;
+  margin-bottom:48px;
+}
+.cg-steps{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px 56px;
+}
+.cg-step{
+  display:grid;
+  grid-template-columns:44px 1fr;
+  gap:0 16px;
+  align-items:start;
+}
+.cg-step-num{
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.18em;
+  color:var(--color-accent);
+  padding-top:4px;
+  line-height:1;
+}
+.cg-step-text{
+  font-family:var(--font-sans);
+  font-size:15.5px;
+  line-height:1.7;
+  color:var(--color-text-secondary);
+}
+
+/* ============================================================
+   BODY TEXT
+   ============================================================ */
+.cg-body-wrap{
+  background:var(--color-bg-elevated);
+  padding:72px 56px 80px;
+}
+.cg-body-inner{
+  max-width:780px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+.cg-body-inner p{
+  font-family:var(--font-sans);
+  font-size:16px;
+  line-height:1.8;
+  color:var(--color-text-secondary);
+  margin:0;
+}
+.cg-body-inner p.cg-close{
+  font-family:var(--font-serif);
+  font-weight:300;
+  font-size:clamp(20px,1.8vw,25px);
+  line-height:1.8;
+  letter-spacing:0.005em;
+  color:var(--color-text-primary);
+}
 
 /* ============================================================
    FOOTER
@@ -190,7 +263,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 /* ============================================================
    RESPONSIVE ≤ 900px
    ============================================================ */
-@media (max-width:900px) {
+@media (max-width:900px){
   header.nav .left,header.nav .right{display:none;}
   .hamburger{display:flex;position:absolute;right:24px;top:50%;transform:translateY(-50%);}
   header.nav{padding:13px 24px;position:relative;}
@@ -201,9 +274,13 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .top-frame.compact header.nav .mark .wd{font-size:15px;}
   .top-frame.compact header.nav .mark .sub{opacity:0;max-height:0;margin-top:0;}
   .top-frame.compact header.nav .mark-logo{max-height:0;opacity:0;margin-bottom:0;transform:scaleY(0.2);}
-  .gallery-hero{padding:48px 24px 40px;}
-  .gallery-cats{flex-direction:column;padding:32px 24px 40px;gap:24px;}
-  .gcat-photo{aspect-ratio:4/3;}
+  .cg-hero-img{height:380px;}
+  .cg-hero-text{bottom:32px;left:24px;right:24px;}
+  .cg-hero-title{font-size:clamp(24px,6vw,38px);}
+  .cg-intro-wrap{padding:44px 24px 52px;}
+  .cg-how-wrap{padding:48px 24px 56px;}
+  .cg-steps{grid-template-columns:1fr;gap:24px;}
+  .cg-body-wrap{padding:48px 24px 56px;}
   .sep{width:70%;}
   footer{grid-template-columns:1fr;gap:28px;padding:44px 24px 24px;}
   footer .brand{align-items:flex-start;}
@@ -258,45 +335,60 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <a href="clientcare.html">Client Care</a>
 </nav>
 
+<!-- HERO -->
+<div class="cg-hero">
+  <img class="cg-hero-img" src="Фото/Картины%20с%20печатью/wax-1.jpg" alt="Christian Gift — handcrafted ceramic with wax seal">
+  <div class="cg-hero-overlay"></div>
+  <div class="cg-hero-text">
+    <span class="cg-hero-eyebrow">Christian Gifts</span>
+    <h1 class="cg-hero-title">Christian Gift for Someone Special</h1>
+  </div>
+</div>
+
 <div class="sep" role="separator"></div>
 
-<!-- GALLERY HERO -->
-<section class="gallery-hero">
-  <p class="eyebrow">Gallery</p>
-  <h1>Each piece painted by hand,<br>carrying its own quiet story.</h1>
-</section>
+<!-- INTRO -->
+<div class="cg-intro-wrap">
+  <div class="cg-intro-inner">
+    <p class="cg-intro-text">It is more than a handcrafted ceramic artwork — it is a meaningful Christian gift that continues to bless its owner every single day, long after it is received.</p>
+  </div>
+</div>
 
-<!-- 3 CATEGORY TILES -->
-<section class="gallery-cats">
+<div class="sep" role="separator"></div>
 
-  <a class="gcat-item" href="#">
-    <div class="gcat-photo">
-      <img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Ceramic Paintings">
+<!-- HOW IT WORKS -->
+<div class="cg-how-wrap">
+  <span class="cg-how-label">How It Works</span>
+  <div class="cg-steps">
+    <div class="cg-step">
+      <span class="cg-step-num">01</span>
+      <span class="cg-step-text">Simply touch the wax seal with the top edge of your smartphone.</span>
     </div>
-    <div class="gcat-info">
-      <span class="gcat-title">Ceramic Paintings</span>
+    <div class="cg-step">
+      <span class="cg-step-num">02</span>
+      <span class="cg-step-text">Instantly receive today's comforting Bible verse with a peaceful audio reading.</span>
     </div>
-  </a>
+    <div class="cg-step">
+      <span class="cg-step-num">03</span>
+      <span class="cg-step-text">Return each day to discover a fresh message from God's Word.</span>
+    </div>
+    <div class="cg-step">
+      <span class="cg-step-num">04</span>
+      <span class="cg-step-text">No batteries. No charging. Always ready whenever you need encouragement from Scripture.</span>
+    </div>
+  </div>
+</div>
 
-  <a class="gcat-item" href="#">
-    <div class="gcat-photo">
-      <img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Ceramic Paintings with Inscriptions">
-    </div>
-    <div class="gcat-info">
-      <span class="gcat-title">Ceramic Paintings with Inscriptions</span>
-    </div>
-  </a>
+<div class="sep" role="separator"></div>
 
-  <a class="gcat-item" href="christian-gifts.html">
-    <div class="gcat-photo">
-      <img src="Фото/Картины%20с%20печатью/wax-1.jpg" alt="Christian Gifts">
-    </div>
-    <div class="gcat-info">
-      <span class="gcat-title">Christian Gifts</span>
-    </div>
-  </a>
-
-</section>
+<!-- BODY TEXT -->
+<div class="cg-body-wrap">
+  <div class="cg-body-inner">
+    <p>Each day, the artwork reveals a new message from God's Word through an inspiring audio reading, creating a quiet moment to pause, find peace, and draw closer to God. Whether in the morning before the day begins or in the evening before rest, every message brings fresh hope, comfort, wisdom, and God's promises.</p>
+    <p>Unlike traditional Christian gifts, this artwork offers a new experience every day, making it a meaningful companion people naturally return to again and again.</p>
+    <p class="cg-close">It is a truly meaningful gift for someone who holds a special place in your heart — a lasting reminder of God's love, your love, and the blessing you wanted to share with them long after the special occasion has passed.</p>
+  </div>
+</div>
 
 <div class="sep" role="separator"></div>
 
@@ -347,7 +439,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 </footer>
 
 <script>
-window.addEventListener('DOMContentLoaded', function(){ window.scrollTo(0,0); });
+window.addEventListener('DOMContentLoaded',function(){window.scrollTo(0,0);});
 
 /* Logo calibration */
 function calibrateLogo(imgEl){
@@ -376,19 +468,9 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
   frame.classList.toggle('compact',window.scrollY>0);
 })();
 
-/* Smooth scroll for tile anchors */
-(function(){
-  document.querySelectorAll('.gcat-item[href^="#"]').forEach(function(a){
-    a.addEventListener('click',function(e){
-      var target=document.querySelector(a.getAttribute('href'));
-      if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
-    });
-  });
-})();
-
 /* Scroll reveal */
 (function(){
-  var targets=document.querySelectorAll('footer');
+  var targets=document.querySelectorAll('.cg-how-wrap,.cg-body-wrap,footer');
   targets.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1),transform 900ms cubic-bezier(0.16,1,0.3,1)';});
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);}});},{threshold:0.04});
   targets.forEach(function(el){io.observe(el);});

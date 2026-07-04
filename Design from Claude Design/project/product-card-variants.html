@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Product card — Lot · final</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  body { background: var(--bone-white); }
+
+  /* ============================================================
+     PAGE HEADER
+     ============================================================ */
+  .page-header {
+    padding: 72px 64px 56px;
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 80px; align-items: end;
+    border-bottom: 0.5px solid var(--aged-clay);
+  }
+  .page-header .stamp {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--wax-seal);
+    margin-bottom: 18px;
+  }
+  .page-header h1 {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 56px;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin: 0;
+    color: var(--bark-black);
+  }
+  .page-header h1 em { font-style: italic; color: var(--wax-seal); }
+  .page-header .lede {
+    font-size: 15px;
+    color: var(--smoked-oak);
+    max-width: 44ch;
+    margin: 0 0 6px;
+    text-wrap: pretty;
+  }
+
+  /* ============================================================
+     SECTION FRAME
+     ============================================================ */
+  .section {
+    padding: 80px 64px 96px;
+    border-bottom: 0.5px solid var(--aged-clay);
+  }
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 56px;
+  }
+  .section-head h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--bark-black);
+  }
+  .section-head .roman {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+    color: var(--smoked-oak);
+  }
+  .section-head .caption {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--smoked-oak);
+  }
+
+  /* ============================================================
+     THE LOT CARD — base component
+     ============================================================ */
+  .card-lot {
+    background: var(--bone-white);
+    border: 0.5px solid var(--bark-black);
+    display: flex; flex-direction: column;
+    width: 100%;
+    transition: opacity 600ms var(--ease);
+  }
+  .card-lot .head {
+    display: flex; justify-content: space-between;
+    padding: 14px 22px;
+    border-bottom: 0.5px solid var(--bark-black);
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--bark-black);
+  }
+  .card-lot .head .right { color: var(--wax-seal); display: flex; align-items: center; gap: 6px; }
+  .card-lot .head .right .pip {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--wax-seal);
+    display: inline-block;
+  }
+
+  .card-lot .stage {
+    background: var(--raw-linen);
+    padding: 24px;
+    overflow: hidden;
+    position: relative;
+  }
+  .card-lot .stage img {
+    width: 100%;
+    aspect-ratio: 4/3; object-fit: cover; display: block;
+    transition: opacity 800ms var(--ease);
+  }
+
+  .card-lot .body {
+    padding: 28px 26px 24px;
+    display: flex; flex-direction: column; gap: 16px;
+    flex: 1;
+  }
+
+  .card-lot .title-block {
+    display: flex; gap: 14px; align-items: baseline;
+  }
+  .card-lot .roman {
+    font-family: var(--font-serif);
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 1;
+    color: var(--wax-seal);
+    letter-spacing: -0.01em;
+  }
+  .card-lot .name {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 26px;
+    line-height: 1.05;
+    color: var(--bark-black);
+    letter-spacing: -0.01em;
+    flex: 1;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .card-lot .desc {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--smoked-oak);
+    text-align: justify;
+    margin: 4px 0 0;
+    text-wrap: pretty;
+  }
+
+  .card-lot .props {
+    display: grid; grid-template-columns: auto 1fr;
+    gap: 6px 18px;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    margin: 0;
+  }
+  .card-lot .props dt { color: var(--smoked-oak); margin: 0; }
+  .card-lot .props dd { margin: 0; color: var(--bark-black); }
+
+  .card-lot .estimate {
+    margin-top: auto;
+    border-top: 0.5px solid var(--bark-black);
+    padding-top: 16px;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .card-lot .estimate .label {
+    font-family: var(--font-mono); font-size: 9.5px;
+    letter-spacing: 0.28em; text-transform: uppercase;
+    color: var(--smoked-oak);
+  }
+  .card-lot .estimate .value {
+    font-family: var(--font-serif); font-weight: 500;
+    font-size: 24px; line-height: 1;
+    color: var(--bark-black);
+  }
+
+  .card-lot .foot {
+    padding: 13px 22px;
+    border-top: 0.5px solid var(--aged-clay);
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: var(--font-mono); font-size: 9.5px;
+    letter-spacing: 0.24em; text-transform: uppercase;
+  }
+  .card-lot .foot .seal {
+    width: 14px; height: 14px; border-radius: 50%; background: var(--wax-seal);
+  }
+  .card-lot .foot .stamp { display: flex; align-items: center; gap: 10px; color: var(--smoked-oak); }
+  .card-lot .foot .cta {
+    color: var(--bark-black);
+    border-bottom: 0.5px solid var(--bark-black);
+    padding-bottom: 2px;
+    cursor: pointer;
+    transition: color 300ms var(--ease), border-color 300ms var(--ease);
+  }
+  .card-lot:hover { cursor: pointer; }
+  .card-lot:hover .stage img { opacity: 0.88; }
+  .card-lot:hover .foot .cta { color: var(--wax-seal); border-bottom-color: var(--wax-seal); }
+
+  /* ============================================================
+     STATES
+     ============================================================ */
+  .card-lot.is-hover .stage img { opacity: 0.88; }
+  .card-lot.is-hover .foot .cta { color: var(--wax-seal); border-bottom-color: var(--wax-seal); }
+
+  .card-lot.is-sold .head .right { color: var(--smoked-oak); }
+  .card-lot.is-sold .head .right .pip { background: var(--smoked-oak); }
+  .card-lot.is-sold .stage img { opacity: 0.5; filter: saturate(0.5); }
+  .card-lot.is-sold .stage::after {
+    content: "Sold";
+    position: absolute; inset: auto 0 24px 0;
+    text-align: center;
+    font-family: var(--font-serif); font-style: italic;
+    font-weight: 300; font-size: 28px; color: var(--bark-black);
+  }
+  .card-lot.is-sold .roman,
+  .card-lot.is-sold .estimate .value,
+  .card-lot.is-sold .foot .cta {
+    color: var(--smoked-oak);
+    text-decoration: line-through; text-decoration-thickness: 0.5px;
+  }
+  .card-lot.is-sold .foot .cta { border-bottom-color: var(--smoked-oak); }
+  .card-lot.is-sold .foot .seal { background: var(--smoked-oak); }
+
+  .card-lot.is-reserved .head .right { color: var(--honey-light); }
+  .card-lot.is-reserved .head .right .pip { background: var(--honey-light); }
+
+  /* ============================================================
+     ANATOMY (annotated featured card)
+     ============================================================ */
+  .anatomy {
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    gap: 96px;
+    align-items: start;
+  }
+  .anatomy .stage-card { max-width: 420px; }
+  .anatomy .notes {
+    display: grid; gap: 22px;
+    padding-top: 8px;
+  }
+  .anatomy .note {
+    display: grid; grid-template-columns: 56px 1fr;
+    gap: 18px; align-items: baseline;
+    padding-bottom: 18px;
+    border-bottom: 0.5px solid var(--aged-clay);
+  }
+  .anatomy .note:last-child { border-bottom: 0; }
+  .anatomy .note .ix {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--wax-seal);
+  }
+  .anatomy .note h3 {
+    font-family: var(--font-serif);
+    font-weight: 400; font-size: 19px; line-height: 1.1;
+    color: var(--bark-black); margin: 0 0 6px;
+    letter-spacing: -0.005em;
+  }
+  .anatomy .note p {
+    font-family: var(--font-sans); font-size: 13.5px;
+    line-height: 1.55; color: var(--smoked-oak);
+    margin: 0; max-width: 48ch;
+  }
+  .anatomy .note p code {
+    font-family: var(--font-mono); font-size: 11.5px;
+    color: var(--bark-black);
+    background: var(--raw-linen); padding: 1px 6px;
+  }
+
+  /* ============================================================
+     STATES ROW
+     ============================================================ */
+  .states-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 32px; align-items: start;
+  }
+  .state-cell { display: flex; flex-direction: column; gap: 18px; }
+  .state-cell .label {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--smoked-oak);
+  }
+  .state-cell .label b { color: var(--bark-black); font-weight: 400; }
+
+  /* ============================================================
+     CONTEXT — list page
+     ============================================================ */
+  .context {
+    background: var(--bone-white);
+    margin: 0 -64px;
+    padding: 80px 64px 96px;
+  }
+  .context-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+  }
+  .context-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    margin-bottom: 56px;
+  }
+  .context h2 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-style: italic;
+    font-size: 32px;
+    color: var(--bark-black);
+  }
+
+  /* ============================================================
+     SPEC TABLE
+     ============================================================ */
+  .specs {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0 64px;
+    border-top: 0.5px solid var(--bark-black);
+  }
+  .specs dl {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0; margin: 0;
+  }
+  .specs dl > div {
+    padding: 14px 0;
+    border-bottom: 0.5px solid var(--aged-clay);
+    display: contents;
+  }
+  .specs dt, .specs dd {
+    padding: 13px 0;
+    border-bottom: 0.5px solid var(--aged-clay);
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    margin: 0;
+  }
+  .specs dt { color: var(--smoked-oak); }
+  .specs dd { color: var(--bark-black); }
+
+  /* ============================================================
+     FOOTNOTE
+     ============================================================ */
+  .footnote {
+    padding: 40px 64px 56px;
+    display: flex; justify-content: space-between;
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--smoked-oak);
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div>
+    <div class="stamp">●  Selected  ·  Lot</div>
+    <h1>The <em>Lot</em>.</h1>
+  </div>
+  <p class="lede">An auction-record composition. The work as a lot, with provenance, estimate, and a small wax seal at the foot. This becomes the model for every other product surface in the system.</p>
+</header>
+
+<!-- ============================================================
+     ANATOMY
+     ============================================================ -->
+<section class="section">
+  <div class="section-head">
+    <div>
+      <span class="roman">i.</span>
+      <h2 style="margin-top: 8px">Anatomy</h2>
+    </div>
+    <span class="caption">Eight regions  ·  one frame</span>
+  </div>
+
+  <div class="anatomy">
+    <div class="stage-card">
+      <article class="card-lot">
+        <div class="head">
+          <span>Lot 014</span>
+          <span class="right"><span class="pip"></span>  Available</span>
+        </div>
+        <div class="stage">
+          <img src="assets/work-memory-of-childhood.png" alt="">
+        </div>
+        <div class="body">
+          <div class="title-block">
+            <span class="roman">XIV.</span>
+            <h3 class="name">Memory of childhood</h3>
+          </div>
+          <p class="desc">Pressed clay, oak-branch impression and matte glaze, signed verso. Made on a Tuesday in April; one of one, accompanied by certificate of authenticity.</p>
+          <dl class="props">
+            <dt>Material</dt><dd>Pressed clay  ·  matte glaze</dd>
+            <dt>Branch</dt><dd>Quercus alba, 1518 — present</dd>
+            <dt>Dim.</dt><dd>30 × 40 cm</dd>
+            <dt>Edition</dt><dd>1 of 1</dd>
+          </dl>
+          <div class="estimate">
+            <span class="label">Estimate</span>
+            <span class="value">$ 480 CAD</span>
+          </div>
+        </div>
+        <div class="foot">
+          <span class="stamp"><span class="seal"></span>  Sealed  ·  signed verso</span>
+          <span class="cta">Bring it home</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="notes">
+      <div class="note">
+        <span class="ix">01</span>
+        <div>
+          <h3>Lot header</h3>
+          <p>Catalog number on the left in mono caps. On the right, a status pip in Wax Seal — <code>Available</code> / <code>Reserved</code> / <code>Sold</code>. The horizontal hairline below is the only place the frame's full <code>0.5px solid Bark Black</code> repeats inside the card.</p>
+        </div>
+      </div>
+      <div class="note">
+        <span class="ix">02</span>
+        <div>
+          <h3>Stage</h3>
+          <p>Image is set on a Raw Linen plinth (24px padding all around) — never edge-to-edge. The plinth is the pedestal; the work sits on it.</p>
+        </div>
+      </div>
+      <div class="note">
+        <span class="ix">03</span>
+        <div>
+          <h3>Title block</h3>
+          <p>Roman numeral in Wax Seal (Cormorant 300 · 36px) reads like a sonnet number. Title in Cormorant 400 · 26px sits next to it on the baseline, allowing the work's name to wrap freely.</p>
+        </div>
+      </div>
+      <div class="note">
+        <span class="ix">04</span>
+        <div>
+          <h3>Description</h3>
+          <p>Italic serif (Cormorant 300 italic · 14px), <em>justified</em>. One short paragraph — never more. Reads like a catalog entry, not marketing.</p>
+        </div>
+      </div>
+      <div class="note">
+        <span class="ix">05</span>
+        <div>
+          <h3>Properties</h3>
+          <p>Tabular metadata in JetBrains Mono 10px / 0.18em tracking. Labels in Smoked Oak, values in Bark Black. The Latin binomial for the branch source is required — provenance is the brand.</p>
+        </div>
+      </div>
+      <div class="note">
+        <span class="ix">06</span>
+        <div>
+          <h3>Estimate</h3>
+          <p>"Estimate" label in mono caps; price in Cormorant 500 · 24px. Separated from the body by a full <code>0.5px solid Bark Black</code> rule. We never write "Price" — this is a lot.</p>
+        </div>
+      </div>
+      <div class="note">
+        <span class="ix">07</span>
+        <div>
+          <h3>Foot stamp</h3>
+          <p>Wax-seal pip + <code>Sealed · signed verso</code> on the left. The CTA — <em>"Bring it home"</em> — is a hairline-underlined text link in mono caps, never a filled button. The card itself is the invitation.</p>
+        </div>
+      </div>
+      <div class="note">
+        <span class="ix">08</span>
+        <div>
+          <h3>Frame</h3>
+          <p>The whole card is enclosed in a single <code>0.5px solid Bark Black</code> hairline. No shadow, no rounding. Width is fluid; height grows with content. Min width 320px, recommended 360–440px.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     STATES
+     ============================================================ -->
+<section class="section">
+  <div class="section-head">
+    <div>
+      <span class="roman">ii.</span>
+      <h2 style="margin-top: 8px">States</h2>
+    </div>
+    <span class="caption">Default  ·  hover  ·  reserved  ·  sold</span>
+  </div>
+
+  <div class="states-grid">
+
+    <div class="state-cell">
+      <span class="label"><b>Default</b>  ·  Available</span>
+      <article class="card-lot">
+        <div class="head">
+          <span>Lot 014</span>
+          <span class="right"><span class="pip"></span>  Available</span>
+        </div>
+        <div class="stage"><img src="assets/work-memory-of-childhood.png" alt=""></div>
+        <div class="body">
+          <div class="title-block">
+            <span class="roman">XIV.</span>
+            <h3 class="name">Memory of childhood</h3>
+          </div>
+          <dl class="props">
+            <dt>Dim.</dt><dd>30 × 40 cm</dd>
+            <dt>Edition</dt><dd>1 of 1</dd>
+          </dl>
+          <div class="estimate">
+            <span class="label">Estimate</span>
+            <span class="value">$ 480</span>
+          </div>
+        </div>
+        <div class="foot">
+          <span class="stamp"><span class="seal"></span>  Sealed</span>
+          <span class="cta">Bring it home</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="state-cell">
+      <span class="label"><b>Hover</b>  ·  cursor over card</span>
+      <article class="card-lot is-hover">
+        <div class="head">
+          <span>Lot 014</span>
+          <span class="right"><span class="pip"></span>  Available</span>
+        </div>
+        <div class="stage"><img src="assets/work-memory-of-childhood.png" alt=""></div>
+        <div class="body">
+          <div class="title-block">
+            <span class="roman">XIV.</span>
+            <h3 class="name">Memory of childhood</h3>
+          </div>
+          <dl class="props">
+            <dt>Dim.</dt><dd>30 × 40 cm</dd>
+            <dt>Edition</dt><dd>1 of 1</dd>
+          </dl>
+          <div class="estimate">
+            <span class="label">Estimate</span>
+            <span class="value">$ 480</span>
+          </div>
+        </div>
+        <div class="foot">
+          <span class="stamp"><span class="seal"></span>  Sealed</span>
+          <span class="cta">Bring it home</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="state-cell">
+      <span class="label"><b>Reserved</b>  ·  in process</span>
+      <article class="card-lot is-reserved">
+        <div class="head">
+          <span>Lot 014</span>
+          <span class="right"><span class="pip"></span>  Reserved</span>
+        </div>
+        <div class="stage"><img src="assets/work-memory-of-childhood.png" alt=""></div>
+        <div class="body">
+          <div class="title-block">
+            <span class="roman">XIV.</span>
+            <h3 class="name">Memory of childhood</h3>
+          </div>
+          <dl class="props">
+            <dt>Dim.</dt><dd>30 × 40 cm</dd>
+            <dt>Edition</dt><dd>1 of 1</dd>
+          </dl>
+          <div class="estimate">
+            <span class="label">Estimate</span>
+            <span class="value">$ 480</span>
+          </div>
+        </div>
+        <div class="foot">
+          <span class="stamp"><span class="seal"></span>  Held until 04 / 26</span>
+          <span class="cta">Notify me</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="state-cell">
+      <span class="label"><b>Sold</b>  ·  one of one, gone</span>
+      <article class="card-lot is-sold">
+        <div class="head">
+          <span>Lot 014</span>
+          <span class="right"><span class="pip"></span>  Sold</span>
+        </div>
+        <div class="stage"><img src="assets/work-memory-of-childhood.png" alt=""></div>
+        <div class="body">
+          <div class="title-block">
+            <span class="roman">XIV.</span>
+            <h3 class="name">Memory of childhood</h3>
+          </div>
+          <dl class="props">
+            <dt>Dim.</dt><dd>30 × 40 cm</dd>
+            <dt>Edition</dt><dd>1 of 1</dd>
+          </dl>
+          <div class="estimate">
+            <span class="label">Realised</span>
+            <span class="value">$ 480</span>
+          </div>
+        </div>
+        <div class="foot">
+          <span class="stamp"><span class="seal"></span>  Sold  ·  04 / 26</span>
+          <span class="cta">See next work</span>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTEXT — IN A CATALOGUE
+     ============================================================ -->
+<section class="section" style="background: var(--bone-white)">
+  <div class="section-head">
+    <div>
+      <span class="roman">iii.</span>
+      <h2 style="margin-top: 8px; font-style: italic; font-weight: 300">In a catalogue.</h2>
+    </div>
+    <span class="caption">Three lots, three breaths</span>
+  </div>
+
+  <div class="context-grid">
+
+    <article class="card-lot">
+      <div class="head">
+        <span>Lot 013</span>
+        <span class="right"><span class="pip"></span>  Available</span>
+      </div>
+      <div class="stage"><img src="assets/work-memory-of-childhood.png" alt=""></div>
+      <div class="body">
+        <div class="title-block">
+          <span class="roman">XIII.</span>
+          <h3 class="name">A morning in May</h3>
+        </div>
+        <p class="desc">A first branch of the season, pressed cold. The clay was still wet from the rain.</p>
+        <dl class="props">
+          <dt>Dim.</dt><dd>40 × 50 cm</dd>
+          <dt>Edition</dt><dd>1 of 1</dd>
+        </dl>
+        <div class="estimate">
+          <span class="label">Estimate</span>
+          <span class="value">$ 620</span>
+        </div>
+      </div>
+      <div class="foot">
+        <span class="stamp"><span class="seal"></span>  Sealed</span>
+        <span class="cta">Bring it home</span>
+      </div>
+    </article>
+
+    <article class="card-lot">
+      <div class="head">
+        <span>Lot 014</span>
+        <span class="right"><span class="pip"></span>  Available</span>
+      </div>
+      <div class="stage"><img src="assets/work-memory-of-childhood.png" alt=""></div>
+      <div class="body">
+        <div class="title-block">
+          <span class="roman">XIV.</span>
+          <h3 class="name">Memory of childhood</h3>
+        </div>
+        <p class="desc">Pressed clay, oak-branch impression, matte glaze. One mark, never twice.</p>
+        <dl class="props">
+          <dt>Dim.</dt><dd>30 × 40 cm</dd>
+          <dt>Edition</dt><dd>1 of 1</dd>
+        </dl>
+        <div class="estimate">
+          <span class="label">Estimate</span>
+          <span class="value">$ 480</span>
+        </div>
+      </div>
+      <div class="foot">
+        <span class="stamp"><span class="seal"></span>  Sealed</span>
+        <span class="cta">Bring it home</span>
+      </div>
+    </article>
+
+    <article class="card-lot is-sold">
+      <div class="head">
+        <span>Lot 015</span>
+        <span class="right"><span class="pip"></span>  Sold</span>
+      </div>
+      <div class="stage"><img src="assets/work-memory-of-childhood.png" alt=""></div>
+      <div class="body">
+        <div class="title-block">
+          <span class="roman">XV.</span>
+          <h3 class="name">The orchard, at six</h3>
+        </div>
+        <p class="desc">An evening branch, late October. The fire was already lit.</p>
+        <dl class="props">
+          <dt>Dim.</dt><dd>50 × 60 cm</dd>
+          <dt>Edition</dt><dd>1 of 1</dd>
+        </dl>
+        <div class="estimate">
+          <span class="label">Realised</span>
+          <span class="value">$ 780</span>
+        </div>
+      </div>
+      <div class="foot">
+        <span class="stamp"><span class="seal"></span>  Sold  ·  03 / 26</span>
+        <span class="cta">See next work</span>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     SPECS
+     ============================================================ -->
+<section class="section" style="border-bottom: 0">
+  <div class="section-head">
+    <div>
+      <span class="roman">iv.</span>
+      <h2 style="margin-top: 8px">Spec</h2>
+    </div>
+    <span class="caption">Tokens & rules</span>
+  </div>
+
+  <div class="specs">
+    <dl>
+      <dt>Frame</dt><dd>0.5px solid bark-black</dd>
+      <dt>Internal divider</dt><dd>0.5px solid aged-clay</dd>
+      <dt>Estimate divider</dt><dd>0.5px solid bark-black</dd>
+      <dt>Stage padding</dt><dd>24 px</dd>
+      <dt>Body padding</dt><dd>28 / 26 / 24 px</dd>
+      <dt>Head padding</dt><dd>14 / 22 px</dd>
+      <dt>Min width</dt><dd>320 px</dd>
+      <dt>Recommended width</dt><dd>360 — 440 px</dd>
+    </dl>
+    <dl>
+      <dt>Lot no.</dt><dd>mono · 10 / 0.24em</dd>
+      <dt>Roman numeral</dt><dd>serif 300 · 36 px · wax seal</dd>
+      <dt>Title</dt><dd>serif 400 · 26 px</dd>
+      <dt>Description</dt><dd>serif italic 300 · 14 px · justified</dd>
+      <dt>Props</dt><dd>mono · 10 / 0.18em</dd>
+      <dt>Estimate value</dt><dd>serif 500 · 24 px</dd>
+      <dt>CTA</dt><dd>mono · 9.5 / 0.24em · underline</dd>
+      <dt>Radius / shadow</dt><dd>0  ·  none</dd>
+    </dl>
+  </div>
+</section>
+
+<div class="footnote">
+  <span>Lot  ·  final  ·  v 1.0</span>
+  <span>Next  —  the system follows</span>
+</div>
+
+</body>
+</html>

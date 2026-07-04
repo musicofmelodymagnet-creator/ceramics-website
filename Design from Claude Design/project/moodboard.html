@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ORLINSKY Ceramic — moodboard</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  /* ============ MOODBOARD-ONLY LAYOUT ============ */
+
+  /* Soft, very faint pressed-branch texture for backgrounds */
+  .branches {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+    opacity: 0.15;
+  }
+  .branches svg { position: absolute; width: 100%; height: 100%; }
+
+  /* ---- top frame (utility + nav on bark) ---- */
+  .top-frame {
+    background: var(--bark-black);
+    color: var(--bone-white);
+  }
+
+  /* ---- top utility bar ---- */
+  .util {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    border-bottom: 0.5px solid rgba(201,184,154,0.18);
+  }
+  .util .cap { color: rgba(245,241,232,0.55); }
+  .util .caption { color: rgba(245,241,232,0.55); }
+  .util .right { display: flex; gap: 36px; }
+
+  /* ---- header / nav (on bark) ---- */
+  header.nav {
+    display: grid; grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 36px 48px 44px;
+  }
+  header.nav .left, header.nav .right { display: flex; gap: 40px; }
+  header.nav .right { justify-content: flex-end; }
+  header.nav a {
+    font-family: var(--font-mono); font-size: 11px;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--bone-white);
+  }
+  header.nav .mark { text-align: center; }
+  header.nav .mark img { height: 44px; display: block; margin: 0 auto 12px; }
+  header.nav .mark .wd {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: 0.38em; text-indent: 0.38em;
+    text-transform: uppercase;
+    color: var(--bone-white);
+    line-height: 1;
+  }
+  header.nav .mark .sub {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.34em; text-indent: 0.34em;
+    text-transform: uppercase;
+    color: var(--smoked-oak);
+    margin-top: 8px;
+    line-height: 1;
+  }
+
+  /* ---- hero ---- */
+  .hero { position: relative; padding: 120px 48px 160px; }
+  .hero .label { display: block; margin-bottom: 40px; }
+  .hero h1 {
+    font-family: var(--font-serif); font-weight: 300;
+    font-size: clamp(56px, 8vw, 112px);
+    letter-spacing: -0.02em;
+    line-height: 1.02;
+    max-width: 14ch;
+  }
+  .hero h1 em { font-style: italic; font-weight: 300; color: var(--wax-seal); }
+  .hero .sub { margin-top: 56px; max-width: 44ch; font-size: 18px; line-height: 1.7; color: var(--smoked-oak); }
+  .hero .actions { margin-top: 56px; display: flex; gap: 32px; align-items: center; }
+
+  /* ---- featured work ---- */
+  .featured { padding: 0 48px 160px; }
+  .featured .heading {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-top: 0.5px solid var(--aged-clay);
+    padding-top: 32px; margin-bottom: 56px;
+  }
+  .featured .heading h2 { font-family: var(--font-serif); font-weight: 400; font-size: 36px; letter-spacing: -0.01em; }
+  .work-grid {
+    display: grid; grid-template-columns: 5fr 4fr 3fr;
+    gap: 32px;
+    align-items: end;
+  }
+  .work { display: block; cursor: pointer; }
+  .work .frame { position: relative; overflow: hidden; transition: opacity 600ms var(--ease); }
+  .work .frame::after { content: ""; display: block; padding-bottom: 125%; }
+  .work .frame .inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--smoked-oak);
+    background-size: cover; background-position: center;
+  }
+  .work:hover .frame { opacity: 0.85; }
+  .work .caption { margin-top: 16px; display: grid; gap: 4px; }
+  .work .caption .name { font-family: var(--font-serif); font-size: 22px; font-weight: 400; color: var(--bark-black); }
+  .work .caption .meta { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--smoked-oak); }
+  .work .caption .price { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bark-black); margin-top: 4px; }
+
+  /* Image substitutes (no stock — paper-grain swatches) */
+  .px-1 { background:
+    radial-gradient(ellipse at 60% 40%, rgba(245,241,232,0.6), transparent 50%),
+    repeating-linear-gradient(135deg, rgba(42,37,32,0.04) 0 1px, transparent 1px 9px),
+    var(--aged-clay);
+  }
+  .px-2 { background:
+    radial-gradient(ellipse at 30% 70%, rgba(245,241,232,0.35), transparent 60%),
+    repeating-linear-gradient(45deg, rgba(42,37,32,0.06) 0 1px, transparent 1px 7px),
+    #B3A487;
+  }
+  .px-3 { background:
+    radial-gradient(circle at 50% 30%, rgba(245,241,232,0.5), transparent 55%),
+    repeating-linear-gradient(90deg, rgba(42,37,32,0.04) 0 1px, transparent 1px 11px),
+    #BFAE91;
+  }
+
+  /* ---- manifesto chapter ---- */
+  .chapter {
+    background: var(--raw-linen);
+    padding: 160px 48px;
+    text-align: center;
+    border-top: 0.5px solid var(--aged-clay);
+    border-bottom: 0.5px solid var(--aged-clay);
+    position: relative;
+  }
+  .chapter blockquote {
+    font-family: var(--font-serif); font-style: italic; font-weight: 300;
+    font-size: clamp(28px, 4vw, 48px);
+    line-height: 1.3; color: var(--bark-black);
+    max-width: 22ch; margin: 0 auto;
+  }
+  .chapter blockquote em { color: var(--wax-seal); font-style: italic; }
+  .chapter .attr { display: block; margin-top: 56px; }
+
+  /* ---- the tree (split image / text) ---- */
+  .tree { padding: 160px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: center; }
+  .tree .img { aspect-ratio: 4/5;
+    background:
+      radial-gradient(ellipse at 50% 30%, rgba(245,241,232,0.4), transparent 60%),
+      repeating-linear-gradient(60deg, rgba(42,37,32,0.06) 0 1px, transparent 1px 8px),
+      var(--aged-clay);
+    position: relative;
+  }
+  .tree .img .stamp { position: absolute; bottom: 18px; left: 18px; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--smoked-oak); }
+  .tree h2 { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 48px; line-height: 1.2; margin-bottom: 40px; max-width: 14ch; }
+  .tree p { font-size: 17px; line-height: 1.7; color: var(--bark-black); max-width: 42ch; margin-bottom: 24px; }
+  .tree .small-cap { display: block; margin-bottom: 32px; }
+
+  /* ---- certificate / wax seal moment ---- */
+  .cert {
+    background: var(--bark-black); color: var(--bone-white);
+    padding: 160px 48px; text-align: center;
+    border-top: 0.5px solid var(--aged-clay);
+    position: relative;
+  }
+  .cert .lockup { margin-bottom: 72px; }
+  .cert .lockup img { height: 72px; display: block; margin: 0 auto 16px; }
+  .cert .lockup .wd {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 28px;
+    letter-spacing: 0.38em; text-indent: 0.38em;
+    text-transform: uppercase;
+    color: var(--bone-white);
+    line-height: 1;
+  }
+  .cert .lockup .sub {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.34em; text-indent: 0.34em;
+    text-transform: uppercase;
+    color: var(--smoked-oak);
+    margin-top: 12px;
+    line-height: 1;
+  }
+  .cert .seal {
+    width: 96px; height: 96px; border-radius: 50%;
+    margin: 0 auto 56px;
+    background: radial-gradient(circle at 35% 30%, #92403D 0%, #7A2E2A 45%, #5E2320 100%);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-serif); font-style: italic; font-size: 40px;
+    color: rgba(245,241,232,0.85);
+    box-shadow: inset 0 -12px 24px rgba(0,0,0,0.3), inset 0 6px 12px rgba(255,255,255,0.08);
+  }
+  .cert .seal::before {
+    content: ""; position: absolute; inset: -8px;
+    border: 0.5px dashed rgba(122,46,42,0.5); border-radius: 50%;
+  }
+  .cert h2 { font-family: var(--font-serif); font-weight: 300; font-size: 48px; letter-spacing: -0.01em; margin-bottom: 24px; }
+  .cert p { color: rgba(245,241,232,0.7); max-width: 44ch; margin: 0 auto; }
+  .cert .cap { color: rgba(245,241,232,0.5); }
+
+  /* ---- ritual list ---- */
+  .ritual { padding: 160px 48px; display: grid; grid-template-columns: 1fr 2fr; gap: 96px; }
+  .ritual h2 { font-family: var(--font-serif); font-weight: 400; font-size: 36px; max-width: 12ch; }
+  .ritual ol { list-style: none; padding: 0; margin: 0; counter-reset: r; display: grid; gap: 48px; }
+  .ritual li { counter-increment: r; display: grid; grid-template-columns: 64px 1fr; gap: 32px; padding-bottom: 32px; border-bottom: 0.5px solid var(--aged-clay); }
+  .ritual li:last-child { border-bottom: 0; }
+  .ritual li::before { content: counter(r, decimal-leading-zero); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; color: var(--smoked-oak); padding-top: 6px; }
+  .ritual h3 { font-family: var(--font-serif); font-weight: 400; font-size: 24px; margin-bottom: 12px; }
+  .ritual p { color: var(--smoked-oak); }
+
+  /* ---- newsletter / quiet CTA ---- */
+  .quiet { padding: 160px 48px 120px; text-align: center; border-top: 0.5px solid var(--aged-clay); }
+  .quiet h2 { font-family: var(--font-serif); font-style: italic; font-weight: 300; font-size: 40px; margin-bottom: 56px; max-width: 22ch; margin-left: auto; margin-right: auto; }
+  .quiet form { display: flex; gap: 0; max-width: 480px; margin: 0 auto; align-items: end; border-bottom: 0.5px solid var(--bark-black); }
+  .quiet input { flex: 1; background: transparent; border: 0; padding: 12px 0; font-family: var(--font-sans); font-size: 17px; color: var(--bark-black); outline: none; }
+  .quiet input::placeholder { color: #8A7A65; font-style: italic; }
+  .quiet button { background: transparent; border: 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bark-black); padding: 12px 0 12px 16px; cursor: pointer; }
+
+  /* ---- footer (on bark) ---- */
+  footer {
+    background: var(--bark-black);
+    color: var(--bone-white);
+    border-top: 0.5px solid var(--aged-clay);
+    padding: 80px 48px 56px;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 64px;
+  }
+  footer .brand .mark { display: block; margin-bottom: 28px; }
+  footer .brand .mark img { height: 56px; display: block; margin-bottom: 14px; }
+  footer .brand .mark .wd {
+    font-family: var(--font-serif);
+    font-weight: 500;
+    font-size: 20px;
+    letter-spacing: 0.38em; text-indent: 0.38em;
+    text-transform: uppercase;
+    color: var(--bone-white);
+    line-height: 1;
+  }
+  footer .brand .mark .sub {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.34em; text-indent: 0.34em;
+    text-transform: uppercase;
+    color: var(--smoked-oak);
+    margin-top: 10px;
+    line-height: 1;
+  }
+  footer .brand p { color: rgba(245,241,232,0.55); font-size: 14px; max-width: 32ch; }
+  footer h4 { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bone-white); margin-bottom: 24px; font-weight: 400; }
+  footer ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  footer ul a { font-family: var(--font-sans); font-size: 15px; color: rgba(245,241,232,0.55); }
+  footer ul a:hover { color: var(--bone-white); border-bottom-color: var(--bone-white); }
+  footer .colophon {
+    grid-column: 1 / -1; margin-top: 64px; padding-top: 32px;
+    border-top: 0.5px solid rgba(201,184,154,0.2);
+    display: flex; justify-content: space-between;
+  }
+  footer .colophon .caption { color: rgba(245,241,232,0.45); }
+
+  /* fade-in on scroll-into-view (CSS-only with attribute trick) */
+  section, header, footer { animation: fade-in 800ms var(--ease) both; }
+
+  @media (max-width: 900px) {
+    .work-grid, .tree, .ritual, footer { grid-template-columns: 1fr; gap: 48px; }
+    .util, header.nav, .hero, .featured, .chapter, .tree, .cert, .ritual, .quiet, footer { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP FRAME (bark) -->
+<div class="top-frame">
+  <!-- UTILITY BAR -->
+  <div class="util" data-comment-anchor="999ce7e9b3-div">
+    <span class="caption">Brooklyn  ·  New York</span>
+    <div class="right">
+      <span class="caption">Currency · USD</span>
+      <span class="caption">Studio open by appointment</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <header class="nav">
+    <nav class="left">
+      <a href="#">The Work</a>
+      <a href="#">The Tree</a>
+      <a href="#">Studio</a>
+    </nav>
+    <div class="mark">
+      <img src="assets/eagle-honey.png" alt="ORLINSKY">
+      <div class="wd">ORLINSKY</div>
+      <div class="sub">CERAMIC&nbsp;&nbsp;STUDIO</div>
+    </div>
+    <nav class="right">
+      <a href="#" data-comment-anchor="ea5402c08e-a">Journal</a>
+      <a href="#">Contact</a>
+      <a href="#">Account</a>
+    </nav>
+  </header>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="caption label">Edition · spring · 2026</span>
+  <h1>Object, memory, <em>silence</em> — and then it becomes art.</h1>
+  <p class="sub">
+    Each piece is hand-pressed with branches from a single oak that watched five centuries pass.
+    We make one. We sign it. We let it leave.
+  </p>
+  <div class="actions">
+    <a class="btn btn--primary">Bring it home</a>
+    <a class="btn btn--ghost">Read the story</a>
+  </div>
+</section>
+
+<!-- FEATURED WORK -->
+<section class="featured">
+  <div class="heading">
+    <h2>The work, this season</h2>
+    <span class="caption">Six pieces · one of one</span>
+  </div>
+  <div class="work-grid">
+    <a class="work">
+      <div class="frame"><div class="inner px-1">work № 014</div></div>
+      <div class="caption">
+        <span class="name">A morning in May</span>
+        <span class="meta">2025 · pressed oak · 1 / 1</span>
+        <span class="price">$ 2,400</span>
+      </div>
+    </a>
+    <a class="work">
+      <div class="frame"><div class="inner px-2">work № 017</div></div>
+      <div class="caption">
+        <span class="name">The orchard, at six</span>
+        <span class="meta">2025 · linen glaze · 1 / 1</span>
+        <span class="price">$ 1,950</span>
+      </div>
+    </a>
+    <a class="work">
+      <div class="frame"><div class="inner px-3">work № 022</div></div>
+      <div class="caption">
+        <span class="name">Quiet plate</span>
+        <span class="meta">2026 · matte oxide · 1 / 1</span>
+        <span class="price">$ 1,400</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="chapter">
+  <blockquote>
+    A piece you live with for thirty years should not look like a piece you <em>scroll past.</em>
+  </blockquote>
+  <span class="caption attr">— Studio note · 002</span>
+</section>
+
+<!-- THE TREE -->
+<section class="tree">
+  <div class="img"><span class="stamp">the oak · 1518 — present</span></div>
+  <div>
+    <span class="caption small-cap">Source · the tree</span>
+    <h2>One tree. Five hundred years. Every piece.</h2>
+    <p>
+      We work with branches and leaves from a single oak in upstate New York. It was a sapling
+      when Magellan crossed the Pacific. It is still standing.
+    </p>
+    <p>
+      Every plate we make carries the print of one of its branches. The mark is never the same twice — the
+      branch decides.
+    </p>
+    <a class="btn btn--ghost" style="margin-top:32px">Visit the tree</a>
+  </div>
+</section>
+
+<!-- CERTIFICATE -->
+<section class="cert">
+  <div class="lockup">
+    <img src="assets/eagle-honey.png" alt="">
+    <div class="wd">ORLINSKY</div>
+    <div class="sub">CERAMIC&nbsp;&nbsp;STUDIO</div>
+  </div>
+  <div class="seal" aria-hidden="true">O</div>
+  <h2>Wax-sealed. Signed. Yours.</h2>
+  <p>Every work is sealed with the studio mark and arrives with a hand-numbered certificate. No two seals fall the same way.</p>
+  <span class="caption" style="display:block;margin-top:32px">Certificate №&nbsp;014 · signed verso</span>
+</section>
+
+<!-- RITUAL -->
+<section class="ritual">
+  <h2>The ritual of bringing it home</h2>
+  <ol>
+    <li>
+      <div>
+        <h3>Choose slowly</h3>
+        <p>Sit with the photographs for an evening. If the piece is still in your mind in the morning, write to us.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>We pack it by hand</h3>
+        <p>Unbleached linen, raw board, no plastic. The packing is part of the work.</p>
+      </div>
+    </li>
+    <li>
+      <div>
+        <h3>Hang it where the light arrives</h3>
+        <p>Morning light is best. Forget it is there. Remember, one evening, that it is.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<!-- QUIET CTA -->
+<section class="quiet">
+  <h2>Two letters a year. One when the work arrives, one when the tree begins to drop its leaves.</h2>
+  <form onsubmit="event.preventDefault()">
+    <input type="email" placeholder="your email">
+    <button type="submit">Subscribe</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="brand">
+    <div class="mark">
+      <img src="assets/eagle-honey.png" alt="ORLINSKY">
+      <div class="wd">ORLINSKY</div>
+      <div class="sub">CERAMIC&nbsp;&nbsp;STUDIO</div>
+    </div>
+    <p>Hand-pressed ceramic painting. Brooklyn, New York. Shipping to the United States &amp; Canada.</p>
+  </div>
+  <div>
+    <h4>Studio</h4>
+    <ul>
+      <li><a href="#">The work</a></li>
+      <li><a href="#">The tree</a></li>
+      <li><a href="#">Journal</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Visit</h4>
+    <ul>
+      <li><a href="#">By appointment</a></li>
+      <li><a href="#">Directions</a></li>
+      <li><a href="#">Hours</a></li>
+    </ul>
+  </div>
+  <div>
+    <h4>Care</h4>
+    <ul>
+      <li><a href="#">Shipping</a></li>
+      <li><a href="#">Care of work</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+  <div class="colophon">
+    <span class="caption">© 2026 Orlinsky Ceramic Studio</span>
+    <span class="caption">Made slowly</span>
+  </div>
+</footer>
+
+</body>
+</html>

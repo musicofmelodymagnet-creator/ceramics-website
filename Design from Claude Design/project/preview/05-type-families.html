@@ -1,0 +1,22 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { background: var(--bone-white); padding: 32px 40px; }
+  .grid { display: grid; grid-template-columns: 110px 1fr; column-gap: 32px; row-gap: 28px; align-items: baseline; }
+  .tag { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--smoked-oak); }
+  .serif { font-family: var(--font-serif); font-weight: 400; font-size: 32px; line-height: 1; color: var(--bark-black); letter-spacing: -0.01em; }
+  .sans  { font-family: var(--font-sans);  font-weight: 400; font-size: 24px; line-height: 1; color: var(--bark-black); }
+  .mono  { font-family: var(--font-mono);  font-weight: 400; font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--bark-black); }
+  .meta  { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: var(--smoked-oak); margin-top: 4px; }
+</style></head>
+<body>
+<div class="grid">
+  <div class="tag">Serif</div>
+  <div><div class="serif">Cormorant Garamond <span style="font-style:italic;font-weight:300">italic</span></div><div class="meta">300 · 400 · 500   ·   manifestos + headlines</div></div>
+  <div class="tag">Sans</div>
+  <div><div class="sans">Inter — humanist, calm</div><div class="meta">300 · 400 · 500   ·   body + ui</div></div>
+  <div class="tag">Mono</div>
+  <div><div class="mono">JetBrains Mono — captions</div><div class="meta">400   ·   labels · prices · metadata</div></div>
+</div>
+</body></html>

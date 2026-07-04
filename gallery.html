@@ -61,7 +61,7 @@ header.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;co
 header.nav .left,header.nav .right{display:flex;gap:40px;}header.nav .left{justify-content:flex-end;}
 header.nav .right{justify-content:flex-start;}
 header.nav a{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-secondary);transition:color 300ms var(--ease);border-bottom:0;}
-header.nav a:hover{color:var(--color-accent);border-bottom:0;}
+@media(hover:hover){header.nav a:hover{color:var(--color-accent);border-bottom:0;}}
 header.nav a.active{color:var(--color-text-primary);}
 header.nav .mark{text-align:center;border-bottom:0!important;}
 header.nav .mark:hover{border-bottom:0!important;}
@@ -87,7 +87,7 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .mobile-menu.is-opening{animation:menu-enter 1300ms cubic-bezier(0.16,1,0.3,1) forwards;}
 .mobile-menu.is-closing{animation:menu-exit 380ms cubic-bezier(0.55,0,1,1) forwards;}
 .mobile-menu a{font-family:var(--font-mono);font-size:14px;letter-spacing:0.26em;text-transform:uppercase;color:var(--color-text-secondary);border-bottom:0;}
-.mobile-menu a:hover{color:var(--color-accent);border-bottom:0;}
+@media(hover:hover){.mobile-menu a:hover{color:var(--color-accent);border-bottom:0;}}
 .mobile-menu .divider{width:32px;height:1px;background:var(--color-divider);}
 
 /* Separator */
@@ -117,61 +117,62 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
    GALLERY CATEGORIES (3 TILES)
    ============================================================ */
 .gallery-cats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  max-width:100%;
-  margin:0;
+  display:flex;
+  gap:16px;
+  max-width:960px;
+  margin:0 auto;
+  padding:56px 56px 64px;
+  box-sizing:border-box;
 }
 .gcat-item{
-  position:relative;
+  flex:1;
   display:block;
-  overflow:hidden;
   text-decoration:none;
   border-bottom:0!important;
   color:var(--color-text-primary);
-  border-right:1px solid rgba(200,180,155,0.08);
+  cursor:pointer;
 }
-.gcat-item:last-child{border-right:none;}
 .gcat-photo{
-  aspect-ratio:3/4;
+  aspect-ratio:1;
   overflow:hidden;
   background:var(--color-bg-elevated);
+  display:block;
 }
 .gcat-photo img{
   width:100%;height:100%;
   object-fit:cover;
   display:block;
-  opacity:0.62;
-  transition:transform 800ms ease, opacity 600ms ease;
+  opacity:0.75;
+  transition:transform 700ms ease, opacity 500ms ease;
 }
 .gcat-item:hover .gcat-photo img{
   transform:scale(1.04);
-  opacity:0.82;
-  transition:transform 500ms ease-out, opacity 350ms ease-out;
+  opacity:0.92;
+  transition:transform 450ms ease-out, opacity 300ms ease-out;
 }
-.gcat-overlay{
-  position:absolute;
-  bottom:0;left:0;right:0;
-  padding:28px 32px 36px;
-  background:linear-gradient(to top, rgba(22,19,15,0.95) 0%, rgba(22,19,15,0.55) 55%, transparent 100%);
+.gcat-info{
+  padding:14px 0 0;
 }
 .gcat-num{
   font-family:var(--font-mono);
-  font-size:9px;
-  letter-spacing:0.32em;
+  font-size:8.5px;
+  letter-spacing:0.3em;
   color:var(--color-accent);
   display:block;
-  margin-bottom:10px;
+  margin-bottom:7px;
 }
 .gcat-title{
   font-family:var(--font-serif);
   font-weight:300;
-  font-size:clamp(20px,2vw,30px);
+  font-size:clamp(16px,1.4vw,22px);
   line-height:1.2;
   color:var(--color-text-primary);
-  margin:0 0 10px;
+  display:block;
+  margin:0 0 7px;
   letter-spacing:0.01em;
+  transition:color 300ms ease;
 }
+.gcat-item:hover .gcat-title{color:var(--color-accent);}
 .gcat-meta{
   display:flex;
   align-items:center;
@@ -179,31 +180,20 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 }
 .gcat-count{
   font-family:var(--font-mono);
-  font-size:8.5px;
-  letter-spacing:0.24em;
+  font-size:8px;
+  letter-spacing:0.2em;
   text-transform:uppercase;
-  color:var(--color-text-secondary);
+  color:var(--color-text-muted);
 }
 .gcat-badge{
   font-family:var(--font-mono);
   font-size:7.5px;
-  letter-spacing:0.2em;
+  letter-spacing:0.18em;
   text-transform:uppercase;
   color:var(--color-text-muted);
   border:0.5px solid var(--color-divider);
-  padding:3px 8px 2px;
+  padding:3px 7px 2px;
 }
-.gcat-arrow{
-  position:absolute;
-  top:50%;
-  right:24px;
-  transform:translateY(-50%) translateX(8px);
-  opacity:0;
-  transition:transform 300ms ease, opacity 300ms ease;
-  color:var(--color-accent);
-}
-.gcat-arrow svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
-.gcat-item:hover .gcat-arrow{opacity:1;transform:translateY(-50%) translateX(0);}
 
 /* Section heading for each subsection */
 .gsec-heading{
@@ -373,8 +363,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .top-frame.compact header.nav .mark .sub{opacity:0;max-height:0;margin-top:0;}
   .top-frame.compact header.nav .mark-logo{max-height:0;opacity:0;margin-bottom:0;transform:scaleY(0.2);}
   .gallery-hero{padding:48px 24px 40px;}
-  .gallery-cats{grid-template-columns:1fr;}
-  .gcat-item{border-right:none;border-bottom:1px solid rgba(200,180,155,0.08);}
+  .gallery-cats{flex-direction:column;padding:32px 24px 40px;gap:24px;}
   .gcat-photo{aspect-ratio:4/3;}
   .gsec-heading{padding:48px 24px 28px;}
   .gsec-coming{padding:56px 24px 72px;}
@@ -450,42 +439,33 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="gcat-photo">
       <img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Ceramic Paintings">
     </div>
-    <div class="gcat-overlay">
+    <div class="gcat-info">
       <span class="gcat-num">01</span>
-      <h2 class="gcat-title">Ceramic Paintings</h2>
-      <div class="gcat-meta">
-        <span class="gcat-count">6 works available</span>
-      </div>
+      <span class="gcat-title">Ceramic Paintings</span>
+      <div class="gcat-meta"><span class="gcat-count">6 works available</span></div>
     </div>
-    <span class="gcat-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
   </a>
 
   <a class="gcat-item" href="#inscriptions">
     <div class="gcat-photo">
       <img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Ceramic Paintings with Inscriptions">
     </div>
-    <div class="gcat-overlay">
+    <div class="gcat-info">
       <span class="gcat-num">02</span>
-      <h2 class="gcat-title">Ceramic Paintings with Inscriptions</h2>
-      <div class="gcat-meta">
-        <span class="gcat-badge">Coming soon</span>
-      </div>
+      <span class="gcat-title">Ceramic Paintings with Inscriptions</span>
+      <div class="gcat-meta"><span class="gcat-badge">Coming soon</span></div>
     </div>
-    <span class="gcat-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
   </a>
 
   <a class="gcat-item" href="#divine-message">
     <div class="gcat-photo">
       <img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Ceramic Paintings with God's Message">
     </div>
-    <div class="gcat-overlay">
+    <div class="gcat-info">
       <span class="gcat-num">03</span>
-      <h2 class="gcat-title">Ceramic Paintings with God's Message</h2>
-      <div class="gcat-meta">
-        <span class="gcat-badge">Coming soon</span>
-      </div>
+      <span class="gcat-title">Ceramic Paintings with God's Message</span>
+      <div class="gcat-meta"><span class="gcat-badge">Coming soon</span></div>
     </div>
-    <span class="gcat-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
   </a>
 
 </section>

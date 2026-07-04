@@ -97,15 +97,46 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 /* ============================================================
    TOP PHOTO (video placeholder)
    ============================================================ */
+.cg-breadcrumb{
+  max-width:1100px;
+  margin:0 auto;
+  padding:24px 56px 0;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:var(--font-mono);
+  font-size:9.5px;
+  letter-spacing:0.26em;
+  text-transform:uppercase;
+  color:var(--color-text-muted);
+}
+.cg-breadcrumb a{color:var(--color-text-muted);border-bottom:0;transition:color 250ms ease;}
+.cg-breadcrumb a:hover{color:var(--color-accent);border-bottom:0;}
+.cg-breadcrumb .bc-sep{opacity:0.4;}
+.cg-top-area{
+  max-width:1100px;
+  margin:0 auto;
+  padding:0 56px;
+  box-sizing:border-box;
+}
+.cg-top-area-title{
+  font-family:var(--font-serif);
+  font-weight:300;
+  font-size:clamp(24px,2.6vw,38px);
+  line-height:1.15;
+  letter-spacing:0.01em;
+  color:var(--color-text-primary);
+  margin:20px 0 20px;
+}
 .cg-top-photo{
-  width:100%;
   overflow:hidden;
   background:var(--color-bg-elevated);
   display:block;
 }
 .cg-top-photo img{
   width:100%;
-  max-height:680px;
+  max-height:620px;
   object-fit:cover;
   object-position:center;
   display:block;
@@ -119,15 +150,6 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   margin:0 auto;
   padding:52px 56px 56px;
   box-sizing:border-box;
-}
-.cg-desc-title{
-  font-family:var(--font-serif);
-  font-weight:300;
-  font-size:clamp(24px,2.6vw,38px);
-  line-height:1.15;
-  letter-spacing:0.01em;
-  color:var(--color-text-primary);
-  margin:0 0 20px;
 }
 .cg-desc-intro{
   font-family:var(--font-sans);
@@ -331,6 +353,8 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .top-frame.compact header.nav .mark .wd{font-size:15px;}
   .top-frame.compact header.nav .mark .sub{opacity:0;max-height:0;margin-top:0;}
   .top-frame.compact header.nav .mark-logo{max-height:0;opacity:0;margin-bottom:0;transform:scaleY(0.2);}
+  .cg-breadcrumb{padding:20px 24px 0;}
+  .cg-top-area{padding:0 24px;}
   .cg-desc{padding:36px 24px 40px;}
   .cg-steps{grid-template-columns:1fr;gap:12px;}
   .cg-list-heading{padding:36px 24px 24px;}
@@ -391,16 +415,25 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <a href="clientcare.html">Client Care</a>
 </nav>
 
-<!-- TOP PHOTO -->
-<div class="cg-top-photo">
-  <img src="Фото/Картины%20с%20печатью/video-placeholder.jpg" alt="Christian Gift — ceramic painting with NFC wax seal">
+<!-- BREADCRUMB -->
+<nav class="cg-breadcrumb" aria-label="Breadcrumb">
+  <a href="gallery.html">Gallery</a>
+  <span class="bc-sep">/</span>
+  <span>Christian Gifts</span>
+</nav>
+
+<!-- TOP PHOTO with title above -->
+<div class="cg-top-area">
+  <h1 class="cg-top-area-title">Christian Gift for Someone Special</h1>
+  <div class="cg-top-photo">
+    <img src="Фото/Картины%20с%20печатью/video-placeholder.jpg" alt="Christian Gift — ceramic painting with NFC wax seal">
+  </div>
 </div>
 
 <div class="sep" role="separator"></div>
 
 <!-- DESCRIPTION -->
 <div class="cg-desc">
-  <h1 class="cg-desc-title">Christian Gift for Someone Special</h1>
   <p class="cg-desc-intro">It is more than a handcrafted ceramic artwork — it is a meaningful Christian gift that continues to bless its owner every single day, long after it is received.</p>
 
   <span class="cg-how-label">How It Works</span>
@@ -440,7 +473,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   </div>
   <div class="cg-list">
 
-    <a class="cg-item" href="#">
+    <a class="cg-item" href="product-cg-1.html">
       <div class="cg-item-photo">
         <img src="Фото/Картины%20с%20печатью/wax-1.jpg" alt="Ceramic painting with daily Bible verse">
       </div>

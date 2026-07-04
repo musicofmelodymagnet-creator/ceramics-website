@@ -6,13 +6,14 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<title>Gallery — ORLINSKY Ceramic Studio</title>
+<title>Ceramic Paintings — ORLINSKY Ceramic Studio</title>
 <script>
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (window.location.hash) history.replaceState(null,'',window.location.pathname+window.location.search);
 </script>
 <style>
 @font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Light.ttf')format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-LightItalic.ttf')format('truetype');font-weight:300;font-style:italic;font-display:swap;}
 @font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Italic.ttf')format('truetype');font-weight:400;font-style:italic;font-display:swap;}
 @font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
 @font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Medium.ttf')format('truetype');font-weight:500;font-style:normal;font-display:swap;}
@@ -34,7 +35,6 @@
   --font-sans:'Inter',-apple-system,sans-serif;
   --font-mono:'JetBrains Mono','IBM Plex Mono',monospace;
   --ease:cubic-bezier(0.4,0.0,0.2,1);
-  --ease-spring:cubic-bezier(0.34,1.52,0.64,1);
 }
 
 ::-webkit-scrollbar{width:4px;}
@@ -58,7 +58,8 @@ a:hover{border-bottom-color:currentColor;}
 }
 .top-frame{background:var(--color-bg-header);position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(200,180,155,0.20);}
 header.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:48px;padding:20px 56px;transition:padding 400ms var(--ease);}
-header.nav .left,header.nav .right{display:flex;gap:40px;}header.nav .left{justify-content:flex-end;}
+header.nav .left,header.nav .right{display:flex;gap:40px;}
+header.nav .left{justify-content:flex-end;}
 header.nav .right{justify-content:flex-start;}
 header.nav a{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-secondary);transition:color 300ms var(--ease);border-bottom:0;}
 @media(hover:hover){header.nav a:hover{color:var(--color-accent);border-bottom:0;}}
@@ -94,77 +95,65 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .sep{height:1px;border:none;margin:0 auto;width:50%;background:linear-gradient(to right,rgba(200,112,31,0) 0%,rgba(200,112,31,0.15) 20%,rgba(200,112,31,0.55) 45%,rgba(200,112,31,0.85) 50%,rgba(200,112,31,0.55) 55%,rgba(200,112,31,0.15) 80%,rgba(200,112,31,0) 100%);box-shadow:0 0 8px 1px rgba(200,112,31,0.35);}
 
 /* ============================================================
-   GALLERY HERO
+   BREADCRUMB
    ============================================================ */
-.gallery-hero{
-  background:var(--color-bg-elevated);
-  padding:36px 56px 32px;
-  text-align:center;
-}
-.gallery-hero .eyebrow{
-  font-family:var(--font-mono);font-size:10px;
-  letter-spacing:0.44em;text-transform:uppercase;
-  color:var(--color-accent);margin:0 0 20px;
-}
-.gallery-hero h1{
-  font-family:var(--font-serif);font-weight:300;
-  font-size:clamp(23px,3vw,39px);
-  line-height:1.2;letter-spacing:0.01em;
-  color:var(--color-text-primary);margin:0;
-}
+.bc-bar{max-width:1200px;margin:0 auto;padding:28px 56px 0;box-sizing:border-box;}
+.breadcrumb{display:flex;align-items:center;gap:10px;font-family:var(--font-mono);font-size:9.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--color-text-muted);}
+.breadcrumb a{color:var(--color-text-muted);border-bottom:0;transition:color 250ms ease;}
+.breadcrumb a:hover{color:var(--color-accent);border-bottom:0;}
+.bc-sep{opacity:0.4;}
 
 /* ============================================================
-   GALLERY CATEGORIES (3 TILES)
+   SECTION HEADING
    ============================================================ */
-.gallery-cats{
-  display:flex;
-  gap:16px;
-  max-width:1124px;
+.gsec-heading{max-width:1200px;margin:0 auto;padding:32px 56px 44px;box-sizing:border-box;}
+.gsec-heading .eyebrow{font-family:var(--font-mono);font-size:9px;letter-spacing:0.38em;text-transform:uppercase;color:var(--color-accent);display:block;margin-bottom:10px;}
+.gsec-heading h2{font-family:var(--font-serif);font-weight:300;font-size:clamp(20px,2vw,28px);line-height:1.2;letter-spacing:0.01em;color:var(--color-text-primary);margin:0;}
+
+/* ============================================================
+   PAINTINGS LIST
+   ============================================================ */
+.g-list-section{background:var(--color-bg-elevated);padding:48px 0 80px;}
+.g-list{
+  padding:0 56px;
+  max-width:1200px;
   margin:0 auto;
-  padding:56px 56px 64px;
   box-sizing:border-box;
 }
-.gcat-item{
-  flex:1;
-  display:block;
-  text-decoration:none;
+.g-item{
+  display:grid;
+  grid-template-columns:325px 1fr;
+  gap:48px;
+  align-items:center;
+  padding:24px 0;
+  position:relative;
+  color:inherit;
   border-bottom:0!important;
-  color:var(--color-text-primary);
   cursor:pointer;
+  text-decoration:none;
 }
-.gcat-photo{
-  aspect-ratio:1;
-  overflow:hidden;
-  background:var(--color-bg-elevated);
-  display:block;
+.g-item::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(to right,rgba(200,112,31,0) 0%,rgba(200,112,31,0.15) 20%,rgba(200,112,31,0.55) 45%,rgba(200,112,31,0.85) 50%,rgba(200,112,31,0.55) 55%,rgba(200,112,31,0.15) 80%,rgba(200,112,31,0) 100%);
+  box-shadow:0 0 8px 1px rgba(200,112,31,0.35);
 }
-.gcat-photo img{
-  width:100%;height:100%;
-  object-fit:cover;
-  display:block;
-  opacity:0.75;
-  transition:transform 700ms ease, opacity 500ms ease;
+.g-item:first-child::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(to right,rgba(200,112,31,0) 0%,rgba(200,112,31,0.15) 20%,rgba(200,112,31,0.55) 45%,rgba(200,112,31,0.85) 50%,rgba(200,112,31,0.55) 55%,rgba(200,112,31,0.15) 80%,rgba(200,112,31,0) 100%);
+  box-shadow:0 0 8px 1px rgba(200,112,31,0.35);
 }
-.gcat-item:hover .gcat-photo img{
-  transform:scale(1.04);
-  opacity:0.92;
-  transition:transform 450ms ease-out, opacity 300ms ease-out;
-}
-.gcat-info{
-  padding:12px 0 0;
-}
-.gcat-title{
-  font-family:var(--font-serif);
-  font-weight:300;
-  font-size:clamp(16px,1.4vw,22px);
-  line-height:1.2;
-  color:var(--color-text-primary);
-  display:block;
-  margin:0 0 7px;
-  letter-spacing:0.01em;
-  transition:color 300ms ease;
-}
-.gcat-item:hover .gcat-title{color:var(--color-accent);}
+.g-photo{aspect-ratio:1;overflow:hidden;background:var(--color-bg-base);}
+.g-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 2000ms ease-in-out;}
+.g-item:hover .g-photo img{transform:scale(1.04);transition:transform 600ms ease-out;}
+.g-photo-wrap,.g-info{position:relative;z-index:1;}
+.g-info{display:flex;flex-direction:column;gap:0;}
+.g-num{font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-muted);display:block;margin-bottom:18px;}
+.g-name{font-family:var(--font-serif);font-weight:300;font-size:clamp(24px,2.8vw,40px);line-height:1.15;letter-spacing:0.01em;color:var(--color-text-primary);margin:0;transition:color 300ms var(--ease);}
+.g-item:hover .g-name{color:var(--color-accent);}
+.g-arrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;text-transform:uppercase;color:var(--color-text-muted);margin-top:20px;opacity:0;transform:translateX(-8px);transition:opacity 350ms var(--ease),transform 350ms var(--ease),color 300ms var(--ease);}
+.g-arrow svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.g-item:hover .g-arrow{opacity:1;transform:translateX(0);color:var(--color-accent);}
+.g-photo-wrap{display:block;}
 
 /* ============================================================
    FOOTER
@@ -190,7 +179,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 /* ============================================================
    RESPONSIVE ≤ 900px
    ============================================================ */
-@media (max-width:900px) {
+@media(max-width:900px){
   header.nav .left,header.nav .right{display:none;}
   .hamburger{display:flex;position:absolute;right:24px;top:50%;transform:translateY(-50%);}
   header.nav{padding:13px 24px;position:relative;}
@@ -201,9 +190,12 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .top-frame.compact header.nav .mark .wd{font-size:15px;}
   .top-frame.compact header.nav .mark .sub{opacity:0;max-height:0;margin-top:0;}
   .top-frame.compact header.nav .mark-logo{max-height:0;opacity:0;margin-bottom:0;transform:scaleY(0.2);}
-  .gallery-hero{padding:48px 24px 40px;}
-  .gallery-cats{flex-direction:column;padding:32px 24px 40px;gap:24px;}
-  .gcat-photo{aspect-ratio:4/3;}
+  .bc-bar{padding:20px 24px 0;}
+  .gsec-heading{padding:24px 24px 32px;}
+  .g-list-section{padding:32px 0 56px;}
+  .g-list{padding:0 24px;}
+  .g-item{grid-template-columns:150px 1fr;gap:20px;padding:20px 0;}
+  .g-name{font-size:clamp(18px,5vw,26px);}
   .sep{width:70%;}
   footer{grid-template-columns:1fr;gap:28px;padding:44px 24px 24px;}
   footer .brand{align-items:flex-start;}
@@ -258,44 +250,94 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <a href="clientcare.html">Client Care</a>
 </nav>
 
+<!-- BREADCRUMB -->
+<div class="bc-bar">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="gallery.html">Gallery</a>
+    <span class="bc-sep">/</span>
+    <span>Ceramic Paintings</span>
+  </nav>
+</div>
+
+<!-- SECTION HEADING -->
+<div class="gsec-heading">
+  <span class="eyebrow">Collection</span>
+  <h2>Ceramic Paintings</h2>
+</div>
+
 <div class="sep" role="separator"></div>
 
-<!-- GALLERY HERO -->
-<section class="gallery-hero">
-  <p class="eyebrow">Gallery</p>
-  <h1>Each piece painted by hand,<br>carrying its own quiet story.</h1>
-</section>
+<!-- PAINTINGS LIST -->
+<section class="g-list-section">
+<div class="g-list">
 
-<!-- 3 CATEGORY TILES -->
-<section class="gallery-cats">
-
-  <a class="gcat-item" href="ceramic-paintings.html">
-    <div class="gcat-photo">
-      <img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Ceramic Paintings">
+  <a class="g-item" href="product.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Tulips in a striped vase"></div>
     </div>
-    <div class="gcat-info">
-      <span class="gcat-title">Ceramic Paintings</span>
+    <div class="g-info">
+      <span class="g-num">01</span>
+      <h2 class="g-name">Tulips in a striped vase</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
-  <a class="gcat-item" href="#">
-    <div class="gcat-photo">
-      <img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Ceramic Paintings with Inscriptions">
+  <a class="g-item" href="product-2.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Eucalyptus and winter berries"></div>
     </div>
-    <div class="gcat-info">
-      <span class="gcat-title">Ceramic Paintings with Inscriptions</span>
-    </div>
-  </a>
-
-  <a class="gcat-item" href="christian-gifts.html">
-    <div class="gcat-photo">
-      <img src="Фото/Картины%20с%20печатью/wax-1.jpg" alt="Christian Gifts">
-    </div>
-    <div class="gcat-info">
-      <span class="gcat-title">Christian Gifts</span>
+    <div class="g-info">
+      <span class="g-num">02</span>
+      <h2 class="g-name">Eucalyptus and winter berries</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
+  <a class="g-item" href="product-3.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Garden boot in bloom"></div>
+    </div>
+    <div class="g-info">
+      <span class="g-num">03</span>
+      <h2 class="g-name">Garden boot in bloom</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </div>
+  </a>
+
+  <a class="g-item" href="product-4.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/4-1.jpg" alt="Three vessels, still life"></div>
+    </div>
+    <div class="g-info">
+      <span class="g-num">04</span>
+      <h2 class="g-name">Three vessels, still life</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </div>
+  </a>
+
+  <a class="g-item" href="product-5.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/5-1.jpg" alt="The whale and the sail"></div>
+    </div>
+    <div class="g-info">
+      <span class="g-num">05</span>
+      <h2 class="g-name">The whale and the sail</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </div>
+  </a>
+
+  <a class="g-item" href="product-6.html">
+    <div class="g-photo-wrap">
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/6-1.jpg" alt="Wheelbarrow in flower"></div>
+    </div>
+    <div class="g-info">
+      <span class="g-num">06</span>
+      <h2 class="g-name">Wheelbarrow in flower</h2>
+      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    </div>
+  </a>
+
+</div>
 </section>
 
 <div class="sep" role="separator"></div>
@@ -347,9 +389,8 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 </footer>
 
 <script>
-window.addEventListener('DOMContentLoaded', function(){ window.scrollTo(0,0); });
+window.addEventListener('DOMContentLoaded',function(){window.scrollTo(0,0);});
 
-/* Logo calibration */
 function calibrateLogo(imgEl){
   if(!imgEl||!imgEl.complete||imgEl.naturalWidth===0)return;
   var mark=imgEl.closest('.mark');if(!mark)return;
@@ -360,8 +401,6 @@ function calibrateLogo(imgEl){
   if(imgEl.id==='footer-eagle'){
     var fm=imgEl.closest('.mark');
     if(fm){fm.style.display='flex';fm.style.flexDirection='column';fm.style.alignItems='center';fm.style.width='fit-content';fm.style.margin='0 auto';}
-    if(wd){wd.style.width='auto';wd.style.maxWidth='none';}
-    if(sub){sub.style.width='auto';sub.style.maxWidth='none';}
   }
 }
 function calibrateAll(){['header-eagle','footer-eagle'].forEach(function(id){var img=document.getElementById(id);if(img)calibrateLogo(img);});}
@@ -369,32 +408,19 @@ window.addEventListener('load',calibrateAll);
 var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTimeout(calibrateAll,120);});
 ['header-eagle','footer-eagle'].forEach(function(id){var img=document.getElementById(id);if(img&&!img.complete)img.addEventListener('load',function(){calibrateLogo(img);});});
 
-/* Compact header */
 (function(){
   var frame=document.querySelector('.top-frame');if(!frame)return;
   window.addEventListener('scroll',function(){frame.classList.toggle('compact',window.scrollY>0);},{passive:true});
   frame.classList.toggle('compact',window.scrollY>0);
 })();
 
-/* Smooth scroll for tile anchors */
 (function(){
-  document.querySelectorAll('.gcat-item[href^="#"]').forEach(function(a){
-    a.addEventListener('click',function(e){
-      var target=document.querySelector(a.getAttribute('href'));
-      if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
-    });
-  });
-})();
-
-/* Scroll reveal */
-(function(){
-  var targets=document.querySelectorAll('footer');
+  var targets=document.querySelectorAll('.g-list-section,footer');
   targets.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1),transform 900ms cubic-bezier(0.16,1,0.3,1)';});
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);}});},{threshold:0.04});
   targets.forEach(function(el){io.observe(el);});
 })();
 
-/* Mobile menu */
 (function(){
   var hb=document.querySelector('.hamburger'),menu=document.querySelector('.mobile-menu'),bd=document.querySelector('.menu-backdrop');
   if(!hb||!menu)return;

@@ -114,6 +114,146 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 }
 
 /* ============================================================
+   GALLERY CATEGORIES (3 TILES)
+   ============================================================ */
+.gallery-cats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  max-width:100%;
+  margin:0;
+}
+.gcat-item{
+  position:relative;
+  display:block;
+  overflow:hidden;
+  text-decoration:none;
+  border-bottom:0!important;
+  color:var(--color-text-primary);
+  border-right:1px solid rgba(200,180,155,0.08);
+}
+.gcat-item:last-child{border-right:none;}
+.gcat-photo{
+  aspect-ratio:3/4;
+  overflow:hidden;
+  background:var(--color-bg-elevated);
+}
+.gcat-photo img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  opacity:0.62;
+  transition:transform 800ms ease, opacity 600ms ease;
+}
+.gcat-item:hover .gcat-photo img{
+  transform:scale(1.04);
+  opacity:0.82;
+  transition:transform 500ms ease-out, opacity 350ms ease-out;
+}
+.gcat-overlay{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  padding:28px 32px 36px;
+  background:linear-gradient(to top, rgba(22,19,15,0.95) 0%, rgba(22,19,15,0.55) 55%, transparent 100%);
+}
+.gcat-num{
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:0.32em;
+  color:var(--color-accent);
+  display:block;
+  margin-bottom:10px;
+}
+.gcat-title{
+  font-family:var(--font-serif);
+  font-weight:300;
+  font-size:clamp(20px,2vw,30px);
+  line-height:1.2;
+  color:var(--color-text-primary);
+  margin:0 0 10px;
+  letter-spacing:0.01em;
+}
+.gcat-meta{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.gcat-count{
+  font-family:var(--font-mono);
+  font-size:8.5px;
+  letter-spacing:0.24em;
+  text-transform:uppercase;
+  color:var(--color-text-secondary);
+}
+.gcat-badge{
+  font-family:var(--font-mono);
+  font-size:7.5px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--color-text-muted);
+  border:0.5px solid var(--color-divider);
+  padding:3px 8px 2px;
+}
+.gcat-arrow{
+  position:absolute;
+  top:50%;
+  right:24px;
+  transform:translateY(-50%) translateX(8px);
+  opacity:0;
+  transition:transform 300ms ease, opacity 300ms ease;
+  color:var(--color-accent);
+}
+.gcat-arrow svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.gcat-item:hover .gcat-arrow{opacity:1;transform:translateY(-50%) translateX(0);}
+
+/* Section heading for each subsection */
+.gsec-heading{
+  padding:64px 56px 40px;
+  max-width:1200px;
+  margin:0 auto;
+  box-sizing:border-box;
+}
+.gsec-heading h2{
+  font-family:var(--font-serif);font-weight:300;
+  font-size:clamp(22px,2.5vw,36px);
+  line-height:1.2;letter-spacing:0.01em;
+  color:var(--color-text-primary);margin:0 0 10px;
+}
+.gsec-heading .eyebrow{
+  font-family:var(--font-mono);font-size:9px;
+  letter-spacing:0.36em;text-transform:uppercase;
+  color:var(--color-accent);display:block;margin-bottom:14px;
+}
+
+/* Coming soon section */
+.gsec-coming{
+  padding:80px 56px 96px;
+  text-align:center;
+  max-width:1200px;
+  margin:0 auto;
+  box-sizing:border-box;
+}
+.gsec-coming-icon{
+  width:56px;height:56px;
+  border:0.5px solid var(--color-divider);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 28px;
+  color:var(--color-accent);
+}
+.gsec-coming-icon svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round;}
+.gsec-coming h2{
+  font-family:var(--font-serif);font-weight:300;
+  font-size:clamp(24px,2.8vw,38px);
+  color:var(--color-text-primary);margin:0 0 16px;
+  letter-spacing:0.01em;
+}
+.gsec-coming p{
+  font-family:var(--font-sans);font-size:15px;
+  color:var(--color-text-muted);line-height:1.7;
+  max-width:52ch;margin:0 auto;
+}
+
+/* ============================================================
    GALLERY LIST
    ============================================================ */
 .g-list{
@@ -232,7 +372,12 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .top-frame.compact header.nav .mark .wd{font-size:15px;}
   .top-frame.compact header.nav .mark .sub{opacity:0;max-height:0;margin-top:0;}
   .top-frame.compact header.nav .mark-logo{max-height:0;opacity:0;margin-bottom:0;transform:scaleY(0.2);}
-  .gallery-hero{padding:56px 24px 52px;}
+  .gallery-hero{padding:48px 24px 40px;}
+  .gallery-cats{grid-template-columns:1fr;}
+  .gcat-item{border-right:none;border-bottom:1px solid rgba(200,180,155,0.08);}
+  .gcat-photo{aspect-ratio:4/3;}
+  .gsec-heading{padding:48px 24px 28px;}
+  .gsec-coming{padding:56px 24px 72px;}
   .g-list{padding:0 24px 72px;}
   .g-item{grid-template-columns:150px 1fr;gap:20px;padding:20px 0;}
   .g-name{font-size:clamp(18px,5vw,26px);}
@@ -298,78 +443,157 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <h1>Each piece painted by hand,<br>carrying its own quiet story.</h1>
 </section>
 
-<div class="sep" role="separator"></div>
+<!-- 3 CATEGORY TILES -->
+<section class="gallery-cats">
 
-<!-- GALLERY LIST -->
-<section class="g-list">
-
-  <a class="g-item" href="product.html">
-    <div class="g-photo-wrap">
-      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Tulips in a striped vase"></div>
+  <a class="gcat-item" href="#ceramic-paintings">
+    <div class="gcat-photo">
+      <img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Ceramic Paintings">
     </div>
-    <div class="g-info">
-      <span class="g-num">01</span>
-      <h2 class="g-name">Tulips in a striped vase</h2>
-      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    <div class="gcat-overlay">
+      <span class="gcat-num">01</span>
+      <h2 class="gcat-title">Ceramic Paintings</h2>
+      <div class="gcat-meta">
+        <span class="gcat-count">6 works available</span>
+      </div>
     </div>
+    <span class="gcat-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
   </a>
 
-  <a class="g-item" href="product-2.html">
-    <div class="g-photo-wrap">
-      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Eucalyptus and winter berries"></div>
+  <a class="gcat-item" href="#inscriptions">
+    <div class="gcat-photo">
+      <img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Ceramic Paintings with Inscriptions">
     </div>
-    <div class="g-info">
-      <span class="g-num">02</span>
-      <h2 class="g-name">Eucalyptus and winter berries</h2>
-      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    <div class="gcat-overlay">
+      <span class="gcat-num">02</span>
+      <h2 class="gcat-title">Ceramic Paintings with Inscriptions</h2>
+      <div class="gcat-meta">
+        <span class="gcat-badge">Coming soon</span>
+      </div>
     </div>
+    <span class="gcat-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
   </a>
 
-  <a class="g-item" href="product-3.html">
-    <div class="g-photo-wrap">
-      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Garden boot in bloom"></div>
+  <a class="gcat-item" href="#divine-message">
+    <div class="gcat-photo">
+      <img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Ceramic Paintings with God's Message">
     </div>
-    <div class="g-info">
-      <span class="g-num">03</span>
-      <h2 class="g-name">Garden boot in bloom</h2>
-      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+    <div class="gcat-overlay">
+      <span class="gcat-num">03</span>
+      <h2 class="gcat-title">Ceramic Paintings with God's Message</h2>
+      <div class="gcat-meta">
+        <span class="gcat-badge">Coming soon</span>
+      </div>
     </div>
-  </a>
-
-  <a class="g-item" href="product-4.html">
-    <div class="g-photo-wrap">
-      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/4-1.jpg" alt="Three vessels, still life"></div>
-    </div>
-    <div class="g-info">
-      <span class="g-num">04</span>
-      <h2 class="g-name">Three vessels, still life</h2>
-      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-    </div>
-  </a>
-
-  <a class="g-item" href="product-5.html">
-    <div class="g-photo-wrap">
-      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/5-1.jpg" alt="The whale and the sail"></div>
-    </div>
-    <div class="g-info">
-      <span class="g-num">05</span>
-      <h2 class="g-name">The whale and the sail</h2>
-      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-    </div>
-  </a>
-
-  <a class="g-item" href="product-6.html">
-    <div class="g-photo-wrap">
-      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/6-1.jpg" alt="Wheelbarrow in flower"></div>
-    </div>
-    <div class="g-info">
-      <span class="g-num">06</span>
-      <h2 class="g-name">Wheelbarrow in flower</h2>
-      <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
-    </div>
+    <span class="gcat-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
   </a>
 
 </section>
+
+<div class="sep" role="separator"></div>
+
+<!-- SECTION 1: CERAMIC PAINTINGS -->
+<div id="ceramic-paintings">
+  <div class="gsec-heading">
+    <span class="eyebrow">01</span>
+    <h2>Ceramic Paintings</h2>
+  </div>
+  <section class="g-list">
+
+    <a class="g-item" href="product.html">
+      <div class="g-photo-wrap">
+        <div class="g-photo"><img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Tulips in a striped vase"></div>
+      </div>
+      <div class="g-info">
+        <span class="g-num">01</span>
+        <h2 class="g-name">Tulips in a striped vase</h2>
+        <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="g-item" href="product-2.html">
+      <div class="g-photo-wrap">
+        <div class="g-photo"><img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Eucalyptus and winter berries"></div>
+      </div>
+      <div class="g-info">
+        <span class="g-num">02</span>
+        <h2 class="g-name">Eucalyptus and winter berries</h2>
+        <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="g-item" href="product-3.html">
+      <div class="g-photo-wrap">
+        <div class="g-photo"><img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Garden boot in bloom"></div>
+      </div>
+      <div class="g-info">
+        <span class="g-num">03</span>
+        <h2 class="g-name">Garden boot in bloom</h2>
+        <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="g-item" href="product-4.html">
+      <div class="g-photo-wrap">
+        <div class="g-photo"><img src="Фото/Фото%20наших%20картин/4-1.jpg" alt="Three vessels, still life"></div>
+      </div>
+      <div class="g-info">
+        <span class="g-num">04</span>
+        <h2 class="g-name">Three vessels, still life</h2>
+        <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="g-item" href="product-5.html">
+      <div class="g-photo-wrap">
+        <div class="g-photo"><img src="Фото/Фото%20наших%20картин/5-1.jpg" alt="The whale and the sail"></div>
+      </div>
+      <div class="g-info">
+        <span class="g-num">05</span>
+        <h2 class="g-name">The whale and the sail</h2>
+        <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+    <a class="g-item" href="product-6.html">
+      <div class="g-photo-wrap">
+        <div class="g-photo"><img src="Фото/Фото%20наших%20картин/6-1.jpg" alt="Wheelbarrow in flower"></div>
+      </div>
+      <div class="g-info">
+        <span class="g-num">06</span>
+        <h2 class="g-name">Wheelbarrow in flower</h2>
+        <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
+  </section>
+</div>
+
+<div class="sep" role="separator"></div>
+
+<!-- SECTION 2: INSCRIPTIONS (Coming Soon) -->
+<div id="inscriptions">
+  <div class="gsec-coming">
+    <div class="gsec-coming-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+    </div>
+    <h2>Ceramic Paintings with Inscriptions</h2>
+    <p>A new series of paintings that carry words — blessings, names, verses — painted by hand into terracotta. This collection is being prepared and will be available soon.</p>
+  </div>
+</div>
+
+<div class="sep" role="separator"></div>
+
+<!-- SECTION 3: DIVINE MESSAGE (Coming Soon) -->
+<div id="divine-message">
+  <div class="gsec-coming">
+    <div class="gsec-coming-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+    </div>
+    <h2>Ceramic Paintings with God's Message</h2>
+    <p>Works that hold scripture, sacred words, and quiet prayers in terracotta and underglaze. Each painting in this series begins in meditation and ends as a vessel of meaning. Coming soon.</p>
+  </div>
+</div>
 
 <div class="sep" role="separator"></div>
 
@@ -449,13 +673,22 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
   frame.classList.toggle('compact',window.scrollY>0);
 })();
 
-/* Scroll reveal */
+/* Scroll reveal — only for below-fold sections */
 (function(){
-  var targets=document.querySelectorAll('section,footer');
-  targets.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1),transform 900ms cubic-bezier(0.16,1,0.3,1)';});
+  var targets=document.querySelectorAll('.g-list,footer');
+  targets.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1),transform 900ms cubic-bezier(0.16,1,0.3,1)';});
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);}});},{threshold:0.04});
   targets.forEach(function(el){io.observe(el);});
-  setTimeout(function(){var h=document.querySelector('.gallery-hero');if(h){h.style.opacity='1';h.style.transform='translateY(0)';}},100);
+})();
+
+/* Smooth scroll for category tile anchors */
+(function(){
+  document.querySelectorAll('.gcat-item[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var target=document.querySelector(a.getAttribute('href'));
+      if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth',block:'start'});}
+    });
+  });
 })();
 
 /* Mobile menu */

@@ -95,149 +95,206 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .sep{height:1px;border:none;margin:0 auto;width:50%;background:linear-gradient(to right,rgba(200,112,31,0) 0%,rgba(200,112,31,0.15) 20%,rgba(200,112,31,0.55) 45%,rgba(200,112,31,0.85) 50%,rgba(200,112,31,0.55) 55%,rgba(200,112,31,0.15) 80%,rgba(200,112,31,0) 100%);box-shadow:0 0 8px 1px rgba(200,112,31,0.35);}
 
 /* ============================================================
-   HERO — full-width photo with title overlay
+   TOP PHOTO (video placeholder)
    ============================================================ */
-.cg-hero{
-  position:relative;
+.cg-top-photo{
   width:100%;
-  max-height:600px;
   overflow:hidden;
   background:var(--color-bg-elevated);
+  display:block;
 }
-.cg-hero-img{
+.cg-top-photo img{
   width:100%;
-  height:600px;
+  max-height:680px;
   object-fit:cover;
   object-position:center;
   display:block;
-  opacity:0.72;
 }
-.cg-hero-overlay{
-  position:absolute;
-  inset:0;
-  background:linear-gradient(to bottom,rgba(34,30,26,0) 30%,rgba(34,30,26,0.85) 100%);
+
+/* ============================================================
+   DESCRIPTION BLOCK — compact
+   ============================================================ */
+.cg-desc{
+  max-width:1100px;
+  margin:0 auto;
+  padding:52px 56px 56px;
+  box-sizing:border-box;
 }
-.cg-hero-text{
-  position:absolute;
-  bottom:52px;
-  left:56px;
-  right:56px;
-}
-.cg-hero-eyebrow{
-  font-family:var(--font-mono);
-  font-size:10px;
-  letter-spacing:0.44em;
-  text-transform:uppercase;
-  color:var(--color-accent);
-  display:block;
-  margin-bottom:16px;
-}
-.cg-hero-title{
+.cg-desc-title{
   font-family:var(--font-serif);
   font-weight:300;
-  font-size:clamp(28px,4vw,56px);
-  line-height:1.1;
+  font-size:clamp(24px,2.6vw,38px);
+  line-height:1.15;
   letter-spacing:0.01em;
   color:var(--color-text-primary);
-  margin:0;
-  max-width:700px;
+  margin:0 0 20px;
 }
-
-/* ============================================================
-   INTRO
-   ============================================================ */
-.cg-intro-wrap{
-  background:var(--color-bg-elevated);
-  padding:64px 56px 72px;
-}
-.cg-intro-inner{
-  max-width:780px;
-  margin:0 auto;
-}
-.cg-intro-text{
-  font-family:var(--font-serif);
-  font-weight:300;
-  font-size:clamp(20px,1.8vw,26px);
-  line-height:1.8;
-  letter-spacing:0.008em;
+.cg-desc-intro{
+  font-family:var(--font-sans);
+  font-size:15px;
+  line-height:1.75;
   color:var(--color-text-secondary);
-  margin:0;
-  text-wrap:balance;
-}
-
-/* ============================================================
-   HOW IT WORKS
-   ============================================================ */
-.cg-how-wrap{
-  padding:72px 56px 80px;
-  max-width:1000px;
-  margin:0 auto;
-  box-sizing:border-box;
+  margin:0 0 32px;
+  max-width:72ch;
 }
 .cg-how-label{
   font-family:var(--font-mono);
-  font-size:10px;
-  letter-spacing:0.44em;
+  font-size:9.5px;
+  letter-spacing:0.42em;
   text-transform:uppercase;
   color:var(--color-accent);
   display:block;
-  margin-bottom:48px;
+  margin-bottom:18px;
 }
 .cg-steps{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:32px 56px;
+  gap:12px 48px;
+  margin-bottom:32px;
 }
 .cg-step{
   display:grid;
-  grid-template-columns:44px 1fr;
-  gap:0 16px;
+  grid-template-columns:32px 1fr;
+  gap:0 12px;
   align-items:start;
 }
 .cg-step-num{
   font-family:var(--font-mono);
-  font-size:11px;
-  letter-spacing:0.18em;
+  font-size:10px;
+  letter-spacing:0.14em;
   color:var(--color-accent);
-  padding-top:4px;
-  line-height:1;
+  padding-top:3px;
+  line-height:1.5;
 }
 .cg-step-text{
   font-family:var(--font-sans);
-  font-size:15.5px;
-  line-height:1.7;
+  font-size:14.5px;
+  line-height:1.65;
   color:var(--color-text-secondary);
 }
-
-/* ============================================================
-   BODY TEXT
-   ============================================================ */
-.cg-body-wrap{
-  background:var(--color-bg-elevated);
-  padding:72px 56px 80px;
-}
-.cg-body-inner{
-  max-width:780px;
-  margin:0 auto;
+.cg-body-paras{
   display:flex;
   flex-direction:column;
-  gap:28px;
+  gap:14px;
+  max-width:72ch;
 }
-.cg-body-inner p{
+.cg-body-paras p{
   font-family:var(--font-sans);
-  font-size:16px;
-  line-height:1.8;
+  font-size:15px;
+  line-height:1.75;
   color:var(--color-text-secondary);
   margin:0;
 }
-.cg-body-inner p.cg-close{
+.cg-body-paras p.cg-close{
   font-family:var(--font-serif);
   font-weight:300;
-  font-size:clamp(20px,1.8vw,25px);
-  line-height:1.8;
-  letter-spacing:0.005em;
+  font-size:clamp(18px,1.6vw,22px);
+  line-height:1.75;
   color:var(--color-text-primary);
 }
+
+/* ============================================================
+   PAINTINGS LIST
+   ============================================================ */
+.cg-list-section{
+  background:var(--color-bg-elevated);
+  padding:0 0 80px;
+}
+.cg-list-heading{
+  padding:48px 56px 36px;
+  max-width:1200px;
+  margin:0 auto;
+  box-sizing:border-box;
+}
+.cg-list-heading h2{
+  font-family:var(--font-serif);
+  font-weight:300;
+  font-size:clamp(20px,2vw,28px);
+  line-height:1.2;
+  letter-spacing:0.01em;
+  color:var(--color-text-primary);
+  margin:0 0 6px;
+}
+.cg-list-heading .eyebrow{
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:0.38em;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  display:block;
+  margin-bottom:10px;
+}
+.cg-list{
+  padding:0 56px;
+  max-width:1200px;
+  margin:0 auto;
+  box-sizing:border-box;
+}
+.cg-item{
+  display:grid;
+  grid-template-columns:300px 1fr;
+  gap:48px;
+  align-items:center;
+  padding:24px 0;
+  position:relative;
+  color:inherit;
+  border-bottom:0!important;
+  cursor:pointer;
+  text-decoration:none;
+}
+.cg-item::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(to right,rgba(200,112,31,0) 0%,rgba(200,112,31,0.15) 20%,rgba(200,112,31,0.55) 45%,rgba(200,112,31,0.85) 50%,rgba(200,112,31,0.55) 55%,rgba(200,112,31,0.15) 80%,rgba(200,112,31,0) 100%);
+  box-shadow:0 0 8px 1px rgba(200,112,31,0.35);
+}
+.cg-item:first-child::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:1px;
+  background:linear-gradient(to right,rgba(200,112,31,0) 0%,rgba(200,112,31,0.15) 20%,rgba(200,112,31,0.55) 45%,rgba(200,112,31,0.85) 50%,rgba(200,112,31,0.55) 55%,rgba(200,112,31,0.15) 80%,rgba(200,112,31,0) 100%);
+  box-shadow:0 0 8px 1px rgba(200,112,31,0.35);
+}
+.cg-item-photo{
+  aspect-ratio:1;
+  overflow:hidden;
+  background:var(--color-bg-base);
+}
+.cg-item-photo img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:transform 2000ms ease-in-out;
+}
+.cg-item:hover .cg-item-photo img{
+  transform:scale(1.04);
+  transition:transform 600ms ease-out;
+}
+.cg-item-info{display:flex;flex-direction:column;gap:0;}
+.cg-item-num{
+  font-family:var(--font-mono);font-size:10px;
+  letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--color-text-muted);
+  display:block;margin-bottom:16px;
+}
+.cg-item-name{
+  font-family:var(--font-serif);font-weight:300;
+  font-size:clamp(22px,2.6vw,36px);
+  line-height:1.15;letter-spacing:0.01em;
+  color:var(--color-text-primary);margin:0;
+  transition:color 300ms var(--ease);
+}
+.cg-item:hover .cg-item-name{color:var(--color-accent);}
+.cg-item-arrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--font-mono);font-size:9px;
+  letter-spacing:0.26em;text-transform:uppercase;
+  color:var(--color-text-muted);margin-top:18px;
+  opacity:0;transform:translateX(-8px);
+  transition:opacity 350ms var(--ease),transform 350ms var(--ease),color 300ms var(--ease);
+}
+.cg-item-arrow svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+.cg-item:hover .cg-item-arrow{opacity:1;transform:translateX(0);color:var(--color-accent);}
 
 /* ============================================================
    FOOTER
@@ -263,7 +320,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 /* ============================================================
    RESPONSIVE ≤ 900px
    ============================================================ */
-@media (max-width:900px){
+@media(max-width:900px){
   header.nav .left,header.nav .right{display:none;}
   .hamburger{display:flex;position:absolute;right:24px;top:50%;transform:translateY(-50%);}
   header.nav{padding:13px 24px;position:relative;}
@@ -274,13 +331,12 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .top-frame.compact header.nav .mark .wd{font-size:15px;}
   .top-frame.compact header.nav .mark .sub{opacity:0;max-height:0;margin-top:0;}
   .top-frame.compact header.nav .mark-logo{max-height:0;opacity:0;margin-bottom:0;transform:scaleY(0.2);}
-  .cg-hero-img{height:380px;}
-  .cg-hero-text{bottom:32px;left:24px;right:24px;}
-  .cg-hero-title{font-size:clamp(24px,6vw,38px);}
-  .cg-intro-wrap{padding:44px 24px 52px;}
-  .cg-how-wrap{padding:48px 24px 56px;}
-  .cg-steps{grid-template-columns:1fr;gap:24px;}
-  .cg-body-wrap{padding:48px 24px 56px;}
+  .cg-desc{padding:36px 24px 40px;}
+  .cg-steps{grid-template-columns:1fr;gap:12px;}
+  .cg-list-heading{padding:36px 24px 24px;}
+  .cg-list{padding:0 24px;}
+  .cg-item{grid-template-columns:130px 1fr;gap:20px;padding:20px 0;}
+  .cg-item-name{font-size:clamp(18px,5vw,26px);}
   .sep{width:70%;}
   footer{grid-template-columns:1fr;gap:28px;padding:44px 24px 24px;}
   footer .brand{align-items:flex-start;}
@@ -335,29 +391,18 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <a href="clientcare.html">Client Care</a>
 </nav>
 
-<!-- HERO -->
-<div class="cg-hero">
-  <img class="cg-hero-img" src="Фото/Картины%20с%20печатью/wax-1.jpg" alt="Christian Gift — handcrafted ceramic with wax seal">
-  <div class="cg-hero-overlay"></div>
-  <div class="cg-hero-text">
-    <span class="cg-hero-eyebrow">Christian Gifts</span>
-    <h1 class="cg-hero-title">Christian Gift for Someone Special</h1>
-  </div>
+<!-- TOP PHOTO -->
+<div class="cg-top-photo">
+  <img src="Фото/Картины%20с%20печатью/video-placeholder.jpg" alt="Christian Gift — ceramic painting with NFC wax seal">
 </div>
 
 <div class="sep" role="separator"></div>
 
-<!-- INTRO -->
-<div class="cg-intro-wrap">
-  <div class="cg-intro-inner">
-    <p class="cg-intro-text">It is more than a handcrafted ceramic artwork — it is a meaningful Christian gift that continues to bless its owner every single day, long after it is received.</p>
-  </div>
-</div>
+<!-- DESCRIPTION -->
+<div class="cg-desc">
+  <h1 class="cg-desc-title">Christian Gift for Someone Special</h1>
+  <p class="cg-desc-intro">It is more than a handcrafted ceramic artwork — it is a meaningful Christian gift that continues to bless its owner every single day, long after it is received.</p>
 
-<div class="sep" role="separator"></div>
-
-<!-- HOW IT WORKS -->
-<div class="cg-how-wrap">
   <span class="cg-how-label">How It Works</span>
   <div class="cg-steps">
     <div class="cg-step">
@@ -377,16 +422,35 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       <span class="cg-step-text">No batteries. No charging. Always ready whenever you need encouragement from Scripture.</span>
     </div>
   </div>
+
+  <div class="cg-body-paras">
+    <p>Each day, the artwork reveals a new message from God's Word through an inspiring audio reading, creating a quiet moment to pause, find peace, and draw closer to God. Whether in the morning before the day begins or in the evening before rest, every message brings fresh hope, comfort, wisdom, and God's promises.</p>
+    <p>Unlike traditional Christian gifts, this artwork offers a new experience every day, making it a meaningful companion people naturally return to again and again.</p>
+    <p class="cg-close">It is a truly meaningful gift for someone who holds a special place in your heart — a lasting reminder of God's love, your love, and the blessing you wanted to share with them long after the special occasion has passed.</p>
+  </div>
 </div>
 
 <div class="sep" role="separator"></div>
 
-<!-- BODY TEXT -->
-<div class="cg-body-wrap">
-  <div class="cg-body-inner">
-    <p>Each day, the artwork reveals a new message from God's Word through an inspiring audio reading, creating a quiet moment to pause, find peace, and draw closer to God. Whether in the morning before the day begins or in the evening before rest, every message brings fresh hope, comfort, wisdom, and God's promises.</p>
-    <p>Unlike traditional Christian gifts, this artwork offers a new experience every day, making it a meaningful companion people naturally return to again and again.</p>
-    <p class="cg-close">It is a truly meaningful gift for someone who holds a special place in your heart — a lasting reminder of God's love, your love, and the blessing you wanted to share with them long after the special occasion has passed.</p>
+<!-- PAINTINGS LIST -->
+<div class="cg-list-section">
+  <div class="cg-list-heading">
+    <span class="eyebrow">Collection</span>
+    <h2>Christian Gifts</h2>
+  </div>
+  <div class="cg-list">
+
+    <a class="cg-item" href="#">
+      <div class="cg-item-photo">
+        <img src="Фото/Картины%20с%20печатью/wax-1.jpg" alt="Ceramic painting with daily Bible verse">
+      </div>
+      <div class="cg-item-info">
+        <span class="cg-item-num">01</span>
+        <h2 class="cg-item-name">Ceramic Painting with Daily Bible Verse</h2>
+        <span class="cg-item-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+      </div>
+    </a>
+
   </div>
 </div>
 
@@ -452,8 +516,6 @@ function calibrateLogo(imgEl){
   if(imgEl.id==='footer-eagle'){
     var fm=imgEl.closest('.mark');
     if(fm){fm.style.display='flex';fm.style.flexDirection='column';fm.style.alignItems='center';fm.style.width='fit-content';fm.style.margin='0 auto';}
-    if(wd){wd.style.width='auto';wd.style.maxWidth='none';}
-    if(sub){sub.style.width='auto';sub.style.maxWidth='none';}
   }
 }
 function calibrateAll(){['header-eagle','footer-eagle'].forEach(function(id){var img=document.getElementById(id);if(img)calibrateLogo(img);});}
@@ -470,7 +532,7 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
 
 /* Scroll reveal */
 (function(){
-  var targets=document.querySelectorAll('.cg-how-wrap,.cg-body-wrap,footer');
+  var targets=document.querySelectorAll('.cg-desc,.cg-list-section,footer');
   targets.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1),transform 900ms cubic-bezier(0.16,1,0.3,1)';});
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);}});},{threshold:0.04});
   targets.forEach(function(el){io.observe(el);});

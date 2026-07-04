@@ -184,7 +184,6 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:6px;
-  height:82px;
   margin-top:6px;
 }
 .prod-thumb{
@@ -194,6 +193,7 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   padding:0;
   position:relative;
   overflow:hidden;
+  aspect-ratio:1;
 }
 .prod-thumb img{
   width:100%;height:100%;
@@ -476,52 +476,178 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .shipping-note-text{font-family:var(--font-sans);font-size:12.5px;line-height:1.65;color:var(--color-text-muted);}
 .shipping-note-text strong{font-weight:400;color:var(--color-text-secondary);}
 
-/* Process tab */
-.process-intro{
-  font-family:var(--font-sans);
-  font-size:14px;
-  line-height:1.75;
-  color:var(--color-text-secondary);
-  margin:0 0 24px;
-  max-width:52ch;
-}
-.video-well{
-  background:var(--color-bg-elevated);
+/* Video tab */
+.video-featured{
   aspect-ratio:16/9;
+  background:var(--color-bg-elevated);
+  position:relative;
+  overflow:hidden;
+  margin-bottom:16px;
+  cursor:pointer;
+}
+.video-featured::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(ellipse at 30% 40%, rgba(200,112,31,0.1) 0%, transparent 65%);
+  pointer-events:none;
+  z-index:1;
+}
+.video-featured-thumb{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  opacity:0.55;
+  transition:opacity 600ms ease;
+}
+.video-featured:hover .video-featured-thumb{opacity:0.72;}
+.video-featured-overlay{
+  position:absolute;
+  inset:0;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  gap:18px;
-  position:relative;
-  overflow:hidden;
-  margin-bottom:20px;
+  gap:14px;
+  z-index:2;
+  padding:24px;
 }
-.video-well::before{
-  content:'';
-  position:absolute;
-  inset:0;
-  background:radial-gradient(ellipse at 30% 40%, rgba(200,112,31,0.08) 0%, rgba(0,0,0,0) 65%);
-}
-.video-play-ring{
-  width:56px;height:56px;
+.video-play-btn{
+  width:64px;height:64px;
   border-radius:50%;
-  background:rgba(200,112,31,0.12);
-  border:1px solid rgba(200,112,31,0.4);
+  background:rgba(200,112,31,0.15);
+  border:1px solid rgba(200,112,31,0.5);
   display:flex;align-items:center;justify-content:center;
-  position:relative;
-  transition:background 300ms ease, border-color 300ms ease;
+  transition:background 300ms ease, border-color 300ms ease, transform 300ms ease;
+  flex-shrink:0;
 }
-.video-play-ring svg{width:16px;height:16px;fill:var(--color-accent);margin-left:2px;}
-.video-well-label{
+.video-featured:hover .video-play-btn{
+  background:rgba(200,112,31,0.28);
+  border-color:rgba(200,112,31,0.85);
+  transform:scale(1.08);
+}
+.video-play-btn svg{width:18px;height:18px;fill:var(--color-accent);margin-left:3px;}
+.video-featured-info{text-align:center;}
+.video-featured-name{
+  font-family:var(--font-serif);
+  font-style:italic;
+  font-size:15px;
+  color:var(--color-text-secondary);
+  line-height:1.35;
+  display:block;
+  margin-bottom:6px;
+}
+.video-featured-meta{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+}
+.video-featured-tag{
   font-family:var(--font-mono);
-  font-size:9.5px;
+  font-size:8px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  border:0.5px solid rgba(200,112,31,0.35);
+  padding:3px 9px 2px;
+}
+.video-featured-dur{
+  font-family:var(--font-mono);
+  font-size:8.5px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--color-text-muted);
+}
+
+/* Video list (2×2 grid) */
+.video-list-label{
+  font-family:var(--font-mono);
+  font-size:9px;
   letter-spacing:0.3em;
   text-transform:uppercase;
   color:var(--color-text-muted);
-  position:relative;
+  margin:0 0 12px;
 }
-.video-link{
+.video-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-bottom:20px;
+}
+.video-card{
+  cursor:pointer;
+  border:0.5px solid transparent;
+  transition:border-color 250ms ease;
+  background:none;
+  padding:0;
+  text-align:left;
+}
+.video-card.active{border-color:rgba(200,112,31,0.6);}
+.video-card-thumb{
+  aspect-ratio:16/9;
+  overflow:hidden;
+  background:var(--color-bg-elevated);
+  position:relative;
+  margin-bottom:8px;
+}
+.video-card-thumb img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+  opacity:0.45;
+  transition:opacity 350ms ease;
+}
+.video-card:hover .video-card-thumb img,
+.video-card.active .video-card-thumb img{opacity:0.65;}
+.video-card-play-icon{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.video-card-play-icon svg{
+  width:22px;height:22px;
+  fill:rgba(200,112,31,0.75);
+  transition:fill 250ms ease, transform 250ms ease;
+}
+.video-card:hover .video-card-play-icon svg,
+.video-card.active .video-card-play-icon svg{fill:var(--color-accent);transform:scale(1.15);}
+.video-card-title{
+  font-family:var(--font-serif);
+  font-style:italic;
+  font-size:12px;
+  color:var(--color-text-secondary);
+  line-height:1.4;
+  display:block;
+  margin-bottom:4px;
+  transition:color 250ms ease;
+}
+.video-card.active .video-card-title{color:var(--color-text-primary);}
+.video-card-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.video-card-dur{
+  font-family:var(--font-mono);
+  font-size:8px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--color-text-muted);
+}
+.video-card-tag{
+  font-family:var(--font-mono);
+  font-size:7.5px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--color-accent);
+  opacity:0.7;
+}
+
+/* YouTube channel link */
+.video-channel-link{
   display:inline-flex;
   align-items:center;
   gap:10px;
@@ -537,8 +663,8 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   border-bottom:0!important;
   transition:border-color 250ms ease, color 250ms ease;
 }
-.video-link:hover{border-color:var(--color-text-secondary);color:var(--color-text-primary);border-bottom:0!important;}
-.video-link svg{width:14px;height:14px;flex-shrink:0;}
+.video-channel-link:hover{border-color:var(--color-text-secondary);color:var(--color-text-primary);border-bottom:0!important;}
+.video-channel-link svg{width:14px;height:14px;flex-shrink:0;}
 
 /* Trust signals */
 .prod-trust{
@@ -583,9 +709,11 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .related-section{padding:88px 56px 96px;background:var(--color-bg-base);}
 .related-heading{
   display:flex;
-  align-items:baseline;
-  justify-content:space-between;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
   margin-bottom:52px;
+  gap:10px;
 }
 .related-heading h2{
   font-family:var(--font-serif);
@@ -624,7 +752,7 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   object-fit:cover;
   display:block;
   opacity:0.82;
-  transition:transform 600ms ease, opacity 600ms ease;
+  transition:transform 2000ms ease-in-out, opacity 2000ms ease-in-out;
 }
 .related-item:hover .related-photo img{
   transform:scale(1.05);
@@ -688,7 +816,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .product-outer{grid-template-columns:1fr;padding:0 0 60px;}
   .prod-photos{position:relative;height:auto;}
   .prod-main-wrap{height:72vw;max-height:520px;aspect-ratio:unset;}
-  .prod-thumb-strip{height:72px;margin-top:6px;padding:0 16px;}
+  .prod-thumb-strip{margin-top:6px;padding:0 16px;}
   .prod-controls{padding:10px 16px;}
   .prod-info{padding:28px 20px 72px;}
   .prod-title{font-size:clamp(26px,7vw,38px);}
@@ -804,12 +932,10 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 
     <!-- Title -->
     <h1 class="prod-title">Tulips in a striped vase</h1>
-    <p class="prod-meta">Underglaze on terracotta &nbsp;·&nbsp; 2024 &nbsp;·&nbsp; Toronto</p>
 
-    <!-- Price + edition -->
+    <!-- Price -->
     <div class="prod-price-row">
-      <div class="prod-price" id="price-display">$320</div>
-      <div class="prod-edition">One of a kind</div>
+      <div class="prod-price" id="price-display">$340</div>
     </div>
 
     <div class="prod-rule"></div>
@@ -818,17 +944,21 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="prod-sizes">
       <div class="size-label">Select size</div>
       <div class="size-options" role="group" aria-label="Available sizes">
-        <button class="size-btn" data-size="s" data-price="$240" aria-pressed="false">
-          <span class="sz-code">S</span>
-          <span class="sz-dim">18 × 18 cm</span>
+        <button class="size-btn" data-size="5" data-price="$180" aria-pressed="false">
+          <span class="sz-code">5″</span>
+          <span class="sz-dim">13 cm</span>
         </button>
-        <button class="size-btn active" data-size="m" data-price="$320" aria-pressed="true">
-          <span class="sz-code">M</span>
-          <span class="sz-dim">24 × 24 cm</span>
+        <button class="size-btn" data-size="7" data-price="$260" aria-pressed="false">
+          <span class="sz-code">7″</span>
+          <span class="sz-dim">18 cm</span>
         </button>
-        <button class="size-btn" data-size="l" data-price="$440" aria-pressed="false">
-          <span class="sz-code">L</span>
-          <span class="sz-dim">30 × 30 cm</span>
+        <button class="size-btn active" data-size="9" data-price="$340" aria-pressed="true">
+          <span class="sz-code">9″</span>
+          <span class="sz-dim">23 cm</span>
+        </button>
+        <button class="size-btn" data-size="11" data-price="$460" aria-pressed="false">
+          <span class="sz-code">11″</span>
+          <span class="sz-dim">28 cm</span>
         </button>
       </div>
     </div>
@@ -853,10 +983,8 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 
     <!-- CTA buttons -->
     <div class="prod-actions">
-      <a href="mailto:musicofmelodymagnet@gmail.com?subject=Order%3A%20Tulips%20in%20a%20striped%20vase%20(M%20%E2%80%94%2024%C3%9724%20cm)&body=Hello%20ORLINSKY%20Studio%2C%0A%0AI%20would%20like%20to%20order%20%22Tulips%20in%20a%20striped%20vase%22.%0A%0ASelected%20size%3A%20M%20%E2%80%94%2024%20%C3%97%2024%20cm%0APrice%3A%20%24320%0A%0APlease%20let%20me%20know%20the%20next%20steps." class="btn-primary">Order this painting</a>
-      <a href="mailto:musicofmelodymagnet@gmail.com?subject=Question%3A%20Tulips%20in%20a%20striped%20vase" class="btn-secondary">Ask a question</a>
+      <a href="mailto:musicofmelodymagnet@gmail.com?subject=Order%3A%20Tulips%20in%20a%20striped%20vase%20(9%22%20%E2%80%94%2023%20cm)&body=Hello%20ORLINSKY%20Studio%2C%0A%0AI%20would%20like%20to%20order%20%22Tulips%20in%20a%20striped%20vase%22.%0A%0ASelected%20size%3A%209%22%20%E2%80%94%2023%20cm%0APrice%3A%20%24340%0A%0APlease%20let%20me%20know%20the%20next%20steps." class="btn-primary" id="order-btn">Order this painting</a>
     </div>
-    <p class="prod-commission">Need a different size or subject? <a href="mailto:musicofmelodymagnet@gmail.com?subject=Bespoke%20commission%20inquiry">Commission a custom piece.</a></p>
 
     <div class="prod-rule"></div>
 
@@ -894,14 +1022,6 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
             <td class="detail-key">Weight (M)</td>
             <td class="detail-val">Approx. 380 g</td>
           </tr>
-          <tr class="detail-row">
-            <td class="detail-key">Year</td>
-            <td class="detail-val">2024</td>
-          </tr>
-          <tr class="detail-row">
-            <td class="detail-key">Edition</td>
-            <td class="detail-val">Original, one of a kind</td>
-          </tr>
         </tbody>
       </table>
 
@@ -916,20 +1036,83 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       </div>
     </div>
 
-    <!-- Tab: Process -->
+    <!-- Tab: Process / Videos -->
     <div class="tab-panel" id="tab-process" role="tabpanel">
-      <p class="process-intro">Each painting is filmed from raw clay to finished glaze. Watch how this piece came to be — from the first sketch on terracotta to the final kiln opening.</p>
 
-      <div class="video-well">
-        <div class="video-play-ring">
-          <svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg>
+      <!-- Featured video well -->
+      <a href="https://www.youtube.com/@ORLINSKYCeramic/featured" target="_blank" rel="noopener noreferrer" class="video-featured" id="video-featured" aria-label="Watch on YouTube">
+        <img class="video-featured-thumb" id="video-featured-thumb" src="Фото/Фото%20наших%20картин/1-1.jpg" alt="">
+        <div class="video-featured-overlay">
+          <div class="video-play-btn">
+            <svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg>
+          </div>
+          <div class="video-featured-info">
+            <span class="video-featured-name" id="video-featured-name">How this painting was made</span>
+            <div class="video-featured-meta">
+              <span class="video-featured-tag" id="video-featured-tag">Process</span>
+              <span class="video-featured-dur" id="video-featured-dur">4:22</span>
+            </div>
+          </div>
         </div>
-        <span class="video-well-label">Watch on YouTube</span>
+      </a>
+
+      <!-- Video thumbnail list -->
+      <p class="video-list-label">From the studio</p>
+      <div class="video-list" role="list">
+
+        <button class="video-card active" data-img="Фото/Фото%20наших%20картин/1-1.jpg" data-title="How this painting was made" data-tag="Process" data-dur="4:22" aria-label="How this painting was made">
+          <div class="video-card-thumb">
+            <img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="">
+            <div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div>
+          </div>
+          <span class="video-card-title">How this painting was made</span>
+          <div class="video-card-row">
+            <span class="video-card-dur">4:22</span>
+            <span class="video-card-tag">Process</span>
+          </div>
+        </button>
+
+        <button class="video-card" data-img="Фото/Фото%20наших%20картин/2-1.jpg" data-title="Working with underglaze on terracotta" data-tag="Technique" data-dur="6:15" aria-label="Working with underglaze on terracotta">
+          <div class="video-card-thumb">
+            <img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="">
+            <div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div>
+          </div>
+          <span class="video-card-title">Working with underglaze on terracotta</span>
+          <div class="video-card-row">
+            <span class="video-card-dur">6:15</span>
+            <span class="video-card-tag">Technique</span>
+          </div>
+        </button>
+
+        <button class="video-card" data-img="Фото/Фото%20наших%20картин/3-1.jpg" data-title="Kiln opening — spring collection" data-tag="Behind the scenes" data-dur="2:47" aria-label="Kiln opening — spring collection">
+          <div class="video-card-thumb">
+            <img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="">
+            <div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div>
+          </div>
+          <span class="video-card-title">Kiln opening — spring collection</span>
+          <div class="video-card-row">
+            <span class="video-card-dur">2:47</span>
+            <span class="video-card-tag">Behind the scenes</span>
+          </div>
+        </button>
+
+        <button class="video-card" data-img="Фото/Фото%20наших%20картин/4-1.jpg" data-title="Studio tour and tools" data-tag="Studio" data-dur="3:08" aria-label="Studio tour and tools">
+          <div class="video-card-thumb">
+            <img src="Фото/Фото%20наших%20картин/4-1.jpg" alt="">
+            <div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div>
+          </div>
+          <span class="video-card-title">Studio tour and tools</span>
+          <div class="video-card-row">
+            <span class="video-card-dur">3:08</span>
+            <span class="video-card-tag">Studio</span>
+          </div>
+        </button>
+
       </div>
 
-      <a href="https://www.youtube.com/@ORLINSKYCeramic/featured" target="_blank" rel="noopener noreferrer" class="video-link">
+      <a href="https://www.youtube.com/@ORLINSKYCeramic/featured" target="_blank" rel="noopener noreferrer" class="video-channel-link">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
-        ORLINSKY on YouTube
+        All videos on YouTube
       </a>
     </div>
 
@@ -984,7 +1167,6 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 <section class="related-section">
   <div class="related-heading">
     <h2>More from the collection</h2>
-    <span class="eyebrow">Gallery</span>
   </div>
   <div class="related-grid">
     <a class="related-item" href="product.html">
@@ -1136,6 +1318,7 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
 /* Size switcher + price update */
 (function(){
   var priceEl=document.getElementById('price-display');
+  var orderBtn=document.getElementById('order-btn');
   document.querySelectorAll('.size-btn').forEach(function(btn){
     btn.addEventListener('click',function(){
       document.querySelectorAll('.size-btn').forEach(function(b){
@@ -1144,7 +1327,15 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
       });
       btn.classList.add('active');
       btn.setAttribute('aria-pressed','true');
-      if(priceEl&&btn.dataset.price)priceEl.textContent=btn.dataset.price;
+      var price=btn.dataset.price||'';
+      var size=btn.dataset.size||'';
+      var dim=btn.querySelector('.sz-dim')?btn.querySelector('.sz-dim').textContent:'';
+      if(priceEl)priceEl.textContent=price;
+      if(orderBtn){
+        var subj=encodeURIComponent('Order: Tulips in a striped vase ('+size+'" — '+dim+')');
+        var body=encodeURIComponent('Hello ORLINSKY Studio,\n\nI would like to order "Tulips in a striped vase".\n\nSelected size: '+size+'" — '+dim+'\nPrice: '+price+'\n\nPlease let me know the next steps.');
+        orderBtn.href='mailto:musicofmelodymagnet@gmail.com?subject='+subj+'&body='+body;
+      }
     });
   });
 })();
@@ -1159,6 +1350,30 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
       btn.setAttribute('aria-selected','true');
       var panel=document.getElementById('tab-'+btn.dataset.tab);
       if(panel)panel.classList.add('active');
+    });
+  });
+})();
+
+/* Video card switcher */
+(function(){
+  var featuredThumb=document.getElementById('video-featured-thumb');
+  var featuredName=document.getElementById('video-featured-name');
+  var featuredTag=document.getElementById('video-featured-tag');
+  var featuredDur=document.getElementById('video-featured-dur');
+  document.querySelectorAll('.video-card').forEach(function(card){
+    card.addEventListener('click',function(){
+      document.querySelectorAll('.video-card').forEach(function(c){c.classList.remove('active');});
+      card.classList.add('active');
+      if(featuredThumb&&card.dataset.img){
+        featuredThumb.style.opacity='0';
+        setTimeout(function(){
+          featuredThumb.src=card.dataset.img;
+          featuredThumb.style.opacity='';
+        },200);
+      }
+      if(featuredName)featuredName.textContent=card.dataset.title||'';
+      if(featuredTag)featuredTag.textContent=card.dataset.tag||'';
+      if(featuredDur)featuredDur.textContent=card.dataset.dur||'';
     });
   });
 })();

@@ -1,0 +1,16 @@
+.DS_Store
+.agents/
+.claude/
+Шрифты/
+orlinsky_dark_color_updated.md
+skills-lock.json
+"Доп материалы"/
+"Фото/.DS_Store"
+"Фото/Фото наших картин/.DS_Store"
+"Design from Claude Design/.DS_Store"
+"Design from Claude Design/project/.DS_Store"
+"Design from Claude Design/project/preview/"
+"Design from Claude Design/project/screenshots/"
+"Design from Claude Design/project/uploads/"
+*.xlsx
+*.docx

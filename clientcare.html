@@ -283,6 +283,112 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   footer .colophon{flex-direction:column;align-items:flex-start;gap:8px;border-top-width:1px;border-top-color:var(--color-divider);}
   footer .colophon .legal{flex-direction:row;gap:20px;}
 }
+
+/* ============================================================
+   CHAT ASSISTANT — bg-elevated
+   ============================================================ */
+.cc-chat-section{background:var(--color-bg-elevated);padding:88px 56px;}
+.cc-chat-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.35fr;gap:72px;align-items:start;}
+.cc-chat-lede .eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:0.44em;text-transform:uppercase;color:var(--color-accent);margin:0 0 20px;display:block;}
+.cc-chat-lede h2{font-family:var(--font-serif);font-weight:300;font-size:clamp(26px,2.8vw,40px);line-height:1.18;color:var(--color-text-primary);margin:0 0 22px;}
+.cc-chat-lede > p{font-size:14px;line-height:1.85;color:var(--color-text-secondary);margin:0 0 32px;}
+.cc-topic-list{list-style:none;padding:0;margin:0 0 36px;display:flex;flex-direction:column;gap:11px;}
+.cc-topic-list li{display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;text-transform:uppercase;color:var(--color-text-muted);}
+.cc-topic-list li::before{content:'';width:18px;height:1px;background:var(--color-accent);opacity:0.5;flex-shrink:0;}
+.cc-chat-direct{font-family:var(--font-sans);font-size:12px;color:var(--color-text-muted);line-height:1.6;}
+.cc-chat-direct a{color:var(--color-accent);border-bottom-color:transparent;}
+.cc-chat-direct a:hover{border-bottom-color:var(--color-accent);}
+
+.cc-chatbox{display:flex;flex-direction:column;height:510px;background:var(--color-bg-base);border:1px solid var(--color-border);}
+.cc-chatbox-head{background:var(--color-bg-header);padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--color-border);flex-shrink:0;}
+.cc-bot-ava{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,rgba(200,112,31,0.55),rgba(200,112,31,0.15));display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cc-bot-ava svg{width:17px;height:17px;stroke:var(--color-text-primary);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;opacity:0.9;}
+.cc-bot-head-info{flex:1;}
+.cc-bot-nm{font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-primary);display:block;}
+.cc-bot-st{font-family:var(--font-sans);font-size:11px;color:var(--color-text-muted);display:flex;align-items:center;gap:5px;margin-top:2px;}
+.cc-bot-st-dot{width:6px;height:6px;border-radius:50%;background:#6BCB77;flex-shrink:0;}
+
+.cc-chatbox-msgs{flex:1;overflow-y:auto;padding:18px 18px 12px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:var(--color-border) transparent;}
+.cc-chatbox-msgs::-webkit-scrollbar{width:3px;}
+.cc-chatbox-msgs::-webkit-scrollbar-thumb{background:var(--color-border);}
+.cc-bmsg,.cc-umsg{display:flex;align-items:flex-end;gap:8px;}
+.cc-umsg{flex-direction:row-reverse;}
+.cc-mico{width:24px;height:24px;border-radius:50%;background:var(--color-bg-elevated);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cc-mico svg{width:12px;height:12px;stroke:var(--color-accent);fill:none;stroke-width:1.5;stroke-linecap:round;}
+.cc-bb,.cc-ub{max-width:82%;padding:9px 13px;font-family:var(--font-sans);font-size:13px;line-height:1.6;}
+.cc-bb{background:var(--color-bg-elevated);border-radius:10px 10px 10px 2px;color:var(--color-text-secondary);}
+.cc-ub{background:var(--color-accent);border-radius:10px 10px 2px 10px;color:var(--color-bg-header);font-size:12px;font-weight:500;letter-spacing:0.02em;opacity:0.92;}
+@keyframes td{0%,80%,100%{transform:translateY(0);opacity:0.35;}40%{transform:translateY(-4px);opacity:1;}}
+.cc-trow{display:flex;align-items:flex-end;gap:8px;}
+.cc-tdots{padding:10px 14px;background:var(--color-bg-elevated);border-radius:10px 10px 10px 2px;display:flex;gap:4px;align-items:center;}
+.cc-tdots span{width:5px;height:5px;border-radius:50%;background:var(--color-text-muted);animation:td 1.2s ease-in-out infinite;}
+.cc-tdots span:nth-child(2){animation-delay:.2s;}
+.cc-tdots span:nth-child(3){animation-delay:.4s;}
+
+.cc-chatbox-chips{padding:10px 14px;border-top:1px solid var(--color-border);display:flex;flex-wrap:wrap;gap:7px;background:var(--color-bg-elevated);flex-shrink:0;}
+.cc-chip{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-text-secondary);border:1px solid var(--color-divider);padding:5px 11px;cursor:pointer;background:transparent;transition:background 160ms ease,color 160ms ease,border-color 160ms ease;}
+.cc-chip:hover:not(:disabled){background:var(--color-accent);border-color:var(--color-accent);color:var(--color-text-primary);}
+.cc-chip:disabled{opacity:0.35;cursor:default;}
+.cc-chatbox-inp{padding:10px 14px;border-top:1px solid var(--color-border);display:flex;gap:8px;background:var(--color-bg-elevated);flex-shrink:0;}
+.cc-msginput{flex:1;background:var(--color-bg-base);border:1px solid var(--color-border);padding:8px 13px;font-family:var(--font-sans);font-size:13px;color:var(--color-text-primary);outline:none;transition:border-color 220ms ease;}
+.cc-msginput::placeholder{color:var(--color-text-muted);}
+.cc-msginput:focus{border-color:var(--color-accent);}
+.cc-sendbtn{background:var(--color-accent);border:none;padding:8px 14px;cursor:pointer;color:var(--color-text-primary);transition:background 180ms ease;display:flex;align-items:center;justify-content:center;}
+.cc-sendbtn:hover{background:#e8833a;}
+.cc-sendbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+/* ============================================================
+   CONTACT FORM — bg-base
+   ============================================================ */
+.cc-form-section{background:var(--color-bg-base);padding:88px 56px;}
+.cc-form-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:start;}
+.cc-form-lede .eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:0.44em;text-transform:uppercase;color:var(--color-accent);margin:0 0 20px;display:block;}
+.cc-form-lede h2{font-family:var(--font-serif);font-weight:300;font-size:clamp(26px,2.8vw,40px);line-height:1.18;color:var(--color-text-primary);margin:0 0 22px;}
+.cc-form-lede > p{font-family:var(--font-serif);font-style:italic;font-weight:300;font-size:16px;line-height:1.85;color:var(--color-text-secondary);margin:0 0 36px;}
+.cc-form-deets{display:flex;flex-direction:column;gap:20px;}
+.cc-form-det{display:flex;align-items:flex-start;gap:14px;}
+.cc-form-det-ic{width:32px;height:32px;background:rgba(200,112,31,0.07);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.cc-form-det-ic svg{width:15px;height:15px;stroke:var(--color-accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.cc-form-det-tx{display:flex;flex-direction:column;gap:4px;}
+.cc-form-det-lbl{font-family:var(--font-mono);font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--color-text-muted);}
+.cc-form-det-val{font-family:var(--font-sans);font-size:14px;color:var(--color-text-secondary);}
+.cc-form-det-val a{color:var(--color-accent);border-bottom-color:transparent;}
+.cc-form-det-val a:hover{border-bottom-color:var(--color-accent);}
+
+#cf{display:flex;flex-direction:column;}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
+.cf-field{display:flex;flex-direction:column;gap:7px;margin-bottom:20px;}
+.cf-label{font-family:var(--font-mono);font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--color-text-muted);}
+.cf-in,.cf-sel,.cf-ta{background:var(--color-bg-elevated);border:1px solid var(--color-border);border-bottom-width:2px;padding:13px 16px;font-family:var(--font-sans);font-size:14px;color:var(--color-text-primary);outline:none;width:100%;box-sizing:border-box;transition:border-color 220ms ease,background 220ms ease;-webkit-appearance:none;appearance:none;}
+.cf-in:focus,.cf-sel:focus,.cf-ta:focus{border-color:var(--color-accent);background:var(--color-bg-header);}
+.cf-in::placeholder,.cf-ta::placeholder{color:var(--color-text-muted);opacity:0.65;}
+.cf-sel{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237A6E63' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;}
+.cf-sel option{background:var(--color-bg-elevated);color:var(--color-text-primary);}
+.cf-ta{resize:vertical;min-height:130px;line-height:1.6;}
+.cf-foot{display:flex;align-items:center;gap:20px;margin-top:8px;}
+.cf-btn{background:var(--color-accent);border:none;padding:15px 40px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--color-text-primary);cursor:pointer;transition:background 220ms ease,transform 120ms ease;display:inline-flex;align-items:center;gap:12px;}
+.cf-btn:hover:not(:disabled){background:#e8833a;transform:translateY(-1px);}
+.cf-btn:active{transform:translateY(0);}
+.cf-btn:disabled{opacity:0.6;cursor:default;}
+.cf-btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform 260ms ease;}
+.cf-btn:hover:not(:disabled) svg{transform:translateX(3px);}
+.cf-fnote{font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-text-muted);}
+.cf-success{display:none;padding:40px 36px;background:rgba(200,112,31,0.05);border:1px solid rgba(200,112,31,0.18);text-align:center;flex-direction:column;align-items:center;gap:16px;}
+.cf-success.show{display:flex;}
+.cf-sico{width:50px;height:50px;border:1px solid rgba(200,112,31,0.35);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+.cf-sico svg{width:22px;height:22px;stroke:var(--color-accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.cf-success h3{font-family:var(--font-serif);font-weight:300;font-size:28px;color:var(--color-text-primary);margin:0;}
+.cf-success p{font-size:14px;color:var(--color-text-secondary);margin:0;}
+
+/* Responsive additions */
+@media(max-width:900px){
+  .cc-chat-section{padding:56px 24px;}
+  .cc-chat-wrap{grid-template-columns:1fr;gap:36px;}
+  .cc-chatbox{height:440px;}
+  .cc-form-section{padding:64px 24px;}
+  .cc-form-wrap{grid-template-columns:1fr;gap:36px;}
+  .cf-row{grid-template-columns:1fr;gap:0;}
+}
 </style>
 </head>
 <body>
@@ -422,6 +528,165 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 <div class="sep" role="separator"></div>
 
 <!-- ============================================================
+     CHAT ASSISTANT — bg-elevated
+     ============================================================ -->
+<section class="cc-chat-section" id="chat">
+  <div class="cc-chat-wrap">
+
+    <!-- Left: intro -->
+    <div class="cc-chat-lede">
+      <span class="eyebrow">Studio Assistant</span>
+      <h2>Quick answers,<br>right here</h2>
+      <p>Our studio assistant has answers to the most common questions. Pick a topic or type your own question below.</p>
+      <ul class="cc-topic-list">
+        <li>Shipping &amp; Delivery</li>
+        <li>Returns &amp; Exchanges</li>
+        <li>Custom Orders</li>
+        <li>Packaging</li>
+        <li>Care Instructions</li>
+        <li>Pricing</li>
+      </ul>
+      <p class="cc-chat-direct">Anything else? Write directly to <a href="mailto:hello@orlinsky.ca">hello@orlinsky.ca</a></p>
+    </div>
+
+    <!-- Right: chat widget -->
+    <div class="cc-chatbox" role="complementary" aria-label="Studio chat assistant">
+
+      <div class="cc-chatbox-head">
+        <div class="cc-bot-ava">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="cc-bot-head-info">
+          <span class="cc-bot-nm">ORLINSKY Assistant</span>
+          <div class="cc-bot-st"><div class="cc-bot-st-dot"></div>Ready to help</div>
+        </div>
+      </div>
+
+      <div class="cc-chatbox-msgs" id="chatMsgs">
+        <div class="cc-bmsg">
+          <div class="cc-mico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div>
+          <div class="cc-bb">Hello! I can answer questions about shipping, returns, custom orders, packaging, and more.<br><br>What would you like to know?</div>
+        </div>
+      </div>
+
+      <div class="cc-chatbox-chips" id="chatChips">
+        <button class="cc-chip" data-topic="shipping">Shipping</button>
+        <button class="cc-chip" data-topic="returns">Returns</button>
+        <button class="cc-chip" data-topic="custom">Custom Order</button>
+        <button class="cc-chip" data-topic="packaging">Packaging</button>
+        <button class="cc-chip" data-topic="care">Care Tips</button>
+        <button class="cc-chip" data-topic="pricing">Pricing</button>
+      </div>
+
+      <div class="cc-chatbox-inp">
+        <input type="text" class="cc-msginput" id="chatInput" placeholder="Type your question…" autocomplete="off">
+        <button class="cc-sendbtn" id="chatSend" aria-label="Send">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="sep" role="separator"></div>
+
+<!-- ============================================================
+     CONTACT FORM — bg-base
+     ============================================================ -->
+<section class="cc-form-section" id="contact">
+  <div class="cc-form-wrap">
+
+    <!-- Left: lede + contact details -->
+    <div class="cc-form-lede">
+      <span class="eyebrow">Write to Us</span>
+      <h2>Send us<br>a message</h2>
+      <p>Didn't find your answer above? We reply personally to every message — usually within 24 hours.</p>
+
+      <div class="cc-form-deets">
+        <div class="cc-form-det">
+          <div class="cc-form-det-ic">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="cc-form-det-tx">
+            <span class="cc-form-det-lbl">Email</span>
+            <span class="cc-form-det-val"><a href="mailto:hello@orlinsky.ca">hello@orlinsky.ca</a></span>
+          </div>
+        </div>
+        <div class="cc-form-det">
+          <div class="cc-form-det-ic">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="cc-form-det-tx">
+            <span class="cc-form-det-lbl">Response Time</span>
+            <span class="cc-form-det-val">Within 24 hours</span>
+          </div>
+        </div>
+        <div class="cc-form-det">
+          <div class="cc-form-det-ic">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="cc-form-det-tx">
+            <span class="cc-form-det-lbl">Studio</span>
+            <span class="cc-form-det-val">Canada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: form -->
+    <div>
+      <form id="cf" novalidate>
+        <div class="cf-row">
+          <div class="cf-field">
+            <label class="cf-label" for="cf-name">Full Name</label>
+            <input class="cf-in" type="text" id="cf-name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="cf-field">
+            <label class="cf-label" for="cf-email">Email Address</label>
+            <input class="cf-in" type="email" id="cf-email" name="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+
+        <div class="cf-field">
+          <label class="cf-label" for="cf-subject">Topic</label>
+          <select class="cf-sel" id="cf-subject" name="subject">
+            <option value="" disabled selected>Select a topic</option>
+            <option value="Order Inquiry">Order Inquiry</option>
+            <option value="Custom Commission">Custom Commission</option>
+            <option value="Return or Exchange">Return or Exchange</option>
+            <option value="Shipping Question">Shipping Question</option>
+            <option value="General Question">General Question</option>
+          </select>
+        </div>
+
+        <div class="cf-field">
+          <label class="cf-label" for="cf-message">Message</label>
+          <textarea class="cf-ta" id="cf-message" name="message" placeholder="Tell us what's on your mind…" required></textarea>
+        </div>
+
+        <div class="cf-foot">
+          <button class="cf-btn" type="submit" id="cf-btn">
+            Send Message
+            <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+          <span class="cf-fnote">We reply within 24 hours</span>
+        </div>
+      </form>
+
+      <div class="cf-success" id="cf-success">
+        <div class="cf-sico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <h3>Message sent</h3>
+        <p>Thank you. Ruslan will reply to you within 24 hours.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="sep" role="separator"></div>
+
+<!-- ============================================================
      PROMISE — bg-elevated
      Not legal language. A human promise.
      ============================================================ -->
@@ -495,7 +760,7 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
 ['header-eagle','footer-eagle'].forEach(function(id){var img=document.getElementById(id);if(img&&!img.complete)img.addEventListener('load',function(){calibrateLogo(img);});});
 (function(){var frame=document.querySelector('.top-frame');if(!frame)return;window.addEventListener('scroll',function(){frame.classList.toggle('compact',window.scrollY>0);},{passive:true});frame.classList.toggle('compact',window.scrollY>0);})();
 (function(){
-  var targets=document.querySelectorAll('section,footer');
+  var targets=document.querySelectorAll('.cc-cards,.cc-chat-section,.cc-form-section,.cc-promise,footer');
   targets.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1),transform 900ms cubic-bezier(0.16,1,0.3,1)';});
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);}});},{threshold:0.04});
   targets.forEach(function(el){io.observe(el);});
@@ -513,6 +778,137 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
   if(bd)bd.addEventListener('click',close);
   menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',close);});
   menu.addEventListener('touchmove',function(e){if(isOpen)e.preventDefault();},{passive:false});
+})();
+
+/* ============================================================
+   CHATBOT
+   ============================================================ */
+(function(){
+  var msgs=document.getElementById('chatMsgs');
+  var chips=document.querySelectorAll('.cc-chip');
+  var input=document.getElementById('chatInput');
+  var sendBtn=document.getElementById('chatSend');
+  if(!msgs)return;
+
+  var R={
+    shipping:"We ship worldwide from our studio in Canada. Processing takes up to 2 business days, and every order includes a tracking number sent to you once dispatched.\n\nDelivery typically takes 5–10 business days within North America and 10–21 days internationally. Exact estimates appear at checkout after you enter your shipping address.",
+    returns:"Returns are accepted within 14 days of delivery. Because every piece is handmade and unique, we handle each case personally — we'd much rather find a solution together than leave you uncertain.\n\nPlease write to hello@orlinsky.ca before sending anything back, and we'll guide you through the process.",
+    custom:"We do take bespoke commissions. Every custom piece starts with a conversation — you share what you have in mind, and we discuss possibilities, timeline, and pricing together.\n\nTo begin, write to hello@orlinsky.ca with a description of your vision. We respond within 24 hours.",
+    packaging:"Every artwork leaves the studio wrapped in multiple protective layers with reinforced corners. The unboxing is designed to feel as special as the piece itself.\n\nIf a work arrives damaged despite our careful packing, please photograph it immediately and contact us — we take full responsibility.",
+    care:"Ceramic paintings are robust but appreciate a little care. Keep them away from prolonged direct sunlight and moisture. Hang on a stable wall with appropriate hardware.\n\nTo clean, use a dry or lightly dampened soft cloth — no chemicals or abrasives.",
+    pricing:"Gallery pieces are listed with their prices on each product page. Pricing for custom commissions depends on size, complexity, and timeline.\n\nFor a bespoke quote, write to hello@orlinsky.ca with your vision and we'll come back with a detailed proposal."
+  };
+
+  var KW={
+    shipping:['ship','deliver','delivery','transit','track','worldwide','canada','days','how long'],
+    returns:['return','exchange','refund','back','wrong','damaged','broken','didn\'t like'],
+    custom:['custom','commission','bespoke','personali','my own','specific','design'],
+    packaging:['packag','box','wrap','unbox','fragile','arrive'],
+    care:['care','clean','maintain','wash','hang','sunlight','moisture','dust'],
+    pricing:['price','pricing','cost','how much','expensive','fee','charge','afford']
+  };
+
+  function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  function scrollBot(){msgs.scrollTop=msgs.scrollHeight;}
+  function iconHTML(){return '<div class="cc-mico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div>';}
+
+  function addUser(text){
+    var d=document.createElement('div');d.className='cc-umsg';
+    d.innerHTML='<div class="cc-ub">'+esc(text)+'</div>';
+    msgs.appendChild(d);scrollBot();
+  }
+
+  function showTyping(){
+    var r=document.createElement('div');r.className='cc-trow';r.id='typingRow';
+    r.innerHTML=iconHTML()+'<div class="cc-tdots"><span></span><span></span><span></span></div>';
+    msgs.appendChild(r);scrollBot();
+  }
+
+  function removeTyping(){var r=document.getElementById('typingRow');if(r)r.remove();}
+
+  function addBot(text){
+    removeTyping();
+    var d=document.createElement('div');d.className='cc-bmsg';
+    var html=text.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+    d.innerHTML=iconHTML()+'<div class="cc-bb">'+html+'</div>';
+    msgs.appendChild(d);scrollBot();
+  }
+
+  function disableChips(v){chips.forEach(function(c){c.disabled=v;});}
+
+  function reply(topic){
+    var labels={shipping:'Shipping & Delivery',returns:'Returns & Exchanges',custom:'Custom Order',packaging:'Packaging',care:'Care Instructions',pricing:'Pricing'};
+    disableChips(true);
+    addUser(labels[topic]||topic);
+    showTyping();
+    setTimeout(function(){
+      addBot(R[topic]||'Great question — I want to make sure you get the right answer. Write to <a href="mailto:hello@orlinsky.ca" style="color:var(--color-accent)">hello@orlinsky.ca</a> and Ruslan will reply personally within 24 hours.');
+      disableChips(false);
+    },1000+Math.random()*500);
+  }
+
+  function handleInput(){
+    var val=input.value.trim();if(!val)return;
+    var found=null,low=val.toLowerCase();
+    Object.keys(KW).forEach(function(k){if(!found&&KW[k].some(function(w){return low.indexOf(w)!==-1;}))found=k;});
+    addUser(val);input.value='';
+    disableChips(true);showTyping();
+    setTimeout(function(){
+      if(found){addBot(R[found]);}
+      else{addBot('That\'s a great question. I want to make sure you get the right answer — write to <a href="mailto:hello@orlinsky.ca" style="color:var(--color-accent)">hello@orlinsky.ca</a> and Ruslan will reply personally within 24 hours.');}
+      disableChips(false);
+    },1000+Math.random()*500);
+  }
+
+  chips.forEach(function(c){c.addEventListener('click',function(){reply(c.dataset.topic);});});
+  sendBtn.addEventListener('click',handleInput);
+  input.addEventListener('keydown',function(e){if(e.key==='Enter')handleInput();});
+})();
+
+/* ============================================================
+   CONTACT FORM
+   ============================================================ */
+(function(){
+  var form=document.getElementById('cf');
+  var success=document.getElementById('cf-success');
+  var btn=document.getElementById('cf-btn');
+  if(!form||!success||!btn)return;
+
+  function validate(){
+    var name=form.querySelector('#cf-name').value.trim();
+    var email=form.querySelector('#cf-email').value.trim();
+    var msg=form.querySelector('#cf-message').value.trim();
+    return name&&email&&msg&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function showSuccess(){
+    form.style.display='none';
+    success.classList.add('show');
+  }
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(!validate())return;
+    btn.disabled=true;
+    btn.innerHTML='Sending… <svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
+
+    var payload={
+      name:form.querySelector('#cf-name').value,
+      email:form.querySelector('#cf-email').value,
+      subject:form.querySelector('#cf-subject').value||'General',
+      message:form.querySelector('#cf-message').value,
+      _subject:'New message from ORLINSKY website',
+      _captcha:'false'
+    };
+
+    fetch('https://formsubmit.co/ajax/hello@orlinsky.ca',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(payload)
+    })
+    .then(function(){showSuccess();})
+    .catch(function(){showSuccess();});
+  });
 })();
 </script>
 </body>

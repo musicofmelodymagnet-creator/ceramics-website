@@ -221,25 +221,14 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 }
 
 /* ============================================================
-   PROMISE — bg-elevated
-   The closing emotional guarantee. Not legal — human.
+   FOLLOW OUR JOURNEY — before footer
    ============================================================ */
-.cc-promise{
-  background:var(--color-bg-elevated);
-  padding:88px 56px;
-  text-align:center;
-}
-.cc-promise blockquote{
-  font-family:var(--font-serif);font-weight:300;font-style:italic;
-  font-size:clamp(22px,2.8vw,38px);
-  line-height:1.45;letter-spacing:0.01em;
-  color:var(--color-text-primary);
-  max-width:700px;margin:0 auto 32px;text-wrap:balance;
-}
-.cc-promise .author{
-  font-family:var(--font-serif);font-style:italic;font-weight:300;
-  font-size:22px;color:var(--color-accent);opacity:0.8;
-}
+.cc-follow{background:var(--color-bg-elevated);padding:72px 56px;text-align:center;}
+.cc-follow-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.52em;text-transform:uppercase;color:var(--color-text-muted);margin:0 0 44px;display:block;}
+.cc-follow-icons{display:flex;justify-content:center;align-items:center;gap:52px;}
+.cc-follow-icons a{color:rgba(200,180,155,0.45);transition:color 240ms ease;line-height:0;border-bottom:none!important;}
+.cc-follow-icons a:hover{color:var(--color-text-primary);}
+.cc-follow-icons svg{width:46px;height:46px;}
 
 /* ============================================================
    FOOTER
@@ -281,7 +270,9 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .cc-cards{padding:56px 24px;}
   .cc-cards-grid{grid-template-columns:1fr;gap:2px;}
   .cc-card{padding:40px 28px;}
-  .cc-promise{padding:64px 24px;}
+  .cc-follow{padding:48px 20px;}
+  .cc-follow-icons{gap:32px;}
+  .cc-follow-icons svg{width:38px;height:38px;}
   .sep{width:70%;}
   footer{grid-template-columns:1fr;gap:28px;padding:44px 24px 24px;}
   footer .brand{align-items:flex-start;}
@@ -305,7 +296,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 .cc-chat-head-text .eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:0.44em;text-transform:uppercase;color:var(--color-accent);margin:0 0 16px;display:block;}
 .cc-chat-head-text h2{font-family:var(--font-serif);font-weight:300;font-size:clamp(26px,2.8vw,40px);line-height:1.18;color:var(--color-text-primary);margin:0;}
 .cc-chatbox{display:flex;flex-direction:column;height:520px;overflow:hidden;border:1px solid var(--color-border);}
-.cc-chatbox-head{background:#2A2320;padding:16px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;}
+.cc-chatbox-head{background:#3A3330;padding:16px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;}
 .cc-ava-wrap{position:relative;flex-shrink:0;}
 .cc-ava-img{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block;}
 .cc-ava-online-dot{position:absolute;bottom:2px;right:2px;width:11px;height:11px;border-radius:50%;background:#4ADE80;border:2px solid #2A2320;}
@@ -316,7 +307,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 .cc-online-label{display:flex;align-items:center;gap:6px;font-family:var(--font-sans);font-size:13px;font-weight:500;color:var(--color-text-primary);}
 .cc-online-dot{width:8px;height:8px;border-radius:50%;background:#4ADE80;}
 .cc-online-sub{font-family:var(--font-sans);font-size:11px;color:var(--color-text-muted);text-align:right;}
-.cc-chatbox-msgs{flex:1;overflow-y:auto;padding:20px 18px;display:flex;flex-direction:column;gap:14px;background:var(--color-bg-elevated);scrollbar-width:thin;scrollbar-color:var(--color-border) transparent;}
+.cc-chatbox-msgs{flex:1;overflow-y:auto;padding:20px 18px;display:flex;flex-direction:column;gap:14px;background:#3E3936;scrollbar-width:thin;scrollbar-color:var(--color-border) transparent;}
 .cc-chatbox-msgs::-webkit-scrollbar{width:3px;}
 .cc-chatbox-msgs::-webkit-scrollbar-thumb{background:var(--color-border);}
 .cc-bmsg,.cc-umsg{display:flex;align-items:flex-end;gap:10px;}
@@ -333,7 +324,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 .cc-tdots span{width:6px;height:6px;border-radius:50%;background:var(--color-text-muted);animation:td 1.3s ease-in-out infinite;}
 .cc-tdots span:nth-child(2){animation-delay:.22s;}
 .cc-tdots span:nth-child(3){animation-delay:.44s;}
-.cc-chatbox-inp{padding:14px 16px;border-top:1px solid var(--color-border);display:flex;gap:10px;align-items:center;background:#2A2320;flex-shrink:0;}
+.cc-chatbox-inp{padding:14px 16px;border-top:1px solid var(--color-border);display:flex;gap:10px;align-items:center;background:#3A3330;flex-shrink:0;}
 @keyframes gradientFlow{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
 .cc-inp-wrap{flex:1;padding:1.5px;border-radius:28px;background:linear-gradient(90deg,#C8701F,#D4A84B,#7BAFD4,#9B6BC8,#4AADDE,#C8701F);background-size:300% 100%;animation:gradientFlow 4s linear infinite;}
 .cc-msginput{width:100%;box-sizing:border-box;border-radius:26px;border:none;background:var(--color-bg-header);padding:10px 18px;font-family:var(--font-sans);font-size:14px;color:var(--color-text-primary);outline:none;}
@@ -462,12 +453,12 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       <!-- Header -->
       <div class="cc-chatbox-head">
         <div class="cc-ava-wrap">
-          <img src="Фото/ava.jpg" alt="Emma" class="cc-ava-img">
+          <img src="Фото/Ава%20для%20чат%20бота%20керамики.jpg" alt="Emma" class="cc-ava-img">
           <div class="cc-ava-online-dot"></div>
         </div>
         <div class="cc-bot-head-info">
           <span class="cc-bot-nm">Emma</span>
-          <div class="cc-bot-st">менеджер</div>
+          <div class="cc-bot-st">Studio Manager</div>
         </div>
         <div class="cc-online-badge">
           <div class="cc-online-label"><div class="cc-online-dot"></div>Online</div>
@@ -478,7 +469,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       <!-- Messages -->
       <div class="cc-chatbox-msgs" id="chatMsgs">
         <div class="cc-bmsg">
-          <img src="Фото/ava.jpg" alt="" class="cc-msgava">
+          <img src="Фото/Ава%20для%20чат%20бота%20керамики.jpg" alt="" class="cc-msgava">
           <div class="cc-bmsg-inner">
             <div class="cc-bb">Hi! I'm here to help with any questions about our ceramics, shipping, custom orders, or anything else.</div>
             <div class="cc-msgtime" id="initTime"></div>
@@ -497,45 +488,6 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       </div>
 
     </div>
-  </div>
-</section>
-
-<div class="sep" role="separator"></div>
-
-<!-- ============================================================
-     HERO — warm invitation, not a service desk
-     bg-elevated
-     ============================================================ -->
-<section class="cc-hero">
-  <span class="eyebrow">Client Care</span>
-  <h1>We are here<br>whenever you need us</h1>
-  <p class="lead">Every piece that leaves this studio carries our full responsibility. If you have a question, a concern, or simply want to talk about your order — we respond personally, not through a system.</p>
-
-  <div class="cc-contact-block">
-    <a href="mailto:hello@orlinsky.ca" class="cc-email">hello@orlinsky.ca</a>
-    <span class="cc-response">We respond within 24 hours</span>
-  </div>
-
-  <div class="cc-socials">
-    <a href="#" aria-label="Instagram">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/></svg>
-      Instagram
-    </a>
-    <span class="dot"></span>
-    <a href="#" aria-label="Facebook">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-      Facebook
-    </a>
-    <span class="dot"></span>
-    <a href="https://www.youtube.com/@ORLINSKYCeramic/featured" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
-      YouTube
-    </a>
-    <span class="dot"></span>
-    <a href="#" aria-label="TikTok">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
-      TikTok
-    </a>
   </div>
 </section>
 
@@ -693,12 +645,24 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 <div class="sep" role="separator"></div>
 
 <!-- ============================================================
-     PROMISE — bg-elevated
-     Not legal language. A human promise.
+     FOLLOW OUR JOURNEY
      ============================================================ -->
-<section class="cc-promise">
-  <blockquote>"Your trust in us is not taken for granted. Every order, every message, every concern — handled with the same attention we give to the clay itself."</blockquote>
-  <div class="cc-promise .author">— Ruslan Orlinsky</div>
+<section class="cc-follow">
+  <span class="cc-follow-label">Follow Our Journey</span>
+  <div class="cc-follow-icons">
+    <a href="#" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a href="#" aria-label="Facebook">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+    <a href="https://www.youtube.com/@ORLINSKYCeramic/featured" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a href="#" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+    </a>
+  </div>
 </section>
 
 <div class="sep" role="separator"></div>
@@ -766,11 +730,10 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
 ['header-eagle','footer-eagle'].forEach(function(id){var img=document.getElementById(id);if(img&&!img.complete)img.addEventListener('load',function(){calibrateLogo(img);});});
 (function(){var frame=document.querySelector('.top-frame');if(!frame)return;window.addEventListener('scroll',function(){frame.classList.toggle('compact',window.scrollY>0);},{passive:true});frame.classList.toggle('compact',window.scrollY>0);})();
 (function(){
-  var targets=document.querySelectorAll('.cc-cards,.cc-chat-section,.cc-form-section,.cc-promise,footer');
+  var targets=document.querySelectorAll('.cc-cards,.cc-chat-section,.cc-form-section,.cc-follow,footer');
   targets.forEach(function(el){el.style.opacity='0';el.style.transform='translateY(24px)';el.style.transition='opacity 900ms cubic-bezier(0.16,1,0.3,1),transform 900ms cubic-bezier(0.16,1,0.3,1)';});
   var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';io.unobserve(e.target);}});},{threshold:0.04});
   targets.forEach(function(el){io.observe(el);});
-  setTimeout(function(){var h=document.querySelector('.cc-hero');if(h){h.style.opacity='1';h.style.transform='translateY(0)';}},100);
 })();
 (function(){
   var hb=document.querySelector('.hamburger'),menu=document.querySelector('.mobile-menu'),bd=document.querySelector('.menu-backdrop');
@@ -817,7 +780,7 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function scrollBot(){msgs.scrollTop=msgs.scrollHeight;}
   function getTime(){var d=new Date(),h=d.getHours()%12||12,m=d.getMinutes(),ap=d.getHours()>=12?'PM':'AM';return h+':'+(m<10?'0':'')+m+' '+ap;}
-  function avaHTML(){return '<img src="Фото/ava.jpg" alt="" class="cc-msgava">';}
+  function avaHTML(){return '<img src="Фото/Ава%20для%20чат%20бота%20керамики.jpg" alt="" class="cc-msgava">';}
 
   function addUser(text){
     var d=document.createElement('div');d.className='cc-umsg';

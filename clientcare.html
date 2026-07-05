@@ -297,57 +297,54 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 }
 
 /* ============================================================
-   CHAT ASSISTANT — bg-elevated
+   CHAT ASSISTANT — redesigned
    ============================================================ */
-.cc-chat-section{background:var(--color-bg-elevated);padding:88px 56px;}
-.cc-chat-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.35fr;gap:72px;align-items:start;}
-.cc-chat-lede .eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:0.44em;text-transform:uppercase;color:var(--color-accent);margin:0 0 20px;display:block;}
-.cc-chat-lede h2{font-family:var(--font-serif);font-weight:300;font-size:clamp(26px,2.8vw,40px);line-height:1.18;color:var(--color-text-primary);margin:0 0 22px;}
-.cc-chat-lede > p{font-size:14px;line-height:1.85;color:var(--color-text-secondary);margin:0 0 32px;}
-.cc-topic-list{list-style:none;padding:0;margin:0 0 36px;display:flex;flex-direction:column;gap:11px;}
-.cc-topic-list li{display:flex;align-items:center;gap:12px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;text-transform:uppercase;color:var(--color-text-muted);}
-.cc-topic-list li::before{content:'';width:18px;height:1px;background:var(--color-accent);opacity:0.5;flex-shrink:0;}
-.cc-chat-direct{font-family:var(--font-sans);font-size:12px;color:var(--color-text-muted);line-height:1.6;}
-.cc-chat-direct a{color:var(--color-accent);border-bottom-color:transparent;}
-.cc-chat-direct a:hover{border-bottom-color:var(--color-accent);}
-
-.cc-chatbox{display:flex;flex-direction:column;height:510px;background:var(--color-bg-base);border:1px solid var(--color-border);}
-.cc-chatbox-head{background:var(--color-bg-header);padding:14px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--color-border);flex-shrink:0;}
-.cc-bot-ava{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,rgba(200,112,31,0.55),rgba(200,112,31,0.15));display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.cc-bot-ava svg{width:17px;height:17px;stroke:var(--color-text-primary);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round;opacity:0.9;}
-.cc-bot-head-info{flex:1;}
-.cc-bot-nm{font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-primary);display:block;}
-.cc-bot-st{font-family:var(--font-sans);font-size:11px;color:var(--color-text-muted);display:flex;align-items:center;gap:5px;margin-top:2px;}
-.cc-bot-st-dot{width:6px;height:6px;border-radius:50%;background:#6BCB77;flex-shrink:0;}
-
-.cc-chatbox-msgs{flex:1;overflow-y:auto;padding:18px 18px 12px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:var(--color-border) transparent;}
+.cc-chat-section{background:var(--color-bg-base);padding:80px 56px 88px;}
+.cc-chat-inner{max-width:680px;margin:0 auto;}
+.cc-chat-head-text{text-align:center;margin-bottom:36px;}
+.cc-chat-head-text .eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:0.44em;text-transform:uppercase;color:var(--color-accent);margin:0 0 16px;display:block;}
+.cc-chat-head-text h2{font-family:var(--font-serif);font-weight:300;font-size:clamp(26px,2.8vw,40px);line-height:1.18;color:var(--color-text-primary);margin:0;}
+.cc-chatbox{display:flex;flex-direction:column;height:520px;overflow:hidden;border:1px solid var(--color-border);}
+.cc-chatbox-head{background:#2A2320;padding:16px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;}
+.cc-ava-wrap{position:relative;flex-shrink:0;}
+.cc-ava-img{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block;}
+.cc-ava-online-dot{position:absolute;bottom:2px;right:2px;width:11px;height:11px;border-radius:50%;background:#4ADE80;border:2px solid #2A2320;}
+.cc-bot-head-info{flex:1;min-width:0;}
+.cc-bot-nm{font-family:var(--font-serif);font-weight:400;font-size:18px;letter-spacing:0.01em;color:var(--color-text-primary);display:block;line-height:1.2;}
+.cc-bot-st{font-family:var(--font-sans);font-size:12px;color:var(--color-text-muted);margin-top:3px;}
+.cc-online-badge{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
+.cc-online-label{display:flex;align-items:center;gap:6px;font-family:var(--font-sans);font-size:13px;font-weight:500;color:var(--color-text-primary);}
+.cc-online-dot{width:8px;height:8px;border-radius:50%;background:#4ADE80;}
+.cc-online-sub{font-family:var(--font-sans);font-size:11px;color:var(--color-text-muted);text-align:right;}
+.cc-chatbox-msgs{flex:1;overflow-y:auto;padding:20px 18px;display:flex;flex-direction:column;gap:14px;background:var(--color-bg-elevated);scrollbar-width:thin;scrollbar-color:var(--color-border) transparent;}
 .cc-chatbox-msgs::-webkit-scrollbar{width:3px;}
 .cc-chatbox-msgs::-webkit-scrollbar-thumb{background:var(--color-border);}
-.cc-bmsg,.cc-umsg{display:flex;align-items:flex-end;gap:8px;}
+.cc-bmsg,.cc-umsg{display:flex;align-items:flex-end;gap:10px;}
 .cc-umsg{flex-direction:row-reverse;}
-.cc-mico{width:24px;height:24px;border-radius:50%;background:var(--color-bg-elevated);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.cc-mico svg{width:12px;height:12px;stroke:var(--color-accent);fill:none;stroke-width:1.5;stroke-linecap:round;}
-.cc-bb,.cc-ub{max-width:82%;padding:9px 13px;font-family:var(--font-sans);font-size:13px;line-height:1.6;}
-.cc-bb{background:var(--color-bg-elevated);border-radius:10px 10px 10px 2px;color:var(--color-text-secondary);}
-.cc-ub{background:var(--color-accent);border-radius:10px 10px 2px 10px;color:var(--color-bg-header);font-size:12px;font-weight:500;letter-spacing:0.02em;opacity:0.92;}
-@keyframes td{0%,80%,100%{transform:translateY(0);opacity:0.35;}40%{transform:translateY(-4px);opacity:1;}}
-.cc-trow{display:flex;align-items:flex-end;gap:8px;}
-.cc-tdots{padding:10px 14px;background:var(--color-bg-elevated);border-radius:10px 10px 10px 2px;display:flex;gap:4px;align-items:center;}
-.cc-tdots span{width:5px;height:5px;border-radius:50%;background:var(--color-text-muted);animation:td 1.2s ease-in-out infinite;}
-.cc-tdots span:nth-child(2){animation-delay:.2s;}
-.cc-tdots span:nth-child(3){animation-delay:.4s;}
-
-.cc-chatbox-chips{padding:10px 14px;border-top:1px solid var(--color-border);display:flex;flex-wrap:wrap;gap:7px;background:var(--color-bg-elevated);flex-shrink:0;}
-.cc-chip{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-text-secondary);border:1px solid var(--color-divider);padding:5px 11px;cursor:pointer;background:transparent;transition:background 160ms ease,color 160ms ease,border-color 160ms ease;}
-.cc-chip:hover:not(:disabled){background:var(--color-accent);border-color:var(--color-accent);color:var(--color-text-primary);}
-.cc-chip:disabled{opacity:0.35;cursor:default;}
-.cc-chatbox-inp{padding:10px 14px;border-top:1px solid var(--color-border);display:flex;gap:8px;background:var(--color-bg-elevated);flex-shrink:0;}
-.cc-msginput{flex:1;background:var(--color-bg-base);border:1px solid var(--color-border);padding:8px 13px;font-family:var(--font-sans);font-size:13px;color:var(--color-text-primary);outline:none;transition:border-color 220ms ease;}
+.cc-msgava{width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.cc-bmsg-inner,.cc-umsg-inner{display:flex;flex-direction:column;gap:4px;max-width:78%;}
+.cc-bb{padding:11px 14px;font-family:var(--font-sans);font-size:13.5px;line-height:1.65;color:var(--color-text-primary);background:var(--color-bg-header);border-radius:14px 14px 14px 3px;}
+.cc-ub{padding:10px 14px;font-family:var(--font-sans);font-size:13px;line-height:1.6;color:#fff;background:var(--color-accent);border-radius:14px 14px 3px 14px;font-weight:500;}
+.cc-msgtime{font-family:var(--font-sans);font-size:10.5px;color:var(--color-text-muted);padding:0 4px;}
+.cc-msgtime-r{text-align:right;}
+@keyframes td{0%,80%,100%{transform:translateY(0);opacity:0.4;}40%{transform:translateY(-5px);opacity:1;}}
+.cc-trow{display:flex;align-items:flex-end;gap:10px;}
+.cc-tdots{padding:11px 16px;background:var(--color-bg-header);border-radius:14px 14px 14px 3px;display:flex;gap:5px;align-items:center;}
+.cc-tdots span{width:6px;height:6px;border-radius:50%;background:var(--color-text-muted);animation:td 1.3s ease-in-out infinite;}
+.cc-tdots span:nth-child(2){animation-delay:.22s;}
+.cc-tdots span:nth-child(3){animation-delay:.44s;}
+.cc-chatbox-chips{padding:12px 16px;border-top:1px solid var(--color-border);display:flex;flex-wrap:wrap;gap:8px;background:#2A2320;flex-shrink:0;}
+.cc-chip{font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-text-secondary);border:1px solid rgba(200,180,155,0.18);padding:6px 12px;cursor:pointer;background:transparent;border-radius:2px;transition:background 160ms ease,color 160ms ease,border-color 160ms ease;}
+.cc-chip:hover:not(:disabled){background:var(--color-accent);border-color:var(--color-accent);color:#fff;}
+.cc-chip:disabled{opacity:0.3;cursor:default;}
+.cc-chatbox-inp{padding:14px 16px;border-top:1px solid var(--color-border);display:flex;gap:10px;align-items:center;background:#2A2320;flex-shrink:0;}
+.cc-inp-wrap{flex:1;padding:1.5px;border-radius:28px;background:linear-gradient(90deg,#C8701F 0%,#D4A84B 30%,#8B9FD4 65%,#9B6BC8 100%);}
+.cc-msginput{width:100%;box-sizing:border-box;border-radius:26px;border:none;background:var(--color-bg-header);padding:10px 18px;font-family:var(--font-sans);font-size:14px;color:var(--color-text-primary);outline:none;}
 .cc-msginput::placeholder{color:var(--color-text-muted);}
-.cc-msginput:focus{border-color:var(--color-accent);}
-.cc-sendbtn{background:var(--color-accent);border:none;padding:8px 14px;cursor:pointer;color:var(--color-text-primary);transition:background 180ms ease;display:flex;align-items:center;justify-content:center;}
-.cc-sendbtn:hover{background:#e8833a;}
-.cc-sendbtn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.cc-sendbtn{width:42px;height:42px;border-radius:50%;border:none;background:var(--color-accent);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 180ms ease,transform 120ms ease;}
+.cc-sendbtn:hover{background:#D4823A;transform:scale(1.06);}
+.cc-sendbtn svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-left:2px;}
+
 
 /* ============================================================
    CONTACT FORM — bg-base
@@ -394,9 +391,9 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 
 /* Responsive additions */
 @media(max-width:900px){
-  .cc-chat-section{padding:56px 24px;}
-  .cc-chat-wrap{grid-template-columns:1fr;gap:36px;}
-  .cc-chatbox{height:440px;}
+  .cc-chat-section{padding:48px 20px 56px;}
+  .cc-chatbox{height:480px;}
+  .cc-online-badge{display:none;}
   .cc-form-section{padding:64px 24px;}
   .cc-form-wrap{grid-template-columns:1fr;gap:36px;}
   .cf-row{grid-template-columns:1fr;gap:0;}
@@ -449,6 +446,72 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <div class="divider"></div>
   <a href="clientcare.html" class="active">Client Care</a>
 </nav>
+
+<div class="sep" role="separator"></div>
+
+<!-- ============================================================
+     CHAT ASSISTANT — Emma
+     ============================================================ -->
+<section class="cc-chat-section" id="chat">
+  <div class="cc-chat-inner">
+
+    <div class="cc-chat-head-text">
+      <span class="eyebrow">Studio Assistant</span>
+      <h2>Ask Emma anything</h2>
+    </div>
+
+    <div class="cc-chatbox" role="complementary" aria-label="Studio chat assistant">
+
+      <!-- Header -->
+      <div class="cc-chatbox-head">
+        <div class="cc-ava-wrap">
+          <img src="Фото/ava.jpg" alt="Emma" class="cc-ava-img">
+          <div class="cc-ava-online-dot"></div>
+        </div>
+        <div class="cc-bot-head-info">
+          <span class="cc-bot-nm">Emma</span>
+          <div class="cc-bot-st">Studio Assistant · ORLINSKY Ceramics</div>
+        </div>
+        <div class="cc-online-badge">
+          <div class="cc-online-label"><div class="cc-online-dot"></div>Online</div>
+          <div class="cc-online-sub">responds within minutes</div>
+        </div>
+      </div>
+
+      <!-- Messages -->
+      <div class="cc-chatbox-msgs" id="chatMsgs">
+        <div class="cc-bmsg">
+          <img src="Фото/ava.jpg" alt="" class="cc-msgava">
+          <div class="cc-bmsg-inner">
+            <div class="cc-bb">Hi! I'm here to help with any questions about our ceramics, shipping, custom orders, or anything else.</div>
+            <div class="cc-msgtime" id="initTime"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chips -->
+      <div class="cc-chatbox-chips" id="chatChips">
+        <button class="cc-chip" data-topic="shipping">Shipping</button>
+        <button class="cc-chip" data-topic="returns">Returns</button>
+        <button class="cc-chip" data-topic="custom">Custom Order</button>
+        <button class="cc-chip" data-topic="packaging">Packaging</button>
+        <button class="cc-chip" data-topic="care">Care Tips</button>
+        <button class="cc-chip" data-topic="pricing">Pricing</button>
+      </div>
+
+      <!-- Input -->
+      <div class="cc-chatbox-inp">
+        <div class="cc-inp-wrap">
+          <input type="text" class="cc-msginput" id="chatInput" placeholder="Type your message…" autocomplete="off">
+        </div>
+        <button class="cc-sendbtn" id="chatSend" aria-label="Send">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <div class="sep" role="separator"></div>
 
@@ -542,70 +605,6 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       <p class="note">Real person · 24-hour response · Every message answered</p>
     </div>
 
-  </div>
-</section>
-
-<div class="sep" role="separator"></div>
-
-<!-- ============================================================
-     CHAT ASSISTANT — bg-elevated
-     ============================================================ -->
-<section class="cc-chat-section" id="chat">
-  <div class="cc-chat-wrap">
-
-    <!-- Left: intro -->
-    <div class="cc-chat-lede">
-      <span class="eyebrow">Studio Assistant</span>
-      <h2>Quick answers,<br>right here</h2>
-      <p>Our studio assistant has answers to the most common questions. Pick a topic or type your own question below.</p>
-      <ul class="cc-topic-list">
-        <li>Shipping &amp; Delivery</li>
-        <li>Returns &amp; Exchanges</li>
-        <li>Custom Orders</li>
-        <li>Packaging</li>
-        <li>Care Instructions</li>
-        <li>Pricing</li>
-      </ul>
-      <p class="cc-chat-direct">Anything else? Write directly to <a href="mailto:hello@orlinsky.ca">hello@orlinsky.ca</a></p>
-    </div>
-
-    <!-- Right: chat widget -->
-    <div class="cc-chatbox" role="complementary" aria-label="Studio chat assistant">
-
-      <div class="cc-chatbox-head">
-        <div class="cc-bot-ava">
-          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-        <div class="cc-bot-head-info">
-          <span class="cc-bot-nm">ORLINSKY Assistant</span>
-          <div class="cc-bot-st"><div class="cc-bot-st-dot"></div>Ready to help</div>
-        </div>
-      </div>
-
-      <div class="cc-chatbox-msgs" id="chatMsgs">
-        <div class="cc-bmsg">
-          <div class="cc-mico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div>
-          <div class="cc-bb">Hello! I can answer questions about shipping, returns, custom orders, packaging, and more.<br><br>What would you like to know?</div>
-        </div>
-      </div>
-
-      <div class="cc-chatbox-chips" id="chatChips">
-        <button class="cc-chip" data-topic="shipping">Shipping</button>
-        <button class="cc-chip" data-topic="returns">Returns</button>
-        <button class="cc-chip" data-topic="custom">Custom Order</button>
-        <button class="cc-chip" data-topic="packaging">Packaging</button>
-        <button class="cc-chip" data-topic="care">Care Tips</button>
-        <button class="cc-chip" data-topic="pricing">Pricing</button>
-      </div>
-
-      <div class="cc-chatbox-inp">
-        <input type="text" class="cc-msginput" id="chatInput" placeholder="Type your question…" autocomplete="off">
-        <button class="cc-sendbtn" id="chatSend" aria-label="Send">
-          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
-      </div>
-
-    </div>
   </div>
 </section>
 
@@ -809,6 +808,7 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
   var input=document.getElementById('chatInput');
   var sendBtn=document.getElementById('chatSend');
   if(!msgs)return;
+  var itEl=document.getElementById('initTime');if(itEl)itEl.textContent=getTime();
 
   var R={
     shipping:"We ship worldwide from our studio in Canada. Processing takes up to 2 business days, and every order includes a tracking number sent to you once dispatched.\n\nDelivery typically takes 5–10 business days within North America and 10–21 days internationally. Exact estimates appear at checkout after you enter your shipping address.",
@@ -830,17 +830,18 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
 
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function scrollBot(){msgs.scrollTop=msgs.scrollHeight;}
-  function iconHTML(){return '<div class="cc-mico"><svg viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg></div>';}
+  function getTime(){var d=new Date(),h=d.getHours()%12||12,m=d.getMinutes(),ap=d.getHours()>=12?'PM':'AM';return h+':'+(m<10?'0':'')+m+' '+ap;}
+  function avaHTML(){return '<img src="Фото/ava.jpg" alt="" class="cc-msgava">';}
 
   function addUser(text){
     var d=document.createElement('div');d.className='cc-umsg';
-    d.innerHTML='<div class="cc-ub">'+esc(text)+'</div>';
+    d.innerHTML='<div class="cc-umsg-inner"><div class="cc-ub">'+esc(text)+'</div><div class="cc-msgtime cc-msgtime-r">'+getTime()+'</div></div>';
     msgs.appendChild(d);scrollBot();
   }
 
   function showTyping(){
     var r=document.createElement('div');r.className='cc-trow';r.id='typingRow';
-    r.innerHTML=iconHTML()+'<div class="cc-tdots"><span></span><span></span><span></span></div>';
+    r.innerHTML=avaHTML()+'<div class="cc-tdots"><span></span><span></span><span></span></div>';
     msgs.appendChild(r);scrollBot();
   }
 
@@ -850,7 +851,7 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
     removeTyping();
     var d=document.createElement('div');d.className='cc-bmsg';
     var html=text.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
-    d.innerHTML=iconHTML()+'<div class="cc-bb">'+html+'</div>';
+    d.innerHTML=avaHTML()+'<div class="cc-bmsg-inner"><div class="cc-bb">'+html+'</div><div class="cc-msgtime">'+getTime()+'</div></div>';
     msgs.appendChild(d);scrollBot();
   }
 

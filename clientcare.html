@@ -226,8 +226,8 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .cc-follow{background:var(--color-bg-elevated);padding:72px 56px;text-align:center;}
 .cc-follow-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.52em;text-transform:uppercase;color:var(--color-text-muted);margin:0 0 44px;display:block;}
 .cc-follow-icons{display:flex;justify-content:center;align-items:center;gap:52px;}
-.cc-follow-icons a{color:rgba(200,180,155,0.45);transition:color 240ms ease;line-height:0;border-bottom:none!important;}
-.cc-follow-icons a:hover{color:var(--color-text-primary);}
+.cc-follow-icons a{color:rgba(200,180,155,0.45);transition:color 3000ms ease-out;line-height:0;border-bottom:none!important;}
+.cc-follow-icons a:hover{color:var(--color-text-primary);transition:color 220ms ease-in;}
 .cc-follow-icons svg{width:46px;height:46px;}
 
 /* ============================================================
@@ -298,23 +298,23 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 .cc-chatbox{display:flex;flex-direction:column;height:520px;overflow:hidden;border:1px solid var(--color-border);}
 .cc-chatbox-head{background:#3A3330;padding:16px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;}
 .cc-ava-wrap{position:relative;flex-shrink:0;}
-.cc-ava-img{width:48px;height:48px;border-radius:50%;object-fit:cover;display:block;}
-.cc-ava-online-dot{position:absolute;bottom:2px;right:2px;width:11px;height:11px;border-radius:50%;background:#4ADE80;border:2px solid #2A2320;}
+.cc-ava-img{width:58px;height:58px;border-radius:50%;object-fit:cover;display:block;}
+.cc-ava-online-dot{position:absolute;bottom:3px;right:3px;width:12px;height:12px;border-radius:50%;background:#4ADE80;border:2px solid #3A3330;}
 .cc-bot-head-info{flex:1;min-width:0;}
-.cc-bot-nm{font-family:var(--font-serif);font-weight:400;font-size:18px;letter-spacing:0.01em;color:var(--color-text-primary);display:block;line-height:1.2;}
-.cc-bot-st{font-family:var(--font-sans);font-size:12px;color:var(--color-text-muted);margin-top:3px;}
+.cc-bot-nm{font-family:var(--font-serif);font-weight:400;font-size:21px;letter-spacing:0.01em;color:var(--color-text-primary);display:block;line-height:1.2;}
+.cc-bot-st{font-family:var(--font-sans);font-size:14px;color:var(--color-text-muted);margin-top:3px;}
 .cc-online-badge{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0;}
-.cc-online-label{display:flex;align-items:center;gap:6px;font-family:var(--font-sans);font-size:13px;font-weight:500;color:var(--color-text-primary);}
+.cc-online-label{display:flex;align-items:center;gap:6px;font-family:var(--font-sans);font-size:15px;font-weight:500;color:var(--color-text-primary);}
 .cc-online-dot{width:8px;height:8px;border-radius:50%;background:#4ADE80;}
-.cc-online-sub{font-family:var(--font-sans);font-size:11px;color:var(--color-text-muted);text-align:right;}
+.cc-online-sub{font-family:var(--font-sans);font-size:13px;color:var(--color-text-muted);text-align:right;}
 .cc-chatbox-msgs{flex:1;overflow-y:auto;padding:20px 18px;display:flex;flex-direction:column;gap:14px;background:#3E3936;scrollbar-width:thin;scrollbar-color:var(--color-border) transparent;}
 .cc-chatbox-msgs::-webkit-scrollbar{width:3px;}
 .cc-chatbox-msgs::-webkit-scrollbar-thumb{background:var(--color-border);}
 .cc-bmsg,.cc-umsg{display:flex;align-items:flex-end;gap:10px;}
 .cc-umsg{flex-direction:row-reverse;}
-.cc-msgava{width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.cc-msgava{width:38px;height:38px;border-radius:50%;object-fit:cover;flex-shrink:0;}
 .cc-bmsg-inner,.cc-umsg-inner{display:flex;flex-direction:column;gap:4px;max-width:78%;}
-.cc-bb{padding:11px 14px;font-family:var(--font-sans);font-size:13.5px;line-height:1.65;color:var(--color-text-primary);background:var(--color-bg-header);border-radius:14px 14px 14px 3px;}
+.cc-bb{padding:11px 14px;font-family:var(--font-sans);font-size:13.5px;line-height:1.65;color:var(--color-text-primary);background:#4A4542;border-radius:14px 14px 14px 3px;}
 .cc-ub{padding:10px 14px;font-family:var(--font-sans);font-size:13px;line-height:1.6;color:#fff;background:#2F5A72;border-radius:14px 14px 3px 14px;font-weight:500;}
 .cc-msgtime{font-family:var(--font-sans);font-size:10.5px;color:var(--color-text-muted);padding:0 4px;}
 .cc-msgtime-r{text-align:right;}
@@ -331,7 +331,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 .cc-msginput::placeholder{color:var(--color-text-muted);}
 .cc-sendbtn{width:42px;height:42px;border-radius:50%;border:none;background:var(--color-accent);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 180ms ease,transform 120ms ease;}
 .cc-sendbtn:hover{background:#D4823A;transform:scale(1.06);}
-.cc-sendbtn svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.cc-sendbtn svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transform:translate(1px,-1px);}
 
 
 /* ============================================================
@@ -559,7 +559,6 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="cc-form-lede">
       <span class="eyebrow">Write to Us</span>
       <h2>Send us<br>a message</h2>
-      <p>Didn't find your answer above? We reply personally to every message — usually within 24 hours.</p>
 
       <div class="cc-form-deets">
         <div class="cc-form-det">

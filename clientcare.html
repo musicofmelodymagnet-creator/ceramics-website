@@ -227,7 +227,7 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .cc-follow-label{font-family:var(--font-mono);font-size:10px;letter-spacing:0.52em;text-transform:uppercase;color:var(--color-text-muted);margin:0 0 44px;display:block;}
 .cc-follow-icons{display:flex;justify-content:center;align-items:center;gap:52px;}
 .cc-follow-icons a{color:rgba(200,180,155,0.45);transition:color 3000ms ease-out;line-height:0;border-bottom:none!important;}
-.cc-follow-icons a:hover{color:var(--color-text-primary);transition:color 220ms ease-in;}
+.cc-follow-icons a:hover{color:var(--color-accent);transition:color 220ms ease-in;}
 .cc-follow-icons svg{width:46px;height:46px;}
 
 /* ============================================================
@@ -299,7 +299,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 .cc-chatbox-head{background:#3A3330;padding:16px 20px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;}
 .cc-ava-wrap{position:relative;flex-shrink:0;}
 .cc-ava-img{width:58px;height:58px;border-radius:50%;object-fit:cover;display:block;}
-.cc-ava-online-dot{position:absolute;bottom:3px;right:3px;width:12px;height:12px;border-radius:50%;background:#4ADE80;border:2px solid #3A3330;}
+.cc-ava-online-dot{position:absolute;bottom:2px;right:2px;width:12px;height:12px;border-radius:50%;background:#4ADE80;border:2px solid #3A3330;}
 .cc-bot-head-info{flex:1;min-width:0;}
 .cc-bot-nm{font-family:var(--font-serif);font-weight:400;font-size:21px;letter-spacing:0.01em;color:var(--color-text-primary);display:block;line-height:1.2;}
 .cc-bot-st{font-family:var(--font-sans);font-size:14px;color:var(--color-text-muted);margin-top:3px;}
@@ -331,32 +331,22 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 .cc-msginput::placeholder{color:var(--color-text-muted);}
 .cc-sendbtn{width:42px;height:42px;border-radius:50%;border:none;background:var(--color-accent);cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 180ms ease,transform 120ms ease;}
 .cc-sendbtn:hover{background:#D4823A;transform:scale(1.06);}
-.cc-sendbtn svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transform:translate(1px,-1px);}
+.cc-sendbtn svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transform:translate(-1px,1px);}
 
 
 /* ============================================================
    CONTACT FORM — bg-base
    ============================================================ */
 .cc-form-section{background:var(--color-bg-base);padding:88px 56px;}
-.cc-form-wrap{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1.5fr;gap:80px;align-items:start;}
-.cc-form-lede .eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:0.44em;text-transform:uppercase;color:var(--color-accent);margin:0 0 20px;display:block;}
-.cc-form-lede h2{font-family:var(--font-serif);font-weight:300;font-size:clamp(26px,2.8vw,40px);line-height:1.18;color:var(--color-text-primary);margin:0 0 22px;}
-.cc-form-lede > p{font-family:var(--font-serif);font-style:italic;font-weight:300;font-size:16px;line-height:1.85;color:var(--color-text-secondary);margin:0 0 36px;}
-.cc-form-deets{display:flex;flex-direction:column;gap:20px;}
-.cc-form-det{display:flex;align-items:flex-start;gap:14px;}
-.cc-form-det-ic{width:32px;height:32px;background:rgba(200,112,31,0.07);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
-.cc-form-det-ic svg{width:15px;height:15px;stroke:var(--color-accent);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
-.cc-form-det-tx{display:flex;flex-direction:column;gap:4px;}
-.cc-form-det-lbl{font-family:var(--font-mono);font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--color-text-muted);}
-.cc-form-det-val{font-family:var(--font-sans);font-size:14px;color:var(--color-text-secondary);}
-.cc-form-det-val a{color:var(--color-accent);border-bottom-color:transparent;}
-.cc-form-det-val a:hover{border-bottom-color:var(--color-accent);}
+.cc-form-title{text-align:center;margin-bottom:48px;}
+.cc-form-title h2{font-family:var(--font-serif);font-weight:300;font-size:clamp(26px,2.8vw,40px);line-height:1.18;color:var(--color-text-primary);margin:0;}
+.cc-form-wrap{max-width:680px;margin:0 auto;}
 
 #cf{display:flex;flex-direction:column;}
 .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px;}
 .cf-field{display:flex;flex-direction:column;gap:7px;margin-bottom:20px;}
 .cf-label{font-family:var(--font-mono);font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--color-text-muted);}
-.cf-in,.cf-sel,.cf-ta{background:var(--color-bg-elevated);border:1px solid var(--color-border);border-bottom-width:2px;padding:13px 16px;font-family:var(--font-sans);font-size:14px;color:var(--color-text-primary);outline:none;width:100%;box-sizing:border-box;transition:border-color 220ms ease,background 220ms ease;-webkit-appearance:none;appearance:none;}
+.cf-in,.cf-sel,.cf-ta{background:#3E3936;border:1px solid var(--color-border);border-bottom-width:2px;padding:13px 16px;font-family:var(--font-sans);font-size:14px;color:var(--color-text-primary);outline:none;width:100%;box-sizing:border-box;transition:border-color 220ms ease,background 220ms ease;-webkit-appearance:none;appearance:none;}
 .cf-in:focus,.cf-sel:focus,.cf-ta:focus{border-color:var(--color-accent);background:var(--color-bg-header);}
 .cf-in::placeholder,.cf-ta::placeholder{color:var(--color-text-muted);opacity:0.65;}
 .cf-sel{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237A6E63' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;padding-right:40px;}
@@ -382,8 +372,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   .cc-chat-section{padding:48px 20px 56px;}
   .cc-chatbox{height:480px;}
   .cc-online-badge{display:none;}
-  .cc-form-section{padding:64px 24px;}
-  .cc-form-wrap{grid-template-columns:1fr;gap:36px;}
+  .cc-form-section{padding:56px 20px;}
   .cf-row{grid-template-columns:1fr;gap:0;}
 }
 </style>
@@ -553,45 +542,10 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
      CONTACT FORM — bg-base
      ============================================================ -->
 <section class="cc-form-section" id="contact">
+  <div class="cc-form-title">
+    <h2>Send us<br>a message</h2>
+  </div>
   <div class="cc-form-wrap">
-
-    <!-- Left: lede + contact details -->
-    <div class="cc-form-lede">
-      <span class="eyebrow">Write to Us</span>
-      <h2>Send us<br>a message</h2>
-
-      <div class="cc-form-deets">
-        <div class="cc-form-det">
-          <div class="cc-form-det-ic">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div class="cc-form-det-tx">
-            <span class="cc-form-det-lbl">Email</span>
-            <span class="cc-form-det-val"><a href="mailto:hello@orlinsky.ca">hello@orlinsky.ca</a></span>
-          </div>
-        </div>
-        <div class="cc-form-det">
-          <div class="cc-form-det-ic">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div class="cc-form-det-tx">
-            <span class="cc-form-det-lbl">Response Time</span>
-            <span class="cc-form-det-val">Within 24 hours</span>
-          </div>
-        </div>
-        <div class="cc-form-det">
-          <div class="cc-form-det-ic">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div class="cc-form-det-tx">
-            <span class="cc-form-det-lbl">Studio</span>
-            <span class="cc-form-det-val">Canada</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right: form -->
     <div>
       <form id="cf" novalidate>
         <div class="cf-row">
@@ -606,18 +560,6 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
         </div>
 
         <div class="cf-field">
-          <label class="cf-label" for="cf-subject">Topic</label>
-          <select class="cf-sel" id="cf-subject" name="subject">
-            <option value="" disabled selected>Select a topic</option>
-            <option value="Order Inquiry">Order Inquiry</option>
-            <option value="Custom Commission">Custom Commission</option>
-            <option value="Return or Exchange">Return or Exchange</option>
-            <option value="Shipping Question">Shipping Question</option>
-            <option value="General Question">General Question</option>
-          </select>
-        </div>
-
-        <div class="cf-field">
           <label class="cf-label" for="cf-message">Message</label>
           <textarea class="cf-ta" id="cf-message" name="message" placeholder="Tell us what's on your mind…" required></textarea>
         </div>
@@ -627,7 +569,6 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
             Send Message
             <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </button>
-          <span class="cf-fnote">We reply within 24 hours</span>
         </div>
       </form>
 

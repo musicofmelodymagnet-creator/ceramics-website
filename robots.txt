@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://orlinskyceramic.ca/sitemap.xml
+
+# Block design system files from indexing
+Disallow: /Design%20from%20Claude%20Design/
+Disallow: /Дополнительные%20материалы/

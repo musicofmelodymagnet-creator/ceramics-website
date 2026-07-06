@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['error' => 'Method not allowed']); exit;
 }
 
-$VENDOR  = '/home/admin/web/orlinskyceramic.ca/public_html/private'; // vendor только
+$VENDOR  = '/home/orlinskyceramic';                                  // vendor вне webroot
 $SECRETS = '/home/admin/web/orlinskyceramic.ca/private';            // ключи вне webroot
 require $VENDOR  . '/vendor/autoload.php';
 $config  = require $SECRETS . '/stripe-config.php';

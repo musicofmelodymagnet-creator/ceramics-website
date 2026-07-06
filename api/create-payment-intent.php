@@ -7,10 +7,11 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['error' => 'Method not allowed']); exit;
 }
 
-$BASE = '/home/admin/web/orlinskyceramic.ca/private';
-require $BASE . '/vendor/autoload.php';
-$config  = require $BASE . '/stripe-config.php';
-$catalog = require $BASE . '/catalog.php';
+$VENDOR  = '/home/admin/web/orlinskyceramic.ca/public_html/private'; // vendor только
+$SECRETS = '/home/admin/web/orlinskyceramic.ca/private';            // ключи вне webroot
+require $VENDOR  . '/vendor/autoload.php';
+$config  = require $SECRETS . '/stripe-config.php';
+$catalog = require $SECRETS . '/catalog.php';
 
 \Stripe\Stripe::setApiKey($config['secret_key']);
 

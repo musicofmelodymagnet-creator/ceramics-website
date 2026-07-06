@@ -1,10 +1,9 @@
 <?php
 declare(strict_types=1);
 
-$VENDOR  = '/home/orlinskyceramic';                                  // vendor вне webroot
-$SECRETS = '/home/admin/web/orlinskyceramic.ca/private';            // ключи вне webroot
-require $VENDOR  . '/vendor/autoload.php';
-$config = require $SECRETS . '/stripe-config.php';
+$BASE   = '/home/orlinskyceramic';
+require $BASE . '/vendor/autoload.php';
+$config = require $BASE . '/stripe-config.php';
 
 \Stripe\Stripe::setApiKey($config['secret_key']);
 
@@ -30,7 +29,7 @@ if ($event->type === 'payment_intent.succeeded') {
         'shipping' => $pi->shipping,
     ];
     // Заказ в приватный лог (одна JSON-строка на заказ)
-    file_put_contents($SECRETS . '/orders.log',
+    file_put_contents($BASE . '/orders.log',
         json_encode($order, JSON_UNESCAPED_UNICODE) . "\n",
         FILE_APPEND | LOCK_EX);
 

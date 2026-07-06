@@ -14,3 +14,9 @@ skills-lock.json
 "Design from Claude Design/project/uploads/"
 *.xlsx
 *.docx
+
+# Stripe — никогда в git
+public_html/private/stripe-config.php
+public_html/private/vendor/
+public_html/private/composer.lock
+public_html/private/orders.log

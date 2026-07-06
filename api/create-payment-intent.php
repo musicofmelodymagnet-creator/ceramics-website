@@ -41,27 +41,33 @@ foreach ($items as $id) {
 
 $ship = $input['shipping'] ?? [];
 
-try {
-    $intent = \Stripe\PaymentIntent::create([
-        'amount'   => $amount,
-        'currency' => $currency,
-        'automatic_payment_methods' => ['enabled' => true],
-        'description'   => 'ORLANSKI Ceramic — ' . implode(', ', $titles),
-        'receipt_email' => $input['email'] ?? null,
-        'shipping' => [
-            'name'    => $ship['name'] ?? '',
-            'phone'   => $ship['phone'] ?? null,
-            'address' => [
-                'line1'       => $ship['line1'] ?? '',
-                'line2'       => $ship['line2'] ?? null,
-                'city'        => $ship['city'] ?? '',
-                'state'       => $ship['state'] ?? '',
-                'postal_code' => $ship['postal_code'] ?? '',
-                'country'     => $ship['country'] ?? '',
-            ],
+$intentParams = [
+    'amount'   => $amount,
+    'currency' => $currency,
+    'automatic_payment_methods' => ['enabled' => true],
+    'description'   => 'ORLANSKI Ceramic — ' . implode(', ', $titles),
+    'receipt_email' => ($input['email'] ?? '') !== '' ? $input['email'] : null,
+    'metadata'      => ['product_ids' => implode(',', $items)],
+];
+
+// Shipping only if name is provided (Stripe rejects empty name)
+if (!empty($ship['name'])) {
+    $intentParams['shipping'] = [
+        'name'    => $ship['name'],
+        'phone'   => ($ship['phone'] ?? '') !== '' ? $ship['phone'] : null,
+        'address' => [
+            'line1'       => $ship['line1'] ?? '',
+            'line2'       => ($ship['line2'] ?? '') !== '' ? $ship['line2'] : null,
+            'city'        => $ship['city'] ?? '',
+            'state'       => $ship['state'] ?? '',
+            'postal_code' => $ship['postal_code'] ?? '',
+            'country'     => $ship['country'] ?? 'CA',
         ],
-        'metadata' => ['product_ids' => implode(',', $items)],
-    ]);
+    ];
+}
+
+try {
+    $intent = \Stripe\PaymentIntent::create($intentParams);
 
     echo json_encode([
         'clientSecret' => $intent->client_secret,

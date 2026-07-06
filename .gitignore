@@ -16,7 +16,7 @@ skills-lock.json
 *.docx
 
 # Stripe — никогда в git
-public_html/private/stripe-config.php
-public_html/private/vendor/
-public_html/private/composer.lock
-public_html/private/orders.log
+private/stripe-config.php
+private/vendor/
+private/composer.lock
+private/orders.log

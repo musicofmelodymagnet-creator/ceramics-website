@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-$BASE   = '/home/orlinskyceramic';
+$BASE   = '/home/admin/web/orlinskyceramic.ca/private';
 require $BASE . '/vendor/autoload.php';
 $config = require $BASE . '/stripe-config.php';
 

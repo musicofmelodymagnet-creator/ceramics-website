@@ -37,10 +37,6 @@ html,body{margin:0;padding:0;background:var(--color-bg-base);color:var(--color-t
 .co-item:last-of-type{border-bottom:none;}
 .co-total{display:flex;justify-content:space-between;font-family:var(--font-serif);font-size:20px;color:var(--color-text-primary);margin-top:16px;padding-top:16px;border-top:1px solid var(--color-border);}
 
-/* currency toggle */
-.co-currency{display:flex;gap:8px;margin-bottom:40px;}
-.co-cur-btn{font-family:var(--font-mono);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;padding:8px 20px;border:1px solid var(--color-border);background:transparent;color:var(--color-text-muted);cursor:pointer;transition:all 180ms ease;}
-.co-cur-btn.active{border-color:var(--color-accent);color:var(--color-accent);}
 
 /* shipping form */
 .co-section-label{font-family:var(--font-mono);font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:var(--color-text-muted);display:block;margin-bottom:20px;}
@@ -106,11 +102,6 @@ select.cf-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://ww
       <span>Total</span>
       <span id="co-total-amount">—</span>
     </div>
-  </div>
-
-  <div class="co-currency">
-    <button class="co-cur-btn active" data-cur="cad">CAD $</button>
-    <button class="co-cur-btn" data-cur="usd">USD $</button>
   </div>
 
   <!-- Shipping & contact form -->
@@ -208,8 +199,8 @@ const STRIPE_PK = 'pk_test_51TqFGFRLE3GENWdWD5kDvXMFTjW3Tt3HjZFemtaG6YpcvbVM3hOm
 const CART_ITEMS = ['painting-001'];
 
 const CLIENT_CATALOG = {
-  'painting-001': { title: 'Работа 1', cad: 45000, usd: 33000 },
-  'painting-002': { title: 'Работа 2', cad: 62000, usd: 45000 },
+  'painting-001': { title: 'Работа 1', price: 45000 },
+  'painting-002': { title: 'Работа 2', price: 62000 },
 };
 
 const appearance = {
@@ -234,11 +225,11 @@ const appearance = {
 
 const stripe = Stripe(STRIPE_PK);
 let elements;
-let currentCurrency = 'cad';
-let shippingData    = null;
+const currentCurrency = window.location.hostname.includes('.com') ? 'usd' : 'cad';
+let shippingData      = null;
 
 // ── Order summary ──────────────────────────────
-function renderSummary(currency) {
+function renderSummary() {
   const container = document.getElementById('co-items');
   const totalEl   = document.getElementById('co-total-amount');
   container.innerHTML = '';
@@ -246,30 +237,21 @@ function renderSummary(currency) {
   CART_ITEMS.forEach(id => {
     const item = CLIENT_CATALOG[id];
     if (!item) return;
-    const price = item[currency];
+    const price = item.price;
     total += price;
     const row = document.createElement('div');
     row.className = 'co-item';
-    row.innerHTML = `<span>${item.title}</span><span>${formatMoney(price, currency)}</span>`;
+    row.innerHTML = `<span>${item.title}</span><span>${formatMoney(price)}</span>`;
     container.appendChild(row);
   });
-  totalEl.textContent = formatMoney(total, currency);
+  totalEl.textContent = formatMoney(total);
 }
 
-function formatMoney(cents, currency) {
-  return new Intl.NumberFormat('en-CA', { style: 'currency', currency: currency.toUpperCase() }).format(cents / 100);
+function formatMoney(cents) {
+  const locale    = currentCurrency === 'usd' ? 'en-US' : 'en-CA';
+  const formatted = new Intl.NumberFormat(locale, { style: 'currency', currency: currentCurrency.toUpperCase() }).format(cents / 100);
+  return formatted + ' ' + currentCurrency.toUpperCase();
 }
-
-// ── Currency toggle ────────────────────────────
-document.querySelectorAll('.co-cur-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.co-cur-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    currentCurrency = btn.dataset.cur;
-    renderSummary(currentCurrency);
-    if (shippingData) initPayment();
-  });
-});
 
 // ── Form validation + Continue ─────────────────
 document.getElementById('co-continue-btn').addEventListener('click', async () => {
@@ -370,7 +352,7 @@ document.getElementById('pay-btn').addEventListener('click', async () => {
   btn.disabled = true;
   const { error } = await stripe.confirmPayment({
     elements,
-    confirmParams: { return_url: 'https://orlinskyceramic.ca/order-success.html' },
+    confirmParams: { return_url: window.location.origin + '/order-success.html' },
   });
   if (error) {
     showPayError(error.message);
@@ -383,7 +365,7 @@ function showPayError(msg) {
 }
 
 // ── Boot ───────────────────────────────────────
-renderSummary(currentCurrency);
+renderSummary();
 </script>
 </body>
 </html>

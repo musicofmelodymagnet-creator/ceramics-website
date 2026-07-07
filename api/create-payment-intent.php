@@ -16,11 +16,10 @@ $catalog = require $BASE . '/catalog.php';
 
 $input = json_decode(file_get_contents('php://input'), true) ?? [];
 
-$currency = strtolower($input['currency'] ?? '');
-if (!in_array($currency, ['cad', 'usd'], true)) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Invalid currency']); exit;
-}
+// Currency is determined SERVER-SIDE from HTTP_HOST — never from client input.
+// This prevents a client from switching to a cheaper currency by manipulating the request.
+$reqHost  = strtolower($_SERVER['HTTP_HOST'] ?? '');
+$currency = str_contains($reqHost, '.com') ? 'usd' : 'cad';
 
 $items = $input['items'] ?? [];
 if (!is_array($items) || count($items) === 0) {
@@ -35,7 +34,7 @@ foreach ($items as $id) {
         http_response_code(400);
         echo json_encode(['error' => 'Unknown item']); exit;
     }
-    $amount  += (int) $catalog[$id][$currency];
+    $amount  += (int) $catalog[$id]['price'];
     $titles[] = $catalog[$id]['title'];
 }
 

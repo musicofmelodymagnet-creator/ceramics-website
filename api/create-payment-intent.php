@@ -44,7 +44,7 @@ $ship = $input['shipping'] ?? [];
 $intentParams = [
     'amount'   => $amount,
     'currency' => $currency,
-    'automatic_payment_methods' => ['enabled' => true],
+    'payment_method_types' => ['card'],
     'description'   => 'ORLANSKI Ceramic — ' . implode(', ', $titles),
     'metadata' => ['product_ids' => implode(',', $items)],
 ];

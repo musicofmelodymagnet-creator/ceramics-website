@@ -46,9 +46,12 @@ $intentParams = [
     'currency' => $currency,
     'automatic_payment_methods' => ['enabled' => true],
     'description'   => 'ORLANSKI Ceramic — ' . implode(', ', $titles),
-    'receipt_email' => ($input['email'] ?? '') !== '' ? $input['email'] : null,
-    'metadata'      => ['product_ids' => implode(',', $items)],
+    'metadata' => ['product_ids' => implode(',', $items)],
 ];
+
+if (($input['email'] ?? '') !== '') {
+    $intentParams['receipt_email'] = $input['email'];
+}
 
 // Shipping only if name is provided (Stripe rejects empty name)
 if (!empty($ship['name'])) {

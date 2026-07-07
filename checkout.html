@@ -225,8 +225,8 @@ const appearance = {
 
 const stripe = Stripe(STRIPE_PK);
 let elements;
-const currentCurrency = window.location.hostname.includes('.com') ? 'usd' : 'cad';
-let shippingData      = null;
+let currentCurrency = 'usd'; // default until server responds with IP-based currency
+let shippingData    = null;
 
 // ── Order summary ──────────────────────────────
 function renderSummary() {
@@ -364,8 +364,17 @@ function showPayError(msg) {
   document.getElementById('pay-error').textContent = msg;
 }
 
-// ── Boot ───────────────────────────────────────
-renderSummary();
+// ── Boot: fetch currency from server by IP, then render ────────────────────
+(async () => {
+  try {
+    const r = await fetch('/api/currency.php');
+    if (r.ok) {
+      const d = await r.json();
+      if (d.currency === 'cad' || d.currency === 'usd') currentCurrency = d.currency;
+    }
+  } catch (_) { /* keep 'usd' default */ }
+  renderSummary();
+})();
 </script>
 </body>
 </html>

@@ -7,6 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['error' => 'Method not allowed']); exit;
 }
 
+// Currency determined server-side by client IP via MaxMind GeoLite2.
+// CA → CAD, everyone else → USD.  Falls back to USD if DB not installed yet.
+define('GEO_INTERNAL', 1);
+require __DIR__ . '/_geo.php';
+$currency = currencyByIp(clientIp());
+
 $BASE    = '/home/admin/web/orlinskyceramic.ca/private';
 require $BASE . '/vendor/autoload.php';
 $config  = require $BASE . '/stripe-config.php';
@@ -15,11 +21,6 @@ $catalog = require $BASE . '/catalog.php';
 \Stripe\Stripe::setApiKey($config['secret_key']);
 
 $input = json_decode(file_get_contents('php://input'), true) ?? [];
-
-// Currency is determined SERVER-SIDE from HTTP_HOST — never from client input.
-// This prevents a client from switching to a cheaper currency by manipulating the request.
-$reqHost  = strtolower($_SERVER['HTTP_HOST'] ?? '');
-$currency = str_contains($reqHost, '.com') ? 'usd' : 'cad';
 
 $items = $input['items'] ?? [];
 if (!is_array($items) || count($items) === 0) {

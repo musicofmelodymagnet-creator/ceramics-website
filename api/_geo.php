@@ -15,10 +15,19 @@ function countryByIp(string $ip): string {
     $db = '/home/admin/web/orlinskyceramic.ca/private/GeoLite2-Country.mmdb';
     if (!file_exists($db)) return '';
 
-    // Load MaxMind reader: compiled extension takes precedence, then Composer autoload
+    // Load MaxMind reader: compiled extension > Composer autoload > bundled copy
     if (!class_exists('\MaxMind\Db\Reader')) {
         $auto = '/home/admin/web/orlinskyceramic.ca/private/vendor/autoload.php';
         if (file_exists($auto)) require_once $auto;
+    }
+    if (!class_exists('\MaxMind\Db\Reader')) {
+        $mmSrc = '/home/admin/web/orlinskyceramic.ca/private/maxmind-reader/src';
+        if (is_dir($mmSrc)) {
+            spl_autoload_register(static function (string $cls) use ($mmSrc): void {
+                $f = $mmSrc . '/' . str_replace('\\', '/', $cls) . '.php';
+                if (file_exists($f)) require_once $f;
+            });
+        }
     }
     if (!class_exists('\MaxMind\Db\Reader')) return '';
 

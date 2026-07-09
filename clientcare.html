@@ -690,74 +690,88 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
 })();
 
 /* ============================================================
-   CHATBOT
+   CHATBOT — Claude AI (Emma)
    ============================================================ */
 (function(){
-  var msgs=document.getElementById('chatMsgs');
-  var input=document.getElementById('chatInput');
-  var sendBtn=document.getElementById('chatSend');
-  if(!msgs)return;
-  var itEl=document.getElementById('initTime');if(itEl)itEl.textContent=getTime();
+  var msgs   = document.getElementById('chatMsgs');
+  var input  = document.getElementById('chatInput');
+  var sendBtn= document.getElementById('chatSend');
+  if(!msgs) return;
+  var itEl = document.getElementById('initTime');
+  if(itEl) itEl.textContent = getTime();
 
-  var R={
-    shipping:"We ship worldwide from our studio in Canada. Processing takes up to 2 business days, and every order includes a tracking number sent to you once dispatched.\n\nDelivery typically takes 5–10 business days within North America and 10–21 days internationally. Exact estimates appear at checkout after you enter your shipping address.",
-    returns:"Returns are accepted within 14 days of delivery. Because every piece is handmade and unique, we handle each case personally — we'd much rather find a solution together than leave you uncertain.\n\nPlease write to hello@orlinsky.ca before sending anything back, and we'll guide you through the process.",
-    custom:"We do take bespoke commissions. Every custom piece starts with a conversation — you share what you have in mind, and we discuss possibilities, timeline, and pricing together.\n\nTo begin, write to hello@orlinsky.ca with a description of your vision. We respond within 24 hours.",
-    packaging:"Every artwork leaves the studio wrapped in multiple protective layers with reinforced corners. The unboxing is designed to feel as special as the piece itself.\n\nIf a work arrives damaged despite our careful packing, please photograph it immediately and contact us — we take full responsibility.",
-    care:"Ceramic paintings are robust but appreciate a little care. Keep them away from prolonged direct sunlight and moisture. Hang on a stable wall with appropriate hardware.\n\nTo clean, use a dry or lightly dampened soft cloth — no chemicals or abrasives.",
-    pricing:"Gallery pieces are listed with their prices on each product page. Pricing for custom commissions depends on size, complexity, and timeline.\n\nFor a bespoke quote, write to hello@orlinsky.ca with your vision and we'll come back with a detailed proposal."
-  };
-
-  var KW={
-    shipping:['ship','deliver','delivery','transit','track','worldwide','canada','days','how long'],
-    returns:['return','exchange','refund','back','wrong','damaged','broken','didn\'t like'],
-    custom:['custom','commission','bespoke','personali','my own','specific','design'],
-    packaging:['packag','box','wrap','unbox','fragile','arrive'],
-    care:['care','clean','maintain','wash','hang','sunlight','moisture','dust'],
-    pricing:['price','pricing','cost','how much','expensive','fee','charge','afford']
-  };
+  var history = [];
+  var busy    = false;
 
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
-  function scrollBot(){msgs.scrollTop=msgs.scrollHeight;}
+  function scrollBot(){msgs.scrollTop = msgs.scrollHeight;}
   function getTime(){var d=new Date(),h=d.getHours()%12||12,m=d.getMinutes(),ap=d.getHours()>=12?'PM':'AM';return h+':'+(m<10?'0':'')+m+' '+ap;}
   function avaHTML(){return '<img src="Фото/Ава%20для%20чат%20бота%20керамики.jpg" alt="" class="cc-msgava">';}
 
   function addUser(text){
-    var d=document.createElement('div');d.className='cc-umsg';
-    d.innerHTML='<div class="cc-umsg-inner"><div class="cc-ub">'+esc(text)+'</div><div class="cc-msgtime cc-msgtime-r">'+getTime()+'</div></div>';
-    msgs.appendChild(d);scrollBot();
+    var d = document.createElement('div'); d.className = 'cc-umsg';
+    d.innerHTML = '<div class="cc-umsg-inner"><div class="cc-ub">'+esc(text)+'</div><div class="cc-msgtime cc-msgtime-r">'+getTime()+'</div></div>';
+    msgs.appendChild(d); scrollBot();
   }
 
   function showTyping(){
-    var r=document.createElement('div');r.className='cc-trow';r.id='typingRow';
-    r.innerHTML=avaHTML()+'<div class="cc-tdots"><span></span><span></span><span></span></div>';
-    msgs.appendChild(r);scrollBot();
+    var r = document.createElement('div'); r.className = 'cc-trow'; r.id = 'typingRow';
+    r.innerHTML = avaHTML()+'<div class="cc-tdots"><span></span><span></span><span></span></div>';
+    msgs.appendChild(r); scrollBot();
   }
 
   function removeTyping(){var r=document.getElementById('typingRow');if(r)r.remove();}
 
   function addBot(text){
     removeTyping();
-    var d=document.createElement('div');d.className='cc-bmsg';
-    var html=text.replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
-    d.innerHTML=avaHTML()+'<div class="cc-bmsg-inner"><div class="cc-bb">'+html+'</div><div class="cc-msgtime">'+getTime()+'</div></div>';
-    msgs.appendChild(d);scrollBot();
+    var d = document.createElement('div'); d.className = 'cc-bmsg';
+    var html = text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+                   .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+    d.innerHTML = avaHTML()+'<div class="cc-bmsg-inner"><div class="cc-bb">'+html+'</div><div class="cc-msgtime">'+getTime()+'</div></div>';
+    msgs.appendChild(d); scrollBot();
+  }
+
+  function setDisabled(on){
+    busy = on;
+    input.disabled  = on;
+    sendBtn.disabled= on;
+    sendBtn.style.opacity = on ? '0.5' : '';
   }
 
   function handleInput(){
-    var val=input.value.trim();if(!val)return;
-    var found=null,low=val.toLowerCase();
-    Object.keys(KW).forEach(function(k){if(!found&&KW[k].some(function(w){return low.indexOf(w)!==-1;}))found=k;});
-    addUser(val);input.value='';
+    var val = input.value.trim();
+    if(!val || busy) return;
+    addUser(val);
+    input.value = '';
     showTyping();
-    setTimeout(function(){
-      if(found){addBot(R[found]);}
-      else{addBot('That\'s a great question. I want to make sure you get the right answer — write to <a href="mailto:hello@orlinsky.ca" style="color:var(--color-accent)">hello@orlinsky.ca</a> and Ruslan will reply personally within 24 hours.');}
-    },1000+Math.random()*500);
+    setDisabled(true);
+
+    history.push({role:'user', content:val});
+
+    fetch('/api/chat.php', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({message: val, history: history.slice(0,-1)})
+    })
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(data.reply){
+        history.push({role:'assistant', content:data.reply});
+        if(history.length > 16) history = history.slice(-16);
+        addBot(data.reply);
+      } else {
+        addBot('I\'m having a small technical moment. Please try again, or write to <a href="mailto:info@orlinskyceramic.ca" style="color:var(--color-accent)">info@orlinskyceramic.ca</a>.');
+      }
+    })
+    .catch(function(){
+      removeTyping();
+      addBot('Something went wrong on my end. You can reach us directly at <a href="mailto:info@orlinskyceramic.ca" style="color:var(--color-accent)">info@orlinskyceramic.ca</a>.');
+    })
+    .finally(function(){setDisabled(false); input.focus();});
   }
 
-  sendBtn.addEventListener('click',handleInput);
-  input.addEventListener('keydown',function(e){if(e.key==='Enter')handleInput();});
+  sendBtn.addEventListener('click', handleInput);
+  input.addEventListener('keydown', function(e){if(e.key==='Enter') handleInput();});
 })();
 
 /* ============================================================
@@ -796,9 +810,9 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
       _captcha:'false'
     };
 
-    fetch('https://formsubmit.co/ajax/hello@orlinsky.ca',{
+    fetch('/api/contact.php',{
       method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      headers:{'Content-Type':'application/json'},
       body:JSON.stringify(payload)
     })
     .then(function(){showSuccess();})

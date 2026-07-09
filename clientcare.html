@@ -384,6 +384,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   gtag('js', new Date());
   gtag('config', 'G-MCYCL12NMF');
 </script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LfE10stAAAAAFnHCUdzWwwps9sRfxfwNowmchIw" async defer></script>
 </head>
 <body>
 
@@ -548,6 +549,12 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <div class="cc-form-wrap">
     <div>
       <form id="cf" novalidate>
+        <!-- honeypot: invisible to humans, bots fill it -->
+        <div style="position:absolute;left:-9999px;top:-9999px;height:0;overflow:hidden" aria-hidden="true">
+          <label for="cf-hp">Leave this empty</label>
+          <input type="text" id="cf-hp" name="website" tabindex="-1" autocomplete="off">
+        </div>
+
         <div class="cf-row">
           <div class="cf-field">
             <label class="cf-label" for="cf-name">Full Name</label>
@@ -569,7 +576,9 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
             Send Message
             <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </button>
+          <p id="cf-error" style="display:none;font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:#c0392b;margin:12px 0 0"></p>
         </div>
+        <p style="font-family:var(--font-mono);font-size:8.5px;letter-spacing:0.15em;text-transform:uppercase;color:var(--color-text-muted);margin:16px 0 0">Protected by reCAPTCHA — <a href="https://policies.google.com/privacy" style="color:inherit;text-decoration:underline" target="_blank" rel="noopener">Privacy</a> &amp; <a href="https://policies.google.com/terms" style="color:inherit;text-decoration:underline" target="_blank" rel="noopener">Terms</a></p>
       </form>
 
       <div class="cf-success" id="cf-success">
@@ -781,7 +790,10 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
   var form=document.getElementById('cf');
   var success=document.getElementById('cf-success');
   var btn=document.getElementById('cf-btn');
+  var errEl=document.getElementById('cf-error');
   if(!form||!success||!btn)return;
+
+  var SEND_SVG='<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
 
   function validate(){
     var name=form.querySelector('#cf-name').value.trim();
@@ -795,28 +807,42 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
     success.classList.add('show');
   }
 
+  function showError(msg){
+    btn.disabled=false;
+    btn.innerHTML='Send Message '+SEND_SVG;
+    if(errEl){errEl.textContent=msg;errEl.style.display='block';}
+  }
+
   form.addEventListener('submit',function(e){
     e.preventDefault();
     if(!validate())return;
+    if(errEl)errEl.style.display='none';
     btn.disabled=true;
     btn.innerHTML='Sending… <svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>';
 
-    var payload={
-      name:form.querySelector('#cf-name').value,
-      email:form.querySelector('#cf-email').value,
-      subject:form.querySelector('#cf-subject').value||'General',
-      message:form.querySelector('#cf-message').value,
-      _subject:'New message from ORLINSKY website',
-      _captcha:'false'
-    };
+    var hpVal=document.getElementById('cf-hp')?document.getElementById('cf-hp').value:'';
 
-    fetch('/api/contact.php',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify(payload)
-    })
-    .then(function(){showSuccess();})
-    .catch(function(){showSuccess();});
+    grecaptcha.ready(function(){
+      grecaptcha.execute('6LfE10stAAAAAFnHCUdzWwwps9sRfxfwNowmchIw',{action:'contact'}).then(function(token){
+        fetch('/api/contact.php',{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            name:form.querySelector('#cf-name').value,
+            email:form.querySelector('#cf-email').value,
+            message:form.querySelector('#cf-message').value,
+            recaptcha_token:token,
+            hp:hpVal
+          })
+        })
+        .then(function(r){return r.json();})
+        .then(function(d){
+          if(d.success)showSuccess();
+          else showError(d.error||'Something went wrong. Please email us at info@orlinskyceramic.ca');
+        })
+        .catch(function(){showError('Connection error. Please email us at info@orlinskyceramic.ca');});
+      }).catch(function(){showError('Verification error. Please try again.');});
+    });
   });
 })();
 </script>

@@ -709,8 +709,21 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
   var itEl = document.getElementById('initTime');
   if(itEl) itEl.textContent = getTime();
 
+  var STORAGE_KEY = 'orlinsky_emma_v1';
   var history = [];
   var busy    = false;
+
+  // Restore history from localStorage (shared with floating widget on other pages)
+  try {
+    var _s = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+    if (_s && _s.ts && (Date.now() - _s.ts) < 7*24*60*60*1000) {
+      history = _s.messages || [];
+    }
+  } catch(e) {}
+
+  function _saveHistory() {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ts:Date.now(), messages:history.slice(-40)})); } catch(e) {}
+  }
 
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function scrollBot(){msgs.scrollTop = msgs.scrollHeight;}
@@ -756,6 +769,7 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
     setDisabled(true);
 
     history.push({role:'user', content:val});
+    _saveHistory();
 
     fetch('/api/chat.php', {
       method: 'POST',
@@ -766,7 +780,8 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
     .then(function(data){
       if(data.reply){
         history.push({role:'assistant', content:data.reply});
-        if(history.length > 16) history = history.slice(-16);
+        if(history.length > 40) history = history.slice(-40);
+        _saveHistory();
         addBot(data.reply);
       } else {
         addBot('I\'m having a small technical moment. Please try again, or write to <a href="mailto:info@orlinskyceramic.ca" style="color:var(--color-accent)">info@orlinskyceramic.ca</a>.');

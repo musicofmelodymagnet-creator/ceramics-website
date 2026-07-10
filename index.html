@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="preload" as="font" type="font/woff2" href="fonts/CormorantGaramond-Regular.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/Inter_18pt-Regular.woff2" crossorigin>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -26,16 +28,16 @@
 </script>
 <style>
 /* ---- @font-face --------------------------------------------------- */
-@font-face { font-family:'Cormorant Garamond'; src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Light.ttf') format('truetype'); font-weight:300; font-style:normal; font-display:swap; }
-@font-face { font-family:'Cormorant Garamond'; src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-LightItalic.ttf') format('truetype'); font-weight:300; font-style:italic; font-display:swap; }
-@font-face { font-family:'Cormorant Garamond'; src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
-@font-face { font-family:'Cormorant Garamond'; src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Italic.ttf') format('truetype'); font-weight:400; font-style:italic; font-display:swap; }
-@font-face { font-family:'Cormorant Garamond'; src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Medium.ttf') format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
-@font-face { font-family:'Cormorant Garamond'; src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-MediumItalic.ttf') format('truetype'); font-weight:500; font-style:italic; font-display:swap; }
-@font-face { font-family:'Inter'; src:url('Design%20from%20Claude%20Design/project/fonts/Inter_18pt-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
-@font-face { font-family:'Inter'; src:url('Design%20from%20Claude%20Design/project/fonts/Inter_18pt-Medium.ttf') format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
-@font-face { font-family:'JetBrains Mono'; src:url('Design%20from%20Claude%20Design/project/fonts/JetBrainsMono-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
-@font-face { font-family:'JetBrains Mono'; src:url('Design%20from%20Claude%20Design/project/fonts/JetBrainsMono-Medium.ttf') format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:'Cormorant Garamond'; src:url('fonts/CormorantGaramond-Light.woff2') format('woff2'), url('fonts/CormorantGaramond-Light.ttf') format('truetype'); font-weight:300; font-style:normal; font-display:swap; }
+@font-face { font-family:'Cormorant Garamond'; src:url('fonts/CormorantGaramond-LightItalic.woff2') format('woff2'), url('fonts/CormorantGaramond-LightItalic.ttf') format('truetype'); font-weight:300; font-style:italic; font-display:swap; }
+@font-face { font-family:'Cormorant Garamond'; src:url('fonts/CormorantGaramond-Regular.woff2') format('woff2'), url('fonts/CormorantGaramond-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Cormorant Garamond'; src:url('fonts/CormorantGaramond-Italic.woff2') format('woff2'), url('fonts/CormorantGaramond-Italic.ttf') format('truetype'); font-weight:400; font-style:italic; font-display:swap; }
+@font-face { font-family:'Cormorant Garamond'; src:url('fonts/CormorantGaramond-Medium.woff2') format('woff2'), url('fonts/CormorantGaramond-Medium.ttf') format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:'Cormorant Garamond'; src:url('fonts/CormorantGaramond-MediumItalic.woff2') format('woff2'), url('fonts/CormorantGaramond-MediumItalic.ttf') format('truetype'); font-weight:500; font-style:italic; font-display:swap; }
+@font-face { font-family:'Inter'; src:url('fonts/Inter_18pt-Regular.woff2') format('woff2'), url('fonts/Inter_18pt-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Inter'; src:url('fonts/Inter_18pt-Medium.woff2') format('woff2'), url('fonts/Inter_18pt-Medium.ttf') format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
+@font-face { font-family:'JetBrains Mono'; src:url('fonts/JetBrainsMono-Regular.woff2') format('woff2'), url('fonts/JetBrainsMono-Regular.ttf') format('truetype'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'JetBrains Mono'; src:url('fonts/JetBrainsMono-Medium.woff2') format('woff2'), url('fonts/JetBrainsMono-Medium.ttf') format('truetype'); font-weight:500; font-style:normal; font-display:swap; }
 
 /* ====================================================================
    DARK BRAND PALETTE — Orlinsky Color System v2
@@ -1011,7 +1013,7 @@ footer .colophon {
     </nav>
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
       <div class="mark-logo">
-        <img src="Фото/LOGO-eagle.png" alt="" id="header-eagle">
+        <img src="Фото/LOGO-eagle.png" alt="" id="header-eagle" width="2605" height="1015">
       </div>
       <div class="wd">ORLINSKY</div>
       <div class="sub">ceramic studio</div>
@@ -1052,7 +1054,7 @@ footer .colophon {
 <section class="hero">
   <div class="video-wrap">
     <div class="video-frame">
-      <video autoplay muted loop playsinline webkit-playsinline preload="auto"
+      <video autoplay muted loop playsinline webkit-playsinline preload="metadata"
         poster="Design%20from%20Claude%20Design/project/assets/hero-video-placeholder.jpg">
         <source src="%D0%92%D0%B8%D0%B4%D0%B5%D0%BE/%D0%92%D0%B8%D0%B4%D0%B5%D0%BE%20%D0%B4%D0%BB%D1%8F%20HERO.mp4" type="video/mp4">
       </video>
@@ -1086,12 +1088,12 @@ footer .colophon {
 <!-- ============ CURATED PREVIEW ============ -->
 <section class="preview">
   <div class="preview-grid">
-    <a class="work" href="product.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Tulips in a striped vase"></div><div class="label"><span class="name">Tulips in a striped vase</span></div></a>
-    <a class="work" href="product-2.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Eucalyptus and winter berries"></div><div class="label"><span class="name">Eucalyptus and winter berries</span></div></a>
-    <a class="work" href="product-3.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Garden boot in bloom"></div><div class="label"><span class="name">Garden boot in bloom</span></div></a>
-    <a class="work" href="product-4.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/4-1.jpg" alt="Three vessels, still life"></div><div class="label"><span class="name">Three vessels, still life</span></div></a>
-    <a class="work" href="product-5.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/5-1.jpg" alt="The whale and the sail"></div><div class="label"><span class="name">The whale and the sail</span></div></a>
-    <a class="work" href="product-6.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/6-1.jpg" alt="Wheelbarrow in flower"></div><div class="label"><span class="name">Wheelbarrow in flower</span></div></a>
+    <a class="work" href="product.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Tulips in a striped vase" width="1792" height="1792"></div><div class="label"><span class="name">Tulips in a striped vase</span></div></a>
+    <a class="work" href="product-2.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Eucalyptus and winter berries" width="1792" height="1792"></div><div class="label"><span class="name">Eucalyptus and winter berries</span></div></a>
+    <a class="work" href="product-3.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Garden boot in bloom" width="1792" height="1792"></div><div class="label"><span class="name">Garden boot in bloom</span></div></a>
+    <a class="work" href="product-4.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/4-1.jpg" alt="Three vessels, still life" width="1792" height="1792"></div><div class="label"><span class="name">Three vessels, still life</span></div></a>
+    <a class="work" href="product-5.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/5-1.jpg" alt="The whale and the sail" width="1792" height="1792"></div><div class="label"><span class="name">The whale and the sail</span></div></a>
+    <a class="work" href="product-6.html"><div class="photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/6-1.jpg" alt="Wheelbarrow in flower" width="1237" height="1237"></div><div class="label"><span class="name">Wheelbarrow in flower</span></div></a>
   </div>
   <div class="preview-cta"><a href="gallery.html">Explore the Collection</a></div>
 </section>
@@ -1106,19 +1108,19 @@ footer .colophon {
   </div>
   <div class="kw-videos-grid">
     <div class="kw-card">
-      <img loading="lazy" decoding="async" class="kw-photo" src="Фото/Заглушки%20для%20отзывов/1%20review.jpg" alt="Client review">
+      <img loading="lazy" decoding="async" class="kw-photo" src="Фото/Заглушки%20для%20отзывов/1%20review.jpg" alt="Client review" width="1772" height="3147">
       <div class="kw-play"></div>
     </div>
     <div class="kw-card">
-      <img loading="lazy" decoding="async" class="kw-photo" src="Фото/Заглушки%20для%20отзывов/2%20review.jpg" alt="Client review">
+      <img loading="lazy" decoding="async" class="kw-photo" src="Фото/Заглушки%20для%20отзывов/2%20review.jpg" alt="Client review" width="1772" height="3150">
       <div class="kw-play"></div>
     </div>
     <div class="kw-card">
-      <img loading="lazy" decoding="async" class="kw-photo" src="Фото/Заглушки%20для%20отзывов/3%20review.jpg" alt="Client review">
+      <img loading="lazy" decoding="async" class="kw-photo" src="Фото/Заглушки%20для%20отзывов/3%20review.jpg" alt="Client review" width="1772" height="3151">
       <div class="kw-play"></div>
     </div>
     <div class="kw-card">
-      <img loading="lazy" decoding="async" class="kw-photo" src="Фото/Заглушки%20для%20отзывов/4%20review.jpg" alt="Client review">
+      <img loading="lazy" decoding="async" class="kw-photo" src="Фото/Заглушки%20для%20отзывов/4%20review.jpg" alt="Client review" width="1772" height="3151">
       <div class="kw-play"></div>
     </div>
   </div>
@@ -1175,7 +1177,7 @@ footer .colophon {
   <div class="brand">
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
       <div class="mark-logo">
-        <img loading="lazy" decoding="async" src="Фото/LOGO-eagle.png" alt="" id="footer-eagle">
+        <img loading="lazy" decoding="async" src="Фото/LOGO-eagle.png" alt="" id="footer-eagle" width="2605" height="1015">
       </div>
       <div class="wd">ORLINSKY</div>
       <div class="sub">ceramic studio</div>

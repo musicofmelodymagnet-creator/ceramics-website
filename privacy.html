@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="preload" as="font" type="font/woff2" href="fonts/CormorantGaramond-Regular.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/Inter_18pt-Regular.woff2" crossorigin>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -24,12 +26,12 @@
   if (window.location.hash) history.replaceState(null,'',window.location.pathname+window.location.search);
 </script>
 <style>
-@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Light.ttf')format('truetype');font-weight:300;font-style:normal;font-display:swap;}
-@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Italic.ttf')format('truetype');font-weight:400;font-style:italic;font-display:swap;}
-@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
-@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Medium.ttf')format('truetype');font-weight:500;font-style:normal;font-display:swap;}
-@font-face{font-family:'Inter';src:url('Design%20from%20Claude%20Design/project/fonts/Inter_18pt-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
-@font-face{font-family:'JetBrains Mono';src:url('Design%20from%20Claude%20Design/project/fonts/JetBrainsMono-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-Light.woff2') format('woff2'), url('fonts/CormorantGaramond-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-Italic.woff2') format('woff2'), url('fonts/CormorantGaramond-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-Regular.woff2') format('woff2'), url('fonts/CormorantGaramond-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-Medium.woff2') format('woff2'), url('fonts/CormorantGaramond-Medium.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Inter';src:url('fonts/Inter_18pt-Regular.woff2') format('woff2'), url('fonts/Inter_18pt-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'JetBrains Mono';src:url('fonts/JetBrainsMono-Regular.woff2') format('woff2'), url('fonts/JetBrainsMono-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
 
 :root{
   --color-bg-base:#221E1A;
@@ -37,7 +39,7 @@
   --color-bg-elevated:#2C2724;
   --color-text-primary:#F5F1E8;
   --color-text-secondary:#C9B89A;
-  --color-text-muted:#7A6E63;
+  --color-text-muted:#9A8C7C;
   --color-accent:#C8701F;
   --color-accent-hover:#E8833A;
   --color-border:#2E2820;
@@ -304,7 +306,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       <a href="#">Bespoke</a>
     </nav>
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
-      <div class="mark-logo"><img src="Фото/LOGO-eagle.png" alt="" id="header-eagle"></div>
+      <div class="mark-logo"><img src="Фото/LOGO-eagle.png" alt="" id="header-eagle" width="2605" height="1015"></div>
       <div class="wd">ORLINSKY</div>
       <div class="sub">ceramic studio</div>
     </a>
@@ -431,7 +433,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <div class="brand">
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
       <div class="mark-logo">
-        <img src="Фото/LOGO-eagle.png" alt="" id="footer-eagle">
+        <img src="Фото/LOGO-eagle.png" alt="" id="footer-eagle" width="2605" height="1015">
       </div>
       <div class="wd">ORLINSKY</div>
       <div class="sub">ceramic studio</div>

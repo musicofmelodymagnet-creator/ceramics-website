@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<link rel="preload" as="font" type="font/woff2" href="fonts/CormorantGaramond-Regular.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/Inter_18pt-Regular.woff2" crossorigin>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
@@ -24,12 +26,12 @@
   if (window.location.hash) history.replaceState(null,'',window.location.pathname+window.location.search);
 </script>
 <style>
-@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Light.ttf')format('truetype');font-weight:300;font-style:normal;font-display:swap;}
-@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Italic.ttf')format('truetype');font-weight:400;font-style:italic;font-display:swap;}
-@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
-@font-face{font-family:'Cormorant Garamond';src:url('Design%20from%20Claude%20Design/project/fonts/CormorantGaramond-Medium.ttf')format('truetype');font-weight:500;font-style:normal;font-display:swap;}
-@font-face{font-family:'Inter';src:url('Design%20from%20Claude%20Design/project/fonts/Inter_18pt-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
-@font-face{font-family:'JetBrains Mono';src:url('Design%20from%20Claude%20Design/project/fonts/JetBrainsMono-Regular.ttf')format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-Light.woff2') format('woff2'), url('fonts/CormorantGaramond-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-Italic.woff2') format('woff2'), url('fonts/CormorantGaramond-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-Regular.woff2') format('woff2'), url('fonts/CormorantGaramond-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-Medium.woff2') format('woff2'), url('fonts/CormorantGaramond-Medium.ttf') format('truetype');font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:'Inter';src:url('fonts/Inter_18pt-Regular.woff2') format('woff2'), url('fonts/Inter_18pt-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'JetBrains Mono';src:url('fonts/JetBrainsMono-Regular.woff2') format('woff2'), url('fonts/JetBrainsMono-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
 
 :root{
   --color-bg-base:#221E1A;
@@ -37,7 +39,7 @@
   --color-bg-elevated:#2C2724;
   --color-text-primary:#F5F1E8;
   --color-text-secondary:#C9B89A;
-  --color-text-muted:#7A6E63;
+  --color-text-muted:#9A8C7C;
   --color-accent:#C8701F;
   --color-accent-hover:#E8833A;
   --color-border:#2E2820;
@@ -969,7 +971,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       <a href="#">Bespoke</a>
     </nav>
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
-      <div class="mark-logo"><img src="Фото/LOGO-eagle.png" alt="" id="header-eagle"></div>
+      <div class="mark-logo"><img src="Фото/LOGO-eagle.png" alt="" id="header-eagle" width="2605" height="1015"></div>
       <div class="wd">ORLINSKY</div>
       <div class="sub">ceramic studio</div>
     </a>
@@ -1026,9 +1028,9 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <!-- Photo panel -->
     <div class="photo-panel" id="panel-photo">
       <div class="prod-main-wrap">
-        <img class="prod-slide active" src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Tulips in a striped vase — front view">
-        <img class="prod-slide" src="Фото/Фото%20наших%20картин/1-2.jpg" alt="Tulips in a striped vase — detail">
-        <img class="prod-slide" src="Фото/Фото%20наших%20картин/1-3.jpg" alt="Tulips in a striped vase — alternate view">
+        <img loading="lazy" decoding="async" class="prod-slide active" src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Tulips in a striped vase — front view" width="1792" height="1792">
+        <img loading="lazy" decoding="async" class="prod-slide" src="Фото/Фото%20наших%20картин/1-2.jpg" alt="Tulips in a striped vase — detail" width="1792" height="1792">
+        <img loading="lazy" decoding="async" class="prod-slide" src="Фото/Фото%20наших%20картин/1-3.jpg" alt="Tulips in a striped vase — alternate view" width="2048" height="2048">
       </div>
       <div class="prod-controls">
         <span class="prod-counter" id="slide-counter">01 / 03</span>
@@ -1048,13 +1050,13 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       </div>
       <div class="prod-thumb-strip">
         <button class="prod-thumb active" data-idx="0" aria-label="View image 1">
-          <img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="">
+          <img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/1-1.jpg" alt="" width="1792" height="1792">
         </button>
         <button class="prod-thumb" data-idx="1" aria-label="View image 2">
-          <img src="Фото/Фото%20наших%20картин/1-2.jpg" alt="">
+          <img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/1-2.jpg" alt="" width="1792" height="1792">
         </button>
         <button class="prod-thumb" data-idx="2" aria-label="View image 3">
-          <img src="Фото/Фото%20наших%20картин/1-3.jpg" alt="">
+          <img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/1-3.jpg" alt="" width="2048" height="2048">
         </button>
       </div>
     </div>
@@ -1062,7 +1064,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <!-- Video panel -->
     <div class="video-panel" id="panel-video">
       <a href="https://www.youtube.com/@ORLINSKYCeramic/featured" target="_blank" rel="noopener noreferrer" class="video-featured" id="video-featured" aria-label="Watch on YouTube">
-        <img class="video-featured-thumb" id="video-featured-thumb" src="Фото/Фото%20наших%20картин/1-1.jpg" alt="">
+        <img loading="lazy" decoding="async" class="video-featured-thumb" id="video-featured-thumb" src="Фото/Фото%20наших%20картин/1-1.jpg" alt="" width="1792" height="1792">
         <div class="video-featured-overlay">
           <div class="video-play-btn">
             <svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg>
@@ -1079,22 +1081,22 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
       <p class="video-list-label">From the studio</p>
       <div class="video-list" role="list">
         <button class="video-card active" data-img="Фото/Фото%20наших%20картин/1-1.jpg" data-title="How this painting was made" data-tag="Process" data-dur="4:22">
-          <div class="video-card-thumb"><img src="Фото/Фото%20наших%20картин/1-1.jpg" alt=""><div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div></div>
+          <div class="video-card-thumb"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/1-1.jpg" alt="" width="1792" height="1792"><div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div></div>
           <span class="video-card-title">How this painting was made</span>
           <div class="video-card-row"><span class="video-card-dur">4:22</span><span class="video-card-tag">Process</span></div>
         </button>
         <button class="video-card" data-img="Фото/Фото%20наших%20картин/2-1.jpg" data-title="Working with underglaze on terracotta" data-tag="Technique" data-dur="6:15">
-          <div class="video-card-thumb"><img src="Фото/Фото%20наших%20картин/2-1.jpg" alt=""><div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div></div>
+          <div class="video-card-thumb"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/2-1.jpg" alt="" width="1792" height="1792"><div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div></div>
           <span class="video-card-title">Working with underglaze on terracotta</span>
           <div class="video-card-row"><span class="video-card-dur">6:15</span><span class="video-card-tag">Technique</span></div>
         </button>
         <button class="video-card" data-img="Фото/Фото%20наших%20картин/3-1.jpg" data-title="Kiln opening — spring collection" data-tag="Behind the scenes" data-dur="2:47">
-          <div class="video-card-thumb"><img src="Фото/Фото%20наших%20картин/3-1.jpg" alt=""><div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div></div>
+          <div class="video-card-thumb"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/3-1.jpg" alt="" width="1792" height="1792"><div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div></div>
           <span class="video-card-title">Kiln opening — spring collection</span>
           <div class="video-card-row"><span class="video-card-dur">2:47</span><span class="video-card-tag">Behind the scenes</span></div>
         </button>
         <button class="video-card" data-img="Фото/Фото%20наших%20картин/4-1.jpg" data-title="Studio tour and tools" data-tag="Studio" data-dur="3:08">
-          <div class="video-card-thumb"><img src="Фото/Фото%20наших%20картин/4-1.jpg" alt=""><div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div></div>
+          <div class="video-card-thumb"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/4-1.jpg" alt="" width="1792" height="1792"><div class="video-card-play-icon"><svg viewBox="0 0 16 16"><path d="M3 2l10 6-10 6z"/></svg></div></div>
           <span class="video-card-title">Studio tour and tools</span>
           <div class="video-card-row"><span class="video-card-dur">3:08</span><span class="video-card-tag">Studio</span></div>
         </button>
@@ -1109,8 +1111,8 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="packaging-panel" id="panel-packaging">
       <p class="pkg-intro">Every piece leaves our studio wrapped with the same care that was put into making it.</p>
       <div class="pkg-photos">
-        <div class="pkg-photo"><img src="Фото/Фото%20наших%20картин/1-2.jpg" alt="Packaging — tissue wrapping"></div>
-        <div class="pkg-photo"><img src="Фото/Фото%20наших%20картин/1-3.jpg" alt="Packaging — finished box"></div>
+        <div class="pkg-photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/1-2.jpg" alt="Packaging — tissue wrapping" width="1792" height="1792"></div>
+        <div class="pkg-photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/1-3.jpg" alt="Packaging — finished box" width="2048" height="2048"></div>
       </div>
       <ul class="pkg-steps">
         <li class="pkg-step">
@@ -1340,32 +1342,32 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="related-slider-wrap">
       <div class="related-grid" id="related-grid">
         <a class="related-item" href="product.html">
-          <div class="related-photo"><img src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Tulips in a striped vase"></div>
+          <div class="related-photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/1-1.jpg" alt="Tulips in a striped vase" width="1792" height="1792"></div>
           <span class="related-num">01</span>
           <span class="related-name">Tulips in a striped vase</span>
         </a>
         <a class="related-item" href="product-2.html">
-          <div class="related-photo"><img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Eucalyptus and winter berries"></div>
+          <div class="related-photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Eucalyptus and winter berries" width="1792" height="1792"></div>
           <span class="related-num">02</span>
           <span class="related-name">Eucalyptus and winter berries</span>
         </a>
         <a class="related-item" href="product-3.html">
-          <div class="related-photo"><img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Garden boot in bloom"></div>
+          <div class="related-photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Garden boot in bloom" width="1792" height="1792"></div>
           <span class="related-num">03</span>
           <span class="related-name">Garden boot in bloom</span>
         </a>
         <a class="related-item" href="product-4.html">
-          <div class="related-photo"><img src="Фото/Фото%20наших%20картин/4-1.jpg" alt="Three vessels, still life"></div>
+          <div class="related-photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/4-1.jpg" alt="Three vessels, still life" width="1792" height="1792"></div>
           <span class="related-num">04</span>
           <span class="related-name">Three vessels, still life</span>
         </a>
         <a class="related-item" href="product-5.html">
-          <div class="related-photo"><img src="Фото/Фото%20наших%20картин/5-1.jpg" alt="The whale and the sail"></div>
+          <div class="related-photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/5-1.jpg" alt="The whale and the sail" width="1792" height="1792"></div>
           <span class="related-num">05</span>
           <span class="related-name">The whale and the sail</span>
         </a>
         <a class="related-item" href="product-6.html">
-          <div class="related-photo"><img src="Фото/Фото%20наших%20картин/6-1.jpg" alt="Wheelbarrow in flower"></div>
+          <div class="related-photo"><img loading="lazy" decoding="async" src="Фото/Фото%20наших%20картин/6-1.jpg" alt="Wheelbarrow in flower" width="1237" height="1237"></div>
           <span class="related-num">06</span>
           <span class="related-name">Wheelbarrow in flower</span>
         </a>
@@ -1400,7 +1402,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <div class="brand">
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
       <div class="mark-logo">
-        <img src="Фото/LOGO-eagle.png" alt="" id="footer-eagle">
+        <img loading="lazy" decoding="async" src="Фото/LOGO-eagle.png" alt="" id="footer-eagle" width="2605" height="1015">
       </div>
       <div class="wd">ORLINSKY</div>
       <div class="sub">ceramic studio</div>
@@ -1521,7 +1523,7 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
       var price=btn.dataset.price||'';
       var size=btn.dataset.size||'';
       var dim=btn.querySelector('.sz-dim')?btn.querySelector('.sz-dim').textContent:'';
-      if(priceEl)priceEl.textContent=price;
+      if(priceEl)priceEl.textContent=(window.ORL_CURRENCY?window.ORL_CURRENCY.prefix:'$')+price.replace(/[^0-9.]/g,'');
       var data=sizeData[size];
       if(data){
         if(dimsEl)dimsEl.textContent=data.dims;
@@ -1632,5 +1634,6 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
 })();
 </script>
 <script src="chat-widget.js" defer></script>
+<script src="currency.js" defer></script>
 </body>
 </html>

@@ -11,7 +11,31 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // CA → CAD, everyone else → USD.  Falls back to USD if DB not installed yet.
 define('GEO_INTERNAL', 1);
 require __DIR__ . '/_geo.php';
-$currency = currencyByIp(clientIp());
+$ip       = clientIp();
+$currency = currencyByIp($ip);
+
+// ── Rate limiting: 20 payment intents per IP per hour (atomic via flock) ─────
+function checkPayRateLimit(string $ip): bool {
+    $f   = sys_get_temp_dir() . '/orlpay_' . md5($ip) . '.json';
+    $now = time();
+    $fh  = fopen($f, 'c+');
+    if (!$fh) return true; // filesystem issue — don't block real customers
+    flock($fh, LOCK_EX);
+    $d      = json_decode(stream_get_contents($fh) ?: '', true) ?? ['r' => []];
+    $d['r'] = array_values(array_filter($d['r'] ?? [], fn($t) => $now - $t < 3600));
+    if (count($d['r']) >= 20) {
+        flock($fh, LOCK_UN); fclose($fh);
+        return false;
+    }
+    $d['r'][] = $now;
+    rewind($fh); ftruncate($fh, 0); fwrite($fh, json_encode($d));
+    flock($fh, LOCK_UN); fclose($fh);
+    return true;
+}
+if (!checkPayRateLimit($ip)) {
+    http_response_code(429);
+    echo json_encode(['error' => 'Too many attempts. Please wait a moment and try again.']); exit;
+}
 
 $BASE    = '/home/admin/web/orlinskyceramic.ca/private';
 require $BASE . '/vendor/autoload.php';

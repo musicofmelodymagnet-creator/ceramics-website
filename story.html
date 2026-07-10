@@ -252,6 +252,9 @@ footer .colophon { grid-column:1/-1; margin-top:40px; padding-top:16px; border-t
   footer .colophon{flex-direction:column;align-items:flex-start;gap:8px;border-top-width:1px;border-top-color:var(--color-divider);}
   footer .colophon .legal{flex-direction:row;gap:20px;}
 }
+/* Touch targets >=44px (WCAG 2.5.5 / mobile) */
+.prod-arrow,.prod-dot,.soc,.hamburger,.mute-btn{position:relative;}
+.prod-arrow::after,.prod-dot::after,.soc::after,.hamburger::after,.mute-btn::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;}
 </style>
 <!-- Google Analytics — replace G-MCYCL12NMF with your Measurement ID -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MCYCL12NMF"></script>
@@ -461,12 +464,12 @@ var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=se
 /* Mobile menu */
 (function(){
   var hb=document.querySelector('.hamburger'), menu=document.querySelector('.mobile-menu'), bd=document.querySelector('.menu-backdrop');
-  if(!hb||!menu) return;
+  if(!hb||!menu) return; menu.setAttribute('inert',''); menu.setAttribute('aria-hidden','true');
   var isOpen=false, savedY=0;
   function lockScroll(){ savedY=window.scrollY; document.body.style.overflow='hidden'; document.body.style.position='fixed'; document.body.style.top='-'+savedY+'px'; document.body.style.width='100%'; }
   function unlockScroll(){ document.body.style.overflow=''; document.body.style.position=''; document.body.style.top=''; document.body.style.width=''; window.scrollTo(0,savedY); }
-  function open(){ if(isOpen)return; isOpen=true; menu.classList.remove('is-closing'); menu.classList.add('is-opening'); if(bd){bd.classList.remove('open');void bd.offsetWidth;bd.classList.add('open');} hb.classList.add('active'); hb.setAttribute('aria-expanded','true'); lockScroll(); }
-  function close(){ if(!isOpen)return; isOpen=false; menu.classList.remove('is-opening'); menu.classList.add('is-closing'); if(bd)bd.classList.remove('open'); hb.classList.remove('active'); hb.setAttribute('aria-expanded','false'); unlockScroll(); menu.addEventListener('animationend',function cleanup(e){ if(e.animationName==='menu-exit'){menu.classList.remove('is-closing');menu.style.transform='translateX(100%)';} menu.removeEventListener('animationend',cleanup); }); }
+  function open(){ if(isOpen)return; isOpen=true; menu.classList.remove('is-closing'); menu.classList.add('is-opening'); if(bd){bd.classList.remove('open');void bd.offsetWidth;bd.classList.add('open');} hb.classList.add('active'); hb.setAttribute('aria-expanded','true'); menu.removeAttribute('inert'); menu.setAttribute('aria-hidden','false'); lockScroll(); }
+  function close(){ if(!isOpen)return; isOpen=false; menu.classList.remove('is-opening'); menu.classList.add('is-closing'); if(bd)bd.classList.remove('open'); hb.classList.remove('active'); hb.setAttribute('aria-expanded','false'); menu.setAttribute('inert',''); menu.setAttribute('aria-hidden','true'); unlockScroll(); menu.addEventListener('animationend',function cleanup(e){ if(e.animationName==='menu-exit'){menu.classList.remove('is-closing');menu.style.transform='translateX(100%)';} menu.removeEventListener('animationend',cleanup); }); }
   hb.addEventListener('click',function(){ isOpen?close():open(); });
   if(bd)bd.addEventListener('click',close);
   menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click',close); });

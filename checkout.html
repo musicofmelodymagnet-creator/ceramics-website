@@ -89,6 +89,16 @@ select.cf-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://ww
   .cf-grid-2,.cf-grid-3{grid-template-columns:1fr;}
   .cf-half{max-width:100%;}
 }
+
+/* Focused checkout flow — hide the floating chat so it never overlaps Pay now */
+#emma-fab{display:none!important;}
+
+/* Button spinner */
+@keyframes co-spin{to{transform:rotate(360deg);}}
+.co-spin{display:inline-block;width:13px;height:13px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:co-spin .7s linear infinite;vertical-align:-2px;margin-right:8px;}
+/* Touch targets >=44px (WCAG 2.5.5 / mobile) */
+.prod-arrow,.prod-dot,.soc,.hamburger,.mute-btn{position:relative;}
+.prod-arrow::after,.prod-dot::after,.soc::after,.hamburger::after,.mute-btn::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;}
 </style>
 </head>
 <body>
@@ -311,7 +321,7 @@ document.getElementById('co-continue-btn').addEventListener('click', async () =>
 
   const btn = document.getElementById('co-continue-btn');
   btn.disabled    = true;
-  btn.textContent = 'Loading...';
+  btn.innerHTML = '<span class="co-spin"></span>Processing…';
 
   const ok = await initPayment();
   if (!ok) { btn.disabled = false; btn.textContent = 'Continue to Payment'; return; }
@@ -388,14 +398,18 @@ async function initPayment() {
 // ── Confirm payment ────────────────────────────
 document.getElementById('pay-btn').addEventListener('click', async () => {
   const btn = document.getElementById('pay-btn');
+  const original = btn.innerHTML;
   btn.disabled = true;
+  btn.innerHTML = '<span class="co-spin"></span>Processing payment…';
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: { return_url: window.location.origin + '/order-success.html' },
   });
+  // On success Stripe redirects away; we only reach here on error.
   if (error) {
     showPayError(error.message);
     btn.disabled = false;
+    btn.innerHTML = original;
   }
 });
 

@@ -665,7 +665,9 @@ header.nav .mark .sub {
   }
   .kw-videos-grid::-webkit-scrollbar { display:none; }
   .kw-card { flex:0 0 80vw; scroll-snap-align:start; aspect-ratio:9/16; }
+  .kw-swipe-hint { display:block; }
 }
+.kw-swipe-hint { display:none; text-align:center; font-family:var(--font-mono); font-size:9px; letter-spacing:0.24em; text-transform:uppercase; color:var(--color-text-muted); margin:16px 0 0; }
 
 /* ============================================================
    PHILOSOPHY
@@ -935,6 +937,9 @@ footer .colophon {
   /* Hero */
   .hero .sub-headline { margin-top:17px; }
 }
+/* Touch targets >=44px (WCAG 2.5.5 / mobile) */
+.prod-arrow,.prod-dot,.soc,.hamburger,.mute-btn{position:relative;}
+.prod-arrow::after,.prod-dot::after,.soc::after,.hamburger::after,.mute-btn::after{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;}
 </style>
 
 <!-- Google Analytics — replace G-MCYCL12NMF with your Measurement ID -->
@@ -1124,6 +1129,7 @@ footer .colophon {
       <div class="kw-play"></div>
     </div>
   </div>
+  <p class="kw-swipe-hint" aria-hidden="true">Swipe to see more &rarr;</p>
   <div class="kw-cta">
     <a href="kindwords.html">See all reviews</a>
   </div>
@@ -1414,7 +1420,7 @@ var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=se
   var hb   = document.querySelector('.hamburger');
   var menu = document.querySelector('.mobile-menu');
   var bd   = document.querySelector('.menu-backdrop');
-  if(!hb || !menu) return;
+  if(!hb || !menu) return; menu.setAttribute('inert',''); menu.setAttribute('aria-hidden','true');
 
   var isOpen = false, savedScrollY = 0;
 
@@ -1440,7 +1446,7 @@ var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=se
     menu.classList.add('is-opening');
     if(bd){ bd.classList.remove('open'); void bd.offsetWidth; bd.classList.add('open'); }
     hb.classList.add('active');
-    hb.setAttribute('aria-expanded','true');
+    hb.setAttribute('aria-expanded','true'); menu.removeAttribute('inert'); menu.setAttribute('aria-hidden','false');
     lockScroll();
   }
 
@@ -1451,7 +1457,7 @@ var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=se
     menu.classList.add('is-closing');
     if(bd) bd.classList.remove('open');
     hb.classList.remove('active');
-    hb.setAttribute('aria-expanded','false');
+    hb.setAttribute('aria-expanded','false'); menu.setAttribute('inert',''); menu.setAttribute('aria-hidden','true');
     unlockScroll();
     menu.addEventListener('animationend', function cleanup(e){
       if(e.animationName === 'menu-exit'){

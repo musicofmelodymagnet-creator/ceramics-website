@@ -90,8 +90,9 @@ select.cf-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://ww
   .cf-half{max-width:100%;}
 }
 
-/* Focused checkout flow — hide the floating chat so it never overlaps Pay now */
+/* Focused checkout flow — hide the floating chat + cart button */
 #emma-fab{display:none!important;}
+#orl-cart-btn{display:none!important;}
 
 /* Button spinner */
 @keyframes co-spin{to{transform:rotate(360deg);}}
@@ -110,10 +111,13 @@ select.cf-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://ww
   <div class="co-summary">
     <div class="co-summary-title">Order Summary</div>
     <div id="co-items"></div>
+    <div class="co-item" style="border-bottom:none;padding-top:14px;"><span>Subtotal</span><span id="co-subtotal">—</span></div>
+    <div class="co-item" style="border-bottom:none;"><span id="co-ship-label">Shipping</span><span id="co-shipping">Calculated at address</span></div>
     <div class="co-total">
       <span>Total</span>
       <span id="co-total-amount">—</span>
     </div>
+    <p id="co-free-note" style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-text-muted);margin:12px 0 0;"></p>
   </div>
 
   <!-- Shipping & contact form -->
@@ -206,34 +210,10 @@ select.cf-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://ww
 </div>
 
 <script src="https://js.stripe.com/v3/"></script>
+<script src="currency.js"></script>
+<script src="cart.js"></script>
 <script>
 const STRIPE_PK = 'pk_test_51TqFGFRLE3GENWdWD5kDvXMFTjW3Tt3HjZFemtaG6YpcvbVM3hOmfbxXEWa3WZr5p88p8NixeXwZs1BQ8SjaCbQ300UWkSb8sq';
-
-// Display catalog (prices are re-validated server-side from private/catalog.php).
-// Keys must match the server catalog: <slug>-<size-in-inches>.
-const CLIENT_CATALOG = (function () {
-  var paintings = {
-    'tulips':        'Tulips in a striped vase',
-    'eucalyptus':    'Eucalyptus and winter berries',
-    'garden-boot':   'Garden boot in bloom',
-    'three-vessels': 'Three vessels, still life',
-    'whale-sail':    'The whale and the sail',
-    'wheelbarrow':   'Wheelbarrow in flower',
-    'bible-verse':   'Ceramic Painting with Daily Bible Verse',
-  };
-  var sizes = { 5: 15000, 7: 20000, 9: 25000, 11: 30000 };
-  var cat = {};
-  Object.keys(paintings).forEach(function (slug) {
-    Object.keys(sizes).forEach(function (inch) {
-      cat[slug + '-' + inch] = { title: paintings[slug] + ' — ' + inch + '″', price: sizes[inch] };
-    });
-  });
-  return cat;
-})();
-
-// Item to buy comes from the URL: checkout.html?item=<slug>-<size>
-var _requested = new URLSearchParams(location.search).get('item');
-const CART_ITEMS = (_requested && CLIENT_CATALOG[_requested]) ? [_requested] : [];
 
 const appearance = {
   theme: 'night',
@@ -257,46 +237,95 @@ const appearance = {
 
 const stripe = Stripe(STRIPE_PK);
 let elements;
-let currentCurrency = 'usd'; // default until server responds with IP-based currency
+let currentCurrency = 'usd';   // until server responds with IP-based currency
 let shippingData    = null;
+let quote           = null;    // last server shipping quote {subtotal, shipping, total, freeShipping, freeThreshold}
+let quoteSeq        = 0;
 
-// ── Order summary ──────────────────────────────
+function cartItems() { return (window.ORLCart ? window.ORLCart.items() : []); }
+function apiItems()  { return cartItems().map(function (i) { return { id: i.id, qty: i.qty }; }); }
+
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function formatMoney(cents) {
+  const locale = currentCurrency === 'usd' ? 'en-US' : 'en-CA';
+  return new Intl.NumberFormat(locale, { style: 'currency', currency: currentCurrency.toUpperCase() }).format(cents / 100);
+}
+
+function localSubtotal() { return cartItems().reduce(function (n, i) { return n + i.price * i.qty; }, 0); }
+
+// ── Render line items + totals ──────────────────
 function renderSummary() {
   const container = document.getElementById('co-items');
   const totalEl   = document.getElementById('co-total-amount');
+  const subEl     = document.getElementById('co-subtotal');
+  const shipEl    = document.getElementById('co-shipping');
+  const noteEl    = document.getElementById('co-free-note');
   container.innerHTML = '';
 
-  // No valid item selected — guide the visitor back instead of a blank/broken order.
-  if (CART_ITEMS.length === 0) {
-    container.innerHTML = '<div class="co-item" style="border:none;color:var(--color-text-secondary)">No item selected — please choose a painting first.</div>';
-    totalEl.textContent = '—';
+  const items = cartItems();
+  if (items.length === 0) {
+    container.innerHTML = '<div class="co-item" style="border:none;color:var(--color-text-secondary)">Your cart is empty.</div>';
+    subEl.textContent = '—'; shipEl.textContent = '—'; totalEl.textContent = '—'; noteEl.textContent = '';
     const b = document.getElementById('co-continue-btn');
-    if (b) { b.disabled = true; b.textContent = 'Browse the collection'; b.disabled = false; b.onclick = function(){ location.href = 'ceramic-paintings.html'; }; }
+    if (b) { b.textContent = 'Browse the collection'; b.onclick = function(){ location.href = 'ceramic-paintings.html'; }; }
+    document.getElementById('co-shipping-form').style.display = 'none';
     return;
   }
 
-  let total = 0;
-  CART_ITEMS.forEach(id => {
-    const item = CLIENT_CATALOG[id];
-    if (!item) return;
-    const price = item.price;
-    total += price;
+  items.forEach(function (it) {
     const row = document.createElement('div');
     row.className = 'co-item';
-    row.innerHTML = `<span>${item.title}</span><span>${formatMoney(price)}</span>`;
+    const name = esc(it.title) + (it.size ? ' — ' + esc(it.size) + '″' : '') + (it.qty > 1 ? ' ×' + it.qty : '');
+    row.innerHTML = '<span>' + name + '</span><span>' + formatMoney(it.price * it.qty) + '</span>';
     container.appendChild(row);
   });
-  totalEl.textContent = formatMoney(total);
+
+  const sub = quote ? quote.subtotal : localSubtotal();
+  subEl.textContent = formatMoney(sub);
+
+  if (quote) {
+    shipEl.textContent = quote.freeShipping ? 'Free' : formatMoney(quote.shipping);
+    totalEl.textContent = formatMoney(quote.total);
+    if (quote.freeShipping) {
+      noteEl.textContent = 'Free shipping applied (order over ' + formatMoney(quote.freeThreshold) + ').';
+    } else {
+      const left = quote.freeThreshold - quote.subtotal;
+      noteEl.textContent = left > 0 ? ('Add ' + formatMoney(left) + ' more for free shipping.') : '';
+    }
+  } else {
+    shipEl.textContent = 'Calculated at address';
+    totalEl.textContent = formatMoney(sub);
+    noteEl.textContent = 'Free shipping over ' + formatMoney(30000) + '.';
+  }
 }
 
-function formatMoney(cents) {
-  const locale    = currentCurrency === 'usd' ? 'en-US' : 'en-CA';
-  const formatted = new Intl.NumberFormat(locale, { style: 'currency', currency: currentCurrency.toUpperCase() }).format(cents / 100);
-  return formatted;
+// ── Live shipping quote from server (never trusts client prices) ─────────────
+async function refreshQuote() {
+  const items = apiItems();
+  if (items.length === 0) return;
+  const country = document.getElementById('cf-country').value || 'CA';
+  const seq = ++quoteSeq;
+  try {
+    const res = await fetch('/api/shipping-quote.php', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: items, country: country }),
+    });
+    const d = await res.json();
+    if (seq !== quoteSeq) return;          // a newer request superseded this one
+    if (d && !d.error) {
+      if (d.currency === 'cad' || d.currency === 'usd') currentCurrency = d.currency;
+      quote = d;
+      renderSummary();
+    }
+  } catch (e) { /* keep last known / local subtotal */ }
 }
+
+document.getElementById('cf-country').addEventListener('change', refreshQuote);
 
 // ── Form validation + Continue ─────────────────
 document.getElementById('co-continue-btn').addEventListener('click', async () => {
+  if (cartItems().length === 0) { location.href = 'ceramic-paintings.html'; return; }
   const email  = document.getElementById('cf-email').value.trim();
   const name   = document.getElementById('cf-name').value.trim();
   const line1  = document.getElementById('cf-line1').value.trim();
@@ -307,9 +336,7 @@ document.getElementById('co-continue-btn').addEventListener('click', async () =>
   const country = document.getElementById('cf-country').value;
   const errEl  = document.getElementById('co-form-error');
 
-  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    errEl.textContent = 'Please enter a valid email address.'; return;
-  }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Please enter a valid email address.'; return; }
   if (!name)   { errEl.textContent = 'Full name is required.'; return; }
   if (!line1)  { errEl.textContent = 'Street address is required.'; return; }
   if (!city)   { errEl.textContent = 'City is required.'; return; }
@@ -320,7 +347,7 @@ document.getElementById('co-continue-btn').addEventListener('click', async () =>
   shippingData = { email, name, line1, line2, city, state, postal_code: postal, country };
 
   const btn = document.getElementById('co-continue-btn');
-  btn.disabled    = true;
+  btn.disabled = true;
   btn.innerHTML = '<span class="co-spin"></span>Processing…';
 
   const ok = await initPayment();
@@ -352,8 +379,7 @@ async function initPayment() {
   document.getElementById('pay-error').textContent = '';
 
   const order = {
-    items:    CART_ITEMS,
-    currency: currentCurrency,
+    items:    apiItems(),
     email:    shippingData.email,
     shipping: {
       name:        shippingData.name,
@@ -368,18 +394,17 @@ async function initPayment() {
 
   try {
     const res  = await fetch('/api/create-payment-intent.php', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
+      method:  'POST', headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify(order),
     });
     const data = await res.json();
     if (data.error) { showPayError(data.error); return false; }
 
-    // Reconcile the displayed total with the authoritative server amount/currency.
+    // Authoritative amounts from the server drive the displayed totals.
     if (data.currency === 'cad' || data.currency === 'usd') currentCurrency = data.currency;
-    if (typeof data.amount === 'number') {
-      const totalEl = document.getElementById('co-total-amount');
-      if (totalEl) totalEl.textContent = formatMoney(data.amount);
+    if (typeof data.subtotal === 'number') {
+      quote = { subtotal: data.subtotal, shipping: data.shipping, total: data.amount, freeShipping: !!data.freeShipping, freeThreshold: 30000 };
+      renderSummary();
     }
 
     if (elements) elements.destroy();
@@ -417,21 +442,14 @@ function showPayError(msg) {
   document.getElementById('pay-error').textContent = msg;
 }
 
-// ── Boot: fetch currency from server by IP, then render ────────────────────
-(async () => {
-  try {
-    const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 4000); // never let a hung request block the summary
-    const r = await fetch('/api/currency.php', { signal: ctrl.signal });
-    clearTimeout(timer);
-    if (r.ok) {
-      const d = await r.json();
-      // Only trust the server currency when geo lookup actually succeeded (ready).
-      if (d.ready && (d.currency === 'cad' || d.currency === 'usd')) currentCurrency = d.currency;
-    }
-  } catch (_) { /* timeout or network error — keep 'usd' default */ }
+// ── Boot ────────────────────────────────────────
+function boot() {
+  if (!window.ORLCart) { setTimeout(boot, 60); return; }
+  window.ORLCart.onChange(function () { quote = null; renderSummary(); refreshQuote(); });
   renderSummary();
-})();
+  refreshQuote(); // show shipping/total for the default country right away
+}
+boot();
 </script>
 <script src="chat-widget.js" defer></script>
 </body>

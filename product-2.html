@@ -1240,7 +1240,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <!-- CTA buttons -->
     <div class="prod-actions">
       <span style="display:block;font-family:var(--font-mono);font-size:9px;letter-spacing:0.28em;text-transform:uppercase;color:var(--color-accent);margin:0 0 14px;">Original — 1 of 1</span>
-      <a href="checkout.html?item=eucalyptus-9" class="btn-primary" id="order-btn">Order this painting</a>
+      <button type="button" class="btn-primary" id="order-btn" data-title="Eucalyptus and winter berries" data-item="eucalyptus-9" data-price="25000" data-size="9">Add to Cart</button>
       <a href="clientcare.html" style="display:block;text-align:center;margin-top:12px;font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-secondary);border:1px solid var(--color-divider);padding:14px 40px;box-sizing:border-box;">Ask a question</a>
       <p style="margin:16px 0 0;font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-muted);line-height:1.8;">Ships in 3–4 weeks · Secure checkout · Insured worldwide · 14-day returns</p>
     </div>
@@ -1434,7 +1434,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 </footer>
 
 <script>
-window.addEventListener('DOMContentLoaded', function(){ window.scrollTo(0,0); var _o=document.getElementById('order-btn'), _a=document.querySelector('.size-btn.active'); if(_o&&_a){ _o.href='checkout.html?item='+'eucalyptus'+'-'+(_a.dataset.size||'9'); } });
+window.addEventListener('DOMContentLoaded', function(){ window.scrollTo(0,0); var _o=document.getElementById('order-btn'), _a=document.querySelector('.size-btn.active'); if(_o&&_a){ var _s=_a.dataset.size||'9';_o.setAttribute('data-item','eucalyptus-'+_s);_o.setAttribute('data-price',String((parseInt((_a.dataset.price||'').replace(/[^0-9]/g,''),10)||0)*100));_o.setAttribute('data-size',_s); } });
 
 /* Logo calibration */
 function calibrateLogo(imgEl){
@@ -1536,7 +1536,7 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
         if(weightEl)weightEl.textContent=data.weight;
       }
       if(orderBtn){
-        orderBtn.href='checkout.html?item=eucalyptus-'+size;
+        orderBtn.setAttribute('data-item','eucalyptus-'+size);orderBtn.setAttribute('data-price',String((parseInt((price||'').replace(/[^0-9]/g,''),10)||0)*100));orderBtn.setAttribute('data-size',size);
       }
     });
   });
@@ -1641,5 +1641,7 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
 </script>
 <script src="chat-widget.js" defer></script>
 <script src="currency.js" defer></script>
+<script src="cart.js" defer></script>
+<script src="add-to-cart.js" defer></script>
 </body>
 </html>

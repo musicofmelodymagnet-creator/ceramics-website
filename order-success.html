@@ -106,8 +106,11 @@ html,body{margin:0;padding:0;background:var(--color-bg-base);color:var(--color-t
   var body2   = document.getElementById('os-body-2');
 
   if (status === 'succeeded') {
-    // Keep the default "Order Confirmed / payment received" content.
+    // Payment went through — empty the cart so it isn't re-ordered.
+    try { localStorage.removeItem('orlinsky_cart_v1'); } catch (e) {}
   } else if (status === 'processing') {
+    // Payment captured/processing — order placed, safe to clear the cart too.
+    try { localStorage.removeItem('orlinsky_cart_v1'); } catch (e) {}
     document.title = 'Payment Processing — ORLINSKY Ceramic Studio';
     if (icon) icon.style.display = 'none';
     eyebrow.textContent = 'Payment Processing';
@@ -128,5 +131,6 @@ html,body{margin:0;padding:0;background:var(--color-bg-base);color:var(--color-t
 </script>
 
 <script src="chat-widget.js" defer></script>
+<script src="cart.js" defer></script>
 </body>
 </html>

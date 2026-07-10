@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preload" as="font" type="font/woff2" href="fonts/CormorantGaramond-Regular.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/Inter_18pt-Regular.woff2" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Your Cart — ORLINSKY Ceramic Studio</title>
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://orlinskyceramic.ca/cart.html">
+<style>
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-Light.woff2') format('woff2'),url('fonts/CormorantGaramond-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:'Cormorant Garamond';src:url('fonts/CormorantGaramond-Regular.woff2') format('woff2'),url('fonts/CormorantGaramond-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Inter';src:url('fonts/Inter_18pt-Regular.woff2') format('woff2'),url('fonts/Inter_18pt-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'JetBrains Mono';src:url('fonts/JetBrainsMono-Regular.woff2') format('woff2'),url('fonts/JetBrainsMono-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+
+:root{
+  --color-bg-base:#221E1A;
+  --color-bg-header:#16130F;
+  --color-bg-elevated:#2C2724;
+  --color-text-primary:#F5F1E8;
+  --color-text-secondary:#C9B89A;
+  --color-text-muted:#9A8C7C;
+  --color-accent:#C8701F;
+  --color-accent-hover:#E8833A;
+  --color-border:#2E2820;
+  --font-serif:'Cormorant Garamond','EB Garamond',Georgia,serif;
+  --font-sans:'Inter',-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono','IBM Plex Mono',monospace;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--color-bg-base);color:var(--color-text-primary);font-family:var(--font-sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+
+.ct-top{background:var(--color-bg-header);border-bottom:1px solid var(--color-border);padding:18px 24px;text-align:center;}
+.ct-top a{font-family:var(--font-serif);font-weight:500;font-size:18px;letter-spacing:0.38em;text-transform:uppercase;color:var(--color-text-primary);}
+
+.ct-wrap{max-width:720px;margin:0 auto;padding:56px 24px 120px;}
+.ct-eyebrow{font-family:var(--font-mono);font-size:10px;letter-spacing:0.44em;text-transform:uppercase;color:var(--color-accent);margin:0 0 14px;display:block;}
+.ct-title{font-family:var(--font-serif);font-weight:300;font-size:clamp(30px,4vw,48px);line-height:1.1;margin:0 0 40px;}
+
+/* line item */
+.ct-item{display:grid;grid-template-columns:88px 1fr auto;gap:18px;align-items:center;padding:20px 0;border-bottom:1px solid var(--color-border);}
+.ct-item-img{width:88px;height:88px;object-fit:cover;background:var(--color-bg-elevated);display:block;}
+.ct-item-name{font-family:var(--font-serif);font-size:20px;font-weight:400;line-height:1.2;margin:0 0 4px;}
+.ct-item-size{font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--color-text-muted);}
+.ct-item-price{font-family:var(--font-mono);font-size:12px;letter-spacing:0.08em;color:var(--color-text-secondary);margin-top:8px;}
+.ct-item-right{display:flex;flex-direction:column;align-items:flex-end;gap:12px;}
+.ct-qty{display:flex;align-items:center;border:1px solid var(--color-border);}
+.ct-qty button{width:32px;height:32px;background:transparent;border:none;color:var(--color-text-secondary);cursor:pointer;font-size:16px;font-family:var(--font-mono);transition:background 160ms ease,color 160ms ease;}
+.ct-qty button:hover{background:var(--color-bg-elevated);color:var(--color-accent);}
+.ct-qty span{min-width:34px;text-align:center;font-family:var(--font-mono);font-size:13px;}
+.ct-remove{background:none;border:none;color:var(--color-text-muted);font-family:var(--font-mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px;}
+.ct-remove:hover{color:var(--color-accent-hover);}
+
+/* summary */
+.ct-summary{margin-top:32px;}
+.ct-row{display:flex;justify-content:space-between;font-size:14px;color:var(--color-text-secondary);padding:8px 0;}
+.ct-total{display:flex;justify-content:space-between;font-family:var(--font-serif);font-size:22px;color:var(--color-text-primary);margin-top:8px;padding-top:16px;border-top:1px solid var(--color-border);}
+.ct-ship-note{font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-muted);margin-top:6px;line-height:1.7;}
+
+/* free-shipping progress */
+.ct-free{margin-top:22px;padding:14px 16px;border:1px solid var(--color-border);background:var(--color-bg-elevated);}
+.ct-free-text{font-family:var(--font-mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-secondary);margin:0 0 10px;}
+.ct-free-text b{color:var(--color-accent);}
+.ct-bar{height:3px;background:var(--color-border);position:relative;overflow:hidden;}
+.ct-bar>i{position:absolute;left:0;top:0;bottom:0;background:var(--color-accent);width:0;transition:width 400ms cubic-bezier(0.4,0,0.2,1);}
+
+/* actions */
+.ct-actions{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap;}
+.ct-btn-primary{flex:1;min-width:200px;background:var(--color-accent);border:none;padding:16px 34px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:#16130F;cursor:pointer;text-align:center;transition:background 200ms ease;}
+.ct-btn-primary:hover{background:var(--color-accent-hover);}
+.ct-btn-secondary{flex:1;min-width:200px;background:transparent;border:1px solid var(--color-border);padding:16px 34px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--color-text-secondary);cursor:pointer;text-align:center;transition:border-color 200ms ease,color 200ms ease;}
+.ct-btn-secondary:hover{border-color:var(--color-text-secondary);color:var(--color-text-primary);}
+
+/* empty */
+.ct-empty{text-align:center;padding:40px 0 8px;}
+.ct-empty p{font-family:var(--font-serif);font-size:22px;color:var(--color-text-secondary);margin:0 0 28px;font-weight:300;}
+
+.ct-trust{display:flex;align-items:center;gap:10px;margin-top:28px;color:var(--color-text-muted);}
+.ct-trust svg{flex-shrink:0;opacity:0.6;}
+.ct-trust span{font-size:12px;line-height:1.4;}
+
+@media(max-width:480px){
+  .ct-item{grid-template-columns:64px 1fr;}
+  .ct-item-img{width:64px;height:64px;}
+  .ct-item-right{grid-column:1/-1;flex-direction:row;justify-content:space-between;align-items:center;}
+}
+/* Redundant on the cart page itself */
+#orl-cart-btn{display:none!important;}
+</style>
+</head>
+<body>
+
+<div class="ct-top"><a href="index.html" aria-label="ORLINSKY home">ORLINSKY</a></div>
+
+<div class="ct-wrap">
+  <span class="ct-eyebrow">Your Selection</span>
+  <h1 class="ct-title">Your Cart</h1>
+
+  <div id="ct-body"><!-- filled by JS --></div>
+</div>
+
+<script src="currency.js" defer></script>
+<script src="cart.js" defer></script>
+<script>
+(function(){
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+
+  function money(c){ return (window.ORLCart && window.ORLCart.money) ? window.ORLCart.money(c) : ('$'+(c/100)); }
+
+  function render(){
+    var body = document.getElementById('ct-body');
+    var items = window.ORLCart.items();
+    var FREE = window.ORLCart.freeThreshold;
+
+    if(items.length === 0){
+      body.innerHTML =
+        '<div class="ct-empty">'+
+          '<p>Your cart is quiet for now.</p>'+
+          '<a class="ct-btn-primary" style="display:inline-block;text-decoration:none;" href="ceramic-paintings.html">Browse the collection</a>'+
+        '</div>';
+      return;
+    }
+
+    var sub = window.ORLCart.subtotalCents();
+    var rows = items.map(function(it){
+      return '<div class="ct-item" data-id="'+esc(it.id)+'">'+
+        (it.img ? '<img class="ct-item-img" src="'+esc(it.img)+'" alt="'+esc(it.title)+'" loading="lazy" decoding="async">' : '<span class="ct-item-img"></span>')+
+        '<div>'+
+          '<h2 class="ct-item-name">'+esc(it.title)+'</h2>'+
+          (it.size ? '<span class="ct-item-size">Size '+esc(it.size)+'&#8243;</span>' : '')+
+          '<div class="ct-item-price">'+money(it.price)+' each</div>'+
+        '</div>'+
+        '<div class="ct-item-right">'+
+          '<div class="ct-qty">'+
+            '<button type="button" data-act="dec" aria-label="Decrease quantity">&minus;</button>'+
+            '<span>'+it.qty+'</span>'+
+            '<button type="button" data-act="inc" aria-label="Increase quantity">+</button>'+
+          '</div>'+
+          '<button type="button" class="ct-remove" data-act="remove">Remove</button>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+
+    // free-shipping progress
+    var freeBlock;
+    if(sub >= FREE){
+      freeBlock = '<div class="ct-free"><p class="ct-free-text"><b>Free shipping unlocked</b> &mdash; your order qualifies.</p><div class="ct-bar"><i style="width:100%"></i></div></div>';
+    } else {
+      var left = FREE - sub;
+      var pct = Math.min(100, Math.round(sub / FREE * 100));
+      freeBlock = '<div class="ct-free"><p class="ct-free-text">Add <b>'+money(left)+'</b> more for free shipping.</p><div class="ct-bar"><i style="width:'+pct+'%"></i></div></div>';
+    }
+
+    body.innerHTML =
+      rows +
+      freeBlock +
+      '<div class="ct-summary">'+
+        '<div class="ct-row"><span>Subtotal</span><span>'+money(sub)+'</span></div>'+
+        '<div class="ct-total"><span>Total</span><span>'+money(sub)+'</span></div>'+
+        '<p class="ct-ship-note">Shipping calculated at checkout &middot; Free over '+money(FREE)+' &middot; Taxes where applicable</p>'+
+      '</div>'+
+      '<div class="ct-actions">'+
+        '<a class="ct-btn-secondary" href="ceramic-paintings.html">Continue shopping</a>'+
+        '<a class="ct-btn-primary" href="checkout.html">Proceed to checkout</a>'+
+      '</div>'+
+      '<div class="ct-trust">'+
+        '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'+
+        '<span>Secure checkout by Stripe &middot; Insured worldwide shipping &middot; 14-day returns</span>'+
+      '</div>';
+
+    // wire controls
+    body.querySelectorAll('.ct-item').forEach(function(row){
+      var id = row.getAttribute('data-id');
+      var item = items.filter(function(i){return i.id===id;})[0];
+      row.querySelector('[data-act="inc"]').addEventListener('click', function(){ window.ORLCart.setQty(id, item.qty+1); });
+      row.querySelector('[data-act="dec"]').addEventListener('click', function(){ window.ORLCart.setQty(id, item.qty-1); });
+      row.querySelector('[data-act="remove"]').addEventListener('click', function(){ window.ORLCart.remove(id); });
+    });
+  }
+
+  function boot(){
+    if(!window.ORLCart){ setTimeout(boot, 60); return; }
+    window.ORLCart.onChange(render);
+    render();
+  }
+  boot();
+})();
+</script>
+<script src="chat-widget.js" defer></script>
+</body>
+</html>

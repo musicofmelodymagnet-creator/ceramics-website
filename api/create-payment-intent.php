@@ -41,36 +41,55 @@ $BASE    = '/home/admin/web/orlinskyceramic.ca/private';
 require $BASE . '/vendor/autoload.php';
 $config  = require $BASE . '/stripe-config.php';
 $catalog = require $BASE . '/catalog.php';
+require __DIR__ . '/_shipping.php';
 
 \Stripe\Stripe::setApiKey($config['secret_key']);
 
 $input = json_decode(file_get_contents('php://input'), true) ?? [];
 
-$items = $input['items'] ?? [];
-if (!is_array($items) || count($items) === 0) {
+// ── Normalise cart: accept [{id,qty}] or ["id",...]; server is the price authority ──
+$rawItems = $input['items'] ?? [];
+if (!is_array($rawItems) || count($rawItems) === 0) {
     http_response_code(400);
     echo json_encode(['error' => 'No items']); exit;
 }
+if (count($rawItems) > 50) { // sanity cap
+    http_response_code(400);
+    echo json_encode(['error' => 'Too many items']); exit;
+}
 
-// СУММА СЧИТАЕТСЯ ТОЛЬКО ПО СЕРВЕРНОМУ КАТАЛОГУ — фронт цену не диктует
-$amount = 0; $titles = [];
-foreach ($items as $id) {
-    if (!isset($catalog[$id])) {
+$subtotal = 0; $titles = []; $metaLines = [];
+foreach ($rawItems as $it) {
+    $id  = is_array($it) ? ($it['id'] ?? '') : $it;
+    $qty = is_array($it) ? (int) ($it['qty'] ?? 1) : 1;
+    if ($qty < 1)  $qty = 1;
+    if ($qty > 10) $qty = 10; // clamp — never trust client quantity
+    if (!is_string($id) || !isset($catalog[$id])) {
         http_response_code(400);
         echo json_encode(['error' => 'Unknown item']); exit;
     }
-    $amount  += (int) $catalog[$id]['price'];
-    $titles[] = $catalog[$id]['title'];
+    $subtotal   += (int) $catalog[$id]['price'] * $qty;
+    $titles[]    = $catalog[$id]['title'] . ($qty > 1 ? " x$qty" : '');
+    $metaLines[] = $id . ':' . $qty;
 }
 
-$ship = $input['shipping'] ?? [];
+// ── Shipping computed server-side (free over threshold, else regional stub) ──
+$ship    = $input['shipping'] ?? [];
+$country = strtoupper(substr(trim((string) ($ship['country'] ?? 'CA')), 0, 2));
+$shipCost = shippingCents($subtotal, $country);
+$amount   = $subtotal + $shipCost;
 
 $intentParams = [
     'amount'   => $amount,
     'currency' => $currency,
     'payment_method_types' => ['card'],
     'description'   => 'ORLINSKY Ceramic — ' . implode(', ', $titles),
-    'metadata' => ['product_ids' => implode(',', $items)],
+    'metadata' => [
+        'items'        => mb_substr(implode(',', $metaLines), 0, 480),
+        'subtotal'     => $subtotal,
+        'shipping'     => $shipCost,
+        'ship_country' => $country,
+    ],
 ];
 
 // receipt_email только если это валидный email — иначе просто не ставим
@@ -78,8 +97,8 @@ if (filter_var($input['email'] ?? '', FILTER_VALIDATE_EMAIL)) {
     $intentParams['receipt_email'] = $input['email'];
 }
 
-// Shipping only if name is provided (Stripe rejects empty name)
-// Все поля обрезаются до 200 символов перед передачей в Stripe
+// Shipping only if name is provided (Stripe rejects empty name).
+// Все поля обрезаются до 200 символов перед передачей в Stripe.
 $clip = fn($v) => mb_substr(trim((string) $v), 0, 200);
 if (!empty($ship['name'])) {
     $intentParams['shipping'] = [
@@ -91,7 +110,7 @@ if (!empty($ship['name'])) {
             'city'        => $clip($ship['city'] ?? ''),
             'state'       => $clip($ship['state'] ?? ''),
             'postal_code' => $clip($ship['postal_code'] ?? ''),
-            'country'     => $clip($ship['country'] ?? 'CA'),
+            'country'     => $country,
         ],
     ];
 }
@@ -102,6 +121,9 @@ try {
     echo json_encode([
         'clientSecret' => $intent->client_secret,
         'amount'       => $amount,
+        'subtotal'     => $subtotal,
+        'shipping'     => $shipCost,
+        'freeShipping' => $shipCost === 0,
         'currency'     => $currency,
     ]);
 } catch (\Throwable $e) {

@@ -38,7 +38,7 @@
   --color-bg-elevated:#2C2724;
   --color-text-primary:#F5F1E8;
   --color-text-secondary:#C9B89A;
-  --color-text-muted:#7A6E63;
+  --color-text-muted:#9A8C7C;
   --color-accent:#C8701F;
   --color-accent-hover:#E8833A;
   --color-border:#2E2820;
@@ -162,6 +162,7 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .g-num{font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-muted);display:block;margin-bottom:18px;}
 .g-name{font-family:var(--font-serif);font-weight:300;font-size:clamp(24px,2.8vw,40px);line-height:1.15;letter-spacing:0.01em;color:var(--color-text-primary);margin:0;transition:color 300ms var(--ease);}
 .g-item:hover .g-name{color:var(--color-accent);}
+.g-price{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-secondary);display:block;margin-top:14px;}
 .g-arrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.26em;text-transform:uppercase;color:var(--color-text-muted);margin-top:20px;opacity:0;transform:translateX(-8px);transition:opacity 350ms var(--ease),transform 350ms var(--ease),color 300ms var(--ease);}
 .g-arrow svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
 .g-item:hover .g-arrow{opacity:1;transform:translateX(0);color:var(--color-accent);}
@@ -239,7 +240,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <nav class="left">
       <a href="gallery.html" class="active">Gallery</a>
       <a href="craft.html">The Craft</a>
-      <a href="#">Bespoke</a>
+      <a href="clientcare.html">Bespoke</a>
     </nav>
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
       <div class="mark-logo"><img src="Фото/LOGO-eagle.png" alt="" id="header-eagle"></div>
@@ -262,7 +263,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 <nav class="mobile-menu" role="dialog" aria-label="Navigation">
   <a href="gallery.html" class="active">Gallery</a><div class="divider"></div>
   <a href="craft.html">The Craft</a><div class="divider"></div>
-  <a href="#">Bespoke</a><div class="divider"></div>
+  <a href="clientcare.html">Bespoke</a><div class="divider"></div>
   <a href="story.html">Our Story</a><div class="divider"></div>
   <a href="kindwords.html">Kind Words</a><div class="divider"></div>
   <a href="faq.html">FAQ</a>
@@ -298,61 +299,67 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <div class="g-info">
       <span class="g-num">01</span>
       <h2 class="g-name">Tulips in a striped vase</h2>
+      <span class="g-price">from $150</span>
       <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
   <a class="g-item" href="product-2.html">
     <div class="g-photo-wrap">
-      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Eucalyptus and winter berries"></div>
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Eucalyptus and winter berries" loading="lazy" decoding="async"></div>
     </div>
     <div class="g-info">
       <span class="g-num">02</span>
       <h2 class="g-name">Eucalyptus and winter berries</h2>
+      <span class="g-price">from $150</span>
       <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
   <a class="g-item" href="product-3.html">
     <div class="g-photo-wrap">
-      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Garden boot in bloom"></div>
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/3-1.jpg" alt="Garden boot in bloom" loading="lazy" decoding="async"></div>
     </div>
     <div class="g-info">
       <span class="g-num">03</span>
       <h2 class="g-name">Garden boot in bloom</h2>
+      <span class="g-price">from $150</span>
       <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
   <a class="g-item" href="product-4.html">
     <div class="g-photo-wrap">
-      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/4-1.jpg" alt="Three vessels, still life"></div>
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/4-1.jpg" alt="Three vessels, still life" loading="lazy" decoding="async"></div>
     </div>
     <div class="g-info">
       <span class="g-num">04</span>
       <h2 class="g-name">Three vessels, still life</h2>
+      <span class="g-price">from $150</span>
       <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
   <a class="g-item" href="product-5.html">
     <div class="g-photo-wrap">
-      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/5-1.jpg" alt="The whale and the sail"></div>
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/5-1.jpg" alt="The whale and the sail" loading="lazy" decoding="async"></div>
     </div>
     <div class="g-info">
       <span class="g-num">05</span>
       <h2 class="g-name">The whale and the sail</h2>
+      <span class="g-price">from $150</span>
       <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
 
   <a class="g-item" href="product-6.html">
     <div class="g-photo-wrap">
-      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/6-1.jpg" alt="Wheelbarrow in flower"></div>
+      <div class="g-photo"><img src="Фото/Фото%20наших%20картин/6-1.jpg" alt="Wheelbarrow in flower" loading="lazy" decoding="async"></div>
     </div>
     <div class="g-info">
       <span class="g-num">06</span>
       <h2 class="g-name">Wheelbarrow in flower</h2>
+      <span class="g-price">from $150</span>
       <span class="g-arrow">View painting <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
     </div>
   </a>
@@ -367,9 +374,9 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <div>
     <h4>Studio</h4>
     <ul>
-      <li><a href="#">Contact</a></li>
+      <li><a href="clientcare.html">Contact</a></li>
       <li><a href="clientcare.html">Client Care</a></li>
-      <li><a href="#">Shipping &amp; Returns</a></li>
+      <li><a href="clientcare.html">Shipping &amp; Returns</a></li>
     </ul>
   </div>
   <div>
@@ -383,7 +390,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <div class="brand">
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
       <div class="mark-logo">
-        <img src="Фото/LOGO-eagle.png" alt="" id="footer-eagle">
+        <img src="Фото/LOGO-eagle.png" alt="" id="footer-eagle" loading="lazy" decoding="async">
       </div>
       <div class="wd">ORLINSKY</div>
       <div class="sub">ceramic studio</div>

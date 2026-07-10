@@ -56,19 +56,19 @@ html,body{margin:0;padding:0;background:var(--color-bg-base);color:var(--color-t
 
 <div class="os-wrap">
 
-  <svg class="os-icon" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
+  <svg class="os-icon" id="os-icon" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg">
     <circle cx="28" cy="28" r="22"/>
     <path d="M19 28.5l6.5 6.5 11.5-13"/>
   </svg>
 
-  <span class="os-eyebrow">Order Confirmed</span>
-  <h1 class="os-title">Thank you<br>for your order</h1>
+  <span class="os-eyebrow" id="os-eyebrow">Order Confirmed</span>
+  <h1 class="os-title" id="os-title">Thank you<br>for your order</h1>
 
   <div class="os-card">
-    <span class="os-card-label">What happens next</span>
+    <span class="os-card-label" id="os-card-label">What happens next</span>
 
-    <p class="os-body">Your payment has been received. We will contact you shortly with shipping details and tracking information.</p>
-    <p class="os-body">A receipt has been sent to your email address.</p>
+    <p class="os-body" id="os-body-1">Your payment has been received. We will contact you shortly with shipping details and tracking information.</p>
+    <p class="os-body" id="os-body-2">A receipt has been sent to your email address.</p>
 
     <hr class="os-divider">
 
@@ -88,6 +88,36 @@ html,body{margin:0;padding:0;background:var(--color-bg-base);color:var(--color-t
   var pi = params.get('payment_intent') || params.get('paymentIntent');
   if (pi) {
     document.getElementById('os-order-id').textContent = pi;
+  }
+
+  // Stripe appends redirect_status to the return URL.
+  // Only 'succeeded' means the payment actually went through.
+  var status  = params.get('redirect_status');
+  var icon    = document.getElementById('os-icon');
+  var eyebrow = document.getElementById('os-eyebrow');
+  var title   = document.getElementById('os-title');
+  var label   = document.getElementById('os-card-label');
+  var body1   = document.getElementById('os-body-1');
+  var body2   = document.getElementById('os-body-2');
+
+  if (status === 'succeeded') {
+    // Keep the default "Order Confirmed / payment received" content.
+  } else if (status === 'processing') {
+    document.title = 'Payment Processing — ORLINSKY Ceramic Studio';
+    if (icon) icon.style.display = 'none';
+    eyebrow.textContent = 'Payment Processing';
+    title.innerHTML = 'Your payment<br>is processing';
+    label.textContent = 'What happens next';
+    body1.textContent = 'Payment processing, we\'ll confirm by email as soon as it completes.';
+    body2.textContent = 'No further action is needed from you right now.';
+  } else {
+    document.title = 'Payment Not Completed — ORLINSKY Ceramic Studio';
+    if (icon) icon.style.display = 'none';
+    eyebrow.textContent = 'Payment Not Completed';
+    title.innerHTML = 'Payment was<br>not completed';
+    label.textContent = 'What you can do';
+    body1.textContent = 'Your payment was not completed, so no order has been placed and nothing has been charged.';
+    body2.innerHTML = 'Please <a href="/" style="color:var(--color-accent)">return to the site</a> and try again, or contact us at <a href="mailto:info@orlinskyceramic.ca" style="color:var(--color-accent)">info@orlinskyceramic.ca</a> and we will help.';
   }
 })();
 </script>

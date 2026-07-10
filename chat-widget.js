@@ -35,7 +35,8 @@
 
     // ── Inject CSS ────────────────────────────────────────────────────────────
     var CSS = [
-        '#emma-fab{position:fixed;bottom:28px;right:28px;z-index:9998;display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none}',
+        /* z-index 90: above page content, below sticky header (100) and mobile menu (99) */
+        '#emma-fab{position:fixed;bottom:28px;right:28px;z-index:90;display:flex;flex-direction:column;align-items:flex-end;gap:10px;pointer-events:none}',
 
         /* Button */
         '#emma-btn{width:54px;height:54px;border-radius:50%;background:oklch(58% 0.12 45);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px oklch(58% 0.12 45 / 0.5),0 2px 6px oklch(0% 0 0 / 0.18);transition:background 180ms ease,transform 120ms ease,box-shadow 180ms ease;pointer-events:all;position:relative;flex-shrink:0;outline:none}',
@@ -262,11 +263,16 @@
         .then(function (r) { return r.json(); })
         .then(function (d) {
             removeTyping();
-            var reply = d.reply || d.error || 'I\'m unable to respond right now. Please try again or email info@orlinskyceramic.ca';
-            addMsg('bot', reply);
-            chatHistory.push({ role: 'assistant', content: reply });
-            if (chatHistory.length > 40) chatHistory = chatHistory.slice(-40);
-            saveHistory();
+            if (d.reply) {
+                addMsg('bot', d.reply);
+                chatHistory.push({ role: 'assistant', content: d.reply });
+                if (chatHistory.length > 40) chatHistory = chatHistory.slice(-40);
+                saveHistory();
+            } else {
+                // Error messages are shown but NOT persisted to history,
+                // so they never go back to the API as assistant context
+                addMsg('bot', d.error || 'I\'m unable to respond right now. Please try again or email info@orlinskyceramic.ca');
+            }
             sendBtn.disabled = false;
             if (!isOpen) { unread++; showBadge(unread); }
         })

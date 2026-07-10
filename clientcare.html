@@ -721,6 +721,15 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
     }
   } catch(e) {}
 
+  // Render restored messages; hide the static greeting when history exists
+  if (history.length > 0) {
+    msgs.innerHTML = '';
+    for (var _i = 0; _i < history.length; _i++) {
+      if (history[_i].role === 'user') addUser(history[_i].content);
+      else addBot(history[_i].content);
+    }
+  }
+
   function _saveHistory() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ts:Date.now(), messages:history.slice(-40)})); } catch(e) {}
   }
@@ -744,11 +753,14 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
 
   function removeTyping(){var r=document.getElementById('typingRow');if(r)r.remove();}
 
-  function addBot(text){
+  function addBot(text, isHtml){
     removeTyping();
     var d = document.createElement('div'); d.className = 'cc-bmsg';
-    var html = text.replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-                   .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
+    // API replies are escaped before markdown replacement (XSS-safe);
+    // isHtml=true is only for our own static fallback messages with mailto links.
+    var html = isHtml ? text
+                      : esc(text).replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+                                 .replace(/\n\n/g,'<br><br>').replace(/\n/g,'<br>');
     d.innerHTML = avaHTML()+'<div class="cc-bmsg-inner"><div class="cc-bb">'+html+'</div><div class="cc-msgtime">'+getTime()+'</div></div>';
     msgs.appendChild(d); scrollBot();
   }
@@ -784,12 +796,12 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
         _saveHistory();
         addBot(data.reply);
       } else {
-        addBot('I\'m having a small technical moment. Please try again, or write to <a href="mailto:info@orlinskyceramic.ca" style="color:var(--color-accent)">info@orlinskyceramic.ca</a>.');
+        addBot('I\'m having a small technical moment. Please try again, or write to <a href="mailto:info@orlinskyceramic.ca" style="color:var(--color-accent)">info@orlinskyceramic.ca</a>.', true);
       }
     })
     .catch(function(){
       removeTyping();
-      addBot('Something went wrong on my end. You can reach us directly at <a href="mailto:info@orlinskyceramic.ca" style="color:var(--color-accent)">info@orlinskyceramic.ca</a>.');
+      addBot('Something went wrong on my end. You can reach us directly at <a href="mailto:info@orlinskyceramic.ca" style="color:var(--color-accent)">info@orlinskyceramic.ca</a>.', true);
     })
     .finally(function(){setDisabled(false); input.focus();});
   }
@@ -837,6 +849,13 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
 
     var hpVal=document.getElementById('cf-hp')?document.getElementById('cf-hp').value:'';
 
+    // reCAPTCHA script may be blocked or fail to load — don't leave the button stuck
+    if(typeof grecaptcha==='undefined'){
+      showError('Verification could not load. Please refresh or email us at info@orlinskyceramic.ca');
+      return;
+    }
+
+    try{
     grecaptcha.ready(function(){
       grecaptcha.execute('6LfE10stAAAAAFnHCUdzWwwps9sRfxfwNowmchIw',{action:'contact'}).then(function(token){
         fetch('/api/contact.php',{
@@ -858,6 +877,9 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
         .catch(function(){showError('Connection error. Please email us at info@orlinskyceramic.ca');});
       }).catch(function(){showError('Verification error. Please try again.');});
     });
+    }catch(err){
+      showError('Verification could not load. Please refresh or email us at info@orlinskyceramic.ca');
+    }
   });
 })();
 </script>

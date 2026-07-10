@@ -45,26 +45,29 @@ $intentParams = [
     'amount'   => $amount,
     'currency' => $currency,
     'payment_method_types' => ['card'],
-    'description'   => 'ORLANSKI Ceramic — ' . implode(', ', $titles),
+    'description'   => 'ORLINSKY Ceramic — ' . implode(', ', $titles),
     'metadata' => ['product_ids' => implode(',', $items)],
 ];
 
-if (($input['email'] ?? '') !== '') {
+// receipt_email только если это валидный email — иначе просто не ставим
+if (filter_var($input['email'] ?? '', FILTER_VALIDATE_EMAIL)) {
     $intentParams['receipt_email'] = $input['email'];
 }
 
 // Shipping only if name is provided (Stripe rejects empty name)
+// Все поля обрезаются до 200 символов перед передачей в Stripe
+$clip = fn($v) => mb_substr(trim((string) $v), 0, 200);
 if (!empty($ship['name'])) {
     $intentParams['shipping'] = [
-        'name'    => $ship['name'],
-        'phone'   => ($ship['phone'] ?? '') !== '' ? $ship['phone'] : null,
+        'name'    => $clip($ship['name']),
+        'phone'   => ($ship['phone'] ?? '') !== '' ? $clip($ship['phone']) : null,
         'address' => [
-            'line1'       => $ship['line1'] ?? '',
-            'line2'       => ($ship['line2'] ?? '') !== '' ? $ship['line2'] : null,
-            'city'        => $ship['city'] ?? '',
-            'state'       => $ship['state'] ?? '',
-            'postal_code' => $ship['postal_code'] ?? '',
-            'country'     => $ship['country'] ?? 'CA',
+            'line1'       => $clip($ship['line1'] ?? ''),
+            'line2'       => ($ship['line2'] ?? '') !== '' ? $clip($ship['line2']) : null,
+            'city'        => $clip($ship['city'] ?? ''),
+            'state'       => $clip($ship['state'] ?? ''),
+            'postal_code' => $clip($ship['postal_code'] ?? ''),
+            'country'     => $clip($ship['country'] ?? 'CA'),
         ],
     ];
 }

@@ -38,7 +38,7 @@
   --color-bg-elevated:#2C2724;
   --color-text-primary:#F5F1E8;
   --color-text-secondary:#C9B89A;
-  --color-text-muted:#7A6E63;
+  --color-text-muted:#9A8C7C;
   --color-accent:#C8701F;
   --color-accent-hover:#E8833A;
   --color-border:#2E2820;
@@ -331,6 +331,36 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
 .cg-item:hover .cg-item-arrow{opacity:1;transform:translateX(0);color:var(--color-accent);}
 
 /* ============================================================
+   CTA
+   ============================================================ */
+.cg-cta-section{
+  background:var(--color-bg-base);
+  padding:64px 56px 72px;
+  text-align:center;
+  box-sizing:border-box;
+}
+.cg-cta{
+  display:inline-block;
+  font-family:var(--font-mono);
+  font-size:11px;
+  letter-spacing:0.24em;
+  text-transform:uppercase;
+  color:var(--color-text-primary);
+  background:var(--color-accent);
+  padding:18px 44px;
+  border:1px solid var(--color-accent);
+  border-bottom:1px solid var(--color-accent);
+  border-radius:2px;
+  transition:background 300ms var(--ease),border-color 300ms var(--ease),transform 300ms var(--ease);
+}
+.cg-cta:hover{
+  background:var(--color-accent-hover);
+  border-color:var(--color-accent-hover);
+  border-bottom-color:var(--color-accent-hover);
+  transform:translateY(-2px);
+}
+
+/* ============================================================
    FOOTER
    ============================================================ */
 footer{background:var(--color-bg-header);padding:64px 80px 32px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:40px;align-items:start;}
@@ -344,7 +374,9 @@ footer .brand .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spaci
 footer .brand .social-links{display:flex;gap:10px;margin-top:20px;justify-content:center;}
 footer .brand .social-links .soc{width:32px;height:32px;border-radius:50%;background:transparent;border:1px solid var(--color-divider);display:flex;align-items:center;justify-content:center;color:var(--color-text-muted);transition:background 3000ms ease-out,border-color 3000ms ease-out,color 3000ms ease-out;}
 footer .brand .social-links .soc:hover{background:var(--color-accent);border-color:var(--color-accent);color:var(--color-text-primary);transition:background 220ms ease-in,border-color 220ms ease-in,color 220ms ease-in;}
-footer .brand .social-links .soc svg{width:15px;height:15px;display:block;}
+footer .brand .social-links .soc{position:relative;}
+footer .brand .social-links .soc::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;}
+footer .brand .social-links .soc svg{width:15px;height:15px;display:block;position:relative;}
 footer h4{font-family:var(--font-mono);font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:var(--color-text-muted);margin:0 0 18px;font-weight:400;}
 footer ul{list-style:none;padding:0;margin:0;display:grid;gap:12px;}
 footer ul a{font-family:var(--font-sans);font-size:14px;color:var(--color-text-secondary);transition:color 300ms var(--ease),border-color 300ms var(--ease);}
@@ -404,7 +436,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <nav class="left">
       <a href="gallery.html" class="active">Gallery</a>
       <a href="craft.html">The Craft</a>
-      <a href="#">Bespoke</a>
+      <a href="clientcare.html">Bespoke</a>
     </nav>
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
       <div class="mark-logo"><img src="Фото/LOGO-eagle.png" alt="" id="header-eagle"></div>
@@ -427,7 +459,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 <nav class="mobile-menu" role="dialog" aria-label="Navigation">
   <a href="gallery.html" class="active">Gallery</a><div class="divider"></div>
   <a href="craft.html">The Craft</a><div class="divider"></div>
-  <a href="#">Bespoke</a><div class="divider"></div>
+  <a href="clientcare.html">Bespoke</a><div class="divider"></div>
   <a href="story.html">Our Story</a><div class="divider"></div>
   <a href="kindwords.html">Kind Words</a><div class="divider"></div>
   <a href="faq.html">FAQ</a>
@@ -495,7 +527,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 
     <a class="cg-item" href="product-cg-1.html">
       <div class="cg-item-photo">
-        <img src="Фото/Картины%20с%20печатью/wax-1.jpg" alt="Ceramic painting with daily Bible verse">
+        <img src="Фото/Картины%20с%20печатью/wax-1.jpg" alt="Ceramic painting with daily Bible verse" loading="lazy" decoding="async">
       </div>
       <div class="cg-item-info">
         <span class="cg-item-num">01</span>
@@ -509,14 +541,21 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 
 <div class="sep" role="separator"></div>
 
+<!-- CTA -->
+<section class="cg-cta-section">
+  <a class="cg-cta" href="ceramic-paintings.html">View the Collection</a>
+</section>
+
+<div class="sep" role="separator"></div>
+
 <!-- FOOTER -->
 <footer>
   <div>
     <h4>Studio</h4>
     <ul>
-      <li><a href="#">Contact</a></li>
+      <li><a href="clientcare.html">Contact</a></li>
       <li><a href="clientcare.html">Client Care</a></li>
-      <li><a href="#">Shipping &amp; Returns</a></li>
+      <li><a href="clientcare.html">Shipping &amp; Returns</a></li>
     </ul>
   </div>
   <div>
@@ -530,7 +569,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <div class="brand">
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
       <div class="mark-logo">
-        <img src="Фото/LOGO-eagle.png" alt="" id="footer-eagle">
+        <img src="Фото/LOGO-eagle.png" alt="" id="footer-eagle" loading="lazy" decoding="async">
       </div>
       <div class="wd">ORLINSKY</div>
       <div class="sub">ceramic studio</div>

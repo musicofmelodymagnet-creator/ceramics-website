@@ -14,6 +14,32 @@ if (!$key) {
     http_response_code(503); echo json_encode(['error' => 'Service unavailable']); exit;
 }
 
+// ── Rate limiting: 5 emails per IP per hour (atomic via flock) ───────────────
+function checkRateLimit(string $ip): bool {
+    $f   = sys_get_temp_dir() . '/orlcontact_' . md5($ip) . '.json';
+    $now = time();
+    $fh  = fopen($f, 'c+');
+    if (!$fh) return true; // проблемы с ФС — не блокируем живых пользователей
+    flock($fh, LOCK_EX);
+    $d      = json_decode(stream_get_contents($fh) ?: '', true) ?? ['r' => []];
+    $d['r'] = array_values(array_filter($d['r'] ?? [], fn($t) => $now - $t < 3600));
+    if (count($d['r']) >= 5) {
+        flock($fh, LOCK_UN); fclose($fh);
+        return false;
+    }
+    $d['r'][] = $now;
+    rewind($fh); ftruncate($fh, 0);
+    fwrite($fh, json_encode($d));
+    flock($fh, LOCK_UN); fclose($fh);
+    return true;
+}
+
+$ip = $_SERVER['REMOTE_ADDR'] ?? '0.0.0.0';
+if (!checkRateLimit($ip)) {
+    http_response_code(429);
+    echo json_encode(['error' => 'Too many messages. Please try again in an hour or email us directly at info@orlinskyceramic.ca']); exit;
+}
+
 $raw     = json_decode(file_get_contents('php://input'), true) ?? [];
 
 // Honeypot — bot filled a hidden field, silently pretend success
@@ -29,10 +55,14 @@ if (!$name || !$message || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400); echo json_encode(['error' => 'Invalid input']); exit;
 }
 
-// reCAPTCHA v3 verification
+// reCAPTCHA v3 verification — fail-closed: если секрет настроен, токен обязателен
 $rcSecret = $config['recaptcha_secret_key'] ?? '';
 $rcToken  = trim($raw['recaptcha_token'] ?? '');
-if ($rcSecret && $rcToken) {
+if ($rcSecret) {
+    if ($rcToken === '') {
+        http_response_code(400);
+        echo json_encode(['error' => 'Verification required']); exit;
+    }
     $rc = curl_init('https://www.google.com/recaptcha/api/siteverify');
     curl_setopt_array($rc, [
         CURLOPT_RETURNTRANSFER => true,
@@ -42,7 +72,9 @@ if ($rcSecret && $rcToken) {
     ]);
     $gr   = json_decode(curl_exec($rc), true);
     curl_close($rc);
-    if (!($gr['success'] ?? false) || ($gr['score'] ?? 0) < 0.5) {
+    if (!($gr['success'] ?? false)
+        || ($gr['score'] ?? 0) < 0.5
+        || ($gr['action'] ?? '') !== 'contact') {
         http_response_code(400);
         echo json_encode(['error' => 'Verification failed. Please try again.']); exit;
     }
@@ -75,7 +107,7 @@ $err  = curl_error($ch);
 curl_close($ch);
 
 if ($err || $code >= 400) {
-    error_log('[contact] Resend error HTTP ' . $code . ': ' . $err . ' ' . $resp);
+    error_log('[contact] Resend error HTTP ' . $code . ($err ? ' curl: ' . $err : ''));
     http_response_code(500);
     echo json_encode(['error' => 'Failed to send. Please email us directly at info@orlinskyceramic.ca']); exit;
 }

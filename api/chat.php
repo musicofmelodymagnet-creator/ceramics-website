@@ -18,15 +18,23 @@ if (!$apiKey) {
     echo json_encode(['error' => 'Chat is temporarily unavailable.']); exit;
 }
 
-// ── Rate limiting: 30 requests per IP per hour ──────────────────────────────
+// ── Rate limiting: 30 requests per IP per hour (atomic via flock) ────────────
 function checkRateLimit(string $ip): bool {
     $f   = sys_get_temp_dir() . '/orlchat_' . md5($ip) . '.json';
     $now = time();
-    $d   = file_exists($f) ? (json_decode(file_get_contents($f), true) ?? ['r' => []]) : ['r' => []];
-    $d['r'] = array_values(array_filter($d['r'], fn($t) => $now - $t < 3600));
-    if (count($d['r']) >= 30) return false;
+    $fh  = fopen($f, 'c+');
+    if (!$fh) return true; // проблемы с ФС — не блокируем живых пользователей
+    flock($fh, LOCK_EX);
+    $d      = json_decode(stream_get_contents($fh) ?: '', true) ?? ['r' => []];
+    $d['r'] = array_values(array_filter($d['r'] ?? [], fn($t) => $now - $t < 3600));
+    if (count($d['r']) >= 30) {
+        flock($fh, LOCK_UN); fclose($fh);
+        return false;
+    }
     $d['r'][] = $now;
-    file_put_contents($f, json_encode($d));
+    rewind($fh); ftruncate($fh, 0);
+    fwrite($fh, json_encode($d));
+    flock($fh, LOCK_UN); fclose($fh);
     return true;
 }
 
@@ -79,7 +87,7 @@ $messages = [];
 foreach ($history as $h) {
     $role    = ($h['role'] ?? '') === 'user' ? 'user' : 'assistant';
     $content = sanitize($h['content'] ?? '');
-    if ($content) $messages[] = ['role' => $role, 'content' => $content];
+    if ($content && !isInjection($content)) $messages[] = ['role' => $role, 'content' => $content];
 }
 $messages[] = ['role' => 'user', 'content' => $message];
 

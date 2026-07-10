@@ -196,12 +196,32 @@ select.cf-input{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://ww
 <script src="https://js.stripe.com/v3/"></script>
 <script>
 const STRIPE_PK = 'pk_test_51TqFGFRLE3GENWdWD5kDvXMFTjW3Tt3HjZFemtaG6YpcvbVM3hOmfbxXEWa3WZr5p88p8NixeXwZs1BQ8SjaCbQ300UWkSb8sq';
-const CART_ITEMS = ['painting-001'];
 
-const CLIENT_CATALOG = {
-  'painting-001': { title: 'Работа 1', price: 45000 },
-  'painting-002': { title: 'Работа 2', price: 62000 },
-};
+// Display catalog (prices are re-validated server-side from private/catalog.php).
+// Keys must match the server catalog: <slug>-<size-in-inches>.
+const CLIENT_CATALOG = (function () {
+  var paintings = {
+    'tulips':        'Tulips in a striped vase',
+    'eucalyptus':    'Eucalyptus and winter berries',
+    'garden-boot':   'Garden boot in bloom',
+    'three-vessels': 'Three vessels, still life',
+    'whale-sail':    'The whale and the sail',
+    'wheelbarrow':   'Wheelbarrow in flower',
+    'bible-verse':   'Ceramic Painting with Daily Bible Verse',
+  };
+  var sizes = { 5: 15000, 7: 20000, 9: 25000, 11: 30000 };
+  var cat = {};
+  Object.keys(paintings).forEach(function (slug) {
+    Object.keys(sizes).forEach(function (inch) {
+      cat[slug + '-' + inch] = { title: paintings[slug] + ' — ' + inch + '″', price: sizes[inch] };
+    });
+  });
+  return cat;
+})();
+
+// Item to buy comes from the URL: checkout.html?item=<slug>-<size>
+var _requested = new URLSearchParams(location.search).get('item');
+const CART_ITEMS = (_requested && CLIENT_CATALOG[_requested]) ? [_requested] : [];
 
 const appearance = {
   theme: 'night',
@@ -233,6 +253,16 @@ function renderSummary() {
   const container = document.getElementById('co-items');
   const totalEl   = document.getElementById('co-total-amount');
   container.innerHTML = '';
+
+  // No valid item selected — guide the visitor back instead of a blank/broken order.
+  if (CART_ITEMS.length === 0) {
+    container.innerHTML = '<div class="co-item" style="border:none;color:var(--color-text-secondary)">No item selected — please choose a painting first.</div>';
+    totalEl.textContent = '—';
+    const b = document.getElementById('co-continue-btn');
+    if (b) { b.disabled = true; b.textContent = 'Browse the collection'; b.disabled = false; b.onclick = function(){ location.href = 'ceramic-paintings.html'; }; }
+    return;
+  }
+
   let total = 0;
   CART_ITEMS.forEach(id => {
     const item = CLIENT_CATALOG[id];
@@ -250,7 +280,7 @@ function renderSummary() {
 function formatMoney(cents) {
   const locale    = currentCurrency === 'usd' ? 'en-US' : 'en-CA';
   const formatted = new Intl.NumberFormat(locale, { style: 'currency', currency: currentCurrency.toUpperCase() }).format(cents / 100);
-  return formatted + ' ' + currentCurrency.toUpperCase();
+  return formatted;
 }
 
 // ── Form validation + Continue ─────────────────

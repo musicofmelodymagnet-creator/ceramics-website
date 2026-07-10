@@ -18,6 +18,15 @@ try {
 }
 
 if ($event->type === 'payment_intent.succeeded') {
+    // Идемпотентность: Stripe повторяет вебхуки — уже обработанные события пропускаем
+    $eventsFile = $BASE . '/processed_events.log';
+    $processed  = file_exists($eventsFile)
+        ? explode("\n", (string) file_get_contents($eventsFile))
+        : [];
+    if (in_array($event->id, $processed, true)) {
+        http_response_code(200); exit; // уже обработано — заказ повторно не пишем
+    }
+
     $pi = $event->data->object;
     $order = [
         'time'     => date('c'),
@@ -32,6 +41,9 @@ if ($event->type === 'payment_intent.succeeded') {
     file_put_contents($BASE . '/orders.log',
         json_encode($order, JSON_UNESCAPED_UNICODE) . "\n",
         FILE_APPEND | LOCK_EX);
+
+    // Помечаем событие как обработанное
+    file_put_contents($eventsFile, $event->id . "\n", FILE_APPEND | LOCK_EX);
 
     // Уведомление на почту (раскомментируй и подставь адрес)
     // mail('you@orlinskyceramic.ca', 'Новый заказ ' . $pi->id, print_r($order, true));

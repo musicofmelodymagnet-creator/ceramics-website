@@ -37,7 +37,7 @@
   --color-bg-elevated:#2C2724;
   --color-text-primary:#F5F1E8;
   --color-text-secondary:#C9B89A;
-  --color-text-muted:#7A6E63;
+  --color-text-muted:#9A8C7C;
   --color-accent:#C8701F;
   --color-accent-hover:#E8833A;
   --color-border:#2E2820;
@@ -177,6 +177,14 @@ header.nav .mark .sub{font-family:var(--font-mono);font-size:9px;letter-spacing:
   transition:color 300ms ease;
 }
 .gcat-item:hover .gcat-title{color:var(--color-accent);}
+.gcat-price{
+  font-family:var(--font-mono);
+  font-size:10px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--color-text-secondary);
+  display:block;
+}
 
 /* ============================================================
    FOOTER
@@ -247,7 +255,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     <nav class="left">
       <a href="gallery.html" class="active">Gallery</a>
       <a href="craft.html">The Craft</a>
-      <a href="#">Bespoke</a>
+      <a href="clientcare.html">Bespoke</a>
     </nav>
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
       <div class="mark-logo"><img src="Фото/LOGO-eagle.png" alt="" id="header-eagle"></div>
@@ -270,7 +278,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 <nav class="mobile-menu" role="dialog" aria-label="Navigation">
   <a href="gallery.html" class="active">Gallery</a><div class="divider"></div>
   <a href="craft.html">The Craft</a><div class="divider"></div>
-  <a href="#">Bespoke</a><div class="divider"></div>
+  <a href="clientcare.html">Bespoke</a><div class="divider"></div>
   <a href="story.html">Our Story</a><div class="divider"></div>
   <a href="kindwords.html">Kind Words</a><div class="divider"></div>
   <a href="faq.html">FAQ</a>
@@ -295,24 +303,27 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
     </div>
     <div class="gcat-info">
       <span class="gcat-title">Ceramic Paintings</span>
-    </div>
-  </a>
-
-  <a class="gcat-item" href="#">
-    <div class="gcat-photo">
-      <img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Ceramic Paintings with Inscriptions">
-    </div>
-    <div class="gcat-info">
-      <span class="gcat-title">Ceramic Paintings with Inscriptions</span>
+      <span class="gcat-price">from $150</span>
     </div>
   </a>
 
   <a class="gcat-item" href="christian-gifts.html">
     <div class="gcat-photo">
-      <img src="Фото/Картины%20с%20печатью/wax-1.jpg" alt="Christian Gifts">
+      <img src="Фото/Фото%20наших%20картин/2-1.jpg" alt="Ceramic Paintings with Inscriptions" loading="lazy" decoding="async">
+    </div>
+    <div class="gcat-info">
+      <span class="gcat-title">Ceramic Paintings with Inscriptions</span>
+      <span class="gcat-price">from $150</span>
+    </div>
+  </a>
+
+  <a class="gcat-item" href="christian-gifts.html">
+    <div class="gcat-photo">
+      <img src="Фото/Картины%20с%20печатью/wax-1.jpg" alt="Christian Gifts" loading="lazy" decoding="async">
     </div>
     <div class="gcat-info">
       <span class="gcat-title">Christian Gifts</span>
+      <span class="gcat-price">from $150</span>
     </div>
   </a>
 
@@ -325,9 +336,9 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <div>
     <h4>Studio</h4>
     <ul>
-      <li><a href="#">Contact</a></li>
+      <li><a href="clientcare.html">Contact</a></li>
       <li><a href="clientcare.html">Client Care</a></li>
-      <li><a href="#">Shipping &amp; Returns</a></li>
+      <li><a href="clientcare.html">Shipping &amp; Returns</a></li>
     </ul>
   </div>
   <div>
@@ -341,7 +352,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
   <div class="brand">
     <a class="mark" href="index.html" aria-label="ORLINSKY home">
       <div class="mark-logo">
-        <img src="Фото/LOGO-eagle.png" alt="" id="footer-eagle">
+        <img src="Фото/LOGO-eagle.png" alt="" id="footer-eagle" loading="lazy" decoding="async">
       </div>
       <div class="wd">ORLINSKY</div>
       <div class="sub">ceramic studio</div>

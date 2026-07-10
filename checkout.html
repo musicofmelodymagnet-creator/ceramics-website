@@ -363,6 +363,13 @@ async function initPayment() {
     const data = await res.json();
     if (data.error) { showPayError(data.error); return false; }
 
+    // Reconcile the displayed total with the authoritative server amount/currency.
+    if (data.currency === 'cad' || data.currency === 'usd') currentCurrency = data.currency;
+    if (typeof data.amount === 'number') {
+      const totalEl = document.getElementById('co-total-amount');
+      if (totalEl) totalEl.textContent = formatMoney(data.amount);
+    }
+
     if (elements) elements.destroy();
     elements = stripe.elements({ clientSecret: data.clientSecret, appearance });
     elements.create('payment', {
@@ -397,12 +404,16 @@ function showPayError(msg) {
 // ── Boot: fetch currency from server by IP, then render ────────────────────
 (async () => {
   try {
-    const r = await fetch('/api/currency.php');
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 4000); // never let a hung request block the summary
+    const r = await fetch('/api/currency.php', { signal: ctrl.signal });
+    clearTimeout(timer);
     if (r.ok) {
       const d = await r.json();
-      if (d.currency === 'cad' || d.currency === 'usd') currentCurrency = d.currency;
+      // Only trust the server currency when geo lookup actually succeeded (ready).
+      if (d.ready && (d.currency === 'cad' || d.currency === 'usd')) currentCurrency = d.currency;
     }
-  } catch (_) { /* keep 'usd' default */ }
+  } catch (_) { /* timeout or network error — keep 'usd' default */ }
   renderSummary();
 })();
 </script>

@@ -7,6 +7,8 @@
     var MAX_AGE     = 7 * 24 * 60 * 60 * 1000; // 7 days
     var API_URL     = '/api/chat.php';
     var SITE_KEY    = '6LfE10stAAAAAFnHCUdzWwwps9sRfxfwNowmchIw';
+    // Shared greeting — keep identical to the embedded chat on clientcare.html (L3)
+    var EMMA_GREETING = "Hello! I'm Emma, the ORLINSKY studio assistant. I can help with questions about our ceramics, ordering, shipping, and more. What can I do for you?";
 
     // ── Persist history ───────────────────────────────────────────────────────
     var chatHistory = [];
@@ -187,13 +189,11 @@
 
     function renderHistory() {
         msgsEl.innerHTML = '';
-        if (chatHistory.length === 0) {
-            addMsg('bot', 'Hello! I\'m Emma, the ORLINSKY studio assistant. I can help with questions about our ceramics, ordering, shipping, and more. What can I do for you?');
-        } else {
-            chatHistory.forEach(function (m) {
-                addMsg(m.role === 'user' ? 'user' : 'bot', m.content);
-            });
-        }
+        // Greeting is always shown first, even after the conversation has started (L2).
+        addMsg('bot', EMMA_GREETING);
+        chatHistory.forEach(function (m) {
+            addMsg(m.role === 'user' ? 'user' : 'bot', m.content);
+        });
     }
 
     // ── Badge ─────────────────────────────────────────────────────────────────
@@ -236,6 +236,13 @@
 
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape' && isOpen) close();
+    });
+
+    // Keep history in sync when another tab updates it (M2)
+    window.addEventListener('storage', function (e) {
+        if (e.key !== STORAGE_KEY) return;
+        loadHistory();
+        if (isOpen) renderHistory();
     });
 
     // ── Send ──────────────────────────────────────────────────────────────────

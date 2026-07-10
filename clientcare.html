@@ -461,7 +461,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
         <div class="cc-bmsg">
           <img src="Фото/Ава%20для%20чат%20бота%20керамики.jpg" alt="" class="cc-msgava">
           <div class="cc-bmsg-inner">
-            <div class="cc-bb">Hi! I'm here to help with any questions about our ceramics, shipping, custom orders, or anything else.</div>
+            <div class="cc-bb">Hello! I'm Emma, the ORLINSKY studio assistant. I can help with questions about our ceramics, ordering, shipping, and more. What can I do for you?</div>
             <div class="cc-msgtime" id="initTime"></div>
           </div>
         </div>
@@ -710,25 +710,38 @@ var _rt;window.addEventListener('resize',function(){clearTimeout(_rt);_rt=setTim
   if(itEl) itEl.textContent = getTime();
 
   var STORAGE_KEY = 'orlinsky_emma_v1';
+  // Keep identical to the floating widget greeting (chat-widget.js) — L3
+  var GREETING = "Hello! I'm Emma, the ORLINSKY studio assistant. I can help with questions about our ceramics, ordering, shipping, and more. What can I do for you?";
   var history = [];
   var busy    = false;
 
-  // Restore history from localStorage (shared with floating widget on other pages)
-  try {
-    var _s = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
-    if (_s && _s.ts && (Date.now() - _s.ts) < 7*24*60*60*1000) {
-      history = _s.messages || [];
-    }
-  } catch(e) {}
+  function _loadHistory() {
+    try {
+      var _s = JSON.parse(localStorage.getItem(STORAGE_KEY) || 'null');
+      if (_s && _s.ts && (Date.now() - _s.ts) < 7*24*60*60*1000) return _s.messages || [];
+    } catch(e) {}
+    return [];
+  }
 
-  // Render restored messages; hide the static greeting when history exists
-  if (history.length > 0) {
+  // Rebuild the whole thread: greeting first (always), then restored history
+  function reRender() {
     msgs.innerHTML = '';
+    addBot(GREETING);
     for (var _i = 0; _i < history.length; _i++) {
       if (history[_i].role === 'user') addUser(history[_i].content);
       else addBot(history[_i].content);
     }
   }
+
+  history = _loadHistory();
+  reRender();
+
+  // Sync when another tab updates the shared history (M2)
+  window.addEventListener('storage', function(e){
+    if (e.key !== STORAGE_KEY) return;
+    history = _loadHistory();
+    reRender();
+  });
 
   function _saveHistory() {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ts:Date.now(), messages:history.slice(-40)})); } catch(e) {}

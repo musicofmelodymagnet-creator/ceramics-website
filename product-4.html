@@ -1426,7 +1426,7 @@ footer .colophon{grid-column:1/-1;margin-top:40px;padding-top:16px;border-top:0.
 </footer>
 
 <script>
-window.addEventListener('DOMContentLoaded', function(){ window.scrollTo(0,0); });
+window.addEventListener('DOMContentLoaded', function(){ window.scrollTo(0,0); var _o=document.getElementById('order-btn'), _a=document.querySelector('.size-btn.active'); if(_o&&_a){ _o.href='checkout.html?item='+'three-vessels'+'-'+(_a.dataset.size||'9'); } });
 
 /* Logo calibration */
 function calibrateLogo(imgEl){

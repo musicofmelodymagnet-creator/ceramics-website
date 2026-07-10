@@ -1315,6 +1315,7 @@ var _rt; window.addEventListener('resize', function(){ clearTimeout(_rt); _rt=se
   targets.forEach(function(el){ io.observe(el); });
   setTimeout(function(){
     var hero = document.querySelector('.hero');
+    if(!hero) return;
     hero.style.opacity='1';
     hero.style.transform='translateY(0)';
   },100);
